@@ -1,0 +1,87 @@
+---
+title: "結巴分詞使用範例"
+output: github_document
+date: 2017/04/09
+author: 曾意儒 Yi-Ju Tseng
+---
+
+## 有關結巴
+
+[“结巴”中文分词：做最好的 Python 中文分词组件](https://github.com/fxsjy/jieba)
+
+## 在R內使用結巴分詞
+
+### 安裝載入套件
+安裝套件
+```{r eval=F}
+install.packages("jiebaR")
+```
+
+載入套件
+```{r}
+library(jiebaR) #載入jiebaR package
+```
+
+### 斷詞
+新增斷詞工具
+```{r}
+cutter <- worker()
+cutter 
+```
+
+斷詞實作
+```{r}
+cutter["這是一段測試用文字，請不要再戰長庚資管了"]
+```
+
+### 詞性判別
+```{r}
+tagger <- worker("tag")
+tagger["這是一段測試用文字，請不要再戰長庚資管了"]
+```
+
+### 新增自訂詞彙
+```{r}
+new_user_word(cutter,'長庚資管',"n")
+cutter["這是一段測試用文字，請不要再戰長庚資管了"]
+```
+
+
+### 自訂停止詞
+```{r}
+readLines("stop.txt")
+cutter = worker(stop_word ="stop.txt")
+cutter["這是一段測試用文字，請不要再戰長庚資管了"]
+```
+
+
+## 操作範例
+
+### 載入需要做分詞的資料
+
+```{r}
+library(rvest)
+PTTNBA<-"https://www.ptt.cc/bbs/NBA/index4671.html"
+pttContent<-read_html(PTTNBA)
+post_title <- pttContent %>% html_nodes(".title") %>% html_text()
+post_title
+```
+
+### 斷詞
+```{r}
+cutter <- worker()
+cutter[post_title] ## 不分行輸出
+cutter$bylines<-T
+cutter[post_title] ## 分行輸出
+```
+
+### 分析斷詞後最常出現的詞彙
+```{r}
+cutter <- worker()
+sort(table(cutter[post_title]),decreasing = T)
+```
+
+## 參考資料
+- [jiebaR GitHub](https://github.com/qinwf/jiebaR)
+- [jiebaR 使用指南](http://qinwenfeng.com/jiebaR/)
+- [用結巴斷詞實作文字視覺化 — 以 2016 總統就職演講為例](http://blog.infographics.tw/2016/05/text-visualization-with-jieba/)

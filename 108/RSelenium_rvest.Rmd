@@ -1,0 +1,92 @@
+---
+title: "瀑布式網頁爬蟲方法"
+output: github_document
+date: 2017/03/13
+author: 曾意儒 Yi-Ju Tseng
+---
+
+##不捲網頁，只爬看到的那一頁
+一般靜態網頁爬蟲方法，以DCard為例
+```{r message=F,warning=F}
+library(rvest)
+library(stringr)
+DCardCGU<-"https://www.dcard.tw/f/cgu?latest=true"
+DCardContent<-read_html(DCardCGU, encoding = "UTF-8")
+post_title <- DCardContent %>% html_nodes(".PostEntry_titleUnread_ycJL0") %>% html_text()
+post_contentShort<- DCardContent %>% html_nodes(".PostEntry_excerpt_A0Bmh") %>% html_text()
+post_author<- DCardContent %>% html_nodes(".PostAuthor_root_3vAJf") %>% html_text()
+post_comment<- DCardContent %>% html_nodes(".PostEntry_commentUnread_1cVyd") %>% html_text()
+post_like<- DCardContent %>% html_nodes(".PostLikeCount_likeCount_2uhBH") %>% html_text()
+post_url <- DCardContent %>% html_nodes(".PostEntry_entry_2rsgm") %>% html_attr("href")
+post_title<-gsub("[^[:alnum:]///' ]", "", post_title)
+DCardCGU_posts <- data.frame(title = post_title, author=post_author, commentN=post_comment, likeN=post_like)
+knitr::kable(DCardCGU_posts)
+```
+
+##使用Selenium模擬網頁瀏覽動作
+
+在R中，如要與[Selenium](http://www.seleniumhq.org/)程式搭配，可以使用`RSelenium` package，在開始爬蟲前，請先安裝:
+- Java JVM (若已安裝可以不裝)
+- [Selenium Standalone Server](http://www.seleniumhq.org/download/)
+- [geckodriver](https://github.com/mozilla/geckodriver/releases)
+- [Firefox](https://www.mozilla.org/zh-TW/firefox/new/)
+- RSelenium package
+
+```{r eval=F}
+install.packages("RSelenium")
+```
+
+2017/03/20能下載的Selenium Standalone Server最新版本為3.3.1，以下都以3.3.1版本為例，若安裝版本不同，請依版本修改指令(取代3.3.1)，
+將selenium-server-standalone-3.3.1.jar和geckodriver.exe放在同一個R projrct的資料夾內，打開cmd，進入R projrct的資料夾，執行
+```{java}
+java -jar selenium-server-standalone-3.3.1.jar
+```
+
+
+```{r warning=F,message=F}
+library(RSelenium)
+library(rvest)
+library(RCurl)
+remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4444L)
+remDr$open()
+
+#navigate to your page
+remDr$navigate("https://www.dcard.tw/f/cgu?latest=true")
+
+#滾滑鼠滾到底五次
+for(i in 1:5){      
+    remDr$executeScript(paste("scroll(0,",i*10000,");"))
+    Sys.sleep(5)    
+}
+
+#get the page html
+page_source<-remDr$getPageSource()
+
+DCardContent<-read_html(page_source[[1]],encoding = "UTF-8") 
+
+##以下部分與上述靜態網頁爬取相同
+post_title <- DCardContent %>% html_nodes(".PostEntry_titleUnread_ycJL0") %>% html_text()
+post_contentShort<- DCardContent %>% html_nodes(".PostEntry_excerpt_A0Bmh") %>% html_text()
+post_author<- DCardContent %>% html_nodes(".PostAuthor_root_3vAJf") %>% html_text()
+post_comment<- DCardContent %>% html_nodes(".PostEntry_commentUnread_1cVyd") %>% html_text()
+post_like<- DCardContent %>% html_nodes(".PostLikeCount_likeCount_2uhBH") %>% html_text()
+post_url <- DCardContent %>% html_nodes(".PostEntry_entry_2rsgm") %>% html_attr("href")
+post_title<-gsub("[^[:alnum:]///' ]", " ", post_title)
+DCardCGU_posts <- data.frame(title = post_title, author=post_author,commentN=post_comment, likeN=post_like)
+knitr::kable(DCardCGU_posts)
+```
+
+##參考資料
+
+- [StackOverflow問答](http://stackoverflow.com/questions/29861117/r-rvest-scraping-a-dynamic-ecommerce-page)
+- [RSelenium Github Issue](https://github.com/ropensci/RSelenium/issues)
+- [RSelenium文件](https://cran.r-project.org/web/packages/RSelenium/vignettes/RSelenium-basics.html)
+
+##後記
+
+花了一點時間用自動化的方式處理瀑布式網頁的爬取，有問題可以歡迎留言討論。另外，我也嘗試過使用Google Chrome瀏覽器，搭配chromedrive，但一直卡關，後來試了firefox就沒問題，目前原因不明~~
+
+##執行環境
+```{r warning=F,message=F}
+sessionInfo()
+```
