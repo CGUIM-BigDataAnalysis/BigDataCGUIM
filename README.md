@@ -1,19 +1,13 @@
 # 長庚資管 大數據分析方法 課程相關資料
 
-參考書: [資料科學與R語言](http://yijutseng.github.io/DataScienceRBook/)
+## 參考書
 
-## 107學年 (2019, Spring)
+[資料科學與R語言](http://yijutseng.github.io/DataScienceRBook/)
 
-上課投影片與上課相關素材請參考**107**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/107)
-
-## 106學年 (2018, Spring)
-
-上課投影片與上課相關素材請參考**106**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/106)
-
-### 數位課程
+## 數位課程
 [YouTube頻道](https://www.youtube.com/channel/UC2ZZMRLibtq2fD-la4YV_nA)
 
-### 投影片
+## 投影片檔案說明
 第一章到第三章的課程投影片只提供PDF檔案，其他章節共提供三種檔案:
 
 - .Rpres
@@ -23,20 +17,21 @@
 - .md
     - 適合在GitHub上閱讀的格式，包含所有投影片內容
 
-### 上課練習解答
+## 108學年 (2020, Spring)
 
-**章節名稱.md** 檔案內有上課互動問題的解答，供複習或沒跟上的同學參考用
+上課投影片與上課相關素材請參考**108**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/108)
+
+## 107學年 (2019, Spring)
+
+上課投影片與上課相關素材請參考**107**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/107)
+
+## 106學年 (2018, Spring)
+
+上課投影片與上課相關素材請參考**106**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/106)
     
 ## 105學年 (2017, Spring)
 
 上課投影片與上課相關素材請參考**105**[資料夾](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/tree/master/105)
-
-
-### 上課練習解答
-
-- .R
-    - 日期.R 檔案內有課程練習的解答，供複習參考用
-
 
 ## 104學年 (2016, Spring)
 
