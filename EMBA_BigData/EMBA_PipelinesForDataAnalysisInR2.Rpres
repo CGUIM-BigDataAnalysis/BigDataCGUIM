@@ -16,7 +16,6 @@ navigation: slide
 ====================================
 - 從檔案匯入
 - 從網路匯入
-- 從Facebook匯入
 - 從Twitter匯入
 - 資料匯出
 
@@ -61,8 +60,9 @@ Import Dataset功能 (RStudio)
 type:alert
 incremental:true
 
-- 操作[範例檔案](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)
+- 操作[範例檔案](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/f_lvr_land_a.csv)
 - 若匯入的檔案為**tab分隔文字檔**? 該如何調整參數？
+
 
 R物件 .rds
 ====================================
@@ -148,14 +148,14 @@ Tags, elements and attributes
     
 XML 可延伸標記式語言-讀取
 ====================================
-- [臺北市水質監測資訊](http://data.taipei/opendata/datalist/datasetMeta/download?id=961ca397-4a59-45e8-b312-697f26b059dc&rid=190796c8-7c56-42e0-8068-39242b8ec927)
+- [空氣品質指標(AQI)](https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml)
 - 安裝`xml2` package
 - `xmlParse()`函數將XML檔案匯入
 
 ```{r}
 library(xml2)
-waterURL<-"http://data.taipei/opendata/datalist/datasetMeta/download?id=961ca397-4a59-45e8-b312-697f26b059dc&rid=190796c8-7c56-42e0-8068-39242b8ec927"
-waterQ <- read_xml(waterURL)
+AQIURL<-"https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml"
+AQIXML <- read_xml(AQIURL)
 ```
 
 xpath?
@@ -170,7 +170,7 @@ XML 可延伸標記式語言-解析
 使用`xml_find_all()`以及`xml_text()`函數取得指定標籤內的資料
 ```{r}
 #取得所有"code_name"標籤內的資料
-code_name_xml<-xml_find_all(waterQ, ".//code_name")
+code_name_xml<-xml_find_all(AQIXML, ".//SiteName")
 code_name<-xml_text(code_name_xml)
 code_name[1:10]
 ```
@@ -180,7 +180,7 @@ XML 可延伸標記式語言-解析
 使用`xml_find_all()`以及`xml_text()`函數取得指定標籤內的資料
 ```{r}
 #取得各監測站的經度longitude
-longitude_xml<-xml_find_all(waterQ, ".//longitude")
+longitude_xml<-xml_find_all(AQIXML, ".//Longitude")
 longitude<-xml_text(longitude_xml)
 longitude[1:10]
 ```
@@ -189,16 +189,16 @@ XML檔案匯入練習
 ====================================
 type:alert
 incremental:true
-- 載入[桃園捷運車站出入口基本資料](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=b2653545-9425-46df-9a50-74ade59ab0cf&rid=f6362ce8-719b-4752-bec6-7fd995b623fd)
-- 嘗試取得各站出入口敘述(LocationDescription)與經緯度(PositionLon,PositionLat)
-- 參考剛剛的水站範例
+- 載入[農產品交易行情](https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx?FOTT=Xml)
+- 嘗試取得各筆交易的作物名稱與平均價
+- 參考剛剛的AQI範例
 ```{r eval=F}
 library(xml2)
-waterURL<-"http://data.taipei/opendata/datalist/datasetMeta/download?id=961ca397-4a59-45e8-b312-697f26b059dc&rid=190796c8-7c56-42e0-8068-39242b8ec927"
-waterQ <- read_xml(waterURL)
-longitude_xml<-xml_find_all(waterQ, ".//longitude")
-longitude<-xml_text(longitude_xml)
-longitude[1:10]
+AQIURL<-"https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml"
+AQIXML <- read_xml(AQIURL)
+code_name_xml<-xml_find_all(AQIXML, ".//SiteName")
+code_name<-xml_text(code_name_xml)
+code_name[1:10]
 ```
 
 
@@ -290,11 +290,11 @@ JSON檔案匯入練習
 type:alert
 incremental:true
 
-- 練習用資料：[「臺北市今日施工資訊」API存取](http://data.taipei/opendata/datalist/datasetMeta/outboundDesc?id=4d29818c-a3ee-425d-b88a-22ac0c24c712&rid=201d8ae8-dffc-4d17-ae1f-e58d8a95b162)
+- 練習用資料：[「空氣品質資料」API存取](https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json)
 - 使用檔案匯入**範例**，將資料匯入R中
     - 提示：**fromJSON**
 - 使用str()函數觀察匯入的資料
-- 請問今日施工資料有幾筆觀察值？幾個欄位？
+- 請問有幾筆觀察值？幾個欄位？
 
 
 網頁爬蟲 Webscraping
@@ -323,14 +323,11 @@ type:sub-section
 ====================================
 ```{r}
 library(rvest) ##載入
-Repoterurl<-"https://www.twreporter.org/"
+Repoterurl<-"https://www.twreporter.org/topics"
 Repoterhtml<-read_html(Repoterurl)
 news_title <- Repoterhtml %>% 
-    html_nodes(".iEENPo") %>% html_text()
-news_url <- Repoterhtml %>% 
-    html_nodes(".hsSyKH a") %>% html_attr("href")
-news <- data.frame(title = news_title, url=news_url)
-head(news,2)
+    html_nodes(".kmupWO") %>% html_text()
+news_title
 ```
 
 
@@ -341,54 +338,49 @@ head(news,2)
     - 或使用**SelectorGadget**輔助
     - 或使用**xpath-helper**輔助xpath標籤的擷取
 - 觀察需要擷取的資料所在HTML片段
-    - css class為`latest-section__ItemFrame-keac6x-1 hsSyKH`
+    - css class為`.kmupWO`
 
-```
-<div class="latest-section__ItemFrame-keac6x-1 hsSyKH"><a href="/a/opinion-new-southbound-talent-development-program-intern-problem"><div class="hover-effect__HoverEffect-sc-10n0hry-0 iRkkRY"><div class="latest-section__ImageFrame-keac6x-2 dyFjYc"><div class="img-wrapper__ImgObjectFit-clvi31-0 cprQrJ"><img alt="黃偉翔／新南向專班，找學生還是找廉價勞力_(照片/教育部高教司提供)" src="https://www.twreporter.org/images/20190308150442-52ed12aed14ade917f1c273f4037daf8-mobile.jpg" srcset="https://www.twreporter.org/images/20190308150442-52ed12aed14ade917f1c273f4037daf8-mobile.jpg 800w, https://www.twreporter.org/images/20190308150442-52ed12aed14ade917f1c273f4037daf8-w400.jpg 400w" sizes="(min-width: 1024px) 199px, (min-width: 768px) 160px, 136px" style="transform: translateZ(0px);" class=""></div></div><div class="latest-section__ContentFrame-keac6x-3 nhxeb">
-....
+
+
+盤中奈米股資料爬取 -1
+====================================
+[零股資料](https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm)
+```{r}
+library(rvest) 
+NanoStockUrl<-"https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm"
+NanoStockContent<-read_html(NanoStockUrl)
+NanoStockName<-
+  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% 
+    html_text()
+NanoStockPrice<-
+  NanoStockContent %>% html_nodes(".t3n1")%>% 
+    html_text()
+
+head(NanoStockName)
+head(NanoStockPrice)
 ```
 
-網頁爬蟲 DCard實作 -1
+盤中奈米股資料爬取 -2
 ====================================
 ```{r}
-library(rvest) ##(爬蟲結果不代表本人意見)
-DCardCGU<-"https://www.dcard.tw/f/cgu"
-DCardContent<-read_html(DCardCGU)
-post_title <- DCardContent %>% 
-    html_nodes(".PostEntry_title_H5o4dj") %>% 
-    html_text()
-post_contentShort<- DCardContent %>% 
-    html_nodes(".PostEntry_excerpt_2eHlNn") %>% 
-    html_text()
-post_author<- DCardContent %>% 
-    html_nodes(".PostAuthor_root_3vAJfe") %>% 
-    html_text()
+NanoStockPriceTable<-
+  matrix(NanoStockPrice,ncol=6, byrow=TRUE)
+NanoStockNameClean<-gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
+                         '',
+                         NanoStockName)
+NanoStockData <- 
+    data.frame(name = NanoStockNameClean,
+               NanoStockPriceTable)
+
 ```
 
-網頁爬蟲 DCard實作 -2
-====================================
-```{r}
-##(爬蟲結果不代表本人意見)
-post_like<- DCardContent %>% 
-    html_nodes(".hlvyVg") %>% html_text()
-post_url <- DCardContent %>% 
-    html_nodes(".PostEntry_root_V6g0rd") %>% html_attr("href")
-DCardCGU_posts <- 
-    data.frame(title = post_title,
-               author=post_author, 
-               content=post_contentShort, 
-               likeN=post_like,
-               url=paste0("https://www.dcard.tw",post_url))
-```
-
-網頁爬蟲 DCard實作 -3
+盤中奈米股資料爬取 -3
 ====================================
 ```{r eval=F}
-DCardCGU_posts
+NanoStockData
 ```
 ```{r echo=F}
-##(爬蟲結果不代表本人意見)
-knitr::kable(DCardCGU_posts) 
+knitr::kable(NanoStockData) 
 ```
 
     
@@ -405,8 +397,7 @@ type:alert
 ====================================
 incremental:true
 
-- 如何爬評論跟內文呢？
-- 其實...DCard是有API的
+- 其實... 很多資料有其他存取方式，像API
     - https://www.dcard.tw/_api/forums/cgu/posts
     - https://www.dcard.tw/_api/posts/225917717
     - https://www.dcard.tw/_api/posts/225917717/comments
@@ -511,15 +502,15 @@ create_token(
 rtweet package - 搜尋hashtag
 ====================================
 ```{r eval=F}
-## search for 3000 tweets using the northkorea hashtag
+## search for 3000 tweets using the trump hashtag
 rt <- search_tweets(
-  "#northkorea", n = 3000, include_rts = FALSE
+  "#trump", n = 3000, include_rts = FALSE
 )
 head(rt)
 ```
 ```{r echo=F}
 rt <- search_tweets(
-  "#northkorea", n = 3000, include_rts = FALSE
+  "#trump", n = 3000, include_rts = FALSE
 )
 knitr::kable(rt[1:6,1:4])
 ```
@@ -533,7 +524,7 @@ ts_plot(rt, "3 hours") +
   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
   ggplot2::labs(
     x = NULL, y = NULL,
-    title = "Frequency of #northkorea Twitter statuses",
+    title = "Frequency of #trump Twitter statuses",
     subtitle = "Twitter status (tweet) counts aggregated using three-hour intervals",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet"
   )
@@ -566,7 +557,7 @@ rtweet package - 取得timeline
 ```{r echo=F}
 ## plot the frequency of tweets for each user over time
 tmls %>%
-  dplyr::filter(created_at > "2017-10-29") %>%
+  dplyr::filter(created_at > "2020-10-01") %>%
   dplyr::group_by(screen_name) %>%
   ts_plot("days", trim = 1L) +
   ggplot2::geom_point() +
@@ -578,7 +569,7 @@ tmls %>%
   ggplot2::labs(
     x = NULL, y = NULL,
     title = "Frequency of Twitter statuses posted by US President",
-    subtitle = "Twitter status (tweet) counts aggregated by day from October/November 2017",
+    subtitle = "Twitter status (tweet) counts aggregated by day from  2020",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet"
   )
 
@@ -743,35 +734,34 @@ as.numeric("abc")
 ====================================
 type:alert
 incremental:true
-回想起DCard(爬蟲結果不代表本人意見)的資料．．．
+回想起奈米股盤中交易的資料．．．
 ```{r}
-library(rvest) ##載入
-DCardCGU<-"https://www.dcard.tw/f/cgu"
-DCardContent<-read_html(DCardCGU)
-post_title <- DCardContent %>% 
-    html_nodes(".PostEntry_title_H5o4dj") %>% 
+library(rvest) 
+NanoStockUrl<-"https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm"
+NanoStockContent<-read_html(NanoStockUrl)
+NanoStockName<-
+  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% 
     html_text()
-post_author<- DCardContent %>% 
-    html_nodes(".PostAuthor_root_3vAJfe") %>% 
+NanoStockPrice<-
+  NanoStockContent %>% html_nodes(".t3n1")%>% 
     html_text()
-post_like<- DCardContent %>% 
-    html_nodes(".hlvyVg") %>% html_text()
-post_url <- DCardContent %>% 
-    html_nodes(".PostEntry_root_V6g0rd") %>% html_attr("href")
-DCardCGU_posts <- 
-    data.frame(title = post_title,
-               author=post_author, 
-               likeN=post_like,
-               url=paste0("https://www.dcard.tw",post_url),
-               stringsAsFactors=F)
+NanoStockPriceTable<-
+  matrix(NanoStockPrice,ncol=6, byrow=TRUE)
+NanoStockNameClean<-gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
+                         '',
+                         NanoStockName)
+NanoStockData <- 
+    data.frame(name = NanoStockNameClean,
+               NanoStockPriceTable)
+knitr::kable(NanoStockData) 
 ```
 
 資料型別轉換練習
 ====================================
 type:alert
-評論數和按讚數都是字串型別 (chr)
+成交股數、總成交值都是字串型別 (chr)
 ```{r}
-str(DCardCGU_posts)
+str(NanoStockData)
 ```
 該如何將這兩個欄位轉成數字呢？
 
@@ -1199,10 +1189,10 @@ semi_join(nameDF,scoreDF,by="ID")
 ====================================
 type:alert
 
-- 下載[106各村里教育程度資料](https://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=EC96FA1A-005C-4801-BBCD-5CD246CC9D80)
-- 下載[10612各村（里）戶籍人口統計月報表](https://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=F4478CE5-7A72-4B14-B91A-F4701758328F)
+- 下載[COVID-19案例數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
+- 下載[COVID-19死亡數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
 - 分別讀入兩個csv檔
-- 依照區域別與村里名稱，將兩張表格結合，只留下有對應到的資料
+- 依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，只留下有對應到的資料
 - 請問結合後的資料有幾列？
 
 
