@@ -18,6 +18,23 @@ navigation: slide
 - R基本語法: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/intro.html)
 - R資料結構: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/RDataStructure.html)
 
+R vs. RStudio
+========================================================
+
+R: 程式核心 (引擎)
+![plot of chunk unnamed-chunk-1](https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg)
+
+[圖片來源](https://www.teslarati.com/tesla-patent-more-efficient-electric-motors/)
+
+R vs. RStudio
+========================================================
+
+RStudio: 操作介面 IDE (儀錶板)
+
+![plot of chunk unnamed-chunk-2](https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg)
+
+
+[圖片來源](https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept)
 
 RStudio Interface
 ========================================================
@@ -31,7 +48,7 @@ left: 30%
 
 ***
 
-![plot of chunk unnamed-chunk-1](figures/RStudio.png)
+![plot of chunk unnamed-chunk-3](figures/RStudio.png)
 
 RStudio 使用步驟
 ========================================================
@@ -63,6 +80,22 @@ incremental:true
 - 左上角**File**->**New File**->**R Script** (如果原本沒有的話)
 - 在Console輸入1+，按Enter
 - 試著跳出打不完的程式碼，變回輸入模式`>`
+
+R and R Packages
+========================================================
+
+R: 程式核心 (iPhone)
+![plot of chunk unnamed-chunk-4](https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668)
+
+R and R Packages
+========================================================
+
+R Packages: 附加程式 (APP)
+
+![plot of chunk unnamed-chunk-5](https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg)
+
+[圖片來源](https://www.apple.com/)
+
 
 R = Base + Other Packages
 ========================================================
@@ -246,7 +279,7 @@ dateBook
 ```
 
 ```
-[1] "2018-05-04"
+[1] "2020-11-13"
 ```
 
 日期 (Date) - lubridate
@@ -500,10 +533,10 @@ Error in mena(NA): 沒有這個函數 "mena"
 type:alert
 incremental:true
 
-- 在Source code視窗輸入`fetch_NBAPlayerStatistics("16-17")`並執行
-- 試著安裝`SportsAnalytics`package
-- 試著載入`SportsAnalytics`package
-- 再次執行`fetch_NBAPlayerStatistics("16-17")`
+- 在Source code視窗輸入`fetch_NBAPlayerStatistics("18-19")`並執行
+- 試著安裝`SportsAnalytics` package
+- 試著載入`SportsAnalytics` package
+- 再次執行`fetch_NBAPlayerStatistics("18-19")`
 - 在Source code視窗輸入`library(knitr)`並執行
 
 Help
@@ -528,6 +561,10 @@ R 常見的資料結構
 - 矩陣 Matrix
 - 資料框 data.frame
 - 屬性查詢函數 
+
+R 常見的資料結構
+========================================================
+![plot of chunk unnamed-chunk-15](figures/DataStructure.png)
 
 向量 Vector
 ========================================================
