@@ -4,6 +4,7 @@ author: 曾意儒 Yi-Ju Tseng
 autosize: true
 font-family: 'Microsoft JhengHei'
 navigation: slide
+output: revealjs::revealjs_presentation
 
 資料分析步驟
 ========================================================
