@@ -248,7 +248,7 @@ JSON檔案匯入
 - 如果API網址為**https**，則需使用 `httr` package
     - 使用`GET()`函數處理資料擷取網址
 - API網址參考[桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
-```{r message=FALSE,warning=FALSE}
+```{r message=FALSE,warning=FALSE,eval=F}
 library(jsonlite)
 library(RCurl)
 APIData<-fromJSON("http://data.tycg.gov.tw/api/v1/rest/datastore/a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f?format=json")
@@ -259,7 +259,7 @@ JSON檔案匯入
 - 轉存為`列表list`的型態
 - 兩個子元素(success, result)
 - result中records子元素的類別為資料框data.frame
-```{r message=FALSE,warning=FALSE}
+```{r message=FALSE,warning=FALSE,eval=F}
 str(APIData)
 ```
 
@@ -269,7 +269,7 @@ JSON檔案解析
 ```{r readJSON,eval=F}
 head(APIData$result$records)
 ```
-```{r readJSONk,echo=F}
+```{r readJSONk,echo=F,eval=F}
 knitr::kable(APIData$result$records[1:8,1:9]) 
 ```
 
@@ -279,7 +279,7 @@ JSON檔案解析
 ```{r readJSON1,eval=F}
 table(APIData$result$records$sarea)
 ```
-```{r readJSON1k,echo=F}
+```{r readJSON1k,echo=F,eval=F}
 knitr::kable(data.frame(table(APIData$result$records$sarea)))
 ```
 分析可知中壢區車站較多
@@ -495,8 +495,8 @@ create_token(
   app = "teach0309",
   consumer_key = "Wbba6ysyPKGstGAqohmtyWZOE",
   consumer_secret = "GJweDzVvXGrbjz26bHTr3d6dFI7q9gFCH98f3Ct2yk3APPWigc",
-  access_token = "216362944-VbXiYOjGtENwSI6eJ9AoDK5OVvoQWlj7yIeXraGt",
-  access_secret = "jnfDCvuMdxdmxswUUPPi3gomxIWZq3BTdumykLJb7GW5A")
+  access_token = "216362944-AxxvSiPBR7nBScfBks7thajSovUwFG6v67aNR3WP",
+  access_secret = "pF0OldOjiJxaBbPlQhx7V3VkA6MIgdzHHofar1DM0pX0G")
 ```
 
 rtweet package - 搜尋hashtag
@@ -533,22 +533,22 @@ ts_plot(rt, "3 hours") +
 rtweet package - 取得趨勢
 ====================================
 ```{r eval=F}
-sf <- get_trends("Japan")
+sf <- get_trends("USA")
 head(sf)
 ```
 ```{r echo=F}
-sf <- get_trends("Japan")
+sf <- get_trends("USA")
 knitr::kable(sf[1:4,1:4])
 ```
 
 rtweet package - 取得timeline
 ====================================
 ```{r eval=F}
-tmls <- get_timelines(c("realDonaldTrump", "BarackObama"), n = 3000)
+tmls <- get_timelines(c("realDonaldTrump", "joebiden"), n = 3000)
 head(tmls)
 ```
 ```{r echo=F}
-tmls <- get_timelines(c("realDonaldTrump", "BarackObama"), n = 3000)
+tmls <- get_timelines(c("realDonaldTrump", "joebiden"), n = 3000)
 knitr::kable(tmls[1:6,c("user_id","screen_name","text","source")])
 ```
 
@@ -557,7 +557,7 @@ rtweet package - 取得timeline
 ```{r echo=F}
 ## plot the frequency of tweets for each user over time
 tmls %>%
-  dplyr::filter(created_at > "2020-10-01") %>%
+  dplyr::filter(created_at > "2020-11-01") %>%
   dplyr::group_by(screen_name) %>%
   ts_plot("days", trim = 1L) +
   ggplot2::geom_point() +
@@ -733,7 +733,6 @@ as.numeric("abc")
 資料型別轉換練習
 ====================================
 type:alert
-incremental:true
 回想起奈米股盤中交易的資料．．．
 ```{r}
 library(rvest) 
