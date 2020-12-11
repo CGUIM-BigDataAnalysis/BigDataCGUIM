@@ -4,7 +4,6 @@ author: 曾意儒 Yi-Ju Tseng
 autosize: true
 font-family: 'Microsoft JhengHei'
 navigation: slide
-output: revealjs::revealjs_presentation
 
 資料分析步驟
 ========================================================
@@ -175,15 +174,15 @@ install.packages("dplyr") ##安裝
 library(dplyr) ##載入
 ```
 
-以上述房屋實價登錄資料為例，首先先[讀入資料]()
+以上述房屋實價登錄資料為例，首先先[讀入二手屋資料](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllOldData.csv)
 ```{r}
 library(readr)
 AllOldData<-read_csv("AllOldData.csv", ,
-                     col_types = cols(
-                       電梯 = col_character(),
-                        非都市土地使用分區= col_character(),
-                        非都市土地使用編定= col_character()
-                        )
+        col_types = cols(
+          電梯 = col_character(),
+          非都市土地使用分區= col_character(),
+          非都市土地使用編定= col_character()
+          )
 )
 ```
 
@@ -209,33 +208,38 @@ AllOldData<-read_csv("AllOldData.csv", ,
 
 欄位(Column)子集 select() 
 ====================================
-篩選欄位名稱為`Name`、開頭是`Threes`或是開頭是`FieldGoals`的欄位
+篩選欄位名稱為`土地區段位置建物區段門牌`、開頭是`交易`或是開頭是`建物`的欄位
 ```{r select1,eval=F}
 select1<-
-    select(NBA1516,Name,starts_with("Threes"),
-            starts_with("FieldGoals"))
-head(select1)
+    select(AllOldData,土地區段位置建物區段門牌,
+           starts_with("交易"),
+            starts_with("建物"))
+select1
 ```
 ```{r select1.1,echo=F}
-select1<-select(NBA1516,Name,starts_with("Threes"),
-                starts_with("FieldGoals"))
+select1<-select(AllOldData,土地區段位置建物區段門牌,
+           starts_with("交易"),
+            starts_with("建物"))
 knitr::kable(head(select1,1)) 
 ```
 
 欄位(Column)子集 select() 
 ====================================
 
-若想篩選欄位`Name`到欄位`FieldGoalsMade`間的所有欄位，但不想要`GamesPlayed`欄位
+若想篩選欄位`土地區段位置建物區段門牌`到欄位`交易筆棟數`間的所有欄位，但不想要`非都市土地使用分區`欄位
 - 用`:`串連欄位名稱
 - 用`-`去除不要的欄位
 ```{r selec3,eval=F}
-##等同於NBA1516[,c(2:4,612)]
 select3<-
-    select(NBA1516,Name:FieldGoalsMade,-GamesPlayed)
+    select(AllOldData,
+           土地區段位置建物區段門牌:交易筆棟數,
+           -非都市土地使用分區)
 head(select3,3)
 ```
 ```{r selec3.1,echo=F}
-select3<-select(NBA1516,Name:FieldGoalsMade,-GamesPlayed)
+select3<-select(AllOldData,
+           土地區段位置建物區段門牌:交易筆棟數,
+           -非都市土地使用分區)
 knitr::kable(head(select3,3))
 ```
 
@@ -243,26 +247,24 @@ knitr::kable(head(select3,3))
 ====================================
 - 是針對列 (Row)做子集
 - `filter(資料名稱,篩選條件1,篩選條件2)`篩選條件們是用**且**的邏輯串連
-- **出場分鐘數超過2850分鐘**的球員資料，可輸入下列指令
+- **單價元平方公尺超過500,000**的房屋資料，可輸入下列指令
 ```{r filter1,eval=F}
-##等於NBA1516[NBA1516$TotalMinutesPlayed>2850,]
-filter(NBA1516,TotalMinutesPlayed>2850)
+filter(AllOldData,單價元平方公尺>500000)
 ```
 ```{r filter1.1,echo=F}
-##等同於 NBA1516[NBA1516$TotalMinutesPlayed>2850,]
-filter1<-filter(NBA1516,TotalMinutesPlayed>2850)
+filter1<-filter(AllOldData,單價元平方公尺>500000)
 knitr::kable(filter1)
 ```
 
 觀察值(Row)子集 filter()
 ====================================
-也可選擇隊伍名稱為"BOS"或"SAN"的球員資料
+也可選擇鄉鎮市區為大安區與信義區的房屋資料
 ```{r filter2,eval=F}
-##等於NBA1516[NBA1516$Team %in% c("BOS","SAN"),]
-filter(NBA1516,Team %in% c("BOS","SAN"))
+filter(AllOldData,
+       鄉鎮市區 %in% c("大安區","信義區"))
 ```
 ```{r filter2.1,echo=F}
-knitr::kable(head(filter(NBA1516,Team %in% c("BOS","SAN"))))
+knitr::kable(head(filter(AllOldData,鄉鎮市區 %in% c("大安區","信義區"))))
 ```
 
 
@@ -270,12 +272,14 @@ knitr::kable(head(filter(NBA1516,Team %in% c("BOS","SAN"))))
 ====================================
 也可使用 `&` 和 `|`等符號串連邏輯
 ```{r filter4,eval=F}
-filter(NBA1516,
-       FieldGoalsMade/FieldGoalsAttempted>0.7
-           &GamesPlayed>30)
+filter(AllOldData,
+       鄉鎮市區 %in% c("大安區","信義區")
+           &單價元平方公尺>500000)
 ```
 ```{r filter4.1,echo=F}
-knitr::kable(filter(NBA1516,FieldGoalsMade/FieldGoalsAttempted>0.7 & GamesPlayed>30))
+knitr::kable(filter(AllOldData,
+       鄉鎮市區 %in% c("大安區","信義區")
+           &單價元平方公尺>500000))
 ```
 
 dplyr 子集練習
@@ -283,48 +287,54 @@ dplyr 子集練習
 type:alert
 incremental:true
 
-- 讀入NBA資料
+- 讀入[實價登錄預售屋](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllPreData.csv)資料
 ```{r,eval=F}
-library(SportsAnalytics)
 library(dplyr)
-NBA1516<-fetch_NBAPlayerStatistics("15-16")
+library(readr)
+AllPreData<-read_csv("AllPreData.csv", ,
+           col_types = cols(
+             非都市土地使用分區= col_character(),
+              非都市土地使用編定= col_character()
+              )
+)
 ```
-- 試著用dplyr語法篩選出所有**助攻數(Assists)超過100**且**抄截數大於20**的球員資料
-- 只留下Name Team Position GamesPlayed TotalMinutesPlayed Assists Steals 七個欄位
+- 試著用dplyr語法篩選出所有**單價元平方公尺超過100萬**且**主要用途為住家用**的預售屋買賣資料
+- 只留下鄉鎮市區 開頭為**土地** 以及開頭為**交易** 的 欄位
 
 
 
 增加新欄位 mutate()
 ====================================
-- 新增新欄位`FGRate`，欄位值為`FieldGoalsMade/FieldGoalsAttempted`
+- 新增新欄位`建物總坪數`，欄位值為`建物移轉總面積平方公尺*0.3025`
 ```{r mutate1}
 mutate1<-
-    mutate(NBA1516,
-           FGRate=FieldGoalsMade/FieldGoalsAttempted)
-mutate1$FGRate[1:5]
+    mutate(AllOldData,
+           建物總坪數=
+             建物移轉總面積平方公尺*0.3025)
+mutate1$建物總坪數[1:5]
 ```
 
 計算統計值 summarise() 
 ====================================
-- **球員個數**、**不重複的隊伍數**以及**不重複的守備位置數**等
+- **買賣筆數**、**不重複的鄉鎮區數**以及**交易標的數**等
 - n(), n_distinct()
 ```{r summarise1}
-summarise(NBA1516,
+summarise(AllOldData,
           nPlayer=n(),
-          nTeam=n_distinct(Team),
-          nPos=n_distinct(Position))
+          nC=n_distinct(鄉鎮市區),
+          nTarget=n_distinct(交易標的))
 ```
 
 計算統計值 summarise() 
 ====================================
 - 通常會與其他功能合併使用
-- 計算**出場分鐘數大於2500分鐘**的**球員個數**、**平均投進的兩分球數**以及**平均投出的兩分球數**
+- 計算**單價元平方公尺超過500,000**的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均土地移轉總面積平方公尺**
 ```{r summarise2}
-filter1<-filter(NBA1516,TotalMinutesPlayed>2500)
+filter1<-filter(AllOldData,單價元平方公尺>500000)
 summarise(filter1,
-          nPlayer=n(),
-          meanFGMade=mean(FieldGoalsMade),
-          meanFGAtt=mean(FieldGoalsAttempted))
+    nHouse=n(),
+    meanBuild=mean(建物移轉總面積平方公尺),
+    meanLand=mean(土地移轉總面積平方公尺))
 ```
 
 dplyr filter()+summarise() 練習
@@ -332,57 +342,65 @@ dplyr filter()+summarise() 練習
 type:alert
 incremental:true
 
-- 讀入NBA資料
-```{r eval=F}
-library(SportsAnalytics)
+- 讀入[實價登錄預售屋](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllPreData.csv)資料
+```{r,eval=F}
 library(dplyr)
-NBA1516<-fetch_NBAPlayerStatistics("15-16")
+library(readr)
+AllPreData<-read_csv("AllPreData.csv", ,
+           col_types = cols(
+             非都市土地使用分區= col_character(),
+              非都市土地使用編定= col_character()
+              )
+)
 ```
-- 試著用dplyr語法篩選出所有**助攻數(Assists)超過100**且**抄截數大於20**的球員資料
-- 計算這些球員的**平均出場數GamesPlayed**，**平均出場分鐘數TotalMinutesPlayed**
+- 試著用dplyr語法篩選出所有**單價元平方公尺超過100萬**且**主要用途為住家用**的預售屋買賣資料
+- 計算這些房屋的**平均建物移轉總面積平方公尺**，**平均土地移轉總面積平方公尺**
 
 pipe %>%
 ====================================
 - 直接用**pipe**符號`%>%`將指令串連，減少暫存物件（filter1）的生成
 ```{r summarise3}
-filter(NBA1516,TotalMinutesPlayed>2500) %>%
-    summarise(nPlayer=n(),
-        meanFGMade=mean(FieldGoalsMade),
-        meanFGAtt=mean(FieldGoalsAttempted))
+
+filter(AllOldData,單價元平方公尺>500000) %>%
+  summarise(nHouse=n(),
+      meanBuild=mean(建物移轉總面積平方公尺),
+      meanLand=mean(土地移轉總面積平方公尺))
 ```
 
 分組 group_by()
 ====================================
 - 設定分組依據
 - 與`summarise()`函式合併使用
-- 計算各**隊**（以Team作為分組依據）的**球員數**、**平均投進的兩分球數**以及**平均投出的兩分球數**
+- 計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均土地移轉總面積平方公尺**
 ```{r group1,eval=F}
-group_by(NBA1516,Team)%>%
-    summarise(nPlayer=n(),
-        meanFGMade=mean(FieldGoalsMade),
-        meanFGAtt=mean(FieldGoalsAttempted))
+group_by(AllOldData,鄉鎮市區)%>%
+    summarise(nHouse=n(),
+      meanBuild=mean(建物移轉總面積平方公尺),
+      meanLand=mean(土地移轉總面積平方公尺))
 ```
 ```{r group1.1,echo=F}
-group1<-group_by(NBA1516,Team)%>%
-  summarise(nPlayer=n(),meanFGMade=mean(FieldGoalsMade),
-                meanFGAtt=mean(FieldGoalsAttempted))
+group1<-group_by(AllOldData,鄉鎮市區)%>%
+    summarise(nHouse=n(),
+      meanBuild=mean(建物移轉總面積平方公尺),
+      meanLand=mean(土地移轉總面積平方公尺))
 knitr::kable(head(group1,4))
 ```
 
 分組 group_by()
 ====================================
 - 可設定**多個**分組依據
-- 計算各**隊**各**守備位置**（以Team和Position作為分組依據）的**球員數**、**平均投進的兩分球數**以及**平均投出的兩分球數**
+- 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均總價元**
 ```{r group2,eval=F}
-group_by(NBA1516,Team,Position)%>%
-  summarise(nPlayer=n(),
-        meanFGMade=mean(FieldGoalsMade),
-        meanFGAtt=mean(FieldGoalsAttempted))
+group_by(AllOldData,鄉鎮市區,交易標的)%>%
+    summarise(nHouse=n(),
+      meanBuild=mean(建物移轉總面積平方公尺),
+      meanPrice=mean(總價元))
 ```
 ```{r group2.1,echo=F}
-group2<-group_by(NBA1516,Team,Position)%>%
-  summarise(nPlayer=n(),meanFGMade=mean(FieldGoalsMade),
-                meanFGAtt=mean(FieldGoalsAttempted))
+group2<-group_by(AllOldData,鄉鎮市區,交易標的)%>%
+    summarise(nHouse=n(),
+      meanBuild=mean(建物移轉總面積平方公尺),
+      meanPrice=mean(總價元))
 knitr::kable(head(group2,3))
 ```
 
@@ -390,10 +408,10 @@ knitr::kable(head(group2,3))
 ====================================
 排序功能，預設為**遞增排序**
 ```{r arrange1,eval=F}
-arrange(NBA1516,TotalMinutesPlayed)
+arrange(AllOldData,總價元)
 ```
 ```{r arrange1.1,echo=F}
-arrange1<-arrange(NBA1516,TotalMinutesPlayed)
+arrange1<-arrange(AllOldData,總價元)
 knitr::kable(head(arrange1)) 
 ```
 
@@ -401,40 +419,43 @@ knitr::kable(head(arrange1))
 ====================================
 使用`desc()`將要**遞減排序**的變數包起來，就可以遞減排序
 ```{r arrange2,eval=F}
-arrange(NBA1516,
-        desc(TotalMinutesPlayed),
-        desc(GamesPlayed))
+arrange(AllOldData,desc(總價元))
 ```
 ```{r arrange2.1,echo=F}
-arrange2<-arrange(NBA1516,desc(TotalMinutesPlayed),desc(GamesPlayed))
+arrange2<-arrange(AllOldData,desc(總價元))
 knitr::kable(head(arrange2,3))
 ```
 
 dplyr綜合範例
 ====================================
 - 結合`group_by()`、`summarise()`、`arrange()`，可完成一連串的資料分析
-- 計算各**隊**各**守備**位置（以Team和Position作為分組依據）的球員數、平均投進的兩分球數以及平均投出的兩分球數，並依平均投進的兩分球數**由大到小排序**
+- 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的交易筆數、平均總價元、平均單價元平方公尺，並依平均單價元平方公尺**由大到小排序**
 ```{r arrange3,eval=F}
-group_by(NBA1516,Team,Position) %>%
-  summarise(nPlayer=n(),
-    meanFGMade=mean(FieldGoalsMade),
-    meanFGAtt=mean(FieldGoalsAttempted)) %>%
-  arrange(desc(meanFGMade))
+group_by(AllOldData,鄉鎮市區,交易標的) %>%
+  summarise(nHouse=n(),
+    meanPrice=mean(總價元),
+    meanUPrice=mean(單價元平方公尺)) %>%
+  arrange(desc(meanUPrice))
 ```
 ```{r arrange3.1,echo=F}
-arrange3<-group_by(NBA1516,Team,Position)%>%
-  summarise(nPlayer=n(),meanFGMade=mean(FieldGoalsMade),
-                meanFGAtt=mean(FieldGoalsAttempted)) %>%
-  arrange(desc(meanFGMade))
+arrange3<-group_by(AllOldData,鄉鎮市區,交易標的) %>%
+  summarise(nHouse=n(),
+    meanPrice=mean(總價元),
+    meanUPrice=mean(單價元平方公尺)) %>%
+  arrange(desc(meanUPrice))
 knitr::kable(head(arrange3,3))
 ```
 
 修改欄位名稱 rename()
 ====================================
 `新名稱=舊名稱`
-```{r rename1}
-rename1<-rename(NBA1516,Po=Position)
-rename1[1:5,1:5]
+```{r rename1, eval=F}
+rename1<-rename(AllOldData,門牌=土地區段位置建物區段門牌)
+rename1[1:5,1:3]
+```
+```{r rename1w, echo=F}
+rename1<-rename(AllOldData,門牌=土地區段位置建物區段門牌)
+knitr::kable(rename1[1:5,1:3])
 ```
 
 dplyr 綜合練習
@@ -442,15 +463,20 @@ dplyr 綜合練習
 type:alert
 incremental:true
 
-- 讀入NBA資料
-```{r eval=F}
-library(SportsAnalytics)
+- 讀入[實價登錄預售屋](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllPreData.csv)資料
+```{r,eval=F}
 library(dplyr)
-NBA1516<-fetch_NBAPlayerStatistics("15-16")
+library(readr)
+AllPreData<-read_csv("AllPreData.csv", ,
+    col_types = cols(
+      非都市土地使用分區= col_character(),
+      非都市土地使用編定= col_character()
+      )
+)
 ```
-- 試著用dplyr語法篩選出所有**助攻數(Assists)超過100**且**抄截數大於20**的球員資料
-- 依**守備位置**Position分組，計算球員的平均**出場數**GamesPlayed，平均**出場分鐘數**TotalMinutesPlayed
-- 依平均出場數GamesPlayed**由大到小**排序
+- 試著用dplyr語法篩選出所有**建物型態為住宅大樓(11層含以上有電梯)**且**建物移轉總面積平方公尺 大於100**的球員資料
+- 依**鄉鎮市區**Position分組，計算交易的平均**總價元**，平均**單價元平方公尺**
+- 依平均**單價元平方公尺** **由大到小**排序
 - 用pipe **%>%**
 
 dplyr 參考文件與資源
@@ -775,7 +801,7 @@ get_googlemap() + ggmap()
 - 投影片金鑰已失效，請自行至[Google Cloud Platform](https://console.cloud.google.com/)，點選**API及服務**申請**Maps Static API**後，複製**API key**
 ```{r, warning=F,message=F, fig.height=5}
 library(ggmap)
-register_google(key = "AIzaSyApRdSUi54irfyfGpYbi8c3fJbP__xzTiY")
+register_google(key = "AIzaSyCNHJwjmJ23-K2HBua71HQu4nYMI6L-LP8")
 twmap <- get_googlemap(center = c(lon=120.58,lat=23.58), 
                   zoom = 7,
                   language = "zh-TW")
