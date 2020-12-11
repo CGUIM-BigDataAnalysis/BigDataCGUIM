@@ -175,10 +175,16 @@ install.packages("dplyr") ##安裝
 library(dplyr) ##載入
 ```
 
-以上述NBA資料為例，首先先讀入資料
+以上述房屋實價登錄資料為例，首先先[讀入資料]()
 ```{r}
-library(SportsAnalytics)
-NBA1516<-fetch_NBAPlayerStatistics("15-16")
+library(readr)
+AllOldData<-read_csv("AllOldData.csv", ,
+                     col_types = cols(
+                       電梯 = col_character(),
+                        非都市土地使用分區= col_character(),
+                        非都市土地使用編定= col_character()
+                        )
+)
 ```
 
 欄位(Column)子集 select() 
@@ -205,8 +211,6 @@ NBA1516<-fetch_NBAPlayerStatistics("15-16")
 ====================================
 篩選欄位名稱為`Name`、開頭是`Threes`或是開頭是`FieldGoals`的欄位
 ```{r select1,eval=F}
-##等於NBA1516[,c("Name","ThreesMade","ThreesAttempted",
-##   "FieldGoalsMade","FieldGoalsAttempted")]
 select1<-
     select(NBA1516,Name,starts_with("Threes"),
             starts_with("FieldGoals"))
