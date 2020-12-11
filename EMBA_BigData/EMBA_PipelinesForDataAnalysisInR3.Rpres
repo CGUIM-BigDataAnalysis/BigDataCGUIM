@@ -247,12 +247,12 @@ knitr::kable(head(select3,3))
 ====================================
 - 是針對列 (Row)做子集
 - `filter(資料名稱,篩選條件1,篩選條件2)`篩選條件們是用**且**的邏輯串連
-- **單價元平方公尺超過500,000**的房屋資料，可輸入下列指令
+- **單價元平方公尺超過1,000,000**的房屋資料，可輸入下列指令
 ```{r filter1,eval=F}
-filter(AllOldData,單價元平方公尺>500000)
+filter(AllOldData,單價元平方公尺>1000000)
 ```
 ```{r filter1.1,echo=F}
-filter1<-filter(AllOldData,單價元平方公尺>500000)
+filter1<-filter(AllOldData,單價元平方公尺>1000000)
 knitr::kable(filter1)
 ```
 
@@ -274,12 +274,12 @@ knitr::kable(head(filter(AllOldData,鄉鎮市區 %in% c("大安區","信義區")
 ```{r filter4,eval=F}
 filter(AllOldData,
        鄉鎮市區 %in% c("大安區","信義區")
-           &單價元平方公尺>500000)
+           &單價元平方公尺>1000000)
 ```
 ```{r filter4.1,echo=F}
 knitr::kable(filter(AllOldData,
        鄉鎮市區 %in% c("大安區","信義區")
-           &單價元平方公尺>500000))
+           &單價元平方公尺>1000000))
 ```
 
 dplyr 子集練習
@@ -328,9 +328,9 @@ summarise(AllOldData,
 計算統計值 summarise() 
 ====================================
 - 通常會與其他功能合併使用
-- 計算**單價元平方公尺超過500,000**的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均土地移轉總面積平方公尺**
+- 計算**單價元平方公尺超過1,000,000**的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均土地移轉總面積平方公尺**
 ```{r summarise2}
-filter1<-filter(AllOldData,單價元平方公尺>500000)
+filter1<-filter(AllOldData,單價元平方公尺>1000000)
 summarise(filter1,
     nHouse=n(),
     meanBuild=mean(建物移轉總面積平方公尺),
@@ -361,7 +361,7 @@ pipe %>%
 - 直接用**pipe**符號`%>%`將指令串連，減少暫存物件（filter1）的生成
 ```{r summarise3}
 
-filter(AllOldData,單價元平方公尺>500000) %>%
+filter(AllOldData,單價元平方公尺>1000000) %>%
   summarise(nHouse=n(),
       meanBuild=mean(建物移轉總面積平方公尺),
       meanLand=mean(土地移轉總面積平方公尺))
@@ -474,7 +474,7 @@ AllPreData<-read_csv("AllPreData.csv", ,
       )
 )
 ```
-- 試著用dplyr語法篩選出所有**建物型態為住宅大樓(11層含以上有電梯)**且**建物移轉總面積平方公尺 大於100**的球員資料
+- 試著用dplyr語法篩選出所有**建物型態為住宅大樓(11層含以上有電梯)**且**建物移轉總面積平方公尺 大於100**的交易資料
 - 依**鄉鎮市區**Position分組，計算交易的平均**總價元**，平均**單價元平方公尺**
 - 依平均**單價元平方公尺** **由大到小**排序
 - 用pipe **%>%**
