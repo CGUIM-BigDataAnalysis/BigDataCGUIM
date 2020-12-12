@@ -17,8 +17,12 @@ iris[seq(2,nrow(iris),2),
      c((ncol(iris)-1),ncol(iris))]
 
 #取出mtcars中，cyl小於等於6的車種資料
-mtcars
+mtcars[mtcars$cyl<=6, ]
 #所有Toyota品牌的車種資料
-
-
+rownames(mtcars)
+grep("Toyota",rownames(mtcars))
+# grep or grepl 
+mtcars[c(20,21), ]
+mtcars[grep("Toyota",rownames(mtcars)), ]
+mtcars[grepl("Toyota",rownames(mtcars)), ]
 
