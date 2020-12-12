@@ -71,3 +71,18 @@ AllPreData<-
               非都市土地使用編定= col_character()
               )
 )
+
+
+#單價元平方公尺超過100萬且主要用途為住家用
+overprice<-filter(AllPreData,
+       單價元平方公尺>400000 &
+         主要用途=="住家用")
+
+#鄉鎮市區欄位以及開頭為土地以及開頭為交易的欄位
+overpriceFinal<-select(overprice,鄉鎮市區,
+       starts_with("土地"),
+       starts_with("交易"))
+
+
+
+
