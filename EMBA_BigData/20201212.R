@@ -26,3 +26,48 @@ mtcars[c(20,21), ]
 mtcars[grep("Toyota",rownames(mtcars)), ]
 mtcars[grepl("Toyota",rownames(mtcars)), ]
 
+# covid
+library(readr)
+Cases <- 
+  read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+Deaths <- 
+  read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
+
+library(dplyr)
+covid<-inner_join(Cases,Deaths, 
+           by = c("Province/State", 
+                  "Country/Region", 
+                  "Lat", "Long"))
+nrow(covid)
+
+covid_wrong<-inner_join(Cases,Deaths, 
+                  by = "Country/Region")
+nrow(covid_wrong)
+
+
+
+
+
+
+
+## select US updated case and death number
+Cases %>% 
+  filter(`Country/Region`=="US") %>%
+  select(`Country/Region`,`12/10/20`) %>%
+  arrange(desc(`12/10/20`))
+  
+Deaths %>% 
+  filter(`Country/Region`=="US") %>%
+  select(`Country/Region`,`12/10/20`) %>%
+  arrange(desc(`12/10/20`))
+
+
+library(dplyr)
+library(readr)
+AllPreData<-
+  read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/AllPreData.csv",
+           col_types = cols(
+             非都市土地使用分區= col_character(),
+              非都市土地使用編定= col_character()
+              )
+)
