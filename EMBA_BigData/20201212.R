@@ -81,7 +81,7 @@ overprice<-filter(AllPreData,
 #鄉鎮市區欄位以及開頭為土地以及開頭為交易的欄位
 overpriceFinal<-select(overprice,鄉鎮市區,
        starts_with("土地"),
-       starts_with("交易"))
+       starts_with("交易"),總價元)
 
 
 
