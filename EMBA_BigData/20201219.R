@@ -15,7 +15,7 @@ overprice<-filter(AllPreData,
 summarise(overprice,
           土地平均面積=
             mean(土地移轉總面積平方公尺),
-          土地平均標準差=
+          土地面積標準差=
             sd(土地移轉總面積平方公尺),
           建物平均面積=
             mean(建物移轉總面積平方公尺))
