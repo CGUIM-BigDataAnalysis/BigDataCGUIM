@@ -21,3 +21,12 @@ summarise(overprice,
             mean(建物移轉總面積平方公尺))
 
 
+
+AllPreData %>%
+  filter(建物型態=="住宅大樓(11層含以上有電梯)" &
+               建物移轉總面積平方公尺>100) %>%
+  group_by(鄉鎮市區) %>%
+  summarise(Price=mean(總價元),
+            PriceU=mean(單價元平方公尺)) %>%
+  arrange(desc(PriceU))
+
