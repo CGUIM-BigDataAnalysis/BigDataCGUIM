@@ -22,11 +22,39 @@ summarise(overprice,
 
 
 
+finalData<-AllPreData %>%
+  filter(建物型態=="住宅大樓(11層含以上有電梯)" &
+               建物移轉總面積平方公尺>100) %>%
+  group_by(鄉鎮市區) %>%
+  summarise(nHouse=n(),
+            Price=mean(總價元),
+            PriceU=mean(單價元平方公尺)) %>%
+  arrange(desc(PriceU))
+
+# normal
+
+filterR<-filter(AllPreData,
+       建物型態=="住宅大樓(11層含以上有電梯)" &
+         建物移轉總面積平方公尺>100)
+
+groupedData<-group_by(filterR,鄉鎮市區)
+
+sumData<-summarise(groupedData,
+          Price=mean(總價元),
+          PriceU=mean(單價元平方公尺))
+
+arrange(sumData,desc(PriceU))
+
 AllPreData %>%
   filter(建物型態=="住宅大樓(11層含以上有電梯)" &
                建物移轉總面積平方公尺>100) %>%
   group_by(鄉鎮市區) %>%
-  summarise(Price=mean(總價元),
-            PriceU=mean(單價元平方公尺)) %>%
-  arrange(desc(PriceU))
+  arrange(鄉鎮市區,desc(總價元)) %>%
+  slice(1,n()) %>% View()
 
+AllPreData %>%
+  filter(建物型態=="住宅大樓(11層含以上有電梯)" &
+               建物移轉總面積平方公尺>100) %>%
+  group_by(鄉鎮市區) %>%
+  arrange(鄉鎮市區,總價元) %>%
+  slice(1) %>% View()
