@@ -46,6 +46,18 @@ library(ggmap)
 register_google("AIzaSyAvNeyA_Uy8Z3JlzDnDuXQg7FhKFeVyNbY")
 taoyuan<-
   get_googlemap(
-    center = c(121.20,25.00)
+    center = c(121.20,25.00),
+    zoom = 11
     )
-ggmap(taoyuan)
+
+ggmap(taoyuan) + 
+  geom_point(
+    aes(x=121.389539,
+        y=25.035225),
+    color="red",size=10
+    )
+
+
+
+
+
