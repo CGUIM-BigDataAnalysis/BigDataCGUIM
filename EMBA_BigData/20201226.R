@@ -58,6 +58,12 @@ ggmap(taoyuan) +
     )
 
 
+library(purrr)
+library(jsonlite)
+Bike<-
+  fromJSON("https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f")
+Bike_df<-
+  map_df(Bike$retVal,as_tibble)
 
 
 
