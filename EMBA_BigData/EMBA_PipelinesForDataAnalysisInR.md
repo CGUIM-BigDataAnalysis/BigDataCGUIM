@@ -52,11 +52,11 @@ left: 30%
 
 RStudio 使用步驟
 ========================================================
-- New Project (如果原本沒有的話)
-- New R Script (如果原本沒有的話)
+- New Project (如果原本沒有的話，就像把相關資料整理在**資料夾**的功能)
+- New R Script (如果原本沒有的話，就像開個WORD記錄所有程式碼)
 - 在左上方**程式碼編輯區 Source editor**撰寫程式碼
-- 將需要執行的程式碼反白，點選**Run**，執行程式碼
-- 將游標移至需要執行的程式碼，點選**Run** 也可執行該行程式碼
+- 將需要執行的程式碼反白，點選**Run**或是按**Ctrl+Enter**，執行程式碼
+- 將游標移至需要執行的程式碼，點選**Run**或是按**Ctrl+Enter**，也可執行該行程式碼
 - 程式碼會在左下方Console視窗執行，顯示結果
 - 如果有畫圖，會出現在右下方視窗
 - 可在右上方視窗檢查所有變數
@@ -76,7 +76,7 @@ type:alert
 incremental:true
 
 - 打開RStudio
-- 左上角**File**->**New Project** (如果原本沒有的話)
+- 左上角**File**->**New Project** (如果原本沒有的話，Project名稱就會是資料夾名稱)
 - 左上角**File**->**New File**->**R Script** (如果原本沒有的話)
 - 在Console輸入1+，按Enter
 - 試著跳出打不完的程式碼，變回輸入模式`>`
@@ -119,6 +119,13 @@ library(ggplot2)
 
 - **不用**在套件名稱前後加雙引號
 
+Install packages hands-on
+====================================
+type:alert
+incremental:true
+
+- 在剛剛新增的**R Script**中，輸入`install.packages("tidyverse")`
+- 使用上方選單**Tools**->**Install packages**->在**Package**欄位輸入`SportsAnalytics`，點選**Install**
 
 Functions - Basic
 ========================================================
@@ -216,8 +223,8 @@ Variable 命名規則
 type:alert
 incremental:true
 
-- 在Source code視窗輸入`TRUE`
-- 在Source code視窗輸入`True`
+- 在Source code視窗輸入`TRUE`，觀察顏色
+- 在Source code視窗輸入`True`，觀察顏色
 
 資料型態
 ========================================================
@@ -279,12 +286,12 @@ dateBook
 ```
 
 ```
-[1] "2020-11-13"
+[1] "2021-11-27"
 ```
 
 日期 (Date) - lubridate
 ========================================================
-- `lubridate` package : 日期與字串的相關轉換操作
+- `lubridate` package : 日期與字串的相關轉換操作，含在`tidyverse`套件中
 - `ymd()`函數 : 將`年/月/日`格式的文字轉換為日期物件
     - y表年year
     - m表月month
@@ -317,7 +324,7 @@ mdy('3/3/2012')
 [1] "2012-03-03"
 ```
 
-- 其他使用方法：[The Yhat Blog](http://blog.yhat.com/static/pdf/R_date_cheat_sheet.pdf)
+- 其他使用方法：[Cheatsheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf)
 
 基本運算子: 數學運算
 ========================================================
@@ -510,7 +517,7 @@ mena(NA)
 ```
 
 ```
-Error in mena(NA): 沒有這個函數 "mena"
+Error in mena(NA): 沒有這個函式 "mena"
 ```
 
 解讀錯誤訊息 範例
@@ -533,10 +540,10 @@ Error in mena(NA): 沒有這個函數 "mena"
 type:alert
 incremental:true
 
-- 在Source code視窗輸入`fetch_NBAPlayerStatistics("18-19")`並執行
+- 在Source code視窗輸入`fetch_NBAPlayerStatistics("20-21")`並執行
 - 試著安裝`SportsAnalytics` package
 - 試著載入`SportsAnalytics` package
-- 再次執行`fetch_NBAPlayerStatistics("18-19")`
+- 再次執行`fetch_NBAPlayerStatistics("20-21")`
 - 在Source code視窗輸入`library(knitr)`並執行
 
 Help
