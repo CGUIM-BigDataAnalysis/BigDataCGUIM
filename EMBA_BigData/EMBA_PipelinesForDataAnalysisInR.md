@@ -258,9 +258,21 @@ char2<-"100"
 char3<-"200"
 #char2+char3 
 #會輸出Error message: non-numeric argument to binary operator
+paste0(char2,char3)
+```
+
+```
+[1] "100200"
 ```
 
 
+```r
+paste0(char2,char3)
+```
+
+```
+[1] "100200"
+```
 布林變數 (logic)
 ========================================================
 - 用於邏輯判斷
@@ -286,7 +298,7 @@ dateBook
 ```
 
 ```
-[1] "2021-11-27"
+[1] "2021-11-26"
 ```
 
 日期 (Date) - lubridate
@@ -517,7 +529,7 @@ mena(NA)
 ```
 
 ```
-Error in mena(NA): 沒有這個函式 "mena"
+Error in mena(NA): could not find function "mena"
 ```
 
 解讀錯誤訊息 範例
@@ -713,8 +725,9 @@ factor(c("大學生","碩士班學生","博士班學生"),
 ```
 
 ```
-[1] 大學生     碩士班學生 博士班學生
-Levels: 大學生 碩士班學生 博士班學生
+[1] \u5927\u5b78\u751f             \u78a9\u58eb\u73ed\u5b78\u751f
+[3] \u535a\u58eb\u73ed\u5b78\u751f
+3 Levels: \u5927\u5b78\u751f ... \u535a\u58eb\u73ed\u5b78\u751f
 ```
 因子變量一但決定其類別的種類與數目時，通常不會再作更動，也就是任何新增的元素都要是大學生、碩士班學生與博士班學生其中一種。
 
@@ -816,7 +829,7 @@ listSample[[1]]
 ```
 
 ```
-[1] "小明" "大雄" "胖虎" "小新" "大白"
+[1] "\u5c0f\u660e" "\u5927\u96c4" "\u80d6\u864e" "\u5c0f\u65b0" "\u5927\u767d"
 ```
 
 列表資料編輯設定
@@ -842,10 +855,10 @@ StuDF
 ```
 
 ```
-  StuID name score
-1     1 小明    80
-2     2 大雄    60
-3     3 胖虎    90
+  StuID         name score
+1     1 \u5c0f\u660e    80
+2     2 \u5927\u96c4    60
+3     3 \u80d6\u864e    90
 ```
 
 
@@ -916,6 +929,83 @@ str(iris)
  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
+
+資料框 data.frame 搭配skimr套件
+======================================================== 
+
+```r
+install.packages("skimr")
+```
+
+```r
+library(skimr)
+skim(iris) 
+```
+
+
+Table: Data summary
+
+|                         |     |
+|:------------------------|:----|
+|Name                     |iris |
+|Number of rows           |150  |
+|Number of columns        |5    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|factor                   |1    |
+|numeric                  |4    |
+|________________________ |     |
+|Group variables          |None |
+
+
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
+|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
+|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
+|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
+|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
+|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
+|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
+資料框 data.frame 搭配skimr套件
+======================================================== 
+
+Table: Data summary
+
+|                         |     |
+|:------------------------|:----|
+|Name                     |iris |
+|Number of rows           |150  |
+|Number of columns        |5    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|factor                   |1    |
+|numeric                  |4    |
+|________________________ |     |
+|Group variables          |None |
+
+
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
+|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
+|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
+|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
+|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
+|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
+|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
 
 資料框資料擷取
 ======================================================== 

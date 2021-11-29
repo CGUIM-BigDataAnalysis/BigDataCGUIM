@@ -222,9 +222,12 @@ char2<-"100"
 char3<-"200"
 #char2+char3 
 #會輸出Error message: non-numeric argument to binary operator
+paste0(char2,char3)
 ```
 
-
+```{r char2}
+paste0(char2,char3)
+```
 布林變數 (logic)
 ========================================================
 - 用於邏輯判斷
@@ -619,6 +622,21 @@ ncol(StuDF) #幾欄
 
 ```{r}
 str(iris) 
+```
+
+資料框 data.frame 搭配skimr套件
+======================================================== 
+```{r eval=F}
+install.packages("skimr")
+```
+```{r}
+library(skimr)
+skim(iris) 
+```
+資料框 data.frame 搭配skimr套件
+======================================================== 
+```{r echo=F}
+skim(iris) 
 ```
 
 資料框資料擷取
