@@ -17,6 +17,7 @@ navigation: slide
 - 從檔案匯入
 - 從網路匯入
 - 從Twitter匯入
+- 從Google Sheet匯入
 - 資料匯出
 
 從檔案匯入
@@ -38,7 +39,7 @@ knitr::include_graphics("figures/import.png")
 
 Import Dataset功能 (RStudio)
 ====================================
-- 選取`From CSV`
+- 選取`From Text (readr)`
 - 點選`Browse`按鈕開啟檔案選取器
 
 ```{r echo=FALSE}
@@ -248,9 +249,8 @@ JSON檔案匯入
 - 如果API網址為**https**，則需使用 `httr` package
     - 使用`GET()`函數處理資料擷取網址
 - API網址參考[桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
-```{r message=FALSE,warning=FALSE,eval=F}
+```{r message=FALSE,warning=FALSE,eval=T}
 library(jsonlite)
-library(RCurl)
 APIData<-fromJSON("http://data.tycg.gov.tw/api/v1/rest/datastore/a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f?format=json")
 ```
 
@@ -259,7 +259,7 @@ JSON檔案匯入
 - 轉存為`列表list`的型態
 - 兩個子元素(success, result)
 - result中records子元素的類別為資料框data.frame
-```{r message=FALSE,warning=FALSE,eval=F}
+```{r message=FALSE,warning=FALSE,eval=T}
 str(APIData)
 ```
 
@@ -269,7 +269,7 @@ JSON檔案解析
 ```{r readJSON,eval=F}
 head(APIData$result$records)
 ```
-```{r readJSONk,echo=F,eval=F}
+```{r readJSONk,echo=F,eval=T}
 knitr::kable(APIData$result$records[1:8,1:9]) 
 ```
 
@@ -279,7 +279,7 @@ JSON檔案解析
 ```{r readJSON1,eval=F}
 table(APIData$result$records$sarea)
 ```
-```{r readJSON1k,echo=F,eval=F}
+```{r readJSON1k,echo=F,eval=T}
 knitr::kable(data.frame(table(APIData$result$records$sarea)))
 ```
 分析可知中壢區車站較多
@@ -326,7 +326,7 @@ library(rvest) ##載入
 Repoterurl<-"https://www.twreporter.org/topics"
 Repoterhtml<-read_html(Repoterurl)
 news_title <- Repoterhtml %>% 
-    html_nodes(".kmupWO") %>% html_text()
+    html_nodes(".eIzpqT") %>% html_text()
 news_title
 ```
 
@@ -338,23 +338,23 @@ news_title
     - 或使用**SelectorGadget**輔助
     - 或使用**xpath-helper**輔助xpath標籤的擷取
 - 觀察需要擷取的資料所在HTML片段
-    - css class為`.kmupWO`
+    - css class為`.eIzpqT`
 
 
 
 盤中奈米股資料爬取 -1
 ====================================
+
 [零股資料](https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm)
+
 ```{r}
 library(rvest) 
 NanoStockUrl<-"https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm"
 NanoStockContent<-read_html(NanoStockUrl)
 NanoStockName<-
-  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% 
-    html_text()
+  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% html_text()
 NanoStockPrice<-
-  NanoStockContent %>% html_nodes(".t3n1")%>% 
-    html_text()
+  NanoStockContent %>% html_nodes(".t3n1")%>% html_text()
 
 head(NanoStockName)
 head(NanoStockPrice)
@@ -502,15 +502,15 @@ create_token(
 rtweet package - 搜尋hashtag
 ====================================
 ```{r eval=F}
-## search for 3000 tweets using the trump hashtag
+## search for 3000 tweets using the Taiwan hashtag
 rt <- search_tweets(
-  "#trump", n = 3000, include_rts = FALSE
+  "#Taiwan", n = 3000, include_rts = FALSE
 )
 head(rt)
 ```
 ```{r echo=F}
 rt <- search_tweets(
-  "#trump", n = 3000, include_rts = FALSE
+  "#Taiwan", n = 3000, include_rts = FALSE
 )
 knitr::kable(rt[1:6,1:4])
 ```
@@ -524,7 +524,7 @@ ts_plot(rt, "3 hours") +
   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
   ggplot2::labs(
     x = NULL, y = NULL,
-    title = "Frequency of #trump Twitter statuses",
+    title = "Frequency of #Taiwan Twitter statuses",
     subtitle = "Twitter status (tweet) counts aggregated using three-hour intervals",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet"
   )
@@ -544,11 +544,11 @@ knitr::kable(sf[1:4,1:4])
 rtweet package - 取得timeline
 ====================================
 ```{r eval=F}
-tmls <- get_timelines(c("realDonaldTrump", "joebiden"), n = 3000)
+tmls <- get_timelines(c("JeffBezos", "elonmusk"), n = 3000)
 head(tmls)
 ```
 ```{r echo=F}
-tmls <- get_timelines(c("realDonaldTrump", "joebiden"), n = 3000)
+tmls <- get_timelines(c("JeffBezos", "elonmusk"), n = 3000)
 knitr::kable(tmls[1:6,c("user_id","screen_name","text","source")])
 ```
 
@@ -557,7 +557,7 @@ rtweet package - 取得timeline
 ```{r echo=F}
 ## plot the frequency of tweets for each user over time
 tmls %>%
-  dplyr::filter(created_at > "2020-11-01") %>%
+  dplyr::filter(created_at > "2021-11-01") %>%
   dplyr::group_by(screen_name) %>%
   ts_plot("days", trim = 1L) +
   ggplot2::geom_point() +
@@ -568,8 +568,8 @@ tmls %>%
     plot.title = ggplot2::element_text(face = "bold")) +
   ggplot2::labs(
     x = NULL, y = NULL,
-    title = "Frequency of Twitter statuses posted by US President",
-    subtitle = "Twitter status (tweet) counts aggregated by day from  2020",
+    title = "Frequency of Twitter statuses posted",
+    subtitle = "Twitter status (tweet) counts aggregated by day from  2021-11-01",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet"
   )
 
@@ -585,7 +585,7 @@ iingwen_flw <- get_followers("iingwen", n = 1000)
 iingwen_flw_data <- lookup_users(iingwen_flw$user_id)
 head(iingwen_flw_data)
 ```
-```{r echo=F,eval=F}
+```{r echo=F,eval=T}
 ## get user IDs of accounts following 蔡英文 Tsai Ing-wen
 iingwen_flw <- get_followers("iingwen", n = 1000)
 ## lookup data on those accounts
@@ -603,6 +603,60 @@ incremental:true
 - 第一筆資料的retweet_count是多少?
 - 第二筆資料的favorite_count是多少?
 
+從Google sheet匯入
+====================================
+type:section
+
+- googlesheets4 package
+
+
+googlesheets4 package
+====================================
+```{r eval=F}
+## install googlesheets4 from CRAN (already included in tidyverse)
+install.packages("googlesheets4")
+## load googlesheets4 package
+library(googlesheets4)
+```
+```{r echo=F,eval=T}
+library(googlesheets4)
+```
+
+googlesheets4 package
+====================================
+使用`read_sheet()`讀入google sheet
+```{r}
+read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
+```
+
+需要開啟google 授權
+====================================
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuth.png")
+```
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuthGoogle.png")
+```
+
+需要開啟google 授權
+====================================
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuth.png")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuthGoogle.png")
+```
+
+googlesheets4 package
+====================================
+使用`read_sheet()`讀入google sheet
+```{r eval=F}
+read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
+```
+```{r echo=F}
+knitr::kable(read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0"))
+```
 
 資料匯出
 ====================================
@@ -666,7 +720,7 @@ type:sub-section
 Each column is a variable. Each row is an observation.
 
 - 一個欄位（Column）內只有一個數值，最好要有凡人看得懂的Column Name
-- 不同的觀察值應該要在不同行（Row）
+- 不同的觀察值應該要在不同列（Row）
 - 一張表裡面，有所有分析需要的資料
 - 如果一定要多張表，中間一定要有index可以把表串起來
 - One file, one table
@@ -917,73 +971,7 @@ type:sub-section
     - 輸入位置: `dataFrame[row index,column index]`
     - 輸入布林變數: `dataFrame[c(T,F,T),c(T,F,T)]`
     - 輸入欄位名稱: `dataFrame[row name,column name]`
-
-子集Subset - 二維資料 []
-====================================
-```{r}
-iris[1,2] ##第一列Row，第二行Column
-```
-```{r eval=F}
-iris[1:3,] ##第1~3列Row，所有的行Column
-```
-```{r echo=F}
-knitr::kable(iris[1:3,]) ##第1~3列Row，所有的行Column
-```
-
-子集Subset - 二維資料 []
-====================================
-```{r eval=F}
-iris[1:10,c(T,F,T,F,T)] ##第1~10列Row，第1,3,5行Column (TRUE)
-```
-```{r echo=F}
-knitr::kable(iris[1:10,c(T,F,T,F,T)]) ##第1~10列Row，第1,3,5行Column (TRUE)
-```
-
-子集Subset - 二維資料 []
-====================================
-```{r}
-iris[,"Species"] ##所有的列Row，名稱為Species的行Column
-```
-
-子集 [ ] 練習
-====================================
-type:alert
-incremental:true
-
-- 取出iris資料集"Species"欄位的前十列(Row)
-- 取出iris資料集所有單數列(Row)
-- 取出iris資料集最後兩個欄位的所有偶數列(Row)
-
-子集Subset - 二維資料 $
-====================================
-也可使用`$`符號做**Column的篩選**
-```{r}
-# 等同於iris[,"Species"]
-iris$Species ##所有的列Row，名稱為Species的行Column
-```
-
-子集Subset - 二維資料subset()
-====================================
-**Row的篩選**可使用`subset()`函數，使用方法為`subset(資料表,篩選邏輯)`
-
-```{r eval=F}
-subset(iris,Species=="virginica") ##Species等於"virginica"的列Row，所有的行Column
-```
-```{r echo=F}
-knitr::kable(subset(iris,Species=="virginica"))
-```
-
-子集Subset - 二維資料grepl()
-====================================
-**Row的篩選**也可搭配字串搜尋函數`grepl()`
-```{r eval=F}
-grepl("color",iris$Species)
-iris[grepl("color",iris$Species),] ##Species包含"color"的列，所有的行
-```
-```{r echo=F}
-head(grepl("color",iris$Species))
-knitr::kable(head(iris[grepl("color",iris$Species),]))
-```
+- 最後常用的是dplyr中的`select()`和`filter()`功能
 
 子集Subset - head()
 ====================================
@@ -1007,18 +995,6 @@ tail(iris,3) ##取出iris資料框的後三列
 knitr::kable(tail(iris,3))
 ```
 
-
-子集綜合練習
-====================================
-type:alert
-incremental:true
-
-- 取出內建資料集mtcars中，所有cyl小於等於6的車種資料
-    - 方法一 subset()
-    - 方法二 [ ]
-- 取出內建資料集mtcars中，所有Toyota品牌的車種資料
-    - 提示: rownames(), grepl()
-    - [ ]
 
 
 資料組合
@@ -1182,6 +1158,16 @@ full_join(nameDF,scoreDF,by="ID")
 ```{r}
 library(dplyr)
 semi_join(nameDF,scoreDF,by="ID")
+```
+
+資料結合 - anti_join()
+====================================
+留下左邊的ID沒有出現在右邊的表的列，右表資料不會輸出
+使用方法 `anti_join(x, y, by = )`
+
+```{r}
+library(dplyr)
+anti_join(nameDF,scoreDF,by="ID")
 ```
 
 資料結合練習

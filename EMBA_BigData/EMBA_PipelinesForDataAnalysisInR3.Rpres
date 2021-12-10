@@ -302,6 +302,18 @@ AllPreData<-read_csv("AllPreData.csv", ,
 - 只留下鄉鎮市區 開頭為**土地** 以及開頭為**交易** 的 欄位
 
 
+子集Subset - 二維資料grepl()
+====================================
+**Row的篩選**也可搭配字串搜尋函數`grepl()`
+```{r eval=F}
+grepl("color",iris$Species)
+filter(iris,grepl("color",Species))##Species包含"color"的row，所有的column
+```
+```{r echo=F}
+head(grepl("color",iris$Species))
+knitr::kable(head(filter(iris,grepl("color",Species))))
+```
+
 
 增加新欄位 mutate()
 ====================================

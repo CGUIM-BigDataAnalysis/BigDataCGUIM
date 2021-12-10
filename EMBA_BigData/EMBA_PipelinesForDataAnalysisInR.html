@@ -1184,7 +1184,7 @@ boolF1&lt;-F
 dateBook
 </code></pre>
 
-<pre><code>[1] &quot;2021-11-26&quot;
+<pre><code>[1] &quot;2021-12-10&quot;
 </code></pre>
 
 </div>
@@ -1675,9 +1675,8 @@ numvec1+numvec2
        levels = c(&quot;大學生&quot;,&quot;碩士班學生&quot;,&quot;博士班學生&quot;))
 </code></pre>
 
-<pre><code>[1] \u5927\u5b78\u751f             \u78a9\u58eb\u73ed\u5b78\u751f
-[3] \u535a\u58eb\u73ed\u5b78\u751f
-3 Levels: \u5927\u5b78\u751f ... \u535a\u58eb\u73ed\u5b78\u751f
+<pre><code>[1] 大學生     碩士班學生 博士班學生
+Levels: 大學生 碩士班學生 博士班學生
 </code></pre>
 
 <p>因子變量一但決定其類別的種類與數目時，通常不會再作更動，也就是任何新增的元素都要是大學生、碩士班學生與博士班學生其中一種。</p>
@@ -1798,7 +1797,7 @@ $School
 listSample[[1]] 
 </code></pre>
 
-<pre><code>[1] &quot;\u5c0f\u660e&quot; &quot;\u5927\u96c4&quot; &quot;\u80d6\u864e&quot; &quot;\u5c0f\u65b0&quot; &quot;\u5927\u767d&quot;
+<pre><code>[1] &quot;小明&quot; &quot;大雄&quot; &quot;胖虎&quot; &quot;小新&quot; &quot;大白&quot;
 </code></pre>
 
 </div>
@@ -1830,10 +1829,10 @@ listSample[[1]]
 StuDF 
 </code></pre>
 
-<pre><code>  StuID         name score
-1     1 \u5c0f\u660e    80
-2     2 \u5927\u96c4    60
-3     3 \u80d6\u864e    90
+<pre><code>  StuID name score
+1     1 小明    80
+2     2 大雄    60
+3     3 胖虎    90
 </code></pre>
 
 </div>
@@ -1923,358 +1922,8 @@ StuDF
 <pre><code class="r">install.packages(&quot;skimr&quot;)
 </code></pre>
 
-<pre><code class="r">library(skimr)
-skim(iris) 
+<pre><code>Error in library(skimr) : there is no package called &#39;skimr&#39;
 </code></pre>
-
-<p>Table: Data summary</p>
-
-<table><thead>
-<tr>
-<th align="left"></th>
-<th align="left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Name</td>
-<td align="left">iris</td>
-</tr>
-<tr>
-<td align="left">Number of rows</td>
-<td align="left">150</td>
-</tr>
-<tr>
-<td align="left">Number of columns</td>
-<td align="left">5</td>
-</tr>
-<tr>
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">factor</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr>
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody></table>
-
-<p><strong>Variable type: factor</strong></p>
-
-<table><thead>
-<tr>
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">ordered</th>
-<th align="right">n_unique</th>
-<th align="left">top_counts</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Species</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">FALSE</td>
-<td align="right">3</td>
-<td align="left">set: 50, ver: 50, vir: 50</td>
-</tr>
-</tbody></table>
-
-<p><strong>Variable type: numeric</strong></p>
-
-<table><thead>
-<tr>
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.84</td>
-<td align="right">0.83</td>
-<td align="right">4.3</td>
-<td align="right">5.1</td>
-<td align="right">5.80</td>
-<td align="right">6.4</td>
-<td align="right">7.9</td>
-<td align="left">▆▇▇▅▂</td>
-</tr>
-<tr>
-<td align="left">Sepal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.44</td>
-<td align="right">2.0</td>
-<td align="right">2.8</td>
-<td align="right">3.00</td>
-<td align="right">3.3</td>
-<td align="right">4.4</td>
-<td align="left">▁▆▇▂▁</td>
-</tr>
-<tr>
-<td align="left">Petal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.76</td>
-<td align="right">1.77</td>
-<td align="right">1.0</td>
-<td align="right">1.6</td>
-<td align="right">4.35</td>
-<td align="right">5.1</td>
-<td align="right">6.9</td>
-<td align="left">▇▁▆▇▂</td>
-</tr>
-<tr>
-<td align="left">Petal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.20</td>
-<td align="right">0.76</td>
-<td align="right">0.1</td>
-<td align="right">0.3</td>
-<td align="right">1.30</td>
-<td align="right">1.8</td>
-<td align="right">2.5</td>
-<td align="left">▇▁▇▅▃</td>
-</tr>
-</tbody></table>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>資料框 data.frame 搭配skimr套件</h3>
-<div class="slideContent" >
-<p>Table: Data summary</p>
-
-<table><thead>
-<tr>
-<th align="left"></th>
-<th align="left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Name</td>
-<td align="left">iris</td>
-</tr>
-<tr>
-<td align="left">Number of rows</td>
-<td align="left">150</td>
-</tr>
-<tr>
-<td align="left">Number of columns</td>
-<td align="left">5</td>
-</tr>
-<tr>
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">factor</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr>
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody></table>
-
-<p><strong>Variable type: factor</strong></p>
-
-<table><thead>
-<tr>
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="left">ordered</th>
-<th align="right">n_unique</th>
-<th align="left">top_counts</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Species</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">FALSE</td>
-<td align="right">3</td>
-<td align="left">set: 50, ver: 50, vir: 50</td>
-</tr>
-</tbody></table>
-
-<p><strong>Variable type: numeric</strong></p>
-
-<table><thead>
-<tr>
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.84</td>
-<td align="right">0.83</td>
-<td align="right">4.3</td>
-<td align="right">5.1</td>
-<td align="right">5.80</td>
-<td align="right">6.4</td>
-<td align="right">7.9</td>
-<td align="left">▆▇▇▅▂</td>
-</tr>
-<tr>
-<td align="left">Sepal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.06</td>
-<td align="right">0.44</td>
-<td align="right">2.0</td>
-<td align="right">2.8</td>
-<td align="right">3.00</td>
-<td align="right">3.3</td>
-<td align="right">4.4</td>
-<td align="left">▁▆▇▂▁</td>
-</tr>
-<tr>
-<td align="left">Petal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.76</td>
-<td align="right">1.77</td>
-<td align="right">1.0</td>
-<td align="right">1.6</td>
-<td align="right">4.35</td>
-<td align="right">5.1</td>
-<td align="right">6.9</td>
-<td align="left">▇▁▆▇▂</td>
-</tr>
-<tr>
-<td align="left">Petal.Width</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.20</td>
-<td align="right">0.76</td>
-<td align="right">0.1</td>
-<td align="right">0.3</td>
-<td align="right">1.30</td>
-<td align="right">1.8</td>
-<td align="right">2.5</td>
-<td align="left">▇▁▇▅▃</td>
-</tr>
-</tbody></table>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>資料框資料擷取</h3>
-<div class="slideContent" >
-<p>資料框可用<code>$</code>符號做<strong>欄位</strong>資料擷取</p>
-
-<pre><code class="r">iris$Species ##取得iris資料框中的Species欄位
-</code></pre>
-
-<pre><code>  [1] setosa     setosa     setosa     setosa     setosa     setosa    
-  [7] setosa     setosa     setosa     setosa     setosa     setosa    
- [13] setosa     setosa     setosa     setosa     setosa     setosa    
- [19] setosa     setosa     setosa     setosa     setosa     setosa    
- [25] setosa     setosa     setosa     setosa     setosa     setosa    
- [31] setosa     setosa     setosa     setosa     setosa     setosa    
- [37] setosa     setosa     setosa     setosa     setosa     setosa    
- [43] setosa     setosa     setosa     setosa     setosa     setosa    
- [49] setosa     setosa     versicolor versicolor versicolor versicolor
- [55] versicolor versicolor versicolor versicolor versicolor versicolor
- [61] versicolor versicolor versicolor versicolor versicolor versicolor
- [67] versicolor versicolor versicolor versicolor versicolor versicolor
- [73] versicolor versicolor versicolor versicolor versicolor versicolor
- [79] versicolor versicolor versicolor versicolor versicolor versicolor
- [85] versicolor versicolor versicolor versicolor versicolor versicolor
- [91] versicolor versicolor versicolor versicolor versicolor versicolor
- [97] versicolor versicolor versicolor versicolor virginica  virginica 
-[103] virginica  virginica  virginica  virginica  virginica  virginica 
-[109] virginica  virginica  virginica  virginica  virginica  virginica 
-[115] virginica  virginica  virginica  virginica  virginica  virginica 
-[121] virginica  virginica  virginica  virginica  virginica  virginica 
-[127] virginica  virginica  virginica  virginica  virginica  virginica 
-[133] virginica  virginica  virginica  virginica  virginica  virginica 
-[139] virginica  virginica  virginica  virginica  virginica  virginica 
-[145] virginica  virginica  virginica  virginica  virginica  virginica 
-Levels: setosa versicolor virginica
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>資料框資料編輯</h3>
-<div class="slideContent" >
-<p>資料框可用<code>$</code>符號做<strong>欄位</strong>資料擷取後，當成向量，並使用<strong>[]</strong>做資料編輯。</p>
-
-<pre><code class="r">iris$Species[2]&lt;-&quot;versicolor&quot;
-head(iris$Species)
-</code></pre>
-
-<pre><code>[1] setosa     versicolor setosa     setosa     setosa     setosa    
-Levels: setosa versicolor virginica
-</code></pre>
-
-</div>
-
-</section>
-<section data-state="alert" data-transition="linear" data-transition-speed="default">
-<h3>資料框資料編輯練習</h3>
-<div class="slideContent" >
-<ul>
-<li class="fragment">iris$Time&lt;-1 會發生什麼事情?</li>
-</ul>
 
 </div>
 
