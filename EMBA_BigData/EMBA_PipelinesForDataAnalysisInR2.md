@@ -289,16 +289,16 @@ List of 2
   .. ..$ sno    : chr [1:100] "2001" "2002" "2003" "2004" ...
   .. ..$ sna    : chr [1:100] "中央大學圖書館" "中壢高中" "中正公園(中美路)" "中壢火車站(前站)" ...
   .. ..$ tot    : chr [1:100] "60" "52" "54" "114" ...
-  .. ..$ sbi    : chr [1:100] "13" "31" "39" "53" ...
+  .. ..$ sbi    : chr [1:100] "13" "33" "37" "54" ...
   .. ..$ sarea  : chr [1:100] "中壢區" "中壢區" "中壢區" "中壢區" ...
-  .. ..$ mday   : chr [1:100] "20211211000918" "20211211000922" "20211211000926" "20211211000920" ...
+  .. ..$ mday   : chr [1:100] "20211211001618" "20211211001622" "20211211001626" "20211211001620" ...
   .. ..$ lat    : chr [1:100] "24.968128" "24.960815" "24.959113" "24.953874" ...
   .. ..$ lng    : chr [1:100] "121.194666" "121.212038" "121.224805" "121.2256" ...
   .. ..$ ar     : chr [1:100] "中大路300號(中央大學校內圖書館前)" "中央西路二段215號對面人行道" "中美路101-113號對面人行道" "中和路139號對面圓環" ...
   .. ..$ sareaen: chr [1:100] "Zhongli Dist." "Zhongli Dist." "Zhongli Dist." "Zhongli Dist." ...
   .. ..$ snaen  : chr [1:100] "National Central University Library" "Jhungli Senior High School" "Zhongzheng Park (Zhongmei Rd.)" "TRA Zhongli Station (Front)" ...
   .. ..$ aren   : chr [1:100] "No.300, Zhongda Rd." "No.215, Sec. 2, Zhongyang W. Rd. (opposite)" "No.101 to No.113, Zhongmei Rd. (opposite)" "No.139, Zhonghe Rd. (opposite)" ...
-  .. ..$ bemp   : chr [1:100] "47" "20" "14" "61" ...
+  .. ..$ bemp   : chr [1:100] "47" "18" "16" "60" ...
   .. ..$ act    : chr [1:100] "1" "1" "1" "1" ...
   ..$ offset        : int 0
   ..$ total         : int 381
@@ -315,14 +315,14 @@ head(APIData$result$records)
 
 | _id|sno  |sna              |tot |sbi |sarea  |mday           |lat       |lng        |
 |---:|:----|:----------------|:---|:---|:------|:--------------|:---------|:----------|
-|   1|2001 |中央大學圖書館   |60  |13  |中壢區 |20211211000918 |24.968128 |121.194666 |
-|   2|2002 |中壢高中         |52  |31  |中壢區 |20211211000922 |24.960815 |121.212038 |
-|   3|2003 |中正公園(中美路) |54  |39  |中壢區 |20211211000926 |24.959113 |121.224805 |
-|   4|2004 |中壢火車站(前站) |114 |53  |中壢區 |20211211000920 |24.953874 |121.2256   |
-|   5|2005 |中原大學         |82  |22  |中壢區 |20211211000945 |24.957943 |121.240201 |
-|   6|2006 |銀河廣場         |58  |26  |中壢區 |20211211000918 |24.961716 |121.224241 |
-|   7|2007 |中壢區公所       |40  |26  |中壢區 |20211211000949 |24.965697 |121.224696 |
-|   8|2008 |光明公園         |96  |42  |中壢區 |20211211000934 |24.962812 |121.217385 |
+|   1|2001 |中央大學圖書館   |60  |13  |中壢區 |20211211001618 |24.968128 |121.194666 |
+|   2|2002 |中壢高中         |52  |33  |中壢區 |20211211001622 |24.960815 |121.212038 |
+|   3|2003 |中正公園(中美路) |54  |37  |中壢區 |20211211001626 |24.959113 |121.224805 |
+|   4|2004 |中壢火車站(前站) |114 |54  |中壢區 |20211211001620 |24.953874 |121.2256   |
+|   5|2005 |中原大學         |82  |17  |中壢區 |20211211001645 |24.957943 |121.240201 |
+|   6|2006 |銀河廣場         |58  |26  |中壢區 |20211211001618 |24.961716 |121.224241 |
+|   7|2007 |中壢區公所       |40  |26  |中壢區 |20211211001643 |24.965697 |121.224696 |
+|   8|2008 |光明公園         |96  |42  |中壢區 |20211211001634 |24.962812 |121.217385 |
 
 JSON檔案解析
 ====================================
@@ -663,14 +663,14 @@ rt <- search_tweets(
 head(rt)
 ```
 
-|user_id            |status_id           |created_at          |screen_name     |
-|:------------------|:-------------------|:-------------------|:---------------|
-|729924727          |1469339908493955082 |2021-12-10 16:15:07 |TWexcellence_en |
-|729924727          |1469001152276611084 |2021-12-09 17:49:02 |TWexcellence_en |
-|340199191          |1468649017932673024 |2021-12-08 18:29:46 |nadz0814        |
-|340199191          |1469339604918493188 |2021-12-10 16:13:55 |nadz0814        |
-|803594213140987904 |1469339373271502866 |2021-12-10 16:13:00 |orfhindi        |
-|803594213140987904 |1469173530461753347 |2021-12-10 05:14:00 |orfhindi        |
+|user_id             |status_id           |created_at          |screen_name   |
+|:-------------------|:-------------------|:-------------------|:-------------|
+|1165865083613769728 |1469341217402068997 |2021-12-10 16:20:19 |muslim_bjp    |
+|1337755057647833095 |1469340942549516294 |2021-12-10 16:19:14 |Anita16Chen   |
+|1337755057647833095 |1468986251676352512 |2021-12-09 16:49:49 |Anita16Chen   |
+|1337755057647833095 |1468640154927910912 |2021-12-08 17:54:33 |Anita16Chen   |
+|482278419           |1469340941257527304 |2021-12-10 16:19:14 |UltimaHoraHn  |
+|1164627833618128897 |1469340896843993094 |2021-12-10 16:19:03 |TachitoSomoza |
 
 rtweet package - 搜尋hashtag
 ====================================
@@ -688,8 +688,8 @@ head(sf)
 |:---------------|:---------------------------------------------|:----------------|:-----------------|
 |#HumanRightsDay |http://twitter.com/search?q=%23HumanRightsDay |NA               |%23HumanRightsDay |
 |Vernehmlassung  |http://twitter.com/search?q=Vernehmlassung    |NA               |Vernehmlassung    |
+|#Assange        |http://twitter.com/search?q=%23Assange        |NA               |%23Assange        |
 |Varianten       |http://twitter.com/search?q=Varianten         |NA               |Varianten         |
-|#Bundesrat      |http://twitter.com/search?q=%23Bundesrat      |NA               |%23Bundesrat      |
 
 rtweet package - 取得timeline
 ====================================
@@ -724,14 +724,14 @@ iingwen_flw_data <- lookup_users(iingwen_flw$user_id)
 head(iingwen_flw_data)
 ```
 
-|user_id             |name        |location | friends_count|
-|:-------------------|:-----------|:--------|-------------:|
-|2391371734          |CwyVanzon   |广东惠州 |            74|
-|1469338733979787264 |小白        |         |            15|
-|1469338566795075589 |chicken zai |         |             5|
-|1469337942258634755 |无法接通    |         |             4|
-|1469330658552344576 |shi esion   |         |             5|
-|1469334995110330370 |拿鐵是隻貓  |         |             2|
+|user_id             |name       |location | friends_count|
+|:-------------------|:----------|:--------|-------------:|
+|1430891230980841490 |丞丞       |         |             7|
+|1427366907259367426 |李秋生     |         |           108|
+|1581766129          |Xi         |Georgia  |          1837|
+|1469341020177403904 |tracy chan |         |             3|
+|1469339789845352453 |王总       |         |             2|
+|2391371734          |CwyVanzon  |广东惠州 |            74|
 
 
 rtweet package練習
@@ -763,7 +763,7 @@ library(googlesheets4)
 
 googlesheets4 package
 ====================================
-使用`read_sheet()`讀入google sheet
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
 
 ```r
 read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
@@ -794,15 +794,10 @@ read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxse
 ![plot of chunk unnamed-chunk-33](figures/OAuth.png)
 ![plot of chunk unnamed-chunk-34](figures/OAuthGoogle.png)
 
-需要開啟google 授權
-====================================
-![plot of chunk unnamed-chunk-35](figures/OAuth.png)
-
-![plot of chunk unnamed-chunk-36](figures/OAuthGoogle.png)
 
 googlesheets4 package
 ====================================
-使用`read_sheet()`讀入google sheet
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
 
 ```r
 read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")

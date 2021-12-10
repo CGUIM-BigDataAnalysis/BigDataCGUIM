@@ -624,7 +624,7 @@ library(googlesheets4)
 
 googlesheets4 package
 ====================================
-使用`read_sheet()`讀入google sheet
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
 ```{r}
 read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
 ```
@@ -638,19 +638,10 @@ knitr::include_graphics("figures/OAuth.png")
 knitr::include_graphics("figures/OAuthGoogle.png")
 ```
 
-需要開啟google 授權
-====================================
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuth.png")
-```
-
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuthGoogle.png")
-```
 
 googlesheets4 package
 ====================================
-使用`read_sheet()`讀入google sheet
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
 ```{r eval=F}
 read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
 ```
