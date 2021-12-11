@@ -151,7 +151,7 @@ XML 可延伸標記式語言-讀取
 ====================================
 - [空氣品質指標(AQI)](https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml)
 - 安裝`xml2` package
-- `xmlParse()`函數將XML檔案匯入
+- `read_xml()`函數將XML檔案匯入
 
 ```{r}
 library(xml2)
@@ -170,10 +170,10 @@ XML 可延伸標記式語言-解析
 ====================================
 使用`xml_find_all()`以及`xml_text()`函數取得指定標籤內的資料
 ```{r}
-#取得所有"code_name"標籤內的資料
-code_name_xml<-xml_find_all(AQIXML, ".//SiteName")
-code_name<-xml_text(code_name_xml)
-code_name[1:10]
+#取得所有"SiteName"標籤內的資料
+SiteName_xml<-xml_find_all(AQIXML, ".//SiteName")
+SiteName<-xml_text(SiteName_xml)
+SiteName[1:10]
 ```
 
 XML 可延伸標記式語言-解析
@@ -197,9 +197,9 @@ incremental:true
 library(xml2)
 AQIURL<-"https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml"
 AQIXML <- read_xml(AQIURL)
-code_name_xml<-xml_find_all(AQIXML, ".//SiteName")
-code_name<-xml_text(code_name_xml)
-code_name[1:10]
+SiteName_xml<-xml_find_all(AQIXML, ".//SiteName")
+SiteName<-xml_text(SiteName_xml)
+SiteName[1:10]
 ```
 
 

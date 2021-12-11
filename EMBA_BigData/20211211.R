@@ -57,3 +57,6 @@ FinalAQI<-AQIJSON$records
 str(FinalAQI)
 skimr::skim(FinalAQI)
 
+# web scraping
+
+
