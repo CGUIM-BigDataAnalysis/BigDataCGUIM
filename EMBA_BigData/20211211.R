@@ -59,4 +59,21 @@ skimr::skim(FinalAQI)
 
 # web scraping
 
+ptturl<-"https://www.ptt.cc/bbs/Tech_Job/index.html"
+library(rvest)
+#step 1 Load data
+ptt_html<-read_html(ptturl)
+#step 2 Filter
+title_node<-html_nodes(ptt_html,".title a")
+#step 3 Clean
+titles<-html_text(title_node)
 
+titles[3]
+
+#pipe   Data %>% function()
+html_nodes(ptt_html,".title a") # =
+ptt_html %>% html_nodes(".title a") # =
+
+titles<-
+  ptt_html %>% html_nodes(".title a") %>% html_text()
+titles[3]
