@@ -1,0 +1,93 @@
+---
+title: "Communication and Application in Data Science"
+author: "Yi-Ju Tseng"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# After R?
+
+- Scheduling
+- Send Email
+- Create Dashboard
+
+
+
+---
+class: inverse, center, middle
+
+# Scheduling
+
+---
+# When You Need Scheduling?
+
+When you need to execute the code every x hours
+
+---
+# Example from HW 2
+
+[Download] the sample code
+
+---
+
+# Scheduling in R?
+
+- install **taskscheduleR** package (Windows)
+```{r eval=FALSE, tidy=FALSE}
+install.packages("taskscheduleR")
+```
+
+- install **cronR** package (MacOS and Linux)
+```{r eval=FALSE, tidy=FALSE}
+install.packages("cronR")
+```
+- You may also need **shinyFiles** package with MacOS
+```{r eval=FALSE, tidy=FALSE}
+install.packages("shinyFiles")
+```
+
+
+---
+# Tools -> Addins 
+```{r echo=FALSE}
+knitr::include_graphics("figures/addins.png")
+```
+
+---
+# Tools -> Addins -> cronR or taskscheduleR
+```{r echo=FALSE}
+knitr::include_graphics("figures/cron_request.png")
+```
+
+---
+# Schedule Your .R file
+```{r echo=FALSE}
+knitr::include_graphics("figures/pttJob.png")
+```
+
+
+---
+
+class: inverse, center, middle
+
+# Send Email
+
+---
+# Send Email in R?
+
+- install **blastula** package [website](https://rstudio.github.io/blastula/)
+```{r eval=FALSE, tidy=FALSE}
+install.packages("blastula")
+```
+---
+class: inverse, center, middle
+
+# Create Dashboard
+
+---
