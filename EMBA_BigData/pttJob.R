@@ -1,4 +1,4 @@
-library(rvest)
+library(tidyverse)
 
 ptturl_main<-"https://www.ptt.cc/bbs/Tech_Job/"
 

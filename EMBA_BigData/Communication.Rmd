@@ -32,7 +32,7 @@ When you need to execute the code every x hours
 ---
 # Example from HW 2
 
-[Download] the sample code
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/pttJob.R) the sample code
 
 ---
 
@@ -55,22 +55,22 @@ install.packages("shinyFiles")
 
 ---
 # Tools -> Addins 
-```{r echo=FALSE}
-knitr::include_graphics("figures/addins.png")
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("figures/addins.png",dpi=NA)
 ```
 
 ---
 # Tools -> Addins -> cronR or taskscheduleR
-```{r echo=FALSE}
-knitr::include_graphics("figures/cron_request.png")
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("figures/cron_request.png",dpi=NA)
 ```
 
 ---
 # Schedule Your .R file
-```{r echo=FALSE}
-knitr::include_graphics("figures/pttJob.png")
-```
 
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("figures/pttJob.png",dpi=NA)
+```
 
 ---
 
@@ -85,6 +85,22 @@ class: inverse, center, middle
 ```{r eval=FALSE, tidy=FALSE}
 install.packages("blastula")
 ```
+
+---
+# HTML email model
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("https://rstudio.github.io/blastula/articles/images/html_email_model.png",dpi=NA)
+```
+[source](https://rstudio.github.io/blastula/articles/blastula.html)
+
+---
+# HTML email model
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("https://rstudio.github.io/blastula/articles/images/html_email_model.png",dpi=NA)
+```
+[source](https://rstudio.github.io/blastula/articles/blastula.html)
+
+
 ---
 class: inverse, center, middle
 
