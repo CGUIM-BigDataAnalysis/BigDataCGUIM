@@ -25,5 +25,5 @@ gg_title<-all_titles[grepl("台積",all_titles)]
 gg_result<-data.frame(title=gg_title,date=Sys.Date())
 
 write.table(gg_result,"gg.csv",sep = ",",append = TRUE, 
-            col.names=!file.exists("gg.csv"))
+            col.names=!file.exists("gg.csv"),row.names = F)
 

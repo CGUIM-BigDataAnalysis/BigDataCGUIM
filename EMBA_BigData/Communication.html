@@ -4,7 +4,7 @@
     <title>Communication and Application in Data Science</title>
     <meta charset="utf-8" />
     <meta name="author" content="Yi-Ju Tseng" />
-    <meta name="date" content="2022-01-06" />
+    <meta name="date" content="2022-01-07" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Communication and Application in Data Science
 ### Yi-Ju Tseng
-### 2022-01-06
+### 2022-01-07
 
 ---
 
@@ -40,7 +40,7 @@ When you need to execute the code every x hours
 ---
 # Example from HW 2
 
-[Download] the sample code
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/pttJob.R) the sample code
 
 ---
 
@@ -66,11 +66,11 @@ install.packages("shinyFiles")
 
 ---
 # Tools -&gt; Addins 
-&lt;img src="figures/addins.png" width="1432" height="100%" /&gt;
+&lt;img src="figures/addins.png" height="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 # Tools -&gt; Addins -&gt; cronR or taskscheduleR
-&lt;img src="figures/cron_request.png" width="1957" height="100%" /&gt;
+&lt;img src="figures/cron_request.png" height="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 # Schedule Your .R file
@@ -94,14 +94,99 @@ install.packages("blastula")
 
 ---
 # HTML email model
-
-![HTML email model](https://rstudio.github.io/blastula/articles/images/html_email_model.png){height=500}
+&lt;img src="https://rstudio.github.io/blastula/articles/images/html_email_model.png" height="500px" style="display: block; margin: auto;" /&gt;
+[source](https://rstudio.github.io/blastula/articles/blastula.html)
 ---
+
+# Other Packages for HTML email
+
+- install **glue** package
+
+```r
+install.packages("glue")
+```
+- install **kableExtra** package 
+
+```r
+install.packages("kableExtra")
+```
+- install **keyring** package 
+
+```r
+install.packages("keyring")
+```
+
+---
+# Example from HW 2
+
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/pttJobEmail.R) the sample code
+
+---
+# Google Security Setting for Gmail
+
+[Google Security](https://support.google.com/accounts/answer/6010255)
+&lt;img src="figures/google_secu.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Email Message Was Sent
+
+&lt;img src="figures/email_sent.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Email Example
+
+
+&lt;img src="figures/email_example.png" height="500px" style="display: block; margin: auto;" /&gt;
+---
+
 class: inverse, center, middle
 
 # Create Dashboard
 
 ---
+
+
+# Static Solution
+
+- install **flexdashboard** package [website](https://pkgs.rstudio.com/flexdashboard/index.html)
+
+```r
+install.packages("flexdashboard")
+```
+
+---
+# flexdashboard
+
+New RMarkdown with flexdashboard template -&gt; **Knit**
+
+&lt;img src="https://pkgs.rstudio.com/flexdashboard/reference/figures/NewRMarkdown.png" height="400px" style="display: block; margin: auto;" /&gt;
+[source](https://pkgs.rstudio.com/flexdashboard/index.html)
+
+---
+# Example from HW 2
+
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/flex_dash_rx.Rmd) the sample code
+
+and 
+
+**Knit**
+
+---
+# Simple Dashboard
+
+&lt;img src="figures/flex_dash.png" height="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Dynamic Solution
+
+TBD
+
+- install **shinydashboard** package [website](https://rstudio.github.io/shinydashboard/index.html)
+
+```r
+install.packages("shinydashboard")
+```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

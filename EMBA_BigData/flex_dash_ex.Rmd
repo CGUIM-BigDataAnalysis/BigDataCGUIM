@@ -1,0 +1,41 @@
+---
+title: "Ptt TechJob with GG"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+gg_table<-readr::read_csv("gg.csv")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### ptt TechJob title
+
+
+```{r}
+DT::datatable(gg_table, options = list(
+  pageLength = 25,scrollY = '90%'
+))
+```
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+

@@ -92,18 +92,100 @@ install.packages("blastula")
 knitr::include_graphics("https://rstudio.github.io/blastula/articles/images/html_email_model.png",dpi=NA)
 ```
 [source](https://rstudio.github.io/blastula/articles/blastula.html)
-
 ---
-# HTML email model
-```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("https://rstudio.github.io/blastula/articles/images/html_email_model.png",dpi=NA)
+
+# Other Packages for HTML email
+
+- install **glue** package
+```{r eval=FALSE, tidy=FALSE}
+install.packages("glue")
 ```
-[source](https://rstudio.github.io/blastula/articles/blastula.html)
-
+- install **kableExtra** package 
+```{r eval=FALSE, tidy=FALSE}
+install.packages("kableExtra")
+```
+- install **keyring** package 
+```{r eval=FALSE, tidy=FALSE}
+install.packages("keyring")
+```
 
 ---
+# Example from HW 2
+
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/pttJobEmail.R) the sample code
+
+---
+# Google Security Setting for Gmail
+
+[Google Security](https://support.google.com/accounts/answer/6010255)
+```{r echo=FALSE,fig.align='center'}
+knitr::include_graphics("figures/google_secu.png",dpi=NA)
+```
+
+---
+# Email Message Was Sent
+
+```{r echo=FALSE,fig.align='center'}
+knitr::include_graphics("figures/email_sent.png",dpi=NA)
+```
+---
+
+# Email Example
+
+
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("figures/email_example.png",dpi=NA)
+```
+---
+
 class: inverse, center, middle
 
 # Create Dashboard
 
 ---
+
+
+# Static Solution
+
+- install **flexdashboard** package [website](https://pkgs.rstudio.com/flexdashboard/index.html)
+```{r eval=FALSE, tidy=FALSE}
+install.packages("flexdashboard")
+```
+
+---
+# flexdashboard
+
+New RMarkdown with flexdashboard template -> **Knit**
+
+```{r echo=FALSE,out.height="400px",fig.align='center'}
+knitr::include_graphics("https://pkgs.rstudio.com/flexdashboard/reference/figures/NewRMarkdown.png",dpi=NA)
+```
+[source](https://pkgs.rstudio.com/flexdashboard/index.html)
+
+---
+# Example from HW 2
+
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/flex_dash_rx.Rmd) the sample code
+
+and 
+
+**Knit**
+
+---
+# Simple Dashboard
+
+```{r echo=FALSE,out.height="500px",fig.align='center'}
+knitr::include_graphics("figures/flex_dash.png",dpi=NA)
+```
+
+---
+
+# Dynamic Solution
+
+TBD
+
+- install **shinydashboard** package [website](https://rstudio.github.io/shinydashboard/index.html)
+```{r eval=FALSE, tidy=FALSE}
+install.packages("shinydashboard")
+```
+
