@@ -179,7 +179,17 @@ knitr::include_graphics("figures/flex_dash.png",dpi=NA)
 ```
 
 ---
+# Cloud Solution
+- [Power BI](https://powerbi.microsoft.com/zh-tw/)
+  - Cloud version: Use your O365 account
+  - [Power BI Desktop](https://powerbi.microsoft.com/zh-tw/desktop/) (Windows only)
+  - [使用 R 建立 Power BI 視覺效果](https://docs.microsoft.com/zh-tw/power-bi/create-reports/desktop-r-visuals)
+- [Tableau](https://www.tableau.com/zh-tw)
+  - [Free for Student](https://www.tableau.com/zh-tw/academic/students)
 
+
+
+---
 # Dynamic Solution
 
 TBD
