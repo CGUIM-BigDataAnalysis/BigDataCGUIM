@@ -1,5 +1,5 @@
 library(tidyverse)
-
+library(rvest)
 ptturl_main<-"https://www.ptt.cc/bbs/Tech_Job/"
 
 #step 1 Load first page
@@ -60,12 +60,12 @@ footer_text <- glue("Sent on {sending_date}.")
 # Compose the email message
 final_email<-compose_email(body = body_text,
                           footer = footer_text)
-
+final_email
 # Store SMTP credentials in the system's key-value store with `provider = "gmail"`
 #install.packages("keyring")
 create_smtp_creds_key(
   id = "my_gmail",
-  user = "your.gmail@gmail.com", # use your gmail address here
+  user = "your_email@gmail.com", # use your gmail address here
   provider = "gmail",overwrite = TRUE
 )
 # https://support.google.com/accounts/answer/6010255
@@ -73,7 +73,7 @@ create_smtp_creds_key(
 final_email %>%
   smtp_send(
     from = "someones.gmail@gmail.com", # use your gmail address here
-    to = "your.gmail@gmail.com", # edit this line
+    to = "your_email@gmail.com", # edit this line
     subject = "GG titles from ptt TechJob",
     credentials = creds_key(id = "my_gmail")
   )
