@@ -1,5 +1,5 @@
 ---
-title: "Communication and Application in Data Science"
+title: "Communication and Application in Data Science with R"
 author: "Yi-Ju Tseng"
 date: "`r Sys.Date()`"
 output:
@@ -56,20 +56,20 @@ install.packages("shinyFiles")
 ---
 # Tools -> Addins 
 ```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("figures/addins.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/addins.png",dpi=NA)
 ```
 
 ---
 # Tools -> Addins -> cronR or taskscheduleR
 ```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("figures/cron_request.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/cron_request.png",dpi=NA)
 ```
 
 ---
 # Schedule Your .R file
 
 ```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("figures/pttJob.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/pttJob.png",dpi=NA)
 ```
 
 ---
@@ -119,14 +119,14 @@ install.packages("keyring")
 
 [Google Security](https://support.google.com/accounts/answer/6010255)
 ```{r echo=FALSE,fig.align='center'}
-knitr::include_graphics("figures/google_secu.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/google_secu.png",dpi=NA)
 ```
 
 ---
 # Email Message Was Sent
 
 ```{r echo=FALSE,fig.align='center'}
-knitr::include_graphics("figures/email_sent.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/email_sent.png",dpi=NA)
 ```
 ---
 
@@ -134,7 +134,7 @@ knitr::include_graphics("figures/email_sent.png",dpi=NA)
 
 
 ```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("figures/email_example.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/email_example.png",dpi=NA)
 ```
 ---
 
@@ -175,7 +175,7 @@ and
 # Simple Dashboard
 
 ```{r echo=FALSE,out.height="500px",fig.align='center'}
-knitr::include_graphics("figures/flex_dash.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/flex_dash.png",dpi=NA)
 ```
 
 ---
