@@ -1,0 +1,481 @@
+---
+title: "Stat with R, examples"
+output: github_document
+author: Yi-Ju Tseng
+date: "`r Sys.Date()`"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load packages
+```{r message=F}
+library(readr)
+library(skimr)
+library(dplyr)
+```
+
+## 1
+The ship Titanic sank in 1912 with the loss of most of its passengers. Details can be obtained on 1309 passengers and crew onboard the ship Titanic. 
+
+[Dataset](https://www.sheffield.ac.uk/polopoly_fs/1.937210!/file/Titanic_R.csv)
+
+[Description](https://www.sheffield.ac.uk/polopoly_fs/1.937209!/file/Titanic_data_description.docx)
+
+
+```{r, message=F}
+Titanic_R <- read_csv("Titanic_R.csv")
+```
+
+### 1.a
+a. Among these passengers, are there age differences between the survived (survived=1) and the dead (survived=0) groups? Assume the population age is normally distributed. 請問存活與死亡的乘客的年紀是否有差？
+
+```{r}
+Titanic_R %>%
+  group_by(survived) %>%
+  skim(age)
+```
+
+由敘述性統計可知死亡與存活的乘客年紀平均值分別為30.5 (13.9)和28.9 (15.1)，單看年紀平均存活組乘客年紀較低。為確認此兩組乘客的年紀是否有顯著差異，因個案數大於30，應符合中央極限定理，使用t-test。（z-test也行）
+
+假設：常態分佈、變異數相等（z-test不用）
+
+首先執行F-test檢定測試兩組資料變異數是否相等，虛無假設為兩組資料變異數相等，對立假設為兩組資料變異數不相等
+
+```{r}
+var.test(age~survived,
+       data=Titanic_R, 
+         alternative = "two.sided")
+```
+
+p-value為0.075，在alpha=0.05的前提下，無法拒絕虛無假設，意即無法拒絕兩者資料變異數相等的假設。
+
+接著執行變異數相等的t-test，虛無假設為兩組資料年紀平均值相等，對立假設為兩組資料年紀平均值不相等
+
+```{r}
+t.test(age~survived,
+       data=Titanic_R,
+       var.equal=T)
+```
+
+p-value為0.072，在alpha=0.05的前提下，無法拒絕虛無假設，意即無法拒絕兩者資料年紀平均數相等的假設。也就是說，存活的乘客與死亡乘客的年紀並無顯著不同。
+
+### 1.b
+
+b. Among these passengers, are there age differences in the first-class cabin (pclass=1), second-class cabin (pclass=2), and third-class cabin (pclass=3) group? Assume the population variances of age in each level of class are the same. 請問三種艙等的乘客年紀是否有差？
+
+```{r}
+Titanic_R %>%
+  group_by(pclass) %>%
+  skim(age)
+```
+
+由敘述性統計可知三個艙等的乘客年紀平均值分別為39.2 (14.5)、29.5(13.6)以及24.8(12.0)，單看年紀平均頭等艙的乘客年紀較長。
+
+`假設：常態分佈、變異數相等`
+
+為確認此不同艙等乘客的年紀是否有顯著差異，在變異數相等的前提下，使用one-way ANOVA test。
+
+虛無假設為不同艙等的乘客年紀均相等，對立假設為至少兩者間不相等。
+
+```{r}
+Titanic_R$pclass<-factor(Titanic_R$pclass)
+model<-aov(age~pclass,
+       data=Titanic_R)
+summary(model)
+```
+
+由ANOVA結果可知，F值為108.3，p-value<0.000001，在alpha=0.05的前提下，拒絕虛無假設，證明不同艙等乘客的年紀有顯著差異。
+
+為了分出兩兩間差異，執行Tukey HSD事後比較，沒做事後比較會扣分
+
+```{r}
+TukeyHSD(model)
+```
+
+由事後檢定結果可知，在alpha=0.05的前提下，任兩組艙等的乘客年紀均有顯著差異。
+
+### 1.c
+
+c. Among these passengers, are the survival status (survived) different among passengers in different levels of cabins (pclass)? 乘客是否存活和乘坐的艙等是否有關？
+
+```{r}
+Titanic_R %>%
+  mutate(survived=factor(survived)) %>%
+  group_by(pclass) %>%
+  skim(survived)
+```
+
+由敘述性統計可知，頭等艙存活人數大於死亡人數，而其他兩個艙等的死亡人數均大於存活人數。為驗證是否存活與艙等是否有關，這邊將艙等當成類別變項，因此艙等的順序資訊將不會納入此分析中，可能會有誤差。進行卡方檢定，滿足隨機且多項試驗的前提，且資料大，期望值均小於5。
+
+`假設：期望值大於5，個數要夠大`
+
+
+虛無假設為是否存活與艙等獨立（無關），對立假設為是否存活與艙等有關
+
+```{r}
+chisq.test(table(Titanic_R$pclass,Titanic_R$survived))
+```
+
+在alpha=0.05的前提下，p<0.05，拒絕虛無假設，意即證明是否存活與艙等有關。
+
+## 2
+
+The Crime Rate data set gives a variety of variables by US state at two time points 10 years apart. 
+
+[Dataset](https://www.sheffield.ac.uk/polopoly_fs/1.937192!/file/Crime_R.csv)
+
+[Description](https://www.sheffield.ac.uk/polopoly_fs/1.937191!/file/Crime_data_summary.docx) 
+
+```{r, message=F}
+Crime <- read_csv("Crime_R.csv")
+```
+
+### 2.a
+
+a. Is the Crime Rate (CrimeRate) in the southern states (Southern=1) higher than the other states (Southern=0)? 在南方的州犯罪率(CrimeRate) 是否比其他州高？
+
+```{r}
+Crime %>%
+  group_by(Southern) %>%
+  skim(CrimeRate)
+```
+
+由敘述性統計可知在南方的州犯罪率為101(22.6)，非南方的州犯罪率為104(32.0)，單看犯罪率南方的州較低低。為確認此南方的州的犯罪率是否顯著比非南方的州高，兩組個案數<30，母體是否為常態分佈未知，為使用t-test，假設母體為常態分佈。
+
+`假設：常態分佈、變異數相等`
+
+首先執行F-test檢定測試兩組資料變異數是否相等，虛無假設為兩組資料變異數相等，對立假設為兩組資料變異數不相等
+```{r}
+var.test(CrimeRate~Southern,
+       data=Crime, 
+         alternative = "two.sided")
+```
+
+p-value為0.157，在alpha=0.05的前提下，無法拒絕虛無假設，意即無法拒絕兩者資料變異數相等的假設。
+
+接著執行變異數相等的t-test，虛無假設為南方的州的犯罪率小於等於非南方的州，對立假設為南方的州的犯罪率是比非南方的州高，為單尾檢定
+
+```{r}
+t.test(CrimeRate~Southern,
+       data=Crime,
+       var.equal=T,
+       alternative = c("less"))
+```
+
+p-value為0.6394，在alpha=0.05的前提下，無法拒絕虛無假設，意即無法拒絕南方與非南方的州犯罪率相等的假設。也就是說，南方與非南方的州犯罪率並無顯著不同。
+
+### 2.b
+
+b. Have crime rates increased in 10 years (CrimeRate vs. CrimeRate10)? 比較各州資料，十年後的犯罪率是否比十年前高？
+
+```{r}
+summary(Crime$CrimeRate)
+summary(Crime$CrimeRate10)
+```
+
+由敘述性統計可知十年前犯罪率為102.8，十年後犯罪率為102.07，單看犯罪率平均，十年前後並無太大差別。為確認此十年後的犯罪率是否顯著比十年前的犯罪率高，兩組個案數>30，且犯罪率同州成對，使用paired t-test。
+
+`假設：差異為常態分佈`
+
+虛無假設為十年後的犯罪率小於等於十年前，對立假設為十年後的犯罪率是比十年前高，為單尾檢定
+
+```{r}
+t.test(x= Crime$CrimeRate,
+      y=Crime$CrimeRate10,
+      paired = T,
+       alternative = c("less"))
+```
+
+p-value為0.68，在alpha=0.05的前提下，無法拒絕虛無假設，意即無法拒絕十年後的犯罪率小於等於十年前的假設。也就是說，十年後的犯罪率與十年前並無顯著不同。
+
+### 2.c
+
+c. Divide the education time (Education) into high education time (>13), median education time (>11 and <=13), and low education time (<=11). Are the Crime Rate (CrimeRate) different among these education groups? Assume the population variances of Crime Rate are the same.將接受教育的時間長度分組，請問各組的犯罪率是否有差異呢？
+
+先將接受教育的時間，依照題目要求長度分組
+
+```{r}
+Edu<-Crime %>% 
+  mutate(EduGroup = 
+           cut(Education, breaks=c(0,11,13,100))) %>%
+  select(Education,EduGroup,CrimeRate)
+table(Edu$EduGroup)
+```
+
+每組人數為7、27、13人
+
+```{r}
+Edu %>%
+  group_by(EduGroup) %>%
+  skim(CrimeRate)
+```
+
+單看每組犯罪率的平均，受教育時間長的組別犯罪率平均值大於其他兩組。但仍需做檢定判斷該差距是否具有統計意義。
+
+`假設：常態分佈、變異數相等`
+
+首先執行Bartlett’s test檢定接受教育的時間不同，犯罪率變異數是否相等，虛無假設為變異數相等，對立假設為至少兩種資料變異數不相等。
+```{r}
+bartlett.test(CrimeRate~EduGroup,
+         data=Edu)
+```
+
+p>0.05，接受教育的時間不同，沒有足夠證據證明犯罪率的變異數不同，因此犯罪率變異數相同。
+
+另外為了檢測各組商品價格是否為常態分佈，執行**Shapiro test**。
+
+```{r}
+Edu %>%
+  group_by(EduGroup) %>%
+  summarise(statistic = shapiro.test(CrimeRate)$statistic,
+            p.value = shapiro.test(CrimeRate)$p.value)
+```
+
+p-value>0.05，資料為常態分佈，做ANOVA test檢定接受教育的時間不同，犯罪率是否相同。這邊只要有寫到需要常態分佈即可。
+虛無假設為接受教育的時間不同，犯罪率相同，對立假設是至少兩組犯罪率不同。
+
+```{r}
+model<-aov(CrimeRate~EduGroup,
+           data=Edu)
+summary(model)
+```
+
+p-value>0.05，也就是說在alpha=0.05的條件下，無法拒絕虛無假設，意即沒有證據證明接受教育的時間不同，犯罪率不同。
+
+### 2.d
+
+d. Is there a relationship between high youth unemployment (HighYouthUnemploy) and southern states (Southern)? 請問是否有高比例的青年失業和是不是南方的州有無關聯？
+
+```{r}
+Crime %>%
+  mutate(HighYouthUnemploy=factor(HighYouthUnemploy)) %>%
+  group_by(Southern) %>%
+  skim(HighYouthUnemploy)
+```
+
+以敘述性統計來看，南方的州高青年失業率的狀況少（1:15），非南方的州高青年失業率的狀況則稍為嚴重（14:17）
+
+`假設：期望值大於5，個數要夠大`
+
+為檢定是否有高比例的青年失業和是不是南方的州有無關聯，由於人數較少，期望值可能小於5，因此不用卡方檢定，改使用**fisher test**，虛無假設為是否有高比例的青年失業和是不是南方的州無關聯，對立假設則是有關
+
+```{r}
+fisher.test(table(Crime$Southern,
+                 Crime$HighYouthUnemploy))
+```
+
+得到p<0.05，意即是否有高比例的青年失業和是不是南方的州有關聯
+
+## 3
+
+In the [JHU CSSE COVID-19 Dataset](https://github.com/CSSEGISandData/COVID-19)
+
+In the global dataset, is the Fatality Ratio (Case_Fatality_Ratio) on [2021/06/07](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/06-06-2021.csv) (file name 06-06-2021) lower than the Fatality Ratio on [2021/05/07](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/05-06-2021.csv)? (file name 05-06-2021) (description)以全球的資料來看，2021/06/07的疾病死亡比例是否有比2021/05/07的死亡比例低呢？
+
+
+```{r message=F}
+X06_06_2021 <- read_csv("06-06-2021.csv")
+X05_06_2021 <- read_csv("05-06-2021.csv")
+### check number of rows
+nrow(X06_06_2021)
+nrow(X05_06_2021)
+```
+
+2021/05/07和2021/06/07全球的COVID-19疫情資料，各有3984筆資料。
+
+```{r}
+### keep the columns we need for analysis 
+X06_06_2021Short<-X06_06_2021 %>% 
+  select(Combined_Key,Case_Fatality_Ratio) %>%
+  rename(Case_Fatality_Ratio0606=Case_Fatality_Ratio)
+X05_06_2021Short<-X05_06_2021 %>% 
+  select(Combined_Key,Case_Fatality_Ratio)%>%
+  rename(Case_Fatality_Ratio0506=Case_Fatality_Ratio)
+
+### merge 2 tables to make sure the incident rates are paired 
+MergedTable<-inner_join(X05_06_2021Short,
+                        X06_06_2021Short,
+                        by=c("Combined_Key"))
+
+### check number of rows after merged 2 tables 
+nrow(MergedTable)
+```
+
+合併兩個日期的資料，用地區名稱作配對依據。
+
+```{r}
+### remove missing value 
+MergedTable<-MergedTable[complete.cases(MergedTable),]
+nrow(MergedTable)
+```
+
+兩資料集均有45筆遺漏值，刪除遺漏值後，資料各有3941筆
+
+```{r}
+### descriptive analysis 
+MergedTable %>%
+  skim(Case_Fatality_Ratio0506,Case_Fatality_Ratio0606)
+```
+
+平均Case Fatality Ratio分別為2.04(sd=2.76)和2.08(sd=2.7)，中位數為1.76和1.78 。單純由平均值或是中位數來看，2021/06/07的疾病死亡率比2021/05/07的疾病死亡率高。
+
+```{r}
+shapiro.test(MergedTable$Case_Fatality_Ratio0606-
+               MergedTable$Case_Fatality_Ratio0506)
+```
+
+`假設：差距為常態分佈`
+
+檢查死亡率的差距是否是常態分佈，使用shapiro test (老師補充，可做可不做)得到的結論都是此資料非常態分佈（P<0.05）
+
+```{r}
+### perform paired t-test
+t.test(x=MergedTable$Case_Fatality_Ratio0606,
+       y=MergedTable$Case_Fatality_Ratio0506,
+       paired = T,
+       alternative = "less")
+```
+
+雖然不是常態分佈，但在沒交過其他方法的情況下，還是執行paired t-test，使用的是單尾檢定（alternative = "greater"，意義為x greater than y），且設定paired = T，指定作配對的檢定。根據輸出結果，t = -4.3686，df = 3940，P-value = 1，我們無法拒絕H0，也就是沒有證據證明2021/06/07的疾病死亡率比2021/05/07的疾病死亡率低。
+
+```{r}
+### perform paired Wilcoxon signed-rank test
+wilcox.test(x=MergedTable$Case_Fatality_Ratio0606,
+            y=MergedTable$Case_Fatality_Ratio0506, 
+            paired = TRUE, 
+            alternative = "less")
+```
+
+（老師補充）不是常態分佈，所以執行Wilcoxon signed-rank test，根據輸出結果P=1，我們無法拒絕H0，也就是沒有證據證明2021/06/07的疾病死亡率比2021/05/07的疾病死亡率低。
+
+## 4
+
+An international e-commerce company based wants to discover key insights from its customer database. The company sells electronic products. ([dataset](https://drive.google.com/file/d/1sDzxspZ3wi1YTdSg7w2qnM--bkvK6r84/view?usp=sharing) from Kaggle)
+
+```{r message=F}
+Train <- read_csv("Train.csv")
+```
+
+### 4.a
+
+a. Is the customer rating (Customer_rating) associated with if the products reached on time (Reached.on.Time_Y.N) and customer gender (Gender)? That is, please test if the customer rating affected by reached on-time status and customer gender. 顧客評分跟貨品有沒有準時到還有顧客性別是否有關？
+
+```{r}
+Train %>%
+  group_by(Reached.on.Time_Y.N,Gender) %>%
+  skim(Customer_rating)
+```
+
+單看四組資料，並無太大差異。
+
+`假設：常態分佈、變異數相等、各組別個案數一樣`
+
+首先執行Bartlett’s test檢定根據貨品有沒有準時到還有顧客性別分組後，各組顧客評分變異數是否相等，虛無假設為變異數相等，對立假設為至少兩組資料變異數不相等。
+
+```{r}
+Train$Groups<-paste(Train$Reached.on.Time_Y.N,Train$Gender)
+bartlett.test(Customer_rating~Groups,
+              data=Train)
+```
+
+因p-value>0.05，沒有證據證明變異數不相等，意即變異數相等。
+
+另外為了檢測各組商品價格是否為常態分佈，執行**Shapiro test**。
+
+```{r}
+Train %>%
+  group_by(Reached.on.Time_Y.N,Gender) %>%
+  summarise(count=n(),
+            statistic = shapiro.test(Customer_rating)$statistic,
+            p.value = shapiro.test(Customer_rating)$p.value)
+```
+
+p-value<0.05，資料看起來不像常態分佈，但沒學過非常態分佈的方法，只好還是做two-way ANOVA test檢定根據貨品有沒有準時到還有顧客性別分組後，各組顧客評分是否相等。這邊只要有寫到需要常態分佈即可。
+虛無假設為根據貨品有沒有準時到還有顧客性別分組後，各組顧客評分相等，對立假設則是至少兩組不相等。
+
+```{r}
+res.aov2 <- 
+  aov(Customer_rating ~ Reached.on.Time_Y.N * Gender, 
+      data = Train)
+summary(res.aov2)
+```
+
+p-value>0.05，也就是說在alpha=0.05的條件下，無法拒絕虛無假設，意即沒有證據證明根據貨品有沒有準時到還有顧客性別分組後，各組顧客評分不同。
+
+（老師補充）在做完ANOVA後，也可以從模型看出樣本是否符合變異數相等和常態分佈的假設，做圖如下：
+
+```{r}
+plot(res.aov2, 1)
+```
+
+outliers會被標出（31, 32等），不符合同質性
+
+```{r}
+plot(res.aov2, 2)
+```
+
+殘差QQ圖也可看出樣本不符合常態分佈。
+
+（老師補充2）在two-way ANOVA中，其實希望各treatment的樣本數相同，這題的樣本數大概是2:2:3:3，要做unbalanced Two-Factor ANOVA test，搭配Type-III sums of squares，這也是要稍微進階的統計課才會教，範例如下：
+
+```{r}
+library(car)
+my_anova <- 
+  aov(Customer_rating~Reached.on.Time_Y.N*Gender, 
+      data = Train)
+Anova(my_anova, type = "III")
+```
+
+
+### 4.b
+
+b. Is the cost of the product (Cost_of_the_Product) different among the mode of shipment (Mode_of_Shipment)? 使用不同運送方式的貨品商品價格是否不同？
+
+```{r}
+Train %>%
+  group_by(Mode_of_Shipment) %>%
+  skim(Cost_of_the_Product)
+```
+為比較不同運送方式的貨品商品價格是否不同，先做敘述性統計，發現空運、陸運以及船運的商品價格平均分別為209(48.2)、210(47.6)、210(48.1)，單比較平均值看不出太大差異。
+
+`假設：常態分佈、變異數相等`
+
+首先執行Bartlett’s test檢定不同運送方式的貨品商品價格變異數是否相等，虛無假設為不同運送方式的貨品商品價格變異數相等，對立假設為至少兩種資料變異數不相等。
+
+```{r}
+bartlett.test(Cost_of_the_Product~Mode_of_Shipment,
+         data=Train)
+```
+
+p-value為0.82，大於alpha=0.05，因此沒有證據證明變異數不同。
+
+另外為了檢測各組商品價格是否為常態分佈，執行**Anderson-Darling normality test**，因為**Shapiro test**不能用在超過5000筆資料上。
+
+```{r}
+library(nortest)
+Train %>%
+  group_by(Mode_of_Shipment) %>%
+  summarise(statistic = ad.test(Cost_of_the_Product)$statistic,
+            p.value = ad.test(Cost_of_the_Product)$p.value)
+```
+
+p-value<0.05，資料看起來不像常態分佈，但沒學過非常態分佈的方法，只好還是做ANOVA test檢定不同運送方式的貨品商品價格是否相同。這邊只要有寫到需要常態分佈即可。
+虛無假設定不同運送方式的貨品商品價格相同，對立假設是至少兩組商品價格不同。
+
+```{r}
+res.aov1 <- 
+  aov(Cost_of_the_Product ~ Mode_of_Shipment, data = Train)
+summary(res.aov1)
+```
+
+p-value>0.05，也就是說在alpha=0.05的條件下，無法拒絕虛無假設，意即沒有證據證明不同運送方式的貨品商品價格不同。
+
+（老師補充）若不符合常態分佈的假設，其實可用**Kruskal-Wallis Test**，範例如下：
+```{r}
+kruskal.test(Cost_of_the_Product ~ Mode_of_Shipment, data = Train)
+```
+可以看出會得到差不多的結論（因為p值很大，怎樣保守估計都不太會影響結論）
+
