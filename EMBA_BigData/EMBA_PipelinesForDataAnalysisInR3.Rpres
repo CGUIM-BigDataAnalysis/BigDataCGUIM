@@ -502,9 +502,9 @@ dplyr 參考文件與資源
 type:sub-section
 
 - 在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
-- reshape2 package提供完整的轉換功能
-    - 寬表轉長表 `melt(資料框/寬表,id.vars=需要保留的欄位)`
-    - 長表轉寬表 `dcast(資料框/長表,寬表分列依據~分欄位依據)`
+- `tidyr` package提供完整的轉換功能
+    - 寬表轉長表 `pivot_longer(資料框/寬表,id.vars=需要保留的欄位)`
+    - 長表轉寬表 `pivot_wider(資料框/長表,寬表分列依據~分欄位依據)`
     
 長表與寬表
 ====================================
@@ -516,37 +516,41 @@ head(airquality,3)
 knitr::kable(head(airquality,3)) 
 ```
 
-寬表轉長表 melt（）
+寬表轉長表 pivot_longer（）
 ====================================
 
 - 保留Month和Day兩個欄位
 - 將其他欄位的名稱整合至variable欄位，數值整合至value欄位
 ```{r}
-library(reshape2)
-airqualityM<-melt(airquality,id.vars = c("Month","Day")) ##欄位需要保留"Month","Day"
+library(tidyr)
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c("Ozone","Solar.R","Wind","Temp")) ##欄位需要保留"Month","Day"
 ```
 ```{r eval=F}
-head(airqualityM)
+head(airqualityLong)
 ```
 ```{r echo=F}
-knitr::kable(head(airqualityM)) 
+knitr::kable(head(airqualityLong)) 
 ```
 
-長表轉寬表 dcast（）
+長表轉寬表 pivot_wider（）
 ====================================
 
-- `airqualityM`資料框中，剩下Month, Day, variable, value等四個欄位 (Column)，屬於長表
+- `airqualityLong`資料框中，剩下Month, Day, variable, value等四個欄位 (Column)，屬於長表
 - variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
 
 ```{r}
 #欄位保留"Month","Day"外，其他欄位由variable定義
-airqualityCast<-dcast(airqualityM, Month +Day~variable) 
+airqualityWide<-
+  pivot_wider(airqualityLong, 
+              names_from="name") 
 ```
 ```{r eval=F}
-head(airqualityCast)
+head(airqualityWide)
 ```
 ```{r echo=F}
-knitr::kable(head(airqualityCast))
+knitr::kable(head(airqualityWide))
 ```
 
 
