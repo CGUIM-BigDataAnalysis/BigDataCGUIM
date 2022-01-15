@@ -800,14 +800,14 @@ ggplot() 資料標示+參數設定
   - `theme_gray()`: 灰背景，預設樣式
   - `theme_bw()`: 黑白樣式
 - 使用其他樣式套件
-  - `ggthemes` packages [Website](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)
+  - `ggthemes` packages [Website](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)
   - `xkcd` packages [Website](http://xkcd.r-forge.r-project.org/)
 
 ggplot2 參考資料
 ====================================
 - [ggplot2 官網](http://ggplot2.tidyverse.org/)
 - [ggplot2 package source code](https://github.com/tidyverse/ggplot2)
-- [ggplot2 cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [ggplot2 cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
 - [ggplot2 doc](http://docs.ggplot2.org/)
 
 

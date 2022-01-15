@@ -82,3 +82,5 @@ ggplot(iris,
   theme_bw()+
   labs(x="xxxxxxx",y="yyyyyy")
 
+#install.packages("ggmap") 
+library(ggmap)
