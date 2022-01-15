@@ -117,3 +117,12 @@ TaipeiMapO
 #x= 121.389539
 #y= 25.035225
 #color =“red”
+
+tymap <- get_googlemap(
+  center = c(lon=121.20,lat=25.00),
+  zoom = 11,
+  language = "zh-TW")
+ggmap(tymap)+
+  geom_point(aes(x=121.389539,
+                 y=25.035225),
+             color="red")
