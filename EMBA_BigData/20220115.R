@@ -61,8 +61,24 @@ AllPreData %>%
   group_by(鄉鎮市區) %>% 
   arrange(鄉鎮市區,總價元) %>%
   slice(c(1,n())) 
+iris$Species
+ggplot(iris, 
+       aes(x = Sepal.Width, 
+           y = Sepal.Length,
+           color=Species)) + 
+  geom_point()
 
+ggplot(iris, 
+       aes(x = Sepal.Length, 
+           y = Sepal.Width)) + 
+  geom_point()+
+  facet_grid(.~Species)+
+  theme_bw()
 
-
-
+ggplot(iris, 
+       aes(x = Species, 
+           y = Sepal.Width)) + 
+  geom_boxplot()+
+  theme_bw()+
+  labs(x="xxxxxxx",y="yyyyyy")
 

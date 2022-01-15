@@ -493,7 +493,7 @@ AllPreData<-read_csv("AllPreData.csv", ,
 
 dplyr 參考文件與資源
 ====================================
-- [Introduction to dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)
+- [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 - DataCamp互動式教學課程 [Data Manipulation in R with dplyr](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial)
 
 
