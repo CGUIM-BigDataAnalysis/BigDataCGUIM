@@ -487,7 +487,7 @@ AllPreData<-read_csv("AllPreData.csv", ,
 )
 ```
 - 試著用dplyr語法篩選出所有**建物型態為住宅大樓(11層含以上有電梯)**且**建物移轉總面積平方公尺 大於100**的交易資料
-- 依**鄉鎮市區**Position分組，計算交易的平均**總價元**，平均**單價元平方公尺**
+- 依**鄉鎮市區**分組，計算交易的平均**總價元**，平均**單價元平方公尺**
 - 依平均**單價元平方公尺** **由大到小**排序
 - 用pipe **%>%**
 
@@ -503,8 +503,8 @@ type:sub-section
 
 - 在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
 - `tidyr` package提供完整的轉換功能
-    - 寬表轉長表 `pivot_longer(資料框/寬表,id.vars=需要保留的欄位)`
-    - 長表轉寬表 `pivot_wider(資料框/長表,寬表分列依據~分欄位依據)`
+    - 寬表轉長表 `pivot_longer(資料框/寬表,cols=需要轉換成長表的欄位)`
+    - 長表轉寬表 `pivot_wider(資料框/長表,names_from=需要轉換成寬表的欄位)`
     
 長表與寬表
 ====================================
@@ -520,12 +520,38 @@ knitr::kable(head(airquality,3))
 ====================================
 
 - 保留Month和Day兩個欄位
-- 將其他欄位的名稱整合至variable欄位，數值整合至value欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
 ```{r}
 library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
 airqualityLong<-
   pivot_longer(airquality,
-               cols = c("Ozone","Solar.R","Wind","Temp")) ##欄位需要保留"Month","Day"
+               cols = c("Ozone","Solar.R","Wind","Temp")) 
+```
+```{r eval=F}
+head(airqualityLong)
+```
+```{r echo=F}
+knitr::kable(head(airqualityLong)) 
+```
+
+寬表轉長表 pivot_longer（）
+====================================
+
+- 保留Month和Day兩個欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
+```{r}
+library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c(-"Month",-"Day")) 
 ```
 ```{r eval=F}
 head(airqualityLong)
@@ -537,11 +563,11 @@ knitr::kable(head(airqualityLong))
 長表轉寬表 pivot_wider（）
 ====================================
 
-- `airqualityLong`資料框中，剩下Month, Day, variable, value等四個欄位 (Column)，屬於長表
+- `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
 - variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
 
 ```{r}
-#欄位保留"Month","Day"外，其他欄位由variable定義
+##增加欄位由name定義
 airqualityWide<-
   pivot_wider(airqualityLong, 
               names_from="name") 
@@ -814,10 +840,10 @@ install.packages("ggmap")
 get_googlemap() + ggmap()
 ====================================
 - 使用`register_google(key = "your key")`帶入google金鑰
-- 投影片金鑰已失效，請自行至[Google Cloud Platform](https://console.cloud.google.com/)，點選**API及服務**申請**Maps Static API**後，複製**API key**
+- 投影片金鑰已失效，請自行至[Google Cloud Platform](https://console.cloud.google.com/)，點選**API及服務**申請**Maps Static API**後，查詢**憑證**，複製**API key**（需綁定信用卡付款）
 ```{r, warning=F,message=F, fig.height=5}
 library(ggmap)
-register_google(key = "AIzaSyCNHJwjmJ23-K2HBua71HQu4nYMI6L-LP8")
+register_google(key = "AIzaSyAvNeyA_Uy8Z3JlzDnDuXQg7FhKFeVyNbY")
 twmap <- get_googlemap(center = c(lon=120.58,lat=23.58), 
                   zoom = 7,
                   language = "zh-TW")
@@ -830,7 +856,6 @@ ggmap + open data 資料載入
 - [台北市水質資料](http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927)
 ```{r message=F, warning=F}
 library(jsonlite)
-library(RCurl)
 WaterData<-fromJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927")
 WaterDataFrame<-WaterData$result$results
 WaterDataFrame$longitude<-as.numeric(WaterDataFrame$longitude)
@@ -853,7 +878,7 @@ TaipeiMapO <- ggmap(TaipeiMap)+
                    color=qua_cntu,size=3.5))+ 
     scale_color_continuous(
         low = "yellow",high = "red")+ 
-    guides(size=FALSE)
+    guides(size="none")
 TaipeiMapO
 ```
 
@@ -870,7 +895,7 @@ TaipeiMapO <- ggmap(TaipeiMap)+
                    color=qua_cntu,size=3.5))+ 
     scale_color_continuous(
         low = "yellow",high = "red")+ 
-    guides(size=FALSE)
+    guides(size="none")
 TaipeiMapO
 ```
 
@@ -1002,14 +1027,14 @@ Heatmap
 ====================================
 為了做圖，將寬表轉長表
 ```{r eval=F,message=FALSE,warning=F}
-library(reshape2) #for melt()
+library(tidyr) 
 #寬表轉長表,以名字作依據
-nba.m <- melt(nba,id.vars = "Name") 
+nba.m <- pivot_longer(nba,col = -"Name",names_to="Feature") 
 head(nba.m,5)
 ```
 ```{r echo=F,message=FALSE,warning=F}
-library(reshape2) 
-nba.m <- melt(nba,id.vars = "Name") 
+library(tidyr) 
+nba.m <- pivot_longer(nba,col = -"Name",names_to="Feature") 
 knitr::kable(head(nba.m,5))
 ```
 
@@ -1018,7 +1043,7 @@ geom_tile()
 將Geometric objects指定為`geom_tile()`
 ```{r message=FALSE,warning=F,fig.height=4}
 library(ggplot2) #for ggplot()
-ggplot(nba.m, aes(variable, Name)) + 
+ggplot(nba.m, aes(Feature, Name)) + 
     geom_tile(aes(fill = value),
               colour = "white")+ 
     scale_fill_gradient(
@@ -1048,8 +1073,8 @@ knitr::kable(head(nba.s,2))
 geom_tile() + scale()
 ====================================
 ```{r message=FALSE,warning=F,fig.height=4}
-nba.s.m <- melt(nba.s) ##寬轉長
-ggplot(nba.s.m, aes(variable, Name)) + 
+nba.s.m <- pivot_longer(nba.s,col = -"Name",names_to="Feature") 
+ggplot(nba.s.m, aes(Feature, Name)) + 
     geom_tile(aes(fill = value),
               colour = "white")+ 
     scale_fill_gradient(
