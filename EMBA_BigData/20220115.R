@@ -108,4 +108,12 @@ TaipeiMapO <- ggmap(TaipeiMap)+
   guides(size="none")
 TaipeiMapO
 
-
+#利用get_googlemap() + ggmap()取得桃園地區的google 圖層
+#center = c(lon=121.20,lat=25.00)
+#zoom = 11
+#language = “zh-TW”
+#在長庚大學所在地 （座標121.389539,25.035225）加上一個紅色的點
+#geom_point()
+#x= 121.389539
+#y= 25.035225
+#color =“red”
