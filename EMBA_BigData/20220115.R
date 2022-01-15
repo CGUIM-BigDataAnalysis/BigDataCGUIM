@@ -84,3 +84,4 @@ ggplot(iris,
 
 #install.packages("ggmap") 
 library(ggmap)
+register_google(key = "AIzaSyAvNeyA_Uy8Z3JlzDnDuXQg7FhKFeVyNbY")
