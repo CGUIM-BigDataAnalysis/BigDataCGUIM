@@ -1,0 +1,141 @@
+---
+title: "Heatmap練習"
+output: github_document
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 題目
+
+- 下載[小兒麻痺發生率](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)資料
+- 將資料載入R
+- 表格是寬表，需要轉成長表
+- 有缺值 （-），用NA取代
+    - 方法一 gsub()
+    - 方法二 ifelse()
+- 盛行率欄位轉換成數值
+    - as.numeric()
+- 用年份當x軸，州名當y軸，區塊顏色用盛行率填入
+    - low = "white",high = "steelblue"
+
+範本：http://graphics.wsj.com/infectious-diseases-and-vaccines/
+
+## 將小兒麻痺發生率資料載入R
+
+```{r}
+library(readr)
+Polio<-read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv")
+```
+查看資料長相
+```{r eval=FALSE}
+Polio
+```
+
+```{r echo=F}
+knitr::kable(Polio)
+```
+
+## 為了做圖，寬表轉長表
+
+
+```{r}
+library(tidyr)
+PolioLong<-pivot_longer(Polio,
+             cols = ALABAMA:WYOMING, #同c(-"YEAR",-"WEEK")
+             names_to = "State")
+```
+
+查看轉成長表後的資料長相
+```{r eval=FALSE}
+PolioLong
+```
+
+```{r echo=F}
+knitr::kable(PolioLong)
+```
+
+發現可能需要轉換資料型態以及整合年份資料
+
+## 查看資料型態，並轉換成需要的資料型態
+```{r}
+skimr::skim(PolioLong)
+```
+發現value欄位（發生率）是文字，需要轉換成數字
+```{r}
+PolioLong$value<-as.numeric(PolioLong$value)
+```
+
+因有Warning，需查看原因，發現是-無法轉換成數字，合理
+
+轉換好後重新查看資料型態是否正確
+```{r}
+skimr::skim(PolioLong)
+```
+
+## 整合年份資料
+因資料內是各週的值，但我們做圖是用年份表示，需要整合。
+而發生率的計算應須加總
+```{r}
+library(dplyr)
+PolioLongYear<-PolioLong %>% group_by(YEAR,State) %>%
+  summarise(Year_inc=sum(value,na.rm = T))
+```
+查看整合成每年發生率的資料長相
+```{r eval=FALSE}
+PolioLongYear
+```
+
+```{r echo=F}
+knitr::kable(PolioLongYear)
+```
+
+## 做Heatmap
+```{r}
+library(ggplot2)
+ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
+  geom_tile()+
+  scale_fill_gradient(low="white",high = "steelblue")
+```
+
+
+發現背景很干擾，因此改成白色，並做其他細修
+```{r}
+ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
+  geom_tile(color="white")+
+  scale_fill_gradient(low="white",high = "red")+
+  theme_minimal(base_line_size = 0)+
+  labs(x="Year",y="States",fill="Incidence")+
+  geom_vline(xintercept = 1955)+
+  geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
+```
+
+## 嘗試製作動態圖形
+```{r eval=F}
+heatmap<-
+  ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
+  geom_tile(color="white")+
+  scale_fill_gradient(low="white",high = "red")+
+  theme_minimal(base_line_size = 0)+
+  labs(x="Year",y="States",fill="Incidence")+
+  geom_vline(xintercept = 1955)+
+  geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
+library(plotly)
+ggplotly(heatmap)
+```
+
+```{r echo=F}
+heatmap<-
+  ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
+  geom_tile(color="white")+
+  scale_fill_gradient(low="white",high = "red")+
+  theme_minimal(base_line_size = 0)+
+  labs(x="Year",y="States",fill="Incidence")+
+  geom_vline(xintercept = 1955)+
+  geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
+library(plotly)
+p<-ggplotly(heatmap)
+htmltools::tagList(list(p, p))
+```
