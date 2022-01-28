@@ -29,7 +29,7 @@ for(url in all_urls){
   final_url<-paste0(ptturl_main,url)
   page_html<-read_html(final_url)
   content <- page_html %>% html_nodes("#main-content") %>% html_text()
-  content_split<-str_split(content,"發信站")
-  all_contents<-c(all_contents,content_split[[1]])
+  content_split<-str_split(content,"※發信站")
+  all_contents<-c(all_contents,content_split[[1]][1])
 }
 all_contents
