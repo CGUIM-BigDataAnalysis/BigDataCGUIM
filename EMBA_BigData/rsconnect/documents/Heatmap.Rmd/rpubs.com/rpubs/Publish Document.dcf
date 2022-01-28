@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/857589/601a4c971d924cc9a1a8ce55c6b77eb9
+bundleId: https://api.rpubs.com/api/v1/document/857589/601a4c971d924cc9a1a8ce55c6b77eb9
+url: http://rpubs.com/beergt/857589
+when: 1643359620.49062
+lastSyncTime: 1643359620.49063

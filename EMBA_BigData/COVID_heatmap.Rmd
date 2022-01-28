@@ -1,0 +1,194 @@
+---
+title: "COVID-19-Heatmap"
+output: html_document
+author: Yi-Ju Tseng
+---
+
+## 將COVID-19累積案例數資料載入R
+
+```{r}
+library(readr)
+case<-
+  read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+```
+查看資料長相
+```{r eval=FALSE}
+head(case,10)
+```
+
+```{r echo=F}
+knitr::kable(head(case,10))
+```
+
+## 為了做圖以及後續分析，寬表轉長表
+
+```{r}
+library(tidyr)
+case_long<-
+  pivot_longer(case,
+             cols = c(-"Country/Region",
+                      -"Province/State",
+                      -"Lat",
+                      -"Long"),
+             names_to = "Date")
+```
+
+查看轉成長表後的資料長相
+```{r eval=FALSE}
+head(case_long,10)
+```
+
+```{r echo=F}
+knitr::kable(head(case_long,10))
+```
+
+## 查看資料型態，並轉換成需要的資料型態
+```{r}
+skimr::skim(case_long)
+```
+發現Date欄位是文字，需要轉換成日期
+```{r}
+case_long$Date<-
+  lubridate::mdy(case_long$Date)
+```
+
+## 作台灣的累積案例圖
+```{r}
+library(dplyr)
+library(ggplot2)
+case_long %>% 
+  filter(`Country/Region`=="Taiwan*") %>%
+  ggplot(aes(x=Date,y=value))+
+  geom_line()+
+  theme_bw()
+```
+
+## 如要作新案例圖，需要計算每日新案例
+
+`lead()`為同一組的下一筆資料
+
+`lag()`為同一組的上一筆資料
+
+```{r}
+library(dplyr)
+case_long_new<-
+  case_long %>% group_by(`Province/State`,`Country/Region`,Lat,Long) %>%
+  arrange(`Province/State`,`Country/Region`,Lat,Long,Date) %>%
+  mutate(new_case=value-lag(value))
+```
+查看台灣的新案例
+```{r eval=FALSE}
+case_long_new%>% 
+  filter(`Country/Region`=="Taiwan*") 
+```
+
+```{r echo=F}
+knitr::kable(head(case_long_new%>% 
+  filter(`Country/Region`=="Taiwan*") ,10))
+```
+
+## 作台灣的新案例趨勢圖
+```{r}
+case_long_new %>% 
+  filter(`Country/Region`=="Taiwan*") %>%
+  ggplot(aes(x=Date,y=new_case))+
+  geom_line()+
+  theme_bw()
+```
+
+## 挑選某些國家做新案例趨勢圖
+```{r}
+case_long_new %>% 
+  filter(`Country/Region` %in% 
+           c("Taiwan*","Japan","Korea, South","Singapore","Thailand","Vietnam")) %>%
+  ggplot(aes(x=Date,y=new_case,color=`Country/Region`))+
+  geom_line()+
+  theme_bw()+
+  labs(x="New cases")
+```
+
+## 挑選某些國家做新案例趨勢圖-7日移動平均
+計算7日移動平均
+```{r}
+case_long_new7<-case_long_new %>% 
+  group_by(`Province/State`,`Country/Region`,Lat,Long) %>%
+  arrange(`Province/State`,`Country/Region`,Lat,Long,Date) %>%
+  mutate(new_case_07 = zoo::rollmean(new_case, k = 7, fill = NA))
+```
+
+畫趨勢圖
+```{r}
+case_long_new7 %>% 
+  filter(`Country/Region` %in% 
+           c("Taiwan*","Japan","Korea, South","Singapore","Thailand","Vietnam")) %>%
+  ggplot(aes(x=Date,y=new_case_07,color=`Country/Region`))+
+  geom_line()+
+  theme_bw()+
+  labs(y="New cases, 7 days moving average")
+```
+
+差太多了，取log看看
+```{r}
+case_long_new7 %>% 
+  filter(`Country/Region` %in% 
+           c("Taiwan*","Japan","Korea, South","Singapore","Thailand","Vietnam")) %>%
+  ggplot(aes(x=Date,y=new_case_07,color=`Country/Region`))+
+  geom_line()+
+  scale_y_log10()+
+  theme_bw()+
+  labs(y="New cases, 7 days moving average (log10)")
+```
+
+## 挑選某些國家做新案例heatmap
+因某些國家的資料有分省份，將其合併
+
+```{r eval=F}
+head(case_long_new %>% 
+       filter(`Country/Region` =="China"))
+```
+
+```{r echo=F}
+knitr::kable(head(case_long_new %>% 
+       filter(`Country/Region` =="China")))
+```
+
+```{r}
+case_long_new_sum<-
+  case_long_new %>% 
+  filter(`Country/Region` %in% 
+           c("Taiwan*","Japan","Korea, South","Singapore","Thailand","Vietnam",
+             "Indonesia","Malaysia","China")) %>%
+  group_by(`Country/Region`,Date)%>% 
+  summarise(new_case=sum(new_case,na.rm = T)) 
+
+```
+合併後資料
+
+
+```{r eval=F}
+head(case_long_new_sum %>% 
+       filter(`Country/Region` =="China"))
+```
+
+```{r echo=F}
+knitr::kable(head(case_long_new_sum %>% 
+       filter(`Country/Region` =="China")))
+```
+
+
+```{r}
+case_long_new_sum %>%
+  ggplot(aes(x=Date,y=`Country/Region`,fill=new_case))+
+  scale_fill_gradient(low="white",high="red")+
+  geom_tile()+theme_bw()+
+  labs(x="New cases",y="Country", fill="New COVID-19\ncases, n")
+```
+
+差太多了，取log看看
+```{r}
+case_long_new_sum %>%
+  ggplot(aes(x=Date,y=`Country/Region`,fill=log10(new_case)))+
+  scale_fill_gradient(low="white",high="red",na.value = "white")+
+  geom_tile()+theme_bw()+
+  labs(x="New cases",y="Country", fill="New COVID-19\ncases, n (log10)")
+```

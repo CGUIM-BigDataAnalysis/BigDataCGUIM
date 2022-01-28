@@ -1,7 +1,7 @@
 ---
 title: "Heatmap練習"
-output: github_document
-always_allow_html: true
+output: html_document
+author: Yi-Ju Tseng
 ---
 
 ```{r setup, include=FALSE}
@@ -35,7 +35,7 @@ Polio
 ```
 
 ```{r echo=F}
-knitr::kable(Polio)
+knitr::kable(head(Polio,10))
 ```
 
 ## 為了做圖，寬表轉長表
@@ -54,7 +54,7 @@ PolioLong
 ```
 
 ```{r echo=F}
-knitr::kable(PolioLong)
+knitr::kable(head(PolioLong,10))
 ```
 
 發現可能需要轉換資料型態以及整合年份資料
@@ -78,7 +78,7 @@ skimr::skim(PolioLong)
 ## 整合年份資料
 因資料內是各週的值，但我們做圖是用年份表示，需要整合。
 而發生率的計算應須加總
-```{r}
+```{r warning=F,message=F}
 library(dplyr)
 PolioLongYear<-PolioLong %>% group_by(YEAR,State) %>%
   summarise(Year_inc=sum(value,na.rm = T))
@@ -89,7 +89,7 @@ PolioLongYear
 ```
 
 ```{r echo=F}
-knitr::kable(PolioLongYear)
+knitr::kable(head(PolioLongYear,10))
 ```
 
 ## 做Heatmap
@@ -101,19 +101,43 @@ ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
 ```
 
 
-發現背景很干擾，因此改成白色，並做其他細修
+發現背景很干擾，因此改成白色，並做其他細修。
+
+1. 顏色調整，顏色名稱可參考[網路資料](https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf) `scale_fill_gradientn`
+2. Y軸文字重疊調整（調小）`theme_minimal(base_size = 9)`
+3. 背景灰色去除`theme_minimal(base_line_size = 0)`
+4. 增加疫苗施打資訊`geom_vline(xintercept = 1955)`、`geom_text(x=1962,y="WYOMING",label="Vaccine introduced")`
+5. 改X軸、Y軸以及填色資訊名稱`labs(x="Year",y="States",fill="Incidence")`
+
 ```{r}
 ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
   geom_tile(color="white")+
-  scale_fill_gradient(low="white",high = "red")+
+  scale_fill_gradientn(colors=c("white","steelblue","seagreen3","yellow3","red4"),
+                       values = c(0,0.05,0.1,0.15,0.2,1))+
+  theme_minimal(base_line_size = 0,base_size = 9)+
+  labs(x="Year",y="States",fill="Incidence")+
+  geom_vline(xintercept = 1955)+
+  geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
+```
+
+如果不想調小字，但又不想要Y軸字會重疊的話，可設定名稱交錯。`scale_y_discrete(guide = guide_axis(n.dodge=2))`
+
+**但此法不適合用在Y軸，X軸是比較適合的使用情境。**
+
+```{r fig.width=10}
+ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
+  geom_tile(color="white")+
+  scale_fill_gradientn(colors=c("white","steelblue","seagreen3","yellow3","red4"),
+                       values = c(0,0.05,0.1,0.15,0.2,1))+
   theme_minimal(base_line_size = 0)+
+  scale_y_discrete(guide = guide_axis(n.dodge=2))+
   labs(x="Year",y="States",fill="Incidence")+
   geom_vline(xintercept = 1955)+
   geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
 ```
 
 ## 嘗試製作動態圖形
-```{r eval=F}
+```{r}
 heatmap<-
   ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
   geom_tile(color="white")+
@@ -122,20 +146,10 @@ heatmap<-
   labs(x="Year",y="States",fill="Incidence")+
   geom_vline(xintercept = 1955)+
   geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
-library(plotly)
-ggplotly(heatmap)
+
 ```
 
-```{r echo=F}
-heatmap<-
-  ggplot(PolioLongYear,aes(x=YEAR,y=State,fill=Year_inc))+
-  geom_tile(color="white")+
-  scale_fill_gradient(low="white",high = "red")+
-  theme_minimal(base_line_size = 0)+
-  labs(x="Year",y="States",fill="Incidence")+
-  geom_vline(xintercept = 1955)+
-  geom_text(x=1962,y="WYOMING",label="Vaccine introduced")
+```{r warning=F,message=F}
 library(plotly)
-p<-ggplotly(heatmap)
-htmltools::tagList(list(p, p))
+ggplotly(heatmap)
 ```

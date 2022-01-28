@@ -1344,13 +1344,13 @@ Heatmap 練習
 type:alert
 incremental:true
 
-- 下載[小兒麻痺盛行率](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)資料
+- 下載[小兒麻痺發生率](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)資料
 - 將資料載入R
 - 表格是寬表，需要轉成長表
 - 有缺值 （-），用NA取代
     - 方法一 gsub()
     - 方法二 ifelse()
-- 盛行率欄位轉換成數值
+- 發生率欄位轉換成數值
     - as.numeric()
 - 用年份當x軸，州名當y軸，區塊顏色用盛行率填入
     - low = "white",high = "steelblue"
