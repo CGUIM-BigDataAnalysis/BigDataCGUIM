@@ -1091,328 +1091,40 @@ ggmap + open data 資料載入
 - 只要資料有經緯度等資訊，就可以使用`ggmap` package與各式資料結合呈現
 - [台北市水質資料](http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927)
 
-```r
-library(jsonlite)
-WaterData<-fromJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927")
-WaterDataFrame<-WaterData$result$results
-WaterDataFrame$longitude<-as.numeric(WaterDataFrame$longitude)
-WaterDataFrame$latitude<-as.numeric(WaterDataFrame$latitude)
-WaterDataFrame$qua_cntu<-as.numeric(WaterDataFrame$qua_cntu)
-WaterDataClean<-WaterDataFrame[WaterDataFrame$qua_cntu>=0,]
-head(WaterDataClean)
-```
-
-```
-  update_date update_time qua_ph longitude       qua_id qua_cntu
-1  2020-07-08  04:15:00      7.2  121.5694 CS00             0.01
-2  2020-07-08  04:15:00      7.2  121.5523 CS01             0.03
-3  2020-07-08  04:15:00      7.3  121.5639 CS02             0.05
-4  2020-07-08  04:15:00        7  121.5444 CS03             0.13
-5  2020-07-08  04:15:00      7.4  121.5479 CX00             0.02
-6  2020-07-08  04:15:00      7.1  121.5640 CX02             0.05
-                 code_name latitude qua_cl _id
-1               雙溪淨水場 25.11419   0.63   1
-2                 衛理女中 25.10176   0.55   2
-3 雙溪國小                 25.10607   0.46   3
-4               華興加壓站 25.09952   0.57   4
-5               長興淨水場 25.01451   0.64   5
-6                 市政大樓 25.03753   0.63   6
-```
-
-ggmap + open data 繪圖
-====================================
-
-```r
-library(ggmap)
-TaipeiMap <- get_googlemap(
-    center  = c(lon=121.50,lat=25.06), 
-    zoom = 11, maptype = 'roadmap')
-TaipeiMapO <- ggmap(TaipeiMap)+ 
-    geom_point(data=WaterDataClean, 
-               aes(x=longitude, y=latitude,
-                   color=qua_cntu,size=3.5))+ 
-    scale_color_continuous(
-        low = "yellow",high = "red")+ 
-    guides(size="none")
-TaipeiMapO
-```
-
-ggmap + open data
-====================================
-![plot of chunk unnamed-chunk-38](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-38-1.png)
-
-ggmap + 地圖型態
-====================================
-`ggmap`套件提供多種地圖型態，使用者可透過設定`maptype`自行選擇適合的地圖樣式，樣式有：
-
-- terrain
-- terrain-background
-- satellite
-- roadmap
-- hybrid (google maps)
-- watercolor
-- toner (stamen maps)
-
-ggmap + extent
-====================================
-透過設定`extent`參數可將地圖輸出樣式改為滿版
-
-```r
-library(ggmap)
-#extent = 'device' 滿版
-ggmap(TaipeiMap,extent = 'device') 
-```
-
-ggmap + extent
-====================================
-透過設定`extent`參數可將地圖輸出樣式改為滿版
-![plot of chunk unnamed-chunk-40](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-40-1.png)
-
-ggmap() 練習 
-====================================
-type:alert
-incremental:true
-
-- 利用get_googlemap() + ggmap()取得桃園地區的google 圖層
-    - center = c(lon=121.20,lat=25.00)
-    - zoom = 11
-    - language = "zh-TW"
-- 在長庚大學所在地 （座標121.389539,25.035225）加上一個紅色的點
-    - geom_point()
-    - x= 121.389539
-    - y= 25.035225
-    - color ="red"
-
-ggmap() 練習輸出圖檔
-====================================
-![plot of chunk unnamed-chunk-41](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-41-1.png)
 
 
-ggmap 參考資料
-====================================
-- [ggmap package source code](https://github.com/dkahle/ggmap)
-- [ggmap cheat sheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)
-- [ggmap doc](https://dl.dropboxusercontent.com/u/24648660/ggmap%20useR%202012.pdf)
 
 
-Choropleth map面量圖
-====================================
-- Choropleth map[面量圖](https://en.wikipedia.org/wiki/Choropleth_map)
-- **把統計資料用顏色畫在對應的地圖上**
-- `choroplethr` package來畫面量圖
-- 基於`ggplot2` package的`面量圖`做圖工具
-- 建議同時安裝`choroplethrMaps` package
 
-```r
-##第一次使用前先安裝
-install.packages(c("choroplethr",
-                   "choroplethrMaps")) 
-```
 
-```r
-library(choroplethr)
-```
 
-choroplethr package
-====================================
-- 內建美國各州地圖與人口學資料
-- 使用`state_choropleth()`函式畫出美國人口分布
 
-```r
-data(df_pop_state) #記載各州人口數的資料
-#把各州人口畫在地圖上
-state_choropleth(df_pop_state) 
-```
 
-![plot of chunk unnamed-chunk-44](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-44-1.png)
 
-Taiwan的面量圖
-====================================
-type:sub-section 
 
-- 台灣的面量圖尚無好的套件輔助
-- Open Data: 台灣鄉鎮市邊界的經緯度檔案
-    - [鄉鎮市區界線](http://data.gov.tw/node/7441)
-    - 空間資料開放格式`shapefile` `.shp`
-- 使用`shapefile`與`ggplot2`畫圖的步驟如下：
-    - 取得空間資料檔案
-    - 使用`rgdal`, `rgeos`,`maptools` package處理地圖檔shapefile
-    - 使用`ggplot2` & `RColorBrewer` 畫圖
-- [實作範例網址](http://yijutseng.github.io/DataScienceRBook/vis.html#taiwan)
 
-Heatmap
-====================================
-type:sub-section 
-- 熱度圖
-- 使用顏色的深淺來表示數值的大小
-- 搭配XY兩軸的變量
-- 使用一張圖就能表示三個維度的資訊
-- 在ggplot2套件中，可以使用`geom_tile()`來畫Heatmap
-- 以下以NBA球員的資料作為範例
 
-Heatmap
-====================================
 
-```r
-#讀.csv檔案
-nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
-head(nba,3)
-```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
-           Name  G  MIN  PTS  FGM  FGA   FGP FTM FTA   FTP X3PM X3PA  X3PP ORB
-1  Dwyane Wade  79 38.6 30.2 10.8 22.0 0.491 7.5 9.8 0.765  1.1  3.5 0.317 1.1
-2 LeBron James  81 37.7 28.4  9.7 19.9 0.489 7.3 9.4 0.780  1.6  4.7 0.344 1.3
-3  Kobe Bryant  82 36.2 26.8  9.8 20.9 0.467 5.9 6.9 0.856  1.4  4.1 0.351 1.1
-  DRB TRB AST STL BLK  TO  PF
-1 3.9 5.0 7.5 2.2 1.3 3.4 2.3
-2 6.3 7.6 7.2 1.7 1.1 3.0 1.7
-3 4.1 5.2 4.9 1.5 0.5 2.6 2.3
+Error in open.connection(con, "rb") : 
+  Timeout was reached: [data.taipei] Connection timeout after 10001 ms
 ```
-
-Heatmap
-====================================
-為了做圖，將寬表轉長表
-
-```r
-library(tidyr) 
-#寬表轉長表,以名字作依據
-nba.m <- pivot_longer(nba,col = -"Name",names_to="Feature") 
-head(nba.m,5)
-```
-
-|Name        |Feature | value|
-|:-----------|:-------|-----:|
-|Dwyane Wade |G       |  79.0|
-|Dwyane Wade |MIN     |  38.6|
-|Dwyane Wade |PTS     |  30.2|
-|Dwyane Wade |FGM     |  10.8|
-|Dwyane Wade |FGA     |  22.0|
-
-geom_tile()
-====================================
-將Geometric objects指定為`geom_tile()`
-
-```r
-library(ggplot2) #for ggplot()
-ggplot(nba.m, aes(Feature, Name)) + 
-    geom_tile(aes(fill = value),
-              colour = "white")+ 
-    scale_fill_gradient(
-        low = "white",high = "steelblue") 
-```
-
-![plot of chunk unnamed-chunk-48](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-48-1.png)
-
-geom_tile() + scale()
-====================================
-- 因為G欄資料明顯大於其他欄位，導致顏色差異不明顯
-- 將個欄位的資料標準化處理
-
-
-```r
-#scale處理
-library(dplyr)
-nba.s<-nba %>% 
-    mutate_each(funs(scale), -Name) 
-head(nba.s,2)
-```
-
-|Name         |         G|       MIN|      PTS|      FGM|      FGA|       FGP|      FTM|      FTA|        FTP|       X3PM|      X3PA|        X3PP|         ORB|        DRB|        TRB|      AST|      STL|       BLK|       TO|         PF|
-|:------------|---------:|---------:|--------:|--------:|--------:|---------:|--------:|--------:|----------:|----------:|---------:|-----------:|-----------:|----------:|----------:|--------:|--------:|---------:|--------:|----------:|
-|Dwyane Wade  | 0.6179300| 1.0019702| 3.179941| 2.920022| 2.596832| 0.5136017| 1.917475| 2.110772| -0.7401673| -0.1080044| 0.1303647| -0.15749098| -0.27213551| -0.3465676| -0.3287465| 1.652247| 2.558238| 1.2064646| 1.790445| -0.2984568|
-|LeBron James | 0.7693834| 0.6119299| 2.566974| 1.957185| 1.697237| 0.4649190| 1.778729| 1.896589| -0.5233214|  0.4920201| 0.6971679|  0.02738974| -0.06117775|  1.0080940|  0.6605370| 1.516147| 1.367252| 0.8627425| 1.059651| -1.3903719|
-
-geom_tile() + scale()
-====================================
-
-```r
-nba.s.m <- pivot_longer(nba.s,col = -"Name",names_to="Feature") 
-ggplot(nba.s.m, aes(Feature, Name)) + 
-    geom_tile(aes(fill = value),
-              colour = "white")+ 
-    scale_fill_gradient(
-        low = "white",high = "steelblue") 
-```
-
-![plot of chunk unnamed-chunk-51](EMBA_PipelinesForDataAnalysisInR3-figure/unnamed-chunk-51-1.png)
-
-[How to Make a Heatmap – a Quick and Easy Solution](http://flowingdata.com/2010/01/21/how-to-make-a-heatmap-a-quick-and-easy-solution/)
-
-Heatmap 練習 
-====================================
-type:alert
-incremental:true
-
-- 下載[小兒麻痺發生率](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)資料
-- 將資料載入R
-- 表格是寬表，需要轉成長表
-- 有缺值 （-），用NA取代
-    - 方法一 gsub()
-    - 方法二 ifelse()
-- 發生率欄位轉換成數值
-    - as.numeric()
-- 用年份當x軸，州名當y軸，區塊顏色用盛行率填入
-    - low = "white",high = "steelblue"
-
-Treemap
-====================================
-type:sub-section 
-- Treemap(矩形式樹狀結構繪圖法)
-- 以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊
-- `treemap` packages
-
-treemap() data
-====================================
-
-```r
-library(treemap)
-data(GNI2014)
-knitr::kable(head(GNI2014))
-```
-
-
-
-|   |iso3 |country          |continent     | population|    GNI|
-|:--|:----|:----------------|:-------------|----------:|------:|
-|3  |BMU  |Bermuda          |North America |      67837| 106140|
-|4  |NOR  |Norway           |Europe        |    4676305| 103630|
-|5  |QAT  |Qatar            |Asia          |     833285|  92200|
-|6  |CHE  |Switzerland      |Europe        |    7604467|  88120|
-|7  |MAC  |Macao SAR, China |Asia          |     559846|  76270|
-|8  |LUX  |Luxembourg       |Europe        |     491775|  75990|
-
-treemap()
-====================================
-
-```r
-library(treemap)
-data(GNI2014)
-treemap(GNI2014,
-       index=c("continent", "iso3"), #分組依據
-       vSize="population", #區塊大小
-       vColor="GNI", #顏色深淺
-       type="value")
-```
-
-![plot of chunk treemap2](EMBA_PipelinesForDataAnalysisInR3-figure/treemap2-1.png)
-
-互動式資料呈現
-====================================
-
-- [互動式資料呈現](http://yijutseng.github.io/DataScienceRBook/InteractiveGraphics.html)
-- [ggvis](http://yijutseng.github.io/DataScienceRBook/InteractiveGraphics.html#ggvis)
-- [googleVis](http://yijutseng.github.io/DataScienceRBook/InteractiveGraphics.html#googlevis)
-- [Plot.ly](http://yijutseng.github.io/DataScienceRBook/InteractiveGraphics.html#plot.ly)
-
-參考資料
-====================================
-type:sub-section 
-
-- 官方網站[文件](http://docs.ggplot2.org/current/)
-- RStudio製作的[ggplot cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
-- DataCamp課程1 [Data Visualization with ggplot2 (Part 1)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
-- DataCamp課程2 [Data Visualization with ggplot2 (Part 2)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-2)
-- DataCamp課程3 [Data Visualization with ggplot2 (Part 3)](https://www.datacamp.com/courses/data-visualization-with-ggplot2-3)
-- [每個人心中都有一碗巷口的牛肉湯](http://tequila1979.blogspot.tw/2017/01/blog-post.html)
-

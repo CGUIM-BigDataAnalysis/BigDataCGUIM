@@ -298,7 +298,7 @@ dateBook
 ```
 
 ```
-[1] "2021-12-11"
+[1] "2022-11-27"
 ```
 
 日期 (Date) - lubridate
@@ -936,14 +936,133 @@ str(iris)
 install.packages("skimr")
 ```
 
+```r
+library(skimr)
+skim(iris) 
+```
 
 
+Table: Data summary
+
+|                         |     |
+|:------------------------|:----|
+|Name                     |iris |
+|Number of rows           |150  |
+|Number of columns        |5    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|factor                   |1    |
+|numeric                  |4    |
+|________________________ |     |
+|Group variables          |None |
 
 
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
+|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
+|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
 
 
+**Variable type: numeric**
 
+|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
+|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
+|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
+|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
+|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
+資料框 data.frame 搭配skimr套件
+======================================================== 
+
+Table: Data summary
+
+|                         |     |
+|:------------------------|:----|
+|Name                     |iris |
+|Number of rows           |150  |
+|Number of columns        |5    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|factor                   |1    |
+|numeric                  |4    |
+|________________________ |     |
+|Group variables          |None |
+
+
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
+|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
+|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
+|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
+|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
+|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
+|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
+
+資料框資料擷取
+======================================================== 
+資料框可用`$`符號做**欄位**資料擷取
+
+```r
+iris$Species ##取得iris資料框中的Species欄位
+```
 
 ```
-Error in library(skimr) : there is no package called 'skimr'
+  [1] setosa     setosa     setosa     setosa     setosa     setosa    
+  [7] setosa     setosa     setosa     setosa     setosa     setosa    
+ [13] setosa     setosa     setosa     setosa     setosa     setosa    
+ [19] setosa     setosa     setosa     setosa     setosa     setosa    
+ [25] setosa     setosa     setosa     setosa     setosa     setosa    
+ [31] setosa     setosa     setosa     setosa     setosa     setosa    
+ [37] setosa     setosa     setosa     setosa     setosa     setosa    
+ [43] setosa     setosa     setosa     setosa     setosa     setosa    
+ [49] setosa     setosa     versicolor versicolor versicolor versicolor
+ [55] versicolor versicolor versicolor versicolor versicolor versicolor
+ [61] versicolor versicolor versicolor versicolor versicolor versicolor
+ [67] versicolor versicolor versicolor versicolor versicolor versicolor
+ [73] versicolor versicolor versicolor versicolor versicolor versicolor
+ [79] versicolor versicolor versicolor versicolor versicolor versicolor
+ [85] versicolor versicolor versicolor versicolor versicolor versicolor
+ [91] versicolor versicolor versicolor versicolor versicolor versicolor
+ [97] versicolor versicolor versicolor versicolor virginica  virginica 
+[103] virginica  virginica  virginica  virginica  virginica  virginica 
+[109] virginica  virginica  virginica  virginica  virginica  virginica 
+[115] virginica  virginica  virginica  virginica  virginica  virginica 
+[121] virginica  virginica  virginica  virginica  virginica  virginica 
+[127] virginica  virginica  virginica  virginica  virginica  virginica 
+[133] virginica  virginica  virginica  virginica  virginica  virginica 
+[139] virginica  virginica  virginica  virginica  virginica  virginica 
+[145] virginica  virginica  virginica  virginica  virginica  virginica 
+Levels: setosa versicolor virginica
 ```
+
+資料框資料編輯
+======================================================== 
+資料框可用`$`符號做**欄位**資料擷取後，當成向量，並使用**[]**做資料編輯。
+
+```r
+iris$Species[2]<-"versicolor"
+head(iris$Species)
+```
+
+```
+[1] setosa     versicolor setosa     setosa     setosa     setosa    
+Levels: setosa versicolor virginica
+```
+
+資料框資料編輯練習
+====================================
+type:alert
+incremental:true
+
+- iris$Time<-1 會發生什麼事情?
+
+
+
