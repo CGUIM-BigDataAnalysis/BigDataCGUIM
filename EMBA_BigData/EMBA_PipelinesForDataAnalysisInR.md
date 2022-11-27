@@ -125,7 +125,7 @@ type:alert
 incremental:true
 
 - 在剛剛新增的**R Script**中，輸入`install.packages("tidyverse")`
-- 使用上方選單**Tools**->**Install packages**->在**Package**欄位輸入`SportsAnalytics`，點選**Install**
+- 使用上方選單**Tools**->**Install packages**->在**Package**欄位輸入`jsonlite`，點選**Install**
 
 Functions - Basic
 ========================================================
@@ -535,10 +535,10 @@ Error in mena(NA): could not find function "mena"
 解讀錯誤訊息 範例
 ========================================================
 ```
-# Error: could not find function "fetch_NBAPlayerStatistics"
-# 找不到"fetch_NBAPlayerStatistics" function
+# Error: could not find function "ymd()"
+# 找不到"ymd" function
 ```
-可能原因：沒安裝或沒讀入SportsAnalytics package
+可能原因：沒安裝或沒讀入lubridates package
 
 
 ```
@@ -552,10 +552,10 @@ Error in mena(NA): could not find function "mena"
 type:alert
 incremental:true
 
-- 在Source code視窗輸入`fetch_NBAPlayerStatistics("20-21")`並執行
-- 試著安裝`SportsAnalytics` package
-- 試著載入`SportsAnalytics` package
-- 再次執行`fetch_NBAPlayerStatistics("20-21")`
+- 在Source code視窗輸入`ymd("2022/12/1")`並執行
+- 試著安裝`lubridate` package
+- 試著載入`lubridate` package
+- 再次執行`ymd("2022/12/1")`
 - 在Source code視窗輸入`library(knitr)`並執行
 
 Help

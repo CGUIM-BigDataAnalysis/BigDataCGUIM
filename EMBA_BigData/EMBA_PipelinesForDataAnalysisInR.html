@@ -969,7 +969,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <ul>
 <li class="fragment">在剛剛新增的<strong>R Script</strong>中，輸入<code>install.packages(&quot;tidyverse&quot;)</code></li>
-<li class="fragment">使用上方選單<strong>Tools</strong>-&gt;<strong>Install packages</strong>-&gt;在<strong>Package</strong>欄位輸入<code>SportsAnalytics</code>，點選<strong>Install</strong></li>
+<li class="fragment">使用上方選單<strong>Tools</strong>-&gt;<strong>Install packages</strong>-&gt;在<strong>Package</strong>欄位輸入<code>jsonlite</code>，點選<strong>Install</strong></li>
 </ul>
 
 </div>
@@ -1454,11 +1454,11 @@ char1&gt;char2
 <section data-transition="linear" data-transition-speed="default">
 <h3>解讀錯誤訊息 範例</h3>
 <div class="slideContent" >
-<pre><code># Error: could not find function &quot;fetch_NBAPlayerStatistics&quot;
-# 找不到&quot;fetch_NBAPlayerStatistics&quot; function
+<pre><code># Error: could not find function &quot;ymd()&quot;
+# 找不到&quot;ymd&quot; function
 </code></pre>
 
-<p>可能原因：沒安裝或沒讀入SportsAnalytics package</p>
+<p>可能原因：沒安裝或沒讀入lubridates package</p>
 
 <pre><code># Error in library(knitr): there is no package called &#39;knitr&#39;
 # 找不到&quot;knitr&quot; package
@@ -1473,10 +1473,10 @@ char1&gt;char2
 <h3>可能是最常見的錯誤訊息</h3>
 <div class="slideContent" >
 <ul>
-<li class="fragment">在Source code視窗輸入<code>fetch_NBAPlayerStatistics(&quot;20-21&quot;)</code>並執行</li>
-<li class="fragment">試著安裝<code>SportsAnalytics</code> package</li>
-<li class="fragment">試著載入<code>SportsAnalytics</code> package</li>
-<li class="fragment">再次執行<code>fetch_NBAPlayerStatistics(&quot;20-21&quot;)</code></li>
+<li class="fragment">在Source code視窗輸入<code>ymd(&quot;2022/12/1&quot;)</code>並執行</li>
+<li class="fragment">試著安裝<code>lubridate</code> package</li>
+<li class="fragment">試著載入<code>lubridate</code> package</li>
+<li class="fragment">再次執行<code>ymd(&quot;2022/12/1&quot;)</code></li>
 <li class="fragment">在Source code視窗輸入<code>library(knitr)</code>並執行</li>
 </ul>
 
