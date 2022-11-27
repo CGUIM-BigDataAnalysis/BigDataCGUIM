@@ -1,3 +1,4 @@
+# Basic 101---------------------
 # install
 install.packages("tidyverse")
 # load
@@ -22,10 +23,12 @@ log()
 # Help
 ?mean
 
+# Data structure ---------------
 
 
 
-ymd()
+
+
 
 
 
