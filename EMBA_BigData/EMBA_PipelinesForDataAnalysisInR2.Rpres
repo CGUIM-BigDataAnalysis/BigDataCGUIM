@@ -117,10 +117,10 @@ type:sub-section
     
 Open Data 開放資料常見平台
 ====================================
-- [政府資料開放平台](http://data.gov.tw/)
-- [Data Taipei](http://data.taipei/)
-- [開放資料 x 開放桃園](http://data.tycg.gov.tw/)
-- [內政資料開放平台](http://data.moi.gov.tw/)
+- [政府資料開放平台](https://data.gov.tw/)
+- [Data Taipei](https://data.taipei/)
+- [開放資料 x 開放桃園](https://data.tycg.gov.tw/)
+
 
 XML 可延伸標記式語言
 ====================================
@@ -155,7 +155,7 @@ XML 可延伸標記式語言-讀取
 
 ```{r}
 library(xml2)
-AQIURL<-"https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml"
+AQIURL<-"https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=XML"
 AQIXML <- read_xml(AQIURL)
 ```
 
@@ -171,7 +171,7 @@ XML 可延伸標記式語言-解析
 使用`xml_find_all()`以及`xml_text()`函數取得指定標籤內的資料
 ```{r}
 #取得所有"SiteName"標籤內的資料
-SiteName_xml<-xml_find_all(AQIXML, ".//SiteName")
+SiteName_xml<-xml_find_all(AQIXML, ".//SITENAME")
 SiteName<-xml_text(SiteName_xml)
 SiteName[1:10]
 ```
@@ -181,7 +181,7 @@ XML 可延伸標記式語言-解析
 使用`xml_find_all()`以及`xml_text()`函數取得指定標籤內的資料
 ```{r}
 #取得各監測站的經度longitude
-longitude_xml<-xml_find_all(AQIXML, ".//Longitude")
+longitude_xml<-xml_find_all(AQIXML, ".//LONGITUDE")
 longitude<-xml_text(longitude_xml)
 longitude[1:10]
 ```
@@ -195,9 +195,9 @@ incremental:true
 - 參考剛剛的AQI範例
 ```{r eval=F}
 library(xml2)
-AQIURL<-"https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=xml"
+AQIURL<-"https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=XML"
 AQIXML <- read_xml(AQIURL)
-SiteName_xml<-xml_find_all(AQIXML, ".//SiteName")
+SiteName_xml<-xml_find_all(AQIXML, ".//SITENAME")
 SiteName<-xml_text(SiteName_xml)
 SiteName[1:10]
 ```
@@ -290,7 +290,7 @@ JSON檔案匯入練習
 type:alert
 incremental:true
 
-- 練習用資料：[「空氣品質資料」API存取](https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&format=json)
+- 練習用資料：[桃園市路外停車資訊](https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=f4cc0b12-86ac-40f9-8745-885bddc18f79&rid=0daad6e6-0632-44f5-bd25-5e1de1e9146f)
 - 使用檔案匯入**範例**，將資料匯入R中
     - 提示：**fromJSON**
 - 使用str()函數觀察匯入的資料
@@ -420,7 +420,7 @@ incremental:true
 其他爬蟲相關參考資源
 ====================================
 - [網路爬蟲實作 - 用 r 語言打造自己的爬蟲程式](https://www.slideshare.net/secret/mdfHLPgvIW1kPR)
-- [rvest GitHub](https://github.com/hadley/rvest)
+- [rvest GitHub](https://github.com/tidyverse/rvest)
 - R Bloggers 有很多[爬蟲範例](http://www.r-bloggers.com/?s=Web+Scraping)（英文）
 - [Ptt爬蟲實作](http://bryannotes.blogspot.tw/2014/08/r-ptt-wantedsocial-network-analysis.html)
 - [大數學堂 網頁爬蟲課程](http://www.largitdata.com/course_list/1)
@@ -544,21 +544,24 @@ knitr::kable(sf[1:4,1:4])
 rtweet package - 取得timeline
 ====================================
 ```{r eval=F}
-tmls <- get_timelines(c("JeffBezos", "elonmusk"), n = 3000)
-head(tmls)
+tmls_Bezos <- get_timelines("JeffBezos", n = 1000)
+tmls_Musk <- get_timelines( "elonmusk", n = 1000)
+head(tmls_Bezos)
+head(tmls_Musk)
 ```
 ```{r echo=F}
-tmls <- get_timelines(c("JeffBezos", "elonmusk"), n = 3000)
-knitr::kable(tmls[1:6,c("user_id","screen_name","text","source")])
+tmls_Bezos <- get_timelines("JeffBezos", n = 1000)
+tmls_Musk <- get_timelines( "elonmusk", n = 1000)
+knitr::kable(tmls_Bezos[1:6,c("full_text","source")])
+knitr::kable(tmls_Musk[1:6,c("full_text","source")])
 ```
 
 rtweet package - 取得timeline
 ====================================
 ```{r echo=F}
 ## plot the frequency of tweets for each user over time
-tmls %>%
-  dplyr::filter(created_at > "2021-11-01") %>%
-  dplyr::group_by(screen_name) %>%
+tmls_Musk %>%
+  dplyr::filter(created_at > "2022-11-01") %>%
   ts_plot("days", trim = 1L) +
   ggplot2::geom_point() +
   ggplot2::theme_minimal() +
@@ -569,28 +572,24 @@ tmls %>%
   ggplot2::labs(
     x = NULL, y = NULL,
     title = "Frequency of Twitter statuses posted",
-    subtitle = "Twitter status (tweet) counts aggregated by day from  2021-11-01",
+    subtitle = "Twitter status (tweet) counts aggregated by day from  2022-11-01",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet"
   )
 
 ```
 
 
-rtweet package - 取得followers
+rtweet package - favorites
 ====================================
 ```{r eval=F}
-## get user IDs of accounts following 蔡英文 Tsai Ing-wen
-iingwen_flw <- get_followers("iingwen", n = 1000)
-## lookup data on those accounts
-iingwen_flw_data <- lookup_users(iingwen_flw$user_id)
-head(iingwen_flw_data)
+## get user IDs of accounts favorited by Elon Musk
+em_flw <- get_favorites("elonmusk", n = 100)
+head(em_flw)
 ```
 ```{r echo=F,eval=T}
-## get user IDs of accounts following 蔡英文 Tsai Ing-wen
-iingwen_flw <- get_followers("iingwen", n = 1000)
-## lookup data on those accounts
-iingwen_flw_data <- lookup_users(iingwen_flw$user_id[1:6])
-knitr::kable(iingwen_flw_data[1:6,c("user_id","name","location","friends_count")])
+## get user IDs of accounts favorited by Elon Musk
+em_flw <- get_favorites("elonmusk", n = 100)
+knitr::kable(em_flw[1:6,c("text", "created_at", "id_str")])
 ```
 
 

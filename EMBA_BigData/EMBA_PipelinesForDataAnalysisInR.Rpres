@@ -1,6 +1,7 @@
 Pipelines For Data Analysis In R, part 1
 ========================================================
 author: 曾意儒 Yi-Ju Tseng
+date: 2022/11/19
 autosize: true
 font-family: 'Microsoft JhengHei'
 navigation: slide
@@ -14,31 +15,10 @@ navigation: slide
 
 在分析之前
 ========================================================
-- RStudio怎麼用？[對應書本章節](https://yijutseng.github.io/DataScienceRBook/install.html#rstudio)
-- R基本語法: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/intro.html)
-- R資料結構: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/RDataStructure.html)
+- RStudio怎麼用？
+- R基本語法
+- R資料結構
 
-R vs. RStudio
-========================================================
-
-R: 程式核心 (引擎)
-```{r echo=FALSE}
-knitr::include_graphics("https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg")
-```
-
-[圖片來源](https://www.teslarati.com/tesla-patent-more-efficient-electric-motors/)
-
-R vs. RStudio
-========================================================
-
-RStudio: 操作介面 IDE (儀錶板)
-
-```{r echo=FALSE}
-knitr::include_graphics("https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg")
-```
-
-
-[圖片來源](https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept)
 
 RStudio Interface
 ========================================================
@@ -58,11 +38,11 @@ knitr::include_graphics("figures/RStudio.png")
 
 RStudio 使用步驟
 ========================================================
-- New Project (如果原本沒有的話，就像把相關資料整理在**資料夾**的功能)
-- New R Script (如果原本沒有的話，就像開個WORD記錄所有程式碼)
+- New Project (如果原本沒有的話)
+- New R Script (如果原本沒有的話)
 - 在左上方**程式碼編輯區 Source editor**撰寫程式碼
-- 將需要執行的程式碼反白，點選**Run**或是按**Ctrl+Enter**，執行程式碼
-- 將游標移至需要執行的程式碼，點選**Run**或是按**Ctrl+Enter**，也可執行該行程式碼
+- 將需要執行的程式碼反白，點選**Run**，執行程式碼
+- 將游標移至需要執行的程式碼，點選**Run** 也可執行該行程式碼
 - 程式碼會在左下方Console視窗執行，顯示結果
 - 如果有畫圖，會出現在右下方視窗
 - 可在右上方視窗檢查所有變數
@@ -75,37 +55,6 @@ Console視窗
 - `+` : 表示前面的程式碼還沒打完
     - 鍵入完整的程式碼
     - **Esc**跳出
-
-RStudio hands-on
-====================================
-type:alert
-incremental:true
-
-- 打開RStudio
-- 左上角**File**->**New Project** (如果原本沒有的話，Project名稱就會是資料夾名稱)
-- 左上角**File**->**New File**->**R Script** (如果原本沒有的話)
-- 在Console輸入1+，按Enter
-- 試著跳出打不完的程式碼，變回輸入模式`>`
-
-R and R Packages
-========================================================
-
-R: 程式核心 (iPhone)
-```{r echo=FALSE}
-knitr::include_graphics("https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668")
-```
-
-R and R Packages
-========================================================
-
-R Packages: 附加程式 (APP)
-
-```{r echo=FALSE}
-knitr::include_graphics("https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg")
-```
-
-[圖片來源](https://www.apple.com/)
-
 
 R = Base + Other Packages
 ========================================================
@@ -126,13 +75,6 @@ library(ggplot2)
 
 - **不用**在套件名稱前後加雙引號
 
-Install packages hands-on
-====================================
-type:alert
-incremental:true
-
-- 在剛剛新增的**R Script**中，輸入`install.packages("tidyverse")`
-- 使用上方選單**Tools**->**Install packages**->在**Package**欄位輸入`jsonlite`，點選**Install**
 
 Functions - Basic
 ========================================================
@@ -184,13 +126,6 @@ Variable 命名規則
 - 開頭只能是英文字，或 `.`
 - 大小寫敏感
 
-保留字檢查
-====================================
-type:alert
-incremental:true
-
-- 在Source code視窗輸入`TRUE`，觀察顏色
-- 在Source code視窗輸入`True`，觀察顏色
 
 資料型態
 ========================================================
@@ -222,12 +157,9 @@ char2<-"100"
 char3<-"200"
 #char2+char3 
 #會輸出Error message: non-numeric argument to binary operator
-paste0(char2,char3)
 ```
 
-```{r char2}
-paste0(char2,char3)
-```
+
 布林變數 (logic)
 ========================================================
 - 用於邏輯判斷
@@ -252,7 +184,7 @@ dateBook
 
 日期 (Date) - lubridate
 ========================================================
-- `lubridate` package : 日期與字串的相關轉換操作，含在`tidyverse`套件中
+- `lubridate` package : 日期與字串的相關轉換操作
 - `ymd()`函數 : 將`年/月/日`格式的文字轉換為日期物件
     - y表年year
     - m表月month
@@ -275,7 +207,7 @@ ymd('2012/3/3')
 mdy('3/3/2012')
 ```
 
-- 其他使用方法：[Cheatsheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf)
+- 其他使用方法：[The Yhat Blog](http://blog.yhat.com/static/pdf/R_date_cheat_sheet.pdf)
 
 基本運算子: 數學運算
 ========================================================
@@ -348,7 +280,6 @@ TRUE & FALSE
 TRUE | TRUE
 TRUE | FALSE
 ```
-
 基本運算子: 反向布林變數 !
 ========================================================
 
@@ -375,10 +306,10 @@ mena(NA)
 解讀錯誤訊息 範例
 ========================================================
 ```
-# Error: could not find function "ymd()"
-# 找不到"ymd" function
+# Error: could not find function "fetch_NBAPlayerStatistics"
+# 找不到"fetch_NBAPlayerStatistics" function
 ```
-可能原因：沒安裝或沒讀入lubridates package
+可能原因：沒安裝或沒讀入SportsAnalytics package
 
 
 ```
@@ -386,17 +317,6 @@ mena(NA)
 # 找不到"knitr" package
 ```
 可能原因：沒安裝knitr package
-
-可能是最常見的錯誤訊息
-====================================
-type:alert
-incremental:true
-
-- 在Source code視窗輸入`ymd("2022/12/1")`並執行
-- 試著安裝`lubridate` package
-- 試著載入`lubridate` package
-- 再次執行`ymd("2022/12/1")`
-- 在Source code視窗輸入`library(knitr)`並執行
 
 Help
 ========================================================
@@ -622,21 +542,6 @@ ncol(StuDF) #幾欄
 
 ```{r}
 str(iris) 
-```
-
-資料框 data.frame 搭配skimr套件
-======================================================== 
-```{r eval=F}
-install.packages("skimr")
-```
-```{r}
-library(skimr)
-skim(iris) 
-```
-資料框 data.frame 搭配skimr套件
-======================================================== 
-```{r echo=F}
-skim(iris) 
 ```
 
 資料框資料擷取
