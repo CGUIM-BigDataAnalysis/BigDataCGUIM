@@ -49,6 +49,7 @@ head(sf)
 
 ## google sheet 4
 library(googlesheets4)
+# if you get the error 404
 gs4_deauth()
 read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
 
