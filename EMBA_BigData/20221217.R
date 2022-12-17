@@ -9,9 +9,9 @@ NanoStockPrice<-
   html_text()
 NanoStockPriceTable<-
   matrix(NanoStockPrice,ncol=6, byrow=TRUE)
-NanoStockNameClean<-gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
-                         '',
-                         NanoStockName)
+NanoStockNameClean<-
+  gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
+       '',NanoStockName)
 NanoStockData <- 
   data.frame(name = NanoStockNameClean,
              NanoStockPriceTable)
@@ -32,4 +32,5 @@ NanoStockData$X2<-
   gsub(",","",NanoStockData$X2) %>%
   as.numeric()
 
-
+grep("A|a",
+     c("Alex","Tom","Amy","Joy","Emma"))
