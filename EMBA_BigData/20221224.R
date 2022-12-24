@@ -12,3 +12,13 @@ case_death<-
                   "Country/Region",
                   "Lat",
                   "Long"))
+library(tidyr)
+case_long<-
+  pivot_longer(case,
+             cols =c(-"Province/State",
+                     -"Country/Region",
+                     -"Lat",
+                     -"Long"),
+             names_to = "Date",
+             values_to = "Count"
+            )
