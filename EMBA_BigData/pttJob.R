@@ -22,10 +22,14 @@ for(i in (lastpage_index-9):(lastpage_index+1)){
   titles <- page_html %>% html_nodes(".title a") %>% html_text()
   all_titles<-c(all_titles,titles)
 }
+
 all_titles<-gsub("GG|gg|TSMC|tsmc","台積",all_titles)
 
 gg_title<-all_titles[grepl("台積",all_titles)]
 gg_result<-data.frame(title=gg_title,date=Sys.Date())
+
+all_titles[grepl("瑞昱",all_titles)]
+all_titles[grepl("螃蟹",all_titles)]
 
 write.table(gg_result,"gg.csv",sep = ",",append = TRUE, 
             col.names=!file.exists("gg.csv"),row.names = F)

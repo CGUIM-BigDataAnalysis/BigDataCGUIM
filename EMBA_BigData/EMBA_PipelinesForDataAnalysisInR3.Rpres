@@ -136,7 +136,7 @@ cor(mtcars$mpg,mtcars$hp)
 
 data.table 參考文件與資源
 ====================================
-- [官網](https://github.com/Rdatatable/data.table/wiki)
+- [官網](https://rdatatable.gitlab.io/data.table/)
 - 指令全集[The data.table R package cheat sheet](https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf)
 - [A data.table R tutorial by DataCamp](https://www.datacamp.com/community/tutorials/data-table-r-tutorial#gs.vzMYa_k)
 - DataCamp [互動式教學課程](https://www.datacamp.com/courses/data-table-data-manipulation-r-tutorial)
@@ -161,6 +161,7 @@ type:sub-section
     - `group_by()`: 分組依據
     - `arrange()`: 觀察值排序
     - `rename()`: 欄位重新命名
+    - `slice()`: 切出需要資料
     - `%>%`: the “pipe” operator 連結上數函式，將所有函式計算串在一起執行
 
 dplyr
@@ -174,7 +175,7 @@ install.packages("dplyr") ##安裝
 library(dplyr) ##載入
 ```
 
-以上述房屋實價登錄資料為例，首先先[讀入二手屋資料](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllOldData.csv)
+以[房屋實價登錄資料](http://plvr.land.moi.gov.tw/Download?type=zip&fileName=lvr_landcsv.zip)為例，首先先[讀入二手屋資料](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllOldData.csv)
 ```{r}
 library(readr)
 AllOldData<-read_csv("AllOldData.csv", ,
@@ -208,16 +209,16 @@ AllOldData<-read_csv("AllOldData.csv", ,
 
 欄位(Column)子集 select() 
 ====================================
-篩選欄位名稱為`土地區段位置建物區段門牌`、開頭是`交易`或是開頭是`建物`的欄位
+篩選欄位名稱為`土地位置建物門牌`、開頭是`交易`或是開頭是`建物`的欄位
 ```{r select1,eval=F}
 select1<-
-    select(AllOldData,土地區段位置建物區段門牌,
+    select(AllOldData,土地位置建物門牌,
            starts_with("交易"),
             starts_with("建物"))
 select1
 ```
 ```{r select1.1,echo=F}
-select1<-select(AllOldData,土地區段位置建物區段門牌,
+select1<-select(AllOldData,土地位置建物門牌,
            starts_with("交易"),
             starts_with("建物"))
 knitr::kable(head(select1,1)) 
@@ -226,19 +227,19 @@ knitr::kable(head(select1,1))
 欄位(Column)子集 select() 
 ====================================
 
-若想篩選欄位`土地區段位置建物區段門牌`到欄位`交易筆棟數`間的所有欄位，但不想要`非都市土地使用分區`欄位
+若想篩選欄位`土地位置建物門牌`到欄位`交易筆棟數`間的所有欄位，但不想要`非都市土地使用分區`欄位
 - 用`:`串連欄位名稱
 - 用`-`去除不要的欄位
 ```{r selec3,eval=F}
 select3<-
     select(AllOldData,
-           土地區段位置建物區段門牌:交易筆棟數,
+           土地位置建物門牌:交易筆棟數,
            -非都市土地使用分區)
 head(select3,3)
 ```
 ```{r selec3.1,echo=F}
 select3<-select(AllOldData,
-           土地區段位置建物區段門牌:交易筆棟數,
+           土地位置建物門牌:交易筆棟數,
            -非都市土地使用分區)
 knitr::kable(head(select3,3))
 ```
@@ -462,11 +463,11 @@ knitr::kable(head(arrange3,3))
 ====================================
 `新名稱=舊名稱`
 ```{r rename1, eval=F}
-rename1<-rename(AllOldData,門牌=土地區段位置建物區段門牌)
+rename1<-rename(AllOldData,門牌=土地位置建物門牌)
 rename1[1:5,1:3]
 ```
 ```{r rename1w, echo=F}
-rename1<-rename(AllOldData,門牌=土地區段位置建物區段門牌)
+rename1<-rename(AllOldData,門牌=土地位置建物門牌)
 knitr::kable(rename1[1:5,1:3])
 ```
 
@@ -496,88 +497,6 @@ dplyr 參考文件與資源
 - [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 - DataCamp互動式教學課程 [Data Manipulation in R with dplyr](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial)
 
-
-長表與寬表
-====================================
-type:sub-section
-
-- 在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
-- `tidyr` package提供完整的轉換功能
-    - 寬表轉長表 `pivot_longer(資料框/寬表,cols=需要轉換成長表的欄位)`
-    - 長表轉寬表 `pivot_wider(資料框/長表,names_from=需要轉換成寬表的欄位)`
-    
-長表與寬表
-====================================
-原來的`airquality`資料框中，有Ozone, Solar.R, Wind, Temp, Month, Day等六個欄位 (Column)，屬於寬表
-```{r eval=F}
-head(airquality,3)
-```
-```{r echo=F}
-knitr::kable(head(airquality,3)) 
-```
-
-寬表轉長表 pivot_longer（）
-====================================
-
-- 保留Month和Day兩個欄位
-- 消滅Ozone, Solar.R, Wind, Temp
-- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
-
-```{r}
-library(tidyr)
-##欄位需要保留"Month","Day"
-##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
-airqualityLong<-
-  pivot_longer(airquality,
-               cols = c("Ozone","Solar.R","Wind","Temp")) 
-```
-```{r eval=F}
-head(airqualityLong)
-```
-```{r echo=F}
-knitr::kable(head(airqualityLong)) 
-```
-
-寬表轉長表 pivot_longer（）
-====================================
-
-- 保留Month和Day兩個欄位
-- 消滅Ozone, Solar.R, Wind, Temp
-- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
-
-```{r}
-library(tidyr)
-##欄位需要保留"Month","Day"
-##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
-airqualityLong<-
-  pivot_longer(airquality,
-               cols = c(-"Month",-"Day")) 
-```
-```{r eval=F}
-head(airqualityLong)
-```
-```{r echo=F}
-knitr::kable(head(airqualityLong)) 
-```
-
-長表轉寬表 pivot_wider（）
-====================================
-
-- `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
-- variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
-
-```{r}
-##增加欄位由name定義
-airqualityWide<-
-  pivot_wider(airqualityLong, 
-              names_from="name") 
-```
-```{r eval=F}
-head(airqualityWide)
-```
-```{r echo=F}
-knitr::kable(head(airqualityWide))
-```
 
 
 資料視覺化大綱
@@ -840,7 +759,7 @@ install.packages("ggmap")
 get_googlemap() + ggmap()
 ====================================
 - 使用`register_google(key = "your key")`帶入google金鑰
-- 投影片金鑰已失效，請自行至[Google Cloud Platform](https://console.cloud.google.com/)，點選**API及服務**申請**Maps Static API**後，查詢**憑證**，複製**API key**（需綁定信用卡付款）
+- 可自行至[Google Cloud Platform](https://console.cloud.google.com/)，點選**API及服務**申請**Maps Static API**後，查詢**憑證**，複製**API key**（需綁定信用卡付款）
 ```{r, warning=F,message=F, fig.height=5}
 library(ggmap)
 register_google(key = "AIzaSyAvNeyA_Uy8Z3JlzDnDuXQg7FhKFeVyNbY")
@@ -853,14 +772,19 @@ ggmap(twmap)
 ggmap + open data 資料載入
 ====================================
 - 只要資料有經緯度等資訊，就可以使用`ggmap` package與各式資料結合呈現
-- [台北市水質資料](http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927)
+- [台北市水質資料](https://twd.water.gov.taipei/opendata/wqb/wqb.asmx/GetQualityData)
 ```{r message=F, warning=F}
-library(jsonlite)
-WaterData<-fromJSON("http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=190796c8-7c56-42e0-8068-39242b8ec927")
-WaterDataFrame<-WaterData$result$results
-WaterDataFrame$longitude<-as.numeric(WaterDataFrame$longitude)
-WaterDataFrame$latitude<-as.numeric(WaterDataFrame$latitude)
-WaterDataFrame$qua_cntu<-as.numeric(WaterDataFrame$qua_cntu)
+library(xml2)
+WaterData<-read_xml("https://twd.water.gov.taipei/opendata/wqb/wqb.asmx/GetQualityData")
+code_name<-WaterData %>% xml_find_all("//code_name")%>% 
+  xml_text()
+longitude<-WaterData %>% xml_find_all("//longitude")%>% 
+  xml_text() %>% as.numeric()
+latitude<-WaterData %>% xml_find_all("//latitude")%>% 
+  xml_text()%>% as.numeric()
+qua_cntu<-WaterData %>% xml_find_all("//qua_cntu") %>% 
+  xml_text()%>% as.numeric()
+WaterDataFrame<-data.frame(code_name,longitude,latitude,qua_cntu)
 WaterDataClean<-WaterDataFrame[WaterDataFrame$qua_cntu>=0,]
 head(WaterDataClean)
 ```
@@ -1087,7 +1011,7 @@ Heatmap 練習
 ====================================
 type:alert
 incremental:true
-
+- 參考[WSJ Battling Infectious Diseases in the 20th Century](http://graphics.wsj.com/infectious-diseases-and-vaccines/)
 - 下載[小兒麻痺發生率](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv)資料
 - 將資料載入R
 - 表格是寬表，需要轉成長表

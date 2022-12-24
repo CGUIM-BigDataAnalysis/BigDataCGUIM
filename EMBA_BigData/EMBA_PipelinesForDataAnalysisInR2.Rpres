@@ -701,7 +701,8 @@ saveRDS(iris,"iris.rds")
 - 子集Subset
 - 排序
 - 資料組合
-- 長表與寬表
+- 長表轉寬表
+- 遺漏值處理
 
 Tidy Data
 ====================================
@@ -1169,6 +1170,90 @@ type:alert
 - 分別讀入兩個csv檔
 - 依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，只留下有對應到的資料
 - 請問結合後的資料有幾列？
+
+
+
+長表與寬表
+====================================
+type:sub-section
+
+- 在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
+- `tidyr` package提供完整的轉換功能
+    - 寬表轉長表 `pivot_longer(資料框/寬表,cols=需要轉換成長表的欄位)`
+    - 長表轉寬表 `pivot_wider(資料框/長表,names_from=需要轉換成寬表的欄位)`
+    
+長表與寬表
+====================================
+原來的`airquality`資料框中，有Ozone, Solar.R, Wind, Temp, Month, Day等六個欄位 (Column)，屬於寬表
+```{r eval=F}
+head(airquality,3)
+```
+```{r echo=F}
+knitr::kable(head(airquality,3)) 
+```
+
+寬表轉長表 pivot_longer（）
+====================================
+
+- 保留Month和Day兩個欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
+```{r}
+library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c("Ozone","Solar.R","Wind","Temp")) 
+```
+```{r eval=F}
+head(airqualityLong)
+```
+```{r echo=F}
+knitr::kable(head(airqualityLong)) 
+```
+
+寬表轉長表 pivot_longer（）
+====================================
+
+- 保留Month和Day兩個欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
+```{r}
+library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c(-"Month",-"Day")) 
+```
+```{r eval=F}
+head(airqualityLong)
+```
+```{r echo=F}
+knitr::kable(head(airqualityLong)) 
+```
+
+長表轉寬表 pivot_wider（）
+====================================
+
+- `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
+- variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
+
+```{r}
+##增加欄位由name定義
+airqualityWide<-
+  pivot_wider(airqualityLong, 
+              names_from="name") 
+```
+```{r eval=F}
+head(airqualityWide)
+```
+```{r echo=F}
+knitr::kable(head(airqualityWide))
+```
 
 
 

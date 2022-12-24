@@ -289,16 +289,16 @@ List of 2
   .. ..$ sno    : chr [1:100] "2001" "2002" "2003" "2004" ...
   .. ..$ sna    : chr [1:100] "中央大學圖書館" "中壢高中" "中正公園(中美路)" "中壢火車站(前站)" ...
   .. ..$ tot    : chr [1:100] "60" "52" "54" "94" ...
-  .. ..$ sbi    : chr [1:100] "22" "22" "18" "33" ...
+  .. ..$ sbi    : chr [1:100] "36" "30" "11" "33" ...
   .. ..$ sarea  : chr [1:100] "中壢區" "中壢區" "中壢區" "中壢區" ...
-  .. ..$ mday   : chr [1:100] "20221203115236" "20221203115232" "20221203115230" "20221203115236" ...
+  .. ..$ mday   : chr [1:100] "20221209114226" "20221209114242" "20221209114250" "20221209114224" ...
   .. ..$ lat    : chr [1:100] "24.968128" "24.960815" "24.959113" "24.954042" ...
   .. ..$ lng    : chr [1:100] "121.194666" "121.212038" "121.224805" "121.22644" ...
   .. ..$ ar     : chr [1:100] "中大路300號(中央大學校內圖書館前)" "中央西路二段215號對面人行道" "中美路101-113號對面人行道" "中和路109號空地" ...
   .. ..$ sareaen: chr [1:100] "Zhongli Dist." "Zhongli Dist." "Zhongli Dist." "Zhongli Dist." ...
   .. ..$ snaen  : chr [1:100] "National Central University Library" "Jhungli Senior High School" "Zhongzheng Park (Zhongmei Rd.)" "TRA Zhongli Station (Front)" ...
   .. ..$ aren   : chr [1:100] "No.300, Zhongda Rd." "No.215, Sec. 2, Zhongyang W. Rd. (opposite)" "No.101 to No.113, Zhongmei Rd. (opposite)" "No. 109, Zhonghe Rd." ...
-  .. ..$ bemp   : chr [1:100] "38" "30" "34" "61" ...
+  .. ..$ bemp   : chr [1:100] "23" "22" "43" "58" ...
   .. ..$ act    : chr [1:100] "1" "1" "1" "1" ...
   ..$ offset        : int 0
   ..$ total         : int 400
@@ -315,14 +315,14 @@ head(APIData$result$records)
 
 | _id|sno  |sna              |tot |sbi |sarea  |mday           |lat       |lng        |
 |---:|:----|:----------------|:---|:---|:------|:--------------|:---------|:----------|
-|   1|2001 |中央大學圖書館   |60  |22  |中壢區 |20221203115236 |24.968128 |121.194666 |
-|   2|2002 |中壢高中         |52  |22  |中壢區 |20221203115232 |24.960815 |121.212038 |
-|   3|2003 |中正公園(中美路) |54  |18  |中壢區 |20221203115230 |24.959113 |121.224805 |
-|   4|2004 |中壢火車站(前站) |94  |33  |中壢區 |20221203115236 |24.954042 |121.22644  |
-|   5|2005 |中原大學         |82  |28  |中壢區 |20221203115225 |24.957943 |121.240201 |
-|   6|2006 |銀河廣場         |58  |29  |中壢區 |20221203115243 |24.961716 |121.224241 |
-|   7|2007 |中壢區公所       |40  |9   |中壢區 |20221203115215 |24.965697 |121.224696 |
-|   8|2008 |光明公園         |96  |18  |中壢區 |20221203115224 |24.962812 |121.217385 |
+|   1|2001 |中央大學圖書館   |60  |36  |中壢區 |20221209114226 |24.968128 |121.194666 |
+|   2|2002 |中壢高中         |52  |30  |中壢區 |20221209114242 |24.960815 |121.212038 |
+|   3|2003 |中正公園(中美路) |54  |11  |中壢區 |20221209114250 |24.959113 |121.224805 |
+|   4|2004 |中壢火車站(前站) |94  |33  |中壢區 |20221209114224 |24.954042 |121.22644  |
+|   5|2005 |中原大學         |82  |45  |中壢區 |20221209114218 |24.957943 |121.240201 |
+|   6|2006 |銀河廣場         |58  |13  |中壢區 |20221209114239 |24.961716 |121.224241 |
+|   7|2007 |中壢區公所       |40  |14  |中壢區 |20221209114224 |24.965697 |121.224696 |
+|   8|2008 |光明公園         |96  |64  |中壢區 |20221209114229 |24.962812 |121.217385 |
 
 JSON檔案解析
 ====================================
@@ -334,14 +334,14 @@ table(APIData$result$records$sarea)
 
 |Var1   | Freq|
 |:------|----:|
+|中壢區 |   35|
 |八德區 |    5|
-|大溪區 |    2|
 |大園區 |    2|
-|龜山區 |   10|
-|蘆竹區 |    7|
+|大溪區 |    2|
 |平鎮區 |    7|
 |桃園區 |   32|
-|中壢區 |   35|
+|蘆竹區 |    7|
+|龜山區 |   10|
 分析可知中壢區車站較多
 
 
@@ -392,11 +392,11 @@ news_title
 ```
 
 ```
-[1] "地方政治的提升與倒退？"               
-[2] "夢想、政治、金權──世界盃的追求"     
-[3] "金馬59 | 凝視傷疤：幽暗之眼與一瞬之光"
-[4] "戰火與重生：走過俄軍肆虐的基輔與布查" 
-[5] "藍色警服下的掙扎"                     
+[1] "那些縫補中的家庭，與他們的孩子──台灣兒少安置現況與未竟之事"
+[2] "1978，請回答──亡國感下台灣主體藝文的追尋與迴聲"            
+[3] "夢想、政治、金權──世界盃的追求"                            
+[4] "地方政治的提升與倒退？"                                    
+[5] "金馬59 | 凝視傷疤：幽暗之眼與一瞬之光"                     
 ```
 
 
@@ -430,12 +430,12 @@ head(NanoStockName)
 ```
 
 ```
-[1] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1101','台泥');\r\n//-->\r\n"     
-[2] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1216','統一');\r\n//-->\r\n"     
-[3] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1301','台塑');\r\n//-->\r\n"     
-[4] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1303','南亞');\r\n//-->\r\n"     
-[5] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1326','台化');\r\n//-->\r\n"     
-[6] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1590','亞德客-KY');\r\n//-->\r\n"
+[1] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1101','台泥');\r\n//-->\r\n"  
+[2] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1216','統一');\r\n//-->\r\n"  
+[3] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1301','台塑');\r\n//-->\r\n"  
+[4] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1303','南亞');\r\n//-->\r\n"  
+[5] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1326','台化');\r\n//-->\r\n"  
+[6] "\r\n\r\n<!--\r\n\tGenLink2stk('AS1402','遠東新');\r\n//-->\r\n"
 ```
 
 ```r
@@ -443,7 +443,7 @@ head(NanoStockPrice)
 ```
 
 ```
-[1] "33.85"     "118,074"   "88"        "33.85"     "16,118"    "3,996,601"
+[1] "34.25"     "157,526"   "231"       "34.25"     "12,330"    "5,413,777"
 ```
 
 盤中奈米股資料爬取 -2
@@ -467,58 +467,58 @@ NanoStockData <-
 NanoStockData
 ```
 
-|name                    |X1       |X2      |X3 |X4       |X5     |X6          |
-|:-----------------------|:--------|:-------|:--|:--------|:------|:-----------|
-|('AS1101','台泥')       |33.85    |118,074 |88 |33.85    |16,118 |3,996,601   |
-|('AS1216','統一')       |65.20    |52,097  |88 |65.10    |3,406  |3,392,700   |
-|('AS1301','台塑')       |89.50    |38,932  |88 |89.40    |4,274  |3,498,094   |
-|('AS1303','南亞')       |77.30    |21,731  |87 |77.30    |2,207  |1,681,206   |
-|('AS1326','台化')       |74.70    |8,248   |80 |74.50    |3,034  |617,529     |
-|('AS1590','亞德客KY')   |980.00   |4,218   |52 |978.00   |142    |4,093,923   |
-|('AS2002','中鋼')       |29.10    |46,293  |86 |29.00    |12,713 |1,350,151   |
-|('AS2207','和泰車')     |637.00   |1,973   |31 |636.00   |149    |1,262,760   |
-|('AS2303','聯電')       |45.55    |82,797  |88 |45.35    |11,843 |3,751,691   |
-|('AS2308','台達電')     |304.00   |46,865  |88 |303.50   |3,675  |14,212,500  |
-|('AS2317','鴻海')       |106.00   |409,435 |88 |105.50   |36,958 |43,106,047  |
-|('AS2327','國巨')       |487.00   |198,282 |86 |487.00   |28,580 |95,875,244  |
-|('AS2330','台積電')     |493.50   |516,342 |88 |493.00   |44,679 |255,245,428 |
-|('AS2357','華碩')       |276.00   |46,254  |88 |277.00   |3,701  |12,702,665  |
-|('AS2379','瑞昱')       |332.00   |22,084  |84 |325.00   |4,068  |7,243,934   |
-|('AS2382','廣達')       |72.50    |25,600  |85 |72.20    |2,362  |1,842,491   |
-|('AS2395','研華')       |325.00   |4,020   |61 |323.00   |480    |1,299,982   |
-|('AS2408','南亞科')     |56.50    |44,884  |83 |56.70    |1,135  |2,537,823   |
-|('AS2409','友達')       |16.35    |57,467  |85 |16.35    |22,909 |937,222     |
-|('AS2412','中華電')     |112.00   |37,356  |87 |112.00   |7,756  |4,174,680   |
-|('AS2454','聯發科')     |740.00   |51,197  |88 |739.00   |4,014  |37,937,316  |
-|('AS2603','長榮')       |159.00   |154,158 |88 |159.00   |26,632 |24,606,692  |
-|('AS2609','陽明')       |65.00    |83,201  |88 |65.00    |5,725  |5,416,211   |
-|('AS2615','萬海')       |74.80    |28,689  |86 |74.60    |8,174  |2,153,771   |
-|('AS2801','彰銀')       |17.35    |9,700   |70 |17.30    |5,253  |168,445     |
-|('AS2880','華南金')     |22.50    |54,652  |84 |22.50    |11,042 |1,232,553   |
-|('AS2881','富邦金')     |60.20    |109,669 |88 |60.10    |25,450 |6,601,991   |
-|('AS2882','國泰金')     |44.05    |229,488 |87 |44.05    |10,226 |10,088,207  |
-|('AS2883','開發金')     |13.50    |54,628  |88 |13.45    |14,837 |734,216     |
-|('AS2884','玉山金')     |24.30    |384,601 |88 |24.30    |28,478 |9,373,050   |
-|('AS2885','元大金')     |22.50    |97,451  |88 |22.45    |31,290 |2,186,572   |
-|('AS2886','兆豐金')     |31.25    |297,875 |88 |31.25    |16,674 |9,321,534   |
-|('AS2887','台新金')     |15.00    |154,381 |87 |15.00    |12,821 |2,314,881   |
-|('AS2890','永豐金')     |17.80    |48,502  |87 |17.80    |9,457  |863,990     |
-|('AS2891','中信金')     |22.65    |53,096  |84 |22.55    |6,970  |1,202,059   |
-|('AS2892','第一金')     |25.95    |84,896  |88 |25.95    |16,387 |2,204,208   |
-|('AS2912','統一超')     |271.00   |20,478  |75 |270.00   |723    |5,521,821   |
-|('AS3008','大立光')     |2,295.00 |10,979  |86 |2,280.00 |745    |25,030,230  |
-|('AS3034','聯詠')       |299.50   |25,181  |87 |300.00   |1,145  |7,482,424   |
-|('AS3037','欣興')       |161.00   |85,794  |87 |160.50   |4,435  |13,760,079  |
-|('AS3045','台灣大')     |95.00    |10,234  |76 |94.30    |1,239  |962,951     |
-|('AS3711','日月光投控') |100.00   |37,499  |83 |100.50   |3,619  |3,757,850   |
-|('AS4904','遠傳')       |67.50    |8,620   |78 |67.50    |976    |579,613     |
-|('AS5871','中租KY')     |210.00   |135,965 |88 |210.50   |4,553  |28,392,203  |
-|('AS5876','上海商銀')   |48.35    |8,101   |74 |48.35    |2,283  |391,641     |
-|('AS5880','合庫金')     |26.45    |77,022  |88 |26.50    |9,222  |2,038,255   |
-|('AS6415','矽力*KY')    |544.00   |37,610  |74 |544.00   |145    |20,246,371  |
-|('AS6505','台塑化')     |83.50    |21,148  |72 |83.50    |2,113  |1,768,798   |
-|('AS8046','南電')       |294.50   |70,655  |88 |295.00   |4,685  |20,592,475  |
-|('AS9910','豐泰')       |189.50   |4,226   |51 |186.50   |888    |796,566     |
+|name                    |X1       |X2        |X3  |X4       |X5     |X6          |
+|:-----------------------|:--------|:---------|:---|:--------|:------|:-----------|
+|('AS1101','台泥')       |34.25    |157,526   |231 |34.25    |12,330 |5,413,777   |
+|('AS1216','統一')       |65.80    |8,118     |133 |65.80    |2,840  |533,696     |
+|('AS1301','台塑')       |87.00    |45,726    |178 |87.00    |3,769  |3,943,609   |
+|('AS1303','南亞')       |70.80    |26,749    |187 |70.80    |5,410  |1,893,381   |
+|('AS1326','台化')       |69.80    |14,716    |142 |69.90    |1,872  |1,026,298   |
+|('AS1402','遠東新')     |31.75    |24,361    |162 |31.80    |2,571  |772,114     |
+|('AS1590','亞德客KY')   |915.00   |1,065     |32  |911.00   |5      |966,589     |
+|('AS2002','中鋼')       |30.65    |103,267   |239 |30.65    |14,347 |3,147,799   |
+|('AS2207','和泰車')     |596.00   |2,307     |84  |596.00   |56     |1,358,852   |
+|('AS2303','聯電')       |42.00    |126,587   |237 |42.00    |8,570  |5,319,658   |
+|('AS2308','台達電')     |283.00   |79,023    |223 |283.50   |2,128  |22,239,664  |
+|('AS2317','鴻海')       |101.00   |94,100    |256 |101.00   |14,369 |9,487,422   |
+|('AS2327','國巨')       |461.50   |24,883    |171 |460.00   |4,182  |11,420,178  |
+|('AS2330','台積電')     |455.50   |1,796,740 |261 |457.00   |45,413 |820,558,419 |
+|('AS2357','華碩')       |273.00   |13,648    |174 |272.00   |1,476  |3,712,197   |
+|('AS2379','瑞昱')       |298.00   |9,401     |136 |292.00   |100    |2,723,866   |
+|('AS2382','廣達')       |71.90    |16,227    |182 |71.70    |1,414  |1,155,701   |
+|('AS2395','研華')       |334.50   |1,632     |84  |332.00   |732    |540,577     |
+|('AS2408','南亞科')     |54.60    |23,674    |147 |51.30    |1,138  |1,211,868   |
+|('AS2412','中華電')     |113.00   |23,032    |171 |113.00   |4,656  |2,588,144   |
+|('AS2454','聯發科')     |662.00   |39,663    |244 |662.00   |2,097  |26,031,789  |
+|('AS2603','長榮')       |167.00   |156,224   |250 |167.50   |33,409 |26,058,553  |
+|('AS2609','陽明')       |67.50    |116,508   |230 |67.60    |6,877  |7,832,024   |
+|('AS2615','萬海')       |86.10    |127,870   |243 |86.20    |16,726 |10,894,336  |
+|('AS2801','彰銀')       |17.30    |7,795     |89  |17.25    |3,873  |134,692     |
+|('AS2880','華南金')     |22.60    |41,334    |172 |22.60    |6,766  |935,452     |
+|('AS2881','富邦金')     |56.90    |51,517    |204 |56.80    |11,692 |2,922,216   |
+|('AS2882','國泰金')     |41.15    |130,329   |230 |41.15    |27,527 |5,351,083   |
+|('AS2883','開發金')     |12.80    |47,260    |191 |12.75    |12,429 |603,616     |
+|('AS2884','玉山金')     |24.25    |117,939   |239 |24.25    |13,933 |2,852,065   |
+|('AS2885','元大金')     |21.90    |103,102   |193 |21.90    |9,897  |2,251,812   |
+|('AS2886','兆豐金')     |30.70    |125,985   |250 |30.70    |7,613  |3,856,913   |
+|('AS2887','台新金')     |15.20    |59,500    |207 |15.20    |12,632 |901,717     |
+|('AS2890','永豐金')     |16.80    |173,027   |233 |16.75    |12,380 |2,907,750   |
+|('AS2891','中信金')     |22.10    |81,832    |225 |22.00    |6,516  |1,795,586   |
+|('AS2892','第一金')     |26.30    |37,840    |207 |26.35    |8,547  |995,774     |
+|('AS2912','統一超')     |270.00   |10,062    |158 |270.00   |1,524  |2,705,095   |
+|('AS3008','大立光')     |2,140.00 |9,418     |196 |2,140.00 |288    |20,087,415  |
+|('AS3034','聯詠')       |302.00   |17,499    |179 |302.00   |1,910  |5,255,486   |
+|('AS3037','欣興')       |125.00   |105,892   |233 |125.00   |9,429  |13,090,096  |
+|('AS3045','台灣大')     |94.70    |6,304     |106 |94.80    |1,894  |595,134     |
+|('AS3711','日月光投控') |94.50    |65,331    |217 |94.20    |2,310  |6,143,494   |
+|('AS4904','遠傳')       |66.80    |14,827    |141 |65.80    |1,732  |976,718     |
+|('AS5871','中租KY')     |216.00   |31,371    |173 |216.00   |2,553  |6,771,626   |
+|('AS5876','上海商銀')   |44.35    |18,314    |122 |44.35    |3,521  |808,507     |
+|('AS5880','合庫金')     |26.05    |57,646    |217 |26.15    |6,589  |1,501,704   |
+|('AS6415','矽力*KY')    |450.00   |5,878     |118 |442.00   |1,092  |2,596,635   |
+|('AS6505','台塑化')     |82.80    |8,888     |117 |80.10    |1,167  |712,809     |
+|('AS8046','南電')       |244.00   |30,752    |198 |242.00   |3,294  |7,420,091   |
+|('AS9910','豐泰')       |208.00   |10,896    |136 |207.50   |345    |2,268,749   |
 
     
 爬蟲練習
@@ -650,14 +650,14 @@ rt <- search_tweets(
 head(rt)
 ```
 
-|created_at          |           id|id_str              |full_text                                                                                                                                                                                                                                                                                                            |
-|:-------------------|------------:|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|2022-12-02 18:45:05 | 1.598629e+18|1598629319043346432 |Delighted to welcome @AliciaKearns &amp; her fellow MPs to #Taiwan. We are grateful for your support &amp; will continue to work with the #UK to safeguard our shared values &amp; uphold regional peace &amp; stability. https://t.co/aNQAkNaSOc                                                                    |
-|2022-12-01 21:33:46 | 1.598309e+18|1598309383380795392 |Enjoyed meeting with leaders from the German Marshall Fund @GMFUS earlier today. I trust our discussions will help advance cooperation between #Taiwan &amp; our transatlantic partners to strengthen our collective security. https://t.co/iUHSPoX7Ma                                                               |
-|2022-12-01 21:08:01 | 1.598303e+18|1598302902103478273 |Great minds from the #US🇺🇸, #UK🇬🇧, #Germany🇩🇪, @Europarl_EN🇪🇺, #Italy🇮🇹 &amp; #Sweden🇸🇪 gathered at Minister Wu’s table. In the face of #China’s continuous coercion, the visit of the @gmfus delegation demonstrates transatlantic partners’ concern &amp; strong support for #Taiwan🇹🇼. https://t.co/cEvXi5UUgJ |
-|2022-12-03 11:57:42 | 1.598889e+18|1598889186026696704 |Felix #Taiwan Queen #世界杯 Theobold #ac米兰 Will #世界杯买球  https://t.co/eoBaDWmiK4                                                                                                                                                                                                                               |
-|2022-12-03 11:57:38 | 1.598889e+18|1598889171141414912 |Frederick #Taiwan Thomas #世界杯 Graceful #Gate Myrtle #世界杯买球  https://t.co/OXhENR1MmQ                                                                                                                                                                                                                          |
-|2022-12-03 11:56:49 | 1.598889e+18|1598888962491240449 |Agatha #山寨币  Just #世界杯 Elsie #Taiwan Lively #世界杯买球  https://t.co/fCzjQ7QJ2j                                                                                                                                                                                                                               |
+|created_at          |           id|id_str              |full_text                                                                                                                                                                                                                                                                                      |
+|:-------------------|------------:|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|2022-12-23 18:33:07 | 1.606236e+18|1606236454769725441 |Grateful to the members of #Taiwan’s armed forces for all they do to defend our nation. This Christmas, we reaffirm our commitment to providing them with the living &amp; training environment they need to be the best they can be. https://t.co/xF59AmbQHY                                  |
+|2022-12-23 05:47:14 | 1.606044e+18|1606043712873566208 |While much of the attention of the public, #NATSEC analysts and journalists has been rightly on the visit of @ZelenskyyUa to Washington DC, we should not forget the Chinese aggression around #Taiwan. This is a good daily wrap up from @MoNDefense https://t.co/zI3Vev5W2a                  |
+|2022-12-23 11:35:34 | 1.606131e+18|1606131371247751169 |Congrats to #Taiwanese photographer Wang Chen-che (王呈哲), who won nine gold medals at the New York Photography Awards for three of his photographic works! The gold-winning pieces are images of temples and religious festivals in #Taiwan. https://t.co/DZj9CuSgfL https://t.co/KRtlMd5ZMH |
+|2022-12-24 11:30:06 | 1.606492e+18|1606492385353269248 |#Taiwan #AQI #Yunlin #Mailiao 雲林麥寮, 良好, 主要污染: 無, 空氣品質指標: 50, PM2.5: 15, PM10: 74, 更新時間: 2022/12/24 11:00:00                                                                                                                                                               |
+|2022-12-24 11:30:06 | 1.606492e+18|1606492384636063745 |#Taiwan #AQI #Kaohsiung #Xiaogang 高雄小港, 普通, 主要污染: 細懸浮微粒, 空氣品質指標: 88, PM2.5: 28, PM10: 52, 更新時間: 2022/12/24 11:00:00                                                                                                                                                   |
+|2022-12-24 11:30:06 | 1.606492e+18|1606492383935627265 |#Taiwan #AQI #Taichung #Xitun 臺中西屯, 良好, 主要污染: 無, 空氣品質指標: 33, PM2.5: 9, PM10: 31, 更新時間: 2022/12/24 11:00:00                                                                                                                                                                |
 
 rtweet package - 搜尋hashtag
 ====================================
@@ -671,12 +671,12 @@ sf <- get_trends("USA")
 head(sf)
 ```
 
-|trend        |url                                            |promoted_content |query              |
-|:------------|:----------------------------------------------|:----------------|:------------------|
-|#SRBSUI      |http://twitter.com/search?q=%23SRBSUI          |NA               |%23SRBSUI          |
-|Serbie       |http://twitter.com/search?q=Serbie             |NA               |Serbie             |
-|#SuiSrb      |http://twitter.com/search?q=%23SuiSrb          |NA               |%23SuiSrb          |
-|hopp schwiiz |http://twitter.com/search?q=%22hopp+schwiiz%22 |NA               |%22hopp+schwiiz%22 |
+|trend       |url                                     |promoted_content |query       |
+|:-----------|:---------------------------------------|:----------------|:-----------|
+|Christmas   |http://twitter.com/search?q=Christmas   |NA               |Christmas   |
+|Weihnachten |http://twitter.com/search?q=Weihnachten |NA               |Weihnachten |
+|Noël        |http://twitter.com/search?q=No%C3%ABl   |NA               |No%C3%ABl   |
+|Festtage    |http://twitter.com/search?q=Festtage    |NA               |Festtage    |
 
 rtweet package - 取得timeline
 ====================================
@@ -688,29 +688,31 @@ head(tmls_Bezos)
 head(tmls_Musk)
 ```
 
-|full_text                                                                                                                                                                                                                                                                                                          |source                                                                             |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
+|full_text                                                                                                                                                                                                                                                                                                       |source                                                                             |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
 |This year’s Bezos Day 1 Families Fund grants go to 40 incredible groups working to end homelessness in the U.S. In 5 years, we’ve given more than $500 million to 167 orgs – helping expand their support of families in need. Honored to support these groups. https://t.co/8fulJLNrkZ https://t.co/17dX56oApm |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
 |RT @awscloud: .@Werner is pulling back the curtain on #Amazon history with the Distributed Computing Manifesto.
 
-Read the 25-year-old inter…                                                                                                                                                                        |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|We’ve just announced a new Courage and Civility award recipient —  @DollyParton, who leads with her heart, and will put this $100 million award to great use helping so many people. She joins prior awardees, @VanJones68 and @Chefjoseandres.  Congrats, Dolly! https://t.co/dzTuoGVp3G                        |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|Yep, the probabilities in this economy tell you to batten down the hatches. https://t.co/SwldRdms5v                                                                                                                                                                                                                |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+Read the 25-year-old inter…                                                                                                                                                                      |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|We’ve just announced a new Courage and Civility award recipient —  @DollyParton, who leads with her heart, and will put this $100 million award to great use helping so many people. She joins prior awardees, @VanJones68 and @Chefjoseandres.  Congrats, Dolly! https://t.co/dzTuoGVp3G                       |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|Yep, the probabilities in this economy tell you to batten down the hatches. https://t.co/SwldRdms5v                                                                                                                                                                                                             |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
 |The Hutch is going to do incredible things with this.
 
-https://t.co/m3BKYhKwr9                                                                                                                                                                                                                                       |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|Invention. You can still improve even an axe! Damn. https://t.co/9vM9Nq3L6i                                                                                                                                                                                                                                        |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+https://t.co/m3BKYhKwr9                                                                                                                                                                                                                                    |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|Invention. You can still improve even an axe! Damn. https://t.co/9vM9Nq3L6i                                                                                                                                                                                                                                     |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
 
 
 
-|full_text                                            |source                                                                             |
-|:----------------------------------------------------|:----------------------------------------------------------------------------------|
-|@StephenKing 🔥🔥🤷‍♂️🙏                              |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|@TheBabylonBee lol                                   |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|@mazemoore @RealJamesWoods 🙏 💕                     |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|@micsolana Well-said                                 |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|@BillyM2k Exactly                                    |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
-|Tune in for Episode 2 of The Twitter Files tomorrow! |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|full_text                                                                                                                                                                                                                                         |source                                                                             |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
+|@cyrusrezvanian @christine_rez Almost no one understands                                                                                                                                                                                          |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|@tobi You can also now play all Steam games on the latest Model S/X cars                                                                                                                                                                          |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|@BillFOXLA @FoxNews !!                                                                                                                                                                                                                            |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|@PranavHegdeHere That and several major UI improvements coming in Jan                                                                                                                                                                             |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|@CollinRugg To be clear, I am overall very much pro FBI. The agency does a great deal of important work protecting the public. 
+
+That said, no organization is perfect and part of the FBI obviously overreached with respect to online censorship. |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
+|@breeadail And engineering                                                                                                                                                                                                                        |<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a> |
 
 rtweet package - 取得timeline
 ====================================
@@ -726,18 +728,21 @@ em_flw <- get_favorites("elonmusk", n = 100)
 head(em_flw)
 ```
 
-|text                                                                                                                                                                                                                                                                                  |created_at          |id_str              |
-|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------|:-------------------|
-|Thank you, @elonmusk, for giving back to all Americans, and voices around the world, the most precious of gifts - free and open speech. 
+|text                                                                                                                                                                                                                                                                                              |created_at          |id_str              |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------|:-------------------|
+|Code is a liability, not an asset. So goal of software engineer is delivering the maximum amount of desired functionality at the cost of the least amount of code complexity, even as desired functionality evolves over time.                                                                    |2022-12-24 11:03:42 |1606485739679932416 |
+|We wish you a Merry Christmas 🎶
+We wish you a Merry Christmas 🎶
+We wish you a Merry Christmas 🎶
+Aaand a happy new yeaaaar 😘 🎶 https://t.co/ZkZo1KeXG4                                                                                                                                           |2022-12-24 10:24:10 |1606475794335043585 |
+|I would LOVE the ability to upload my YouTube catalogue to twitter &amp; display it in an easily searchable format for followers. YouTube have mastered video, but their algorithm is annoyingly mysterious &amp; fussy, and it punishes channels that don’t pick a lane &amp; stick to it. Lame. |2022-12-24 03:05:11 |1606365319743799307 |
+|If they weren’t trying to sink the economy, what else would they be doing differently? https://t.co/9x42pK3Dve                                                                                                                                                                                    |2022-12-24 03:03:55 |1606365001739931648 |
+|@elonmusk @RealDanODowd I'm very impressed with the latest FSD software.  I finally am getting my money's worth and then some.  Thanks out to the entire Tesla Team!!  Great job!@                                                                                                                |2022-12-24 02:22:09 |1606354490851872768 |
+|These corporate media people are so fucking twisted they think Aaron Ruper -- a video dunce who watches TV all day and posts distorted clips to Twitter -- is a "journalist."
 
-I admire you and I salute you, sir.                                                                                                           |2022-12-03 10:19:26 |1598864456511270913 |
-|amazing having to explain to a "journalist" that people capable of silencing literally the fucking president wield real power, and power must be held to account                                                                                                                      |2022-12-03 10:10:55 |1598862313821700097 |
-|if you think this is a partisan issue, you’re a sheep.                                                                                                                                                                                                                               |2022-12-03 10:10:27 |1598862197358460928 |
-|LIVE: I'm going live now on Rumble, from our new SYSTEM UPDATE studio, to discuss these (previously) secret Twitter files showing how top-level Twitter execs colluded with Biden campaign to interfere in the 2020 election by censorship reporting on Biden:
+But they think Julian Assange and Matt Taibbi aren't journalists.
 
-https://t.co/DXsjPrCRgw |2022-12-03 09:37:49 |1598853982260146176 |
-|It's been a whirlwind 96 hours for me, too. There is much more to come, including answers to questions about issues like shadow-banning, boosting, follower counts, the fate of various individual accounts, and more. These issues are not limited to the political right.           |2022-12-03 09:35:30 |1598853399004708864 |
-|Sunlight is indeed the best disinfectant.                                                                                                                                                                                                                                             |2022-12-03 09:34:43 |1598853201326809088 |
+Tells you all you need to know.                     |2022-12-24 02:11:19 |1606351761253445632 |
 
 
 rtweet package練習
@@ -882,7 +887,8 @@ saveRDS(iris,"iris.rds")
 - 子集Subset
 - 排序
 - 資料組合
-- 長表與寬表
+- 長表轉寬表
+- 遺漏值處理
 
 Tidy Data
 ====================================
@@ -1017,58 +1023,58 @@ knitr::kable(NanoStockData)
 
 
 
-|name                    |X1       |X2      |X3 |X4       |X5     |X6          |
-|:-----------------------|:--------|:-------|:--|:--------|:------|:-----------|
-|('AS1101','台泥')       |33.85    |118,074 |88 |33.85    |16,118 |3,996,601   |
-|('AS1216','統一')       |65.20    |52,097  |88 |65.10    |3,406  |3,392,700   |
-|('AS1301','台塑')       |89.50    |38,932  |88 |89.40    |4,274  |3,498,094   |
-|('AS1303','南亞')       |77.30    |21,731  |87 |77.30    |2,207  |1,681,206   |
-|('AS1326','台化')       |74.70    |8,248   |80 |74.50    |3,034  |617,529     |
-|('AS1590','亞德客KY')   |980.00   |4,218   |52 |978.00   |142    |4,093,923   |
-|('AS2002','中鋼')       |29.10    |46,293  |86 |29.00    |12,713 |1,350,151   |
-|('AS2207','和泰車')     |637.00   |1,973   |31 |636.00   |149    |1,262,760   |
-|('AS2303','聯電')       |45.55    |82,797  |88 |45.35    |11,843 |3,751,691   |
-|('AS2308','台達電')     |304.00   |46,865  |88 |303.50   |3,675  |14,212,500  |
-|('AS2317','鴻海')       |106.00   |409,435 |88 |105.50   |36,958 |43,106,047  |
-|('AS2327','國巨')       |487.00   |198,282 |86 |487.00   |28,580 |95,875,244  |
-|('AS2330','台積電')     |493.50   |516,342 |88 |493.00   |44,679 |255,245,428 |
-|('AS2357','華碩')       |276.00   |46,254  |88 |277.00   |3,701  |12,702,665  |
-|('AS2379','瑞昱')       |332.00   |22,084  |84 |325.00   |4,068  |7,243,934   |
-|('AS2382','廣達')       |72.50    |25,600  |85 |72.20    |2,362  |1,842,491   |
-|('AS2395','研華')       |325.00   |4,020   |61 |323.00   |480    |1,299,982   |
-|('AS2408','南亞科')     |56.50    |44,884  |83 |56.70    |1,135  |2,537,823   |
-|('AS2409','友達')       |16.35    |57,467  |85 |16.35    |22,909 |937,222     |
-|('AS2412','中華電')     |112.00   |37,356  |87 |112.00   |7,756  |4,174,680   |
-|('AS2454','聯發科')     |740.00   |51,197  |88 |739.00   |4,014  |37,937,316  |
-|('AS2603','長榮')       |159.00   |154,158 |88 |159.00   |26,632 |24,606,692  |
-|('AS2609','陽明')       |65.00    |83,201  |88 |65.00    |5,725  |5,416,211   |
-|('AS2615','萬海')       |74.80    |28,689  |86 |74.60    |8,174  |2,153,771   |
-|('AS2801','彰銀')       |17.35    |9,700   |70 |17.30    |5,253  |168,445     |
-|('AS2880','華南金')     |22.50    |54,652  |84 |22.50    |11,042 |1,232,553   |
-|('AS2881','富邦金')     |60.20    |109,669 |88 |60.10    |25,450 |6,601,991   |
-|('AS2882','國泰金')     |44.05    |229,488 |87 |44.05    |10,226 |10,088,207  |
-|('AS2883','開發金')     |13.50    |54,628  |88 |13.45    |14,837 |734,216     |
-|('AS2884','玉山金')     |24.30    |384,601 |88 |24.30    |28,478 |9,373,050   |
-|('AS2885','元大金')     |22.50    |97,451  |88 |22.45    |31,290 |2,186,572   |
-|('AS2886','兆豐金')     |31.25    |297,875 |88 |31.25    |16,674 |9,321,534   |
-|('AS2887','台新金')     |15.00    |154,381 |87 |15.00    |12,821 |2,314,881   |
-|('AS2890','永豐金')     |17.80    |48,502  |87 |17.80    |9,457  |863,990     |
-|('AS2891','中信金')     |22.65    |53,096  |84 |22.55    |6,970  |1,202,059   |
-|('AS2892','第一金')     |25.95    |84,896  |88 |25.95    |16,387 |2,204,208   |
-|('AS2912','統一超')     |271.00   |20,478  |75 |270.00   |723    |5,521,821   |
-|('AS3008','大立光')     |2,295.00 |10,979  |86 |2,280.00 |745    |25,030,230  |
-|('AS3034','聯詠')       |299.50   |25,181  |87 |300.00   |1,145  |7,482,424   |
-|('AS3037','欣興')       |161.00   |85,794  |87 |160.50   |4,435  |13,760,079  |
-|('AS3045','台灣大')     |95.00    |10,234  |76 |94.30    |1,239  |962,951     |
-|('AS3711','日月光投控') |100.00   |37,499  |83 |100.50   |3,619  |3,757,850   |
-|('AS4904','遠傳')       |67.50    |8,620   |78 |67.50    |976    |579,613     |
-|('AS5871','中租KY')     |210.00   |135,965 |88 |210.50   |4,553  |28,392,203  |
-|('AS5876','上海商銀')   |48.35    |8,101   |74 |48.35    |2,283  |391,641     |
-|('AS5880','合庫金')     |26.45    |77,022  |88 |26.50    |9,222  |2,038,255   |
-|('AS6415','矽力*KY')    |544.00   |37,610  |74 |544.00   |145    |20,246,371  |
-|('AS6505','台塑化')     |83.50    |21,148  |72 |83.50    |2,113  |1,768,798   |
-|('AS8046','南電')       |294.50   |70,655  |88 |295.00   |4,685  |20,592,475  |
-|('AS9910','豐泰')       |189.50   |4,226   |51 |186.50   |888    |796,566     |
+|name                    |X1       |X2        |X3  |X4       |X5     |X6          |
+|:-----------------------|:--------|:---------|:---|:--------|:------|:-----------|
+|('AS1101','台泥')       |34.25    |157,526   |231 |34.25    |12,330 |5,413,777   |
+|('AS1216','統一')       |65.80    |8,118     |133 |65.80    |2,840  |533,696     |
+|('AS1301','台塑')       |87.00    |45,726    |178 |87.00    |3,769  |3,943,609   |
+|('AS1303','南亞')       |70.80    |26,749    |187 |70.80    |5,410  |1,893,381   |
+|('AS1326','台化')       |69.80    |14,716    |142 |69.90    |1,872  |1,026,298   |
+|('AS1402','遠東新')     |31.75    |24,361    |162 |31.80    |2,571  |772,114     |
+|('AS1590','亞德客KY')   |915.00   |1,065     |32  |911.00   |5      |966,589     |
+|('AS2002','中鋼')       |30.65    |103,267   |239 |30.65    |14,347 |3,147,799   |
+|('AS2207','和泰車')     |596.00   |2,307     |84  |596.00   |56     |1,358,852   |
+|('AS2303','聯電')       |42.00    |126,587   |237 |42.00    |8,570  |5,319,658   |
+|('AS2308','台達電')     |283.00   |79,023    |223 |283.50   |2,128  |22,239,664  |
+|('AS2317','鴻海')       |101.00   |94,100    |256 |101.00   |14,369 |9,487,422   |
+|('AS2327','國巨')       |461.50   |24,883    |171 |460.00   |4,182  |11,420,178  |
+|('AS2330','台積電')     |455.50   |1,796,740 |261 |457.00   |45,413 |820,558,419 |
+|('AS2357','華碩')       |273.00   |13,648    |174 |272.00   |1,476  |3,712,197   |
+|('AS2379','瑞昱')       |298.00   |9,401     |136 |292.00   |100    |2,723,866   |
+|('AS2382','廣達')       |71.90    |16,227    |182 |71.70    |1,414  |1,155,701   |
+|('AS2395','研華')       |334.50   |1,632     |84  |332.00   |732    |540,577     |
+|('AS2408','南亞科')     |54.60    |23,674    |147 |51.30    |1,138  |1,211,868   |
+|('AS2412','中華電')     |113.00   |23,032    |171 |113.00   |4,656  |2,588,144   |
+|('AS2454','聯發科')     |662.00   |39,663    |244 |662.00   |2,097  |26,031,789  |
+|('AS2603','長榮')       |167.00   |156,224   |250 |167.50   |33,409 |26,058,553  |
+|('AS2609','陽明')       |67.50    |116,508   |230 |67.60    |6,877  |7,832,024   |
+|('AS2615','萬海')       |86.10    |127,870   |243 |86.20    |16,726 |10,894,336  |
+|('AS2801','彰銀')       |17.30    |7,795     |89  |17.25    |3,873  |134,692     |
+|('AS2880','華南金')     |22.60    |41,334    |172 |22.60    |6,766  |935,452     |
+|('AS2881','富邦金')     |56.90    |51,517    |204 |56.80    |11,692 |2,922,216   |
+|('AS2882','國泰金')     |41.15    |130,329   |230 |41.15    |27,527 |5,351,083   |
+|('AS2883','開發金')     |12.80    |47,260    |191 |12.75    |12,429 |603,616     |
+|('AS2884','玉山金')     |24.25    |117,939   |239 |24.25    |13,933 |2,852,065   |
+|('AS2885','元大金')     |21.90    |103,102   |193 |21.90    |9,897  |2,251,812   |
+|('AS2886','兆豐金')     |30.70    |125,985   |250 |30.70    |7,613  |3,856,913   |
+|('AS2887','台新金')     |15.20    |59,500    |207 |15.20    |12,632 |901,717     |
+|('AS2890','永豐金')     |16.80    |173,027   |233 |16.75    |12,380 |2,907,750   |
+|('AS2891','中信金')     |22.10    |81,832    |225 |22.00    |6,516  |1,795,586   |
+|('AS2892','第一金')     |26.30    |37,840    |207 |26.35    |8,547  |995,774     |
+|('AS2912','統一超')     |270.00   |10,062    |158 |270.00   |1,524  |2,705,095   |
+|('AS3008','大立光')     |2,140.00 |9,418     |196 |2,140.00 |288    |20,087,415  |
+|('AS3034','聯詠')       |302.00   |17,499    |179 |302.00   |1,910  |5,255,486   |
+|('AS3037','欣興')       |125.00   |105,892   |233 |125.00   |9,429  |13,090,096  |
+|('AS3045','台灣大')     |94.70    |6,304     |106 |94.80    |1,894  |595,134     |
+|('AS3711','日月光投控') |94.50    |65,331    |217 |94.20    |2,310  |6,143,494   |
+|('AS4904','遠傳')       |66.80    |14,827    |141 |65.80    |1,732  |976,718     |
+|('AS5871','中租KY')     |216.00   |31,371    |173 |216.00   |2,553  |6,771,626   |
+|('AS5876','上海商銀')   |44.35    |18,314    |122 |44.35    |3,521  |808,507     |
+|('AS5880','合庫金')     |26.05    |57,646    |217 |26.15    |6,589  |1,501,704   |
+|('AS6415','矽力*KY')    |450.00   |5,878     |118 |442.00   |1,092  |2,596,635   |
+|('AS6505','台塑化')     |82.80    |8,888     |117 |80.10    |1,167  |712,809     |
+|('AS8046','南電')       |244.00   |30,752    |198 |242.00   |3,294  |7,420,091   |
+|('AS9910','豐泰')       |208.00   |10,896    |136 |207.50   |345    |2,268,749   |
 
 資料型別轉換練習
 ====================================
@@ -1082,12 +1088,12 @@ str(NanoStockData)
 ```
 'data.frame':	50 obs. of  7 variables:
  $ name: chr  "('AS1101','台泥')" "('AS1216','統一')" "('AS1301','台塑')" "('AS1303','南亞')" ...
- $ X1  : chr  "33.85" "65.20" "89.50" "77.30" ...
- $ X2  : chr  "118,074" "52,097" "38,932" "21,731" ...
- $ X3  : chr  "88" "88" "88" "87" ...
- $ X4  : chr  "33.85" "65.10" "89.40" "77.30" ...
- $ X5  : chr  "16,118" "3,406" "4,274" "2,207" ...
- $ X6  : chr  "3,996,601" "3,392,700" "3,498,094" "1,681,206" ...
+ $ X1  : chr  "34.25" "65.80" "87.00" "70.80" ...
+ $ X2  : chr  "157,526" "8,118" "45,726" "26,749" ...
+ $ X3  : chr  "231" "133" "178" "187" ...
+ $ X4  : chr  "34.25" "65.80" "87.00" "70.80" ...
+ $ X5  : chr  "12,330" "2,840" "3,769" "5,410" ...
+ $ X6  : chr  "5,413,777" "533,696" "3,943,609" "1,893,381" ...
 ```
 該如何將這兩個欄位轉成數字呢？
 
@@ -1676,6 +1682,118 @@ type:alert
 - 分別讀入兩個csv檔
 - 依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，只留下有對應到的資料
 - 請問結合後的資料有幾列？
+
+
+
+長表與寬表
+====================================
+type:sub-section
+
+- 在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
+- `tidyr` package提供完整的轉換功能
+    - 寬表轉長表 `pivot_longer(資料框/寬表,cols=需要轉換成長表的欄位)`
+    - 長表轉寬表 `pivot_wider(資料框/長表,names_from=需要轉換成寬表的欄位)`
+    
+長表與寬表
+====================================
+原來的`airquality`資料框中，有Ozone, Solar.R, Wind, Temp, Month, Day等六個欄位 (Column)，屬於寬表
+
+```r
+head(airquality,3)
+```
+
+| Ozone| Solar.R| Wind| Temp| Month| Day|
+|-----:|-------:|----:|----:|-----:|---:|
+|    41|     190|  7.4|   67|     5|   1|
+|    36|     118|  8.0|   72|     5|   2|
+|    12|     149| 12.6|   74|     5|   3|
+
+寬表轉長表 pivot_longer（）
+====================================
+
+- 保留Month和Day兩個欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
+
+```r
+library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c("Ozone","Solar.R","Wind","Temp")) 
+```
+
+```r
+head(airqualityLong)
+```
+
+| Month| Day|name    | value|
+|-----:|---:|:-------|-----:|
+|     5|   1|Ozone   |  41.0|
+|     5|   1|Solar.R | 190.0|
+|     5|   1|Wind    |   7.4|
+|     5|   1|Temp    |  67.0|
+|     5|   2|Ozone   |  36.0|
+|     5|   2|Solar.R | 118.0|
+
+寬表轉長表 pivot_longer（）
+====================================
+
+- 保留Month和Day兩個欄位
+- 消滅Ozone, Solar.R, Wind, Temp
+- 將其他欄位的名稱整合至name欄位，數值整合至value欄位
+
+
+```r
+library(tidyr)
+##欄位需要保留"Month","Day"
+##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
+airqualityLong<-
+  pivot_longer(airquality,
+               cols = c(-"Month",-"Day")) 
+```
+
+```r
+head(airqualityLong)
+```
+
+| Month| Day|name    | value|
+|-----:|---:|:-------|-----:|
+|     5|   1|Ozone   |  41.0|
+|     5|   1|Solar.R | 190.0|
+|     5|   1|Wind    |   7.4|
+|     5|   1|Temp    |  67.0|
+|     5|   2|Ozone   |  36.0|
+|     5|   2|Solar.R | 118.0|
+
+長表轉寬表 pivot_wider（）
+====================================
+
+- `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
+- variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
+
+
+```r
+##增加欄位由name定義
+airqualityWide<-
+  pivot_wider(airqualityLong, 
+              names_from="name") 
+```
+
+```r
+head(airqualityWide)
+```
+
+| Month| Day| Ozone| Solar.R| Wind| Temp|
+|-----:|---:|-----:|-------:|----:|----:|
+|     5|   1|    41|     190|  7.4|   67|
+|     5|   2|    36|     118|  8.0|   72|
+|     5|   3|    12|     149| 12.6|   74|
+|     5|   4|    18|     313| 11.5|   62|
+|     5|   5|    NA|      NA| 14.3|   56|
+|     5|   6|    28|      NA| 14.9|   66|
 
 
 

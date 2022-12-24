@@ -29,6 +29,7 @@ for (county in letters){
     }
   }
 }
-
+AllPreData<-AllPreData %>% select(-編號)
+AllOldData<-AllOldData %>% select(-編號)
 write_csv(AllPreData,"AllPreData.csv")
 write_csv(AllOldData,"AllOldData.csv")
