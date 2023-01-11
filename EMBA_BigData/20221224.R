@@ -63,7 +63,8 @@ filter_temp1<-
 group_temp<-group_by(filter_temp1,鄉鎮市區)
 #計算交易的平均總價元，平均單價元平方公尺
 sum_temp<-summarise(group_temp,
+                    n(),
           meanPrice=mean(總價元),
           meanUPrice=mean(單價元平方公尺))
 #依平均單價元平方公尺 由大到小排序
-arrange(sum_temp,desc(meanUPrice))
+arrange(sum_temp,desc(meanUPrice)) %>% View()
