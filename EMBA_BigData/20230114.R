@@ -64,4 +64,33 @@ TaipeiMapO <- ggmap(TaipeiMap)+
   guides(size="none")
 TaipeiMapO
 
+TyMap<-
+  get_googlemap(
+    center = c(lon=121.20,lat=25.00),
+    zoom=11)
 
+ggmap(TyMap)+
+  geom_point(aes(x=121.389539,
+                 y=25.035225),
+             color="red",size=3)
+
+aaa<-
+  ggmap(TyMap)+
+  geom_point(aes(x=121.389539,
+                 y=25.035225),
+             color="red",size=3)
+aaa
+
+
+library(readr)
+Polio<-read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/104/POLIO_Incidence.csv")
+library(tidyr)
+Polio_long<-
+  pivot_longer(Polio,
+               cols = c(-"YEAR",-"WEEK"),
+               names_to = "State",
+               values_to = "Incidence")
+class(Polio_long$Incidence)
+Polio_long$Incidence<-
+  as.numeric(Polio_long$Incidence)
+class(Polio_long$Incidence)
