@@ -1,36 +1,54 @@
 library(tidyverse)
 library(rvest)
 
-ptturl_main<-"https://www.ptt.cc/bbs/Tech_Job/"
+ptturl_main<-
+  "https://www.ptt.cc/bbs/Tech_Job/"
 
 #step 1 Load first page
-ptt_html<-read_html(paste0(ptturl_main,"index.html"))
+ptt_html<-
+  read_html(paste0(ptturl_main,"index.html"))
 #step 2 Get last page url node
-lastpage_node<-html_nodes(ptt_html,".wide:nth-child(2)")
+lastpage_node<-
+  html_nodes(ptt_html,".wide:nth-child(2)")
 #step 3 Clean and get the url
-lastpage_url<-html_attr(lastpage_node,"href")
+lastpage_url<-
+  html_attr(lastpage_node,"href")
 
-lastpage_url_split<-
-  strsplit(lastpage_url,"index|.html")
-lastpage_index<-lastpage_url_split[[1]][2]
-lastpage_index<-as.numeric(lastpage_index)
+lastpage_index<-
+  gsub("/bbs/Tech_Job/index|.html",
+     "",lastpage_url)
+lastpage_index<-
+  as.numeric(lastpage_index)
 
 all_titles<-c()
+all_push<-c()
+all_date<-c()
 
 for(i in (lastpage_index-9):(lastpage_index+1)){
-  page_html<-read_html(paste0(ptturl_main,"index",i,".html"))
-  titles <- page_html %>% html_nodes(".title a") %>% html_text()
+  page_html<-
+    read_html(paste0(ptturl_main,"index",i,".html"))
+  titles <- 
+    page_html %>% 
+    html_nodes(".title") %>% 
+    html_text()
+  pushes <- 
+    page_html %>% 
+    html_nodes(".nrec") %>% 
+    html_text()
+  dates <- 
+    page_html %>% 
+    html_nodes(".date") %>% 
+    html_text()
   all_titles<-c(all_titles,titles)
+  all_push<-c(all_push,pushes)
+  all_date<-c(all_date,dates)
 }
+pttData<-
+  data.frame(Title=all_titles,
+             Push=all_push,
+             Date=all_date)
 
-all_titles<-gsub("GG|gg|TSMC|tsmc","台積",all_titles)
 
-gg_title<-all_titles[grepl("台積",all_titles)]
-gg_result<-data.frame(title=gg_title,date=Sys.Date())
 
-all_titles[grepl("瑞昱",all_titles)]
-all_titles[grepl("螃蟹",all_titles)]
 
-write.table(gg_result,"gg.csv",sep = ",",append = TRUE, 
-            col.names=!file.exists("gg.csv"),row.names = F)
 
