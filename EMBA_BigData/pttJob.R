@@ -49,6 +49,11 @@ pttData<-
              Date=all_date)
 
 
+# example - how to label "面試|請益" or "非面試"？
+# from HW2
+grepl("面試|請益",pttData$Title)
+# How about .....
+pttData$Interview<-
+  grepl("面試|請益",pttData$Title)
 
-
-
+table(pttData$Interview)
