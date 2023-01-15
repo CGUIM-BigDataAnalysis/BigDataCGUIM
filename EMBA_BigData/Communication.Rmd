@@ -119,7 +119,7 @@ install.packages("keyring")
 
 [Google Security](https://support.google.com/accounts/answer/6010255)
 ```{r echo=FALSE,fig.align='center'}
-knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/google_secu.png",dpi=NA)
+knitr::include_graphics("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/figures/app_pass.png",dpi=NA)
 ```
 
 ---
@@ -165,7 +165,7 @@ knitr::include_graphics("https://pkgs.rstudio.com/flexdashboard/reference/figure
 ---
 # Example from HW 2
 
-[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/flex_dash_rx.Rmd) the sample code
+[Download](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/flex_dash_ex.Rmd) the sample code
 
 and 
 

@@ -30,12 +30,28 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+TitleCount<-
+  gg_table %>% mutate(CleanDate=ymd(paste0("2023/",Date))) %>%
+  group_by(CleanDate) %>%
+  summarise(Count=n())
+ggplot(TitleCount,aes(x=CleanDate,y=Count))+
+  geom_line()+
+  labs(x="Date",title="Articles about GG")
 ```
 
 ### Chart C
 
 ```{r}
-
+TitleCount<-
+  gg_table %>% 
+  mutate(Interview=grepl("面試|請益",Title)) %>%
+  group_by(Interview) %>%
+  summarise(Count=n())
+ggplot(TitleCount,aes(x=Interview,y=Count))+
+  geom_bar(stat="identity")+
+  labs(x="Interview or not")
 ```
 
