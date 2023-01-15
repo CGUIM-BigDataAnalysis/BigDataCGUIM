@@ -94,3 +94,20 @@ class(Polio_long$Incidence)
 Polio_long$Incidence<-
   as.numeric(Polio_long$Incidence)
 class(Polio_long$Incidence)
+Polio_year<-
+  Polio_long %>% 
+  group_by(YEAR,State) %>%
+  summarise(TotalInc=sum(Incidence,na.rm=T))
+# data = Polio_year
+# X=YEAR
+# Y=State
+# fill = TotalInc
+
+ggplot(Polio_year,
+       aes(x=YEAR,y=State,fill=TotalInc))+
+  geom_tile()+
+  scale_fill_gradient(low = "white",
+                      high = "darkred")+
+  geom_vline(xintercept = 1955)+
+  theme_minimal()
+
