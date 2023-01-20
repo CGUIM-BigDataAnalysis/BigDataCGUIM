@@ -57,3 +57,11 @@ pttData$Interview<-
   grepl("面試|請益",pttData$Title)
 
 table(pttData$Interview)
+
+var.test(Push~Interview,
+         data=pttData %>%
+           mutate(Push=as.numeric(Push)))
+t.test(Push~Interview,
+       data=pttData %>%
+         mutate(Push=as.numeric(Push)))
+

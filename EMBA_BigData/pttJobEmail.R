@@ -8,14 +8,15 @@ library(rvest)
 ## Do this once
 # Store SMTP credentials in the system's key-value store with `provider = "gmail"`
 #install.packages("keyring")
-create_smtp_creds_file(
-  file = "gmail_creds",
-  user = "your_email@gmail.com", # put your email here
-  provider = "gmail"
-)
+#create_smtp_creds_file(
+#  file = "gmail_creds",
+#  user = "cguim.emba@gmail.com", # put your email here
+#  provider = "gmail"
+#)
 
 ###### Excute the following codes every time you want to get data
-ptturl_main<-"https://www.ptt.cc/bbs/Tech_Job/"
+ptturl_main<-
+  "https://www.ptt.cc/bbs/Tech_Job/"
 
 #step 1 Load first page
 ptt_html<-read_html(paste0(ptturl_main,"index.html"))
@@ -83,8 +84,9 @@ sending_date<-Sys.Date()
 footer_text <- glue("Sent on {sending_date}.")
 
 # Compose the email message
-final_email<-compose_email(body = body_text,
-                          footer = footer_text)
+final_email<-
+  compose_email(body = body_text,
+                footer = footer_text)
 final_email
 
 
@@ -93,7 +95,7 @@ final_email
 final_email %>%
   smtp_send(
     from = "cguim.emba@gmail.com", # use your gmail address here
-    to = "yout_emal@gmail.com", # edit this line
+    to = "your_emal@gmail.com", # edit this line
     subject = "GG titles from ptt TechJob",
     credentials =  creds_file(file = "gmail_creds")
   )
