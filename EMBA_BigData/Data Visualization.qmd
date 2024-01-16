@@ -1,0 +1,186 @@
+---
+title: "資料視覺化"
+format: revealjs
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Load Libraries
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{python}
+
+!pip install numpy matplotlib pandas sklearn seaborn calmap squarify plotly
+```
+
+```{python}
+# Load library for visualization
+import matplotlib.pyplot as plt
+import seaborn as sns
+import calmap
+# Load library for data precessing
+import pandas as pd  
+import numpy as np
+```
+
+```{python}
+# 空氣品質監測日平均值(一般污染物)
+# https://data.moenv.gov.tw/dataset/detail/AQX_P_19
+# https://drive.google.com/drive/folders/1OrMlB4hP8nnW_0bYwoHRO6DRXWNk1qvy?usp=sharing
+!gdown --id '1P3qrYrynZhXDC13dVo5KhDXmld5OGZz1' --output Data/202310.csv
+!gdown --id '1P1Kv1ZmPOYyi83DJKUIPoksM31vJJiS5' --output Data/202311.csv
+!gdown --id '1P0mojOXgvVbXImnRTPQemm7dCkLDLKAC' --output Data/202312.csv
+!gdown --id '1OwAf366l-iItXV4foJemw5QdMuD3JgMc' --output Data/202401.csv
+```
+
+```{python}
+# 讀檔
+df202401 = pd.read_csv('Data/202401.csv') 
+df202312 = pd.read_csv('Data/202312.csv') 
+df202311 = pd.read_csv('Data/202311.csv') 
+df202310 = pd.read_csv('Data/202310.csv') 
+df = pd.concat([df202401,df202312,df202311,df202310],axis=0)
+df.head()
+```
+
+```{python}
+new_headers = []
+for header in df.columns: # data.columns is your list of headers
+    header = header.strip('"') # Remove the quotes off each header
+    new_headers.append(header) # Save the new strings without the quotes
+df.columns = new_headers # Replace the old headers with the new list
+```
+
+```{python}
+df.dtypes
+```
+
+```{python}
+df['concentration'] = df['concentration'].astype('float')
+```
+
+```{python}
+df['concentration'] = df['concentration'].replace('x',np.nan)
+df['concentration'] = df['concentration'].astype('float')
+```
+
+```{python}
+# Parse String To DateTime
+df['DateTime']=pd.to_datetime(df['monitordate'],
+                              format='%Y-%m-%d')
+```
+
+```{python}
+df.dtypes
+```
+
+# 呈現資料分佈的圖形制作
+
+## 直方圖 Histogram
+
+```{python}
+pm25 = df[df['itemengname']=="PM2.5"]
+sns.histplot(data=pm25,x="concentration")
+plt.show()
+```
+
+```{python}
+sns.histplot(data=df[df['itemengname']=="PM10"],x="concentration")
+plt.show()
+```
+
+### Hands-on
+看看一氧化碳(CO)的資料分布
+```{python}
+# 請按照題目要求修改
+# 如修改正確，執行後會呈現圖形
+# 修改錯誤則會有錯誤訊息
+# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
+sns.histplot(data=df[df['itemengname']=="修改這裡"],x="concentration")
+plt.show()
+```
+
+## 散佈圖 Scatter plot
+除了PM2.5濃度的數值分佈、PM2.5濃度隨著時間的變化外，我們可能也會對各項空污數據間的關聯性有興趣，此時可以用散佈圖將有興趣的濃度分別放在x軸與y軸。在Python中，可用`seaborn`套件的`scatterplot()`函數作圖，輸入函數有x軸與y軸數據，分列如下：
+
+x軸：PM2.5濃度
+y軸：PM10濃度
+
+```{python}
+sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
+plt.show()
+```
+
+由上圖可知，PM2.5和PM10的資料分佈有一定關係，為了將此關係視覺化，可在散佈圖加上迴歸線。
+
+## 散佈圖 Scatter plot + 迴歸線
+在散佈圖中加上迴歸線可使用`seaborn`套件的`regplot()`函數，使用方法與`scatterplot()`函數相同。
+```{python}
+sns.regplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
+plt.show()
+```
+
+### Hands-on
+試著看看最近的空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
+```{python}
+# 請按照題目要求修改
+# 如修改正確，會呈現圖形
+# 如修改錯誤，則會有錯誤訊息
+# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
+sns.regplot(df[修改這裡]['concentration'],df[修改這裡]['concentration'])
+plt.show()
+```
+
+# 比較各組或不同時間數據的圖形制作
+
+## 折線圖 Line chart
+在前述章節中，我們學會如何利用視覺化圖形觀察資料分佈，但若想要比較各組或不同時間的數據，如PM2.5濃度隨時間的變化，就需要使用其他視覺化的方法。 為了呈現各項數據與時間的關係，在此一樣先前範例載入的北京空氣污染數據。 如何呈現每天 PM2.5濃度的變化？
+
+可使用`seaborn`套件的`lineplot()`函數畫折線圖，此函數需要兩個參數，分別為x與y
+
+- x軸：日期
+- y軸：PM2.5濃度
+
+```{python}
+sns.lineplot(x=pm25[pm25['sitename']=="麥寮"]['DateTime'], y=pm25[pm25['sitename']=="麥寮"]['concentration'])
+plt.show()
+```
+
+### Hands-on
+請試著呈現林口測站在2024/1/1~2024/1/15的PM2.5濃度起伏
+```{python}
+# 請按照題目要求修改
+# 如修改正確，會呈現圖形
+# 如修改錯誤，則會有錯誤訊息
+# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位
+pm25Linkou = pm25[pm25['sitename']=="修改這裡"]
+sns.lineplot(pm25Linkou['DateTime'], pm25Linkou['修改這裡'])
+plt.show()
+```
+
+## [進階] 如何在折線圖中同時呈現所有氣體變化呢？
+用單一折線圖有時不管用
+```{python}
+sns.lineplot(df202401[df202401['itemengname']=="PM2.5"]['DateTime'], df202401[df202401['itemengname']=="PM2.5"]['concentration'])
+sns.lineplot(df202401[df202401['itemengname']=="PM10"]['DateTime'], df202401[df202401['itemengname']=="PM10"]['concentration'])
+sns.lineplot(df202401[df202401['itemengname']=="CO"]['DateTime'], df202401[df202401['itemengname']=="CO"]['concentration'])
+sns.lineplot(df202401[df202401['itemengname']=="NO2"]['DateTime'], df202401[df202401['itemengname']=="NO2"]['concentration'])
+sns.lineplot(df202401[df202401['itemengname']=="O3"]['DateTime'], df202401[df202401['itemengname']=="O3"]['concentration'])
+plt.show()
+```
+
+```{python}
+g = sns.FacetGrid(df202401[df202401['itemengname'].isin("PM2.5","PM10","CO","NO2","O3")], row="itemengname",height=2, aspect=6, sharey=False)
+g.map(sns.lineplot, "DateTime", "concentration")
+```
