@@ -1,6 +1,7 @@
 Pipelines For Data Analysis In R, part 1
 ========================================================
 author: 曾意儒 Yi-Ju Tseng
+date: 2022/11/19
 autosize: true
 font-family: 'Microsoft JhengHei'
 navigation: slide
@@ -14,27 +15,10 @@ navigation: slide
 
 在分析之前
 ========================================================
-- RStudio怎麼用？[對應書本章節](https://yijutseng.github.io/DataScienceRBook/install.html#rstudio)
-- R基本語法: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/intro.html)
-- R資料結構: [對應書本章節](https://yijutseng.github.io/DataScienceRBook/RDataStructure.html)
+- RStudio怎麼用？
+- R基本語法
+- R資料結構
 
-R vs. RStudio
-========================================================
-
-R: 程式核心 (引擎)
-![plot of chunk unnamed-chunk-1](https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg)
-
-[圖片來源](https://www.teslarati.com/tesla-patent-more-efficient-electric-motors/)
-
-R vs. RStudio
-========================================================
-
-RStudio: 操作介面 IDE (儀錶板)
-
-![plot of chunk unnamed-chunk-2](https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg)
-
-
-[圖片來源](https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept)
 
 RStudio Interface
 ========================================================
@@ -48,15 +32,15 @@ left: 30%
 
 ***
 
-![plot of chunk unnamed-chunk-3](figures/RStudio.png)
+![plot of chunk unnamed-chunk-1](figures/RStudio.png)
 
 RStudio 使用步驟
 ========================================================
-- New Project (如果原本沒有的話，就像把相關資料整理在**資料夾**的功能)
-- New R Script (如果原本沒有的話，就像開個WORD記錄所有程式碼)
+- New Project (如果原本沒有的話)
+- New R Script (如果原本沒有的話)
 - 在左上方**程式碼編輯區 Source editor**撰寫程式碼
-- 將需要執行的程式碼反白，點選**Run**或是按**Ctrl+Enter**，執行程式碼
-- 將游標移至需要執行的程式碼，點選**Run**或是按**Ctrl+Enter**，也可執行該行程式碼
+- 將需要執行的程式碼反白，點選**Run**，執行程式碼
+- 將游標移至需要執行的程式碼，點選**Run** 也可執行該行程式碼
 - 程式碼會在左下方Console視窗執行，顯示結果
 - 如果有畫圖，會出現在右下方視窗
 - 可在右上方視窗檢查所有變數
@@ -69,33 +53,6 @@ Console視窗
 - `+` : 表示前面的程式碼還沒打完
     - 鍵入完整的程式碼
     - **Esc**跳出
-
-RStudio hands-on
-====================================
-type:alert
-incremental:true
-
-- 打開RStudio
-- 左上角**File**->**New Project** (如果原本沒有的話，Project名稱就會是資料夾名稱)
-- 左上角**File**->**New File**->**R Script** (如果原本沒有的話)
-- 在Console輸入1+，按Enter
-- 試著跳出打不完的程式碼，變回輸入模式`>`
-
-R and R Packages
-========================================================
-
-R: 程式核心 (iPhone)
-![plot of chunk unnamed-chunk-4](https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668)
-
-R and R Packages
-========================================================
-
-R Packages: 附加程式 (APP)
-
-![plot of chunk unnamed-chunk-5](https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg)
-
-[圖片來源](https://www.apple.com/)
-
 
 R = Base + Other Packages
 ========================================================
@@ -119,13 +76,6 @@ library(ggplot2)
 
 - **不用**在套件名稱前後加雙引號
 
-Install packages hands-on
-====================================
-type:alert
-incremental:true
-
-- 在剛剛新增的**R Script**中，輸入`install.packages("tidyverse")`
-- 使用上方選單**Tools**->**Install packages**->在**Package**欄位輸入`jsonlite`，點選**Install**
 
 Functions - Basic
 ========================================================
@@ -218,13 +168,6 @@ Variable 命名規則
 - 開頭只能是英文字，或 `.`
 - 大小寫敏感
 
-保留字檢查
-====================================
-type:alert
-incremental:true
-
-- 在Source code視窗輸入`TRUE`，觀察顏色
-- 在Source code視窗輸入`True`，觀察顏色
 
 資料型態
 ========================================================
@@ -258,21 +201,9 @@ char2<-"100"
 char3<-"200"
 #char2+char3 
 #會輸出Error message: non-numeric argument to binary operator
-paste0(char2,char3)
-```
-
-```
-[1] "100200"
 ```
 
 
-```r
-paste0(char2,char3)
-```
-
-```
-[1] "100200"
-```
 布林變數 (logic)
 ========================================================
 - 用於邏輯判斷
@@ -298,12 +229,12 @@ dateBook
 ```
 
 ```
-[1] "2022-11-27"
+[1] "2024-01-16"
 ```
 
 日期 (Date) - lubridate
 ========================================================
-- `lubridate` package : 日期與字串的相關轉換操作，含在`tidyverse`套件中
+- `lubridate` package : 日期與字串的相關轉換操作
 - `ymd()`函數 : 將`年/月/日`格式的文字轉換為日期物件
     - y表年year
     - m表月month
@@ -336,7 +267,7 @@ mdy('3/3/2012')
 [1] "2012-03-03"
 ```
 
-- 其他使用方法：[Cheatsheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf)
+- 其他使用方法：[The Yhat Blog](http://blog.yhat.com/static/pdf/R_date_cheat_sheet.pdf)
 
 基本運算子: 數學運算
 ========================================================
@@ -486,7 +417,6 @@ TRUE | FALSE
 ```
 [1] TRUE
 ```
-
 基本運算子: 反向布林變數 !
 ========================================================
 
@@ -535,10 +465,10 @@ Error in mena(NA): could not find function "mena"
 解讀錯誤訊息 範例
 ========================================================
 ```
-# Error: could not find function "ymd()"
-# 找不到"ymd" function
+# Error: could not find function "fetch_NBAPlayerStatistics"
+# 找不到"fetch_NBAPlayerStatistics" function
 ```
-可能原因：沒安裝或沒讀入lubridates package
+可能原因：沒安裝或沒讀入SportsAnalytics package
 
 
 ```
@@ -546,17 +476,6 @@ Error in mena(NA): could not find function "mena"
 # 找不到"knitr" package
 ```
 可能原因：沒安裝knitr package
-
-可能是最常見的錯誤訊息
-====================================
-type:alert
-incremental:true
-
-- 在Source code視窗輸入`ymd("2022/12/1")`並執行
-- 試著安裝`lubridate` package
-- 試著載入`lubridate` package
-- 再次執行`ymd("2022/12/1")`
-- 在Source code視窗輸入`library(knitr)`並執行
 
 Help
 ========================================================
@@ -583,7 +502,7 @@ R 常見的資料結構
 
 R 常見的資料結構
 ========================================================
-![plot of chunk unnamed-chunk-15](figures/DataStructure.png)
+![plot of chunk unnamed-chunk-11](figures/DataStructure.png)
 
 向量 Vector
 ========================================================
@@ -928,83 +847,6 @@ str(iris)
  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
-
-資料框 data.frame 搭配skimr套件
-======================================================== 
-
-```r
-install.packages("skimr")
-```
-
-```r
-library(skimr)
-skim(iris) 
-```
-
-
-Table: Data summary
-
-|                         |     |
-|:------------------------|:----|
-|Name                     |iris |
-|Number of rows           |150  |
-|Number of columns        |5    |
-|_______________________  |     |
-|Column type frequency:   |     |
-|factor                   |1    |
-|numeric                  |4    |
-|________________________ |     |
-|Group variables          |None |
-
-
-**Variable type: factor**
-
-|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
-|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
-|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
-
-
-**Variable type: numeric**
-
-|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
-|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
-|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
-|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
-|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
-|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
-資料框 data.frame 搭配skimr套件
-======================================================== 
-
-Table: Data summary
-
-|                         |     |
-|:------------------------|:----|
-|Name                     |iris |
-|Number of rows           |150  |
-|Number of columns        |5    |
-|_______________________  |     |
-|Column type frequency:   |     |
-|factor                   |1    |
-|numeric                  |4    |
-|________________________ |     |
-|Group variables          |None |
-
-
-**Variable type: factor**
-
-|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                |
-|:-------------|---------:|-------------:|:-------|--------:|:-------------------------|
-|Species       |         0|             1|FALSE   |        3|set: 50, ver: 50, vir: 50 |
-
-
-**Variable type: numeric**
-
-|skim_variable | n_missing| complete_rate| mean|   sd|  p0| p25|  p50| p75| p100|hist  |
-|:-------------|---------:|-------------:|----:|----:|---:|---:|----:|---:|----:|:-----|
-|Sepal.Length  |         0|             1| 5.84| 0.83| 4.3| 5.1| 5.80| 6.4|  7.9|▆▇▇▅▂ |
-|Sepal.Width   |         0|             1| 3.06| 0.44| 2.0| 2.8| 3.00| 3.3|  4.4|▁▆▇▂▁ |
-|Petal.Length  |         0|             1| 3.76| 1.77| 1.0| 1.6| 4.35| 5.1|  6.9|▇▁▆▇▂ |
-|Petal.Width   |         0|             1| 1.20| 0.76| 0.1| 0.3| 1.30| 1.8|  2.5|▇▁▇▅▃ |
 
 資料框資料擷取
 ======================================================== 
