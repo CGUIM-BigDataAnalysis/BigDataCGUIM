@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="1_Python101_files/libs/clipboard/clipboard.min.js"></script>
-<script src="1_Python101_files/libs/quarto-html/tabby.min.js"></script>
-<script src="1_Python101_files/libs/quarto-html/popper.min.js"></script>
-<script src="1_Python101_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="1_Python101_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="1_Python101_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="1_Python101_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="1_Python101_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="1_EnvSet_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1_EnvSet_files/libs/quarto-html/tabby.min.js"></script>
+<script src="1_EnvSet_files/libs/quarto-html/popper.min.js"></script>
+<script src="1_EnvSet_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="1_EnvSet_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1_EnvSet_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="1_EnvSet_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="1_EnvSet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <title>1. Python 101</title>
+  <title>1. Environment Setting</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="1_Python101_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="1_Python101_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="1_EnvSet_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="1_EnvSet_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -94,11 +94,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="1_Python101_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="1_Python101_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="1_Python101_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="1_Python101_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="1_Python101_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="1_EnvSet_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="1_EnvSet_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="1_EnvSet_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -389,7 +389,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">1. Python 101</h1>
+  <h1 class="title">1. Environment Setting</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -402,13 +402,14 @@
 </section>
 <section id="python-vs.-python-ide" class="slide level2">
 <h2>Python vs.&nbsp;Python IDE</h2>
-<p>Python: 程式核心 (引擎) <img data-src="https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg" alt="plot of chunk unnamed-chunk-1"></p>
+<p>Python: 程式核心 (引擎) <img data-src="https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg" width="800" alt="plot of chunk unnamed-chunk-1"></p>
 <p><a href="https://www.teslarati.com/tesla-patent-more-efficient-electric-motors/">圖片來源</a></p>
 </section>
 <section id="python-vs.-python-ide-1" class="slide level2">
 <h2>Python vs.&nbsp;Python IDE</h2>
 <p>Python IDE: 操作介面 IDE (儀錶板)，如<strong>VSCode</strong>、<strong>PyCharm</strong></p>
-<p><img data-src="https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg" alt="plot of chunk unnamed-chunk-2"> <a href="https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept">圖片來源</a></p>
+
+<img data-src="https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg" width="700" class="r-stretch quarto-figure-center"><p class="caption">plot of chunk unnamed-chunk-2</p><p><a href="https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept">圖片來源</a></p>
 </section>
 <section id="work-in-the-cloud" class="slide level2">
 <h2>Work in the Cloud</h2>
@@ -420,21 +421,40 @@
 </section>
 <section id="google-colab-interface" class="slide level2">
 <h2>Google Colab Interface</h2>
-</section>
+
+<img data-src="figures/Colab_Inter.png" width="700" class="r-stretch"></section>
 <section id="google-colab-step-by-step" class="slide level2">
 <h2>Google Colab Step by Step</h2>
-</section>
+<ol type="1">
+<li><p>Google “Colab”</p></li>
+<li><p>Click the first link with “<a href="https://colab.research.google.com/?hl=zh-tw">Google Colab</a>” and from Google</p></li>
+<li><p>Click “新增筆記本”</p></li>
+</ol>
+
+<img data-src="figures/new_notebook.png" width="600" class="r-stretch"></section>
 <section id="google-colab-markdown" class="slide level2">
 <h2>Google Colab Markdown</h2>
+<ol type="1">
+<li><p>File name</p></li>
+<li><p>Code</p></li>
+<li><p>Text</p></li>
+<li><p>AI!</p></li>
+</ol>
+
+<img data-src="figures/colab1.png" width="300" class="r-stretch quarto-figure-center"></section>
+<section id="google-generative-ai" class="slide level2">
+<h2>Google Generative AI</h2>
+<p><img data-src="figures/AI1.png" width="400"></p>
+<p><img data-src="figures/AI_ex.png" width="400"></p>
 </section>
 <section id="google-colab-hands-on" class="slide level2">
 <h2>Google Colab Hands-on</h2>
 <ul>
-<li>打開RStudio</li>
-<li>左上角<strong>File</strong>-&gt;<strong>New Project</strong> (如果原本沒有的話，Project名稱就會是資料夾名稱)</li>
-<li>左上角<strong>File</strong>-&gt;<strong>New File</strong>-&gt;<strong>R Script</strong> (如果原本沒有的話)</li>
-<li>在Console輸入1+，按Enter</li>
-<li>試著跳出打不完的程式碼，變回輸入模式<code>&gt;</code></li>
+<li>打開Google Colab</li>
+<li>新增一個筆記本</li>
+<li>新增一個程式碼區塊（如果沒有的話）</li>
+<li>在程式碼區塊輸入1+，按左手邊的執行按鈕（Play）</li>
+<li>觀察結果</li>
 </ul>
 </section></section>
 <section>
@@ -444,25 +464,33 @@
 </section>
 <section id="python-and-python-packages" class="slide level2">
 <h2>Python and Python Packages</h2>
-<p>Python: 程式核心 (iPhone) <img data-src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&amp;hei=1112&amp;fmt=png-alpha&amp;qlt=80&amp;.v=1551226036668" alt="plot of chunk unnamed-chunk-4"></p>
-</section>
+<p>Python: 程式核心 (iPhone)</p>
+
+<img data-src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&amp;hei=1112&amp;fmt=png-alpha&amp;qlt=80&amp;.v=1551226036668" width="423" class="r-stretch quarto-figure-center"><p class="caption">plot of chunk unnamed-chunk-4</p></section>
 <section id="python-and-python-packages-1" class="slide level2">
 <h2>Python and Python Packages</h2>
 <p>Python Packages: 附加程式 (APP)</p>
 
-<img data-src="https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg" class="r-stretch quarto-figure-center"><p class="caption">plot of chunk unnamed-chunk-5</p><p><a href="https://www.apple.com/">圖片來源</a></p>
-</section>
-<section id="python-base-other-packages" class="slide level2">
-<h2>Python = Base + Other Packages</h2>
+<img data-src="https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg" class="r-stretch"><p><a href="https://www.apple.com/">圖片來源</a></p>
+</section></section>
+<section>
+<section id="python-base-other-packages" class="title-slide slide level1 center">
+<h1>Python = Base + Other Packages</h1>
+
 </section>
 <section id="install-pacakgeslib" class="slide level2">
 <h2>Install pacakges/lib</h2>
 <ul>
-<li><p><code>!</code> <code>pip3</code> <code>install</code> package names</p></li>
-<li><p>Google Colab has multiple build-in packages, you can check in the notebook</p></li>
+<li><code>!</code> <code>pip3</code> <code>install</code> package names</li>
+</ul>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">!</span>pip3 install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Google Colab has multiple build-in packages, you can check in the notebook</li>
 </ul>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">!</span>pip <span class="bu">list</span> <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">!</span>pip <span class="bu">list</span> <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Package                      Version  Location                                                                        Installer
 ---------------------------- -------- ------------------------------------------------------------------------------- ---------
@@ -636,62 +664,13 @@ wrapt                        1.14.1   /Library/Frameworks/Python.framework/Versi
 <li><code>pandas</code></li>
 </ul>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="install-packages-hands-on" class="slide level2">
 <h2>Install packages hands-on</h2>
 <ul>
 <li>在剛剛新增的<strong>Notebook</strong>中，輸入<code>!pip3 install pandas</code></li>
-</ul>
-</section></section>
-<section>
-<section id="basic-python" class="title-slide slide level1 center">
-<h1>Basic Python</h1>
-
-</section>
-<section id="variable--" class="slide level2">
-<h2>Variable [&lt;-]</h2>
-<ul>
-<li>使用 <code>&lt;-</code> 設定變數</li>
-<li><strong>變數名稱</strong> <code>&lt;-</code> <strong>變數內容(值)</strong></li>
-<li><strong>變數名稱</strong>可依箭頭方向放置於左側 <code>&lt;-</code> 或右側 <code>-&gt;</code></li>
-<li>但為方便閱讀，<strong>變數名稱</strong>多放置於左側</li>
-</ul>
-</section>
-<section id="data-types" class="slide level2">
-<h2>Data Types</h2>
-<ul>
-<li><strong>數值 (numeric)</strong></li>
-<li><strong>字串 (character)</strong></li>
-<li><strong>布林變數 (logic)</strong></li>
-<li><strong>日期 (Date)</strong></li>
-</ul>
-<h3 id="numeric">Numeric</h3>
-<h3 id="string">String</h3>
-<h3 id="logic">Logic</h3>
-<h3 id="date">Date</h3>
-</section>
-<section id="operator-運算子" class="slide level2">
-<h2>Operator 運算子</h2>
-<h3 id="section">+ / - / * / /</h3>
-<h3 id="section-1">&gt; / &lt; / == / !=</h3>
-<h3 id="section-2">&amp; / |</h3>
-</section></section>
-<section>
-<section id="data-structure" class="title-slide slide level1 center">
-<h1>Data Structure</h1>
-
-</section>
-<section id="common-data-structure-in-python" class="slide level2">
-<h2>Common Data Structure in Python</h2>
-<ul>
-<li>向量 Vector</li>
-<li>因子 Factor</li>
-<li>列表 List</li>
-<li>矩陣 Matrix</li>
-<li>資料框 data.frame</li>
-<li>屬性查詢函數</li>
 </ul>
 </section></section>
 <section>
@@ -767,19 +746,19 @@ wrapt                        1.14.1   /Library/Frameworks/Python.framework/Versi
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="1_Python101_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="1_Python101_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="1_Python101_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1_Python101_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="1_EnvSet_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

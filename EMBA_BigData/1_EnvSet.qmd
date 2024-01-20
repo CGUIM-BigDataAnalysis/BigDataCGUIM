@@ -1,0 +1,184 @@
+---
+title: "1. Environment Setting"
+format: revealjs
+editor: visual
+---
+
+# Basic Setup
+
+## Python vs. Python IDE
+
+Python: 程式核心 (引擎) ![plot of chunk unnamed-chunk-1](https://www.teslarati.com/wp-content/uploads/2018/07/model-3-drivetrain-1.jpg){width="800"}
+
+[圖片來源](https://www.teslarati.com/tesla-patent-more-efficient-electric-motors/)
+
+## Python vs. Python IDE
+
+Python IDE: 操作介面 IDE (儀錶板)，如**VSCode**、**PyCharm**
+
+![plot of chunk unnamed-chunk-2](https://i.pinimg.com/originals/b9/73/15/b97315751352729f99b02c87f454012b.jpg){width="700"}
+
+[圖片來源](https://www.theverge.com/2015/3/19/8260295/tesla-user-interface-redesign-concept)
+
+## Work in the Cloud
+
+-   If you are not familiar with Python and python IDE, and are able to work in the cloud. I recommend you to use **Google Colab** with **Jupyter notebook**.
+-   [Jupyter notebook](https://jupyter.org/) is a really good python interface for data analysis.
+-   Check the [document](https://colab.research.google.com/?hl=zh-tw#scrollTo=GJBs_flRovLc) for more information
+
+## Google Colab Interface
+
+![](figures/Colab_Inter.png){width="700"}
+
+## Google Colab Step by Step
+
+1.  Google "Colab"
+
+2.  Click the first link with "[Google Colab](https://colab.research.google.com/?hl=zh-tw)" and from Google
+
+3.  Click "新增筆記本"
+
+![](figures/new_notebook.png){width="600"}
+
+## Google Colab Markdown
+
+1.  File name
+
+2.  Code
+
+3.  Text
+
+4.  AI!
+
+![](figures/colab1.png){fig-align="center" width="300"}
+
+## Google Generative AI
+
+![](figures/AI1.png){width="400"}
+
+![](figures/AI_ex.png){width="400"}
+
+## Google Colab Hands-on
+
+-   打開Google Colab
+-   新增一個筆記本
+-   新增一個程式碼區塊（如果沒有的話）
+-   在程式碼區塊輸入1+，按左手邊的執行按鈕（Play）
+-   觀察結果
+
+# Packages
+
+## Python and Python Packages
+
+Python: 程式核心 (iPhone)
+
+![plot of chunk unnamed-chunk-4](https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668){width="423"}
+
+## Python and Python Packages
+
+Python Packages: 附加程式 (APP)
+
+![](https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg)
+
+[圖片來源](https://www.apple.com/)
+
+# Python = Base + Other Packages
+
+## Install pacakges/lib
+
+-   `!` `pip3` `install` package names
+
+```{python}
+#| eval: false
+#| echo: true
+!pip3 install pandas
+```
+
+-   Google Colab has multiple build-in packages, you can check in the notebook
+
+```{python}
+#| echo: true
+!pip list -v
+```
+
+## Import packages/libraries
+
+We will use the following packages in python for the first try.
+
+-   `pandas`
+
+```{python}
+#| echo: true
+import pandas as pd
+```
+
+## Install packages hands-on
+
+-   在剛剛新增的**Notebook**中，輸入`!pip3 install pandas`
+
+# Setup the environment on your own computer (For your reference)
+
+## Python installation
+
+You can install python in different way. For someone who are not familiar with python, feel free to follow these steps:
+
+-   Download python \@ <https://www.python.org/downloads/>
+-   Install it by double click the installer
+-   Check if the installation success by typing `python3` in **CMD** (Windows) or **terminal** (Mac or Linux)
+
+![](figures/checkjupyter.png)
+
+## Packages/libraries installation
+
+In **CMD** (Windows) or **terminal** (Mac or Linux), type
+
+```         
+pip3 install pandas jupyter seaborn
+```
+
+to install packages
+
+Of course you can use **conda** or other method to install packages
+
+## Setup an IDE for data analysis
+
+-   If you are not familiar with python IDE, I recommend you to use **VS Code** with **Jupyter notebook**.
+-   [Jupyter notebook](https://jupyter.org/) is a really good python interface for data analysis (of course including statistic).
+-   You can install and using **Jupyter notebook** in different ways.
+    -   We have installed `jupyter` library in the previous step
+-   Check the [document](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for more instruction
+
+## 1. Download and install [VS Code](https://code.visualstudio.com/)
+
+[VS Code](https://code.visualstudio.com/) ![](figures/vscode_down.png)
+
+## 2. Check python and jupyter package
+
+Make sure you have installed `python` and `jupyter` package (see previous slide)
+
+\@ Terminal or CMD or Python
+
+![](figures/checkjupyter.png)
+
+## 3. Install Python extension
+
+In VS Code, click **Extensions**, search python, and install the extension
+
+![](figures/pthext.png) **Jupyter** extension is also useful
+
+## 4. Trust your [workspace](https://code.visualstudio.com/docs/editor/workspace-trust)
+
+Click **trust** and add the folder with codes in the trust [workspace](https://code.visualstudio.com/docs/editor/workspace-trust)
+
+![](figures/rest.png)
+
+## 5. Create a Jupyter Notebook
+
+-   by running the **Create: New Jupyter Notebook** command from the Command Palette (⇧⌘P)
+-   by creating a new **.ipynb** file in your workspace
+
+![](figures/newfile.png)
+
+## 6. Now we are ready to start!
+
+![](figures/jp.png)
