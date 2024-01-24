@@ -1,0 +1,12 @@
+---
+title: "3. Data I/O"
+format: revealjs
+editor: visual
+---
+
+## 資料分析步驟
+
+- **資料匯入** 
+- 資料清洗處理
+- 資料分析
+- 資料呈現與視覺化

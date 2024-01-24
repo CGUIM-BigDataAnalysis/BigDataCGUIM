@@ -4,47 +4,642 @@ format: revealjs
 editor: visual
 ---
 
-# Basic Python
+## 資料分析步驟
 
-## Variable \[\<-\]
+-   **資料匯入**
+-   **資料清洗處理**
+-   **資料分析**
+-   **資料呈現與視覺化**
 
--   使用 `<-` 設定變數
--   **變數名稱** `<-` **變數內容(值)**
--   **變數名稱**可依箭頭方向放置於左側 `<-` 或右側 `->`
--   但為方便閱讀，**變數名稱**多放置於左側
+但在分析之前，得先學會Python的基本語法
 
-## Data Types
+# Python 101
 
+## Variable 變數設定
+
+-   使用 `=` 設定變數
+-   **變數名稱** `=` **變數內容(值)**
+
+```{python}
+#| echo: true
+var1 = "test"
+var2, var3 = "test2","test3"
+print(var1)
+print(var2+var3)
+```
+
+## Variable 變數命名規則
+
+-   不可使用保留字
+    -   會變色的基本上都是保留字，如`True`, `False`等，在Python有功能的字串
+-   只能由數字`0-9`、字母`A-Z` `a-z`，或是底線組成`_`，且不可以數字開頭
+-   大小寫敏感
+
+```{python}
+True
+False
+```
+
+## Function 函數使用
+
+`函數名稱`(`參數`)，如`print`(`變數或字串`)
+
+```{python}
+#| echo: true
+var1 = "test"
+print(var1)
+```
+
+# Data Types 資料型態
+
+## Data Types 資料型態
+
+-   **文字 (text, string, character)**
 -   **數值 (numeric)**
--   **字串 (character)**
--   **布林變數 (logic)**
--   **日期 (Date)**
+-   **布林變數 (Boolean, logic)**
+-   **日期 (date)**
 
-### Numeric
+## 文字 (text, string, character)
 
-### String
+-   一般文字，使用`雙引號`標註，或是使用`str(文字內容)`宣告
+-   就算內容為數字，只要使用雙引號標注，或是`str`宣告，即為文字型態（除非有做轉型）
 
-### Logic
+```{python}
+#| echo: true
+text1 = "abcd"
+text2 = "10"
+text3 = str("xyz")
+text4 = str(100)
+print([text1, text2, text3,text4])
+```
 
-### Date
+## 數值 (numeric)
+
+包含**整數 int**與浮點數 float等型態。
+
+**整數 int**：正數或負數，無小數點
+
+-   直接指定，或是使用`int(數值)`宣告整數
+-   若`數值`非整數，則**無條件捨去**
+-   若`數值`是文字型態，則強迫轉型
+
+```{python}
+#| echo: true
+int1 = 10
+int2 = int(5)
+int3 = int(6.7)
+int4 = int(6.3)
+int5 = int("88")
+print([int1, int2, int3, int4, int5])
+```
+
+## 數值 (numeric)
+
+包含整數 int與**浮點數 float**等型態。
+
+**浮點數 float**：正數或負數，有小數點的數值
+
+-   直接指定，或是使用`float(數值)`宣告整數
+-   若`數值`為整數，則**加入小數點**
+-   若`數值`是文字型態，則強迫轉型
+
+```{python}
+#| echo: true
+float1 = float(10)
+float2 = float(6.7)
+float3 = float("88.8")
+print([float1, float2, float3])
+```
+
+## 布林變數 (Boolean, logic)
+
+`True` or `False`
+
+::: columns
+::: column
+```{python}
+#| echo: true
+a = 1 > 2
+print(a)
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+b = 1 < 2
+print(b)
+```
+:::
+:::
+
+## 日期 (date)
+
+Python中並無內建的日期型態，必須使用`datetime`套件，使用前要記得載入（import）
+
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install datetime
+```
+
+```{python}
+#| echo: true
+import datetime
+```
+
+## 日期 (date)
+
+當需要用載入套件的功能時，結構為：`套件名稱`.`套件功能或資料類型`（可能有多層）
+
+如`datetime`.`datetime.now()`：
+
+  - 第一個datetime為套件名稱
+  - 第二個為套件內資料類型，有`date`, `time`, `datetime`等，可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
+  - `.now()`為更進一步的功能（取得今日）
+
+```{python}
+#| echo: true
+today = datetime.datetime.now()
+print(today)
+```
+## 日期 (date)
+
+取得日期後，日期物件有許多內建的功能
+
+- 如`.year`，`.month`等
+- 可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
+
+```{python}
+#| echo: true
+print(today)
+```
+```{python}
+#| echo: true
+print(today.year)
+```
+```{python}
+#| echo: true
+print(today.month)
+```
+## 日期 (date)
+
+也可直接新增指定日期物件，使用方法為：
+
+- `datetime.date(年,月,日)`
+- `datetime.datetime(年,月,日,時,分,秒)`
+- 時分秒不指定會直接使用預設值
+
+```{python}
+#| echo: true
+newdate = datetime.date(2024,1,23)
+print(newdate)
+```
+```{python}
+#| echo: true
+newdatetime = datetime.datetime(2024,1,23,23,23,23)
+print(newdatetime)
+```
+```{python}
+#| echo: true
+newdatetime = datetime.datetime(2024,1,23)
+print(newdatetime)
+```
+
+## Data Types 資料型態 - Recap
+
+-   **文字 (text, string, character)**
+-   **數值 (numeric)**
+-   **布林變數 (Boolean, logic)**
+-   **日期 (date)**
+
+# Operator 運算子
 
 ## Operator 運算子
 
-### + / - / \* / /
+-   `+`加 / `-`減 / `*`乘 / `/`除
+-   `>`大於 / `<`小於 / `==`等於 / `!=`不等於
+-   `and`且 / `or`或
 
-### \> / \< / == / !=
+## +加 / -減 / \*乘 / /除
 
-### & / \|
+```{python}
+#| echo: true
+int1 = 10
+int2 = int(5)
+print([int1, int2])
+```
 
-# Data Structure
+::: columns
+::: column
+`+`加 `-`減
+```{python}
+#| echo: true
+int1 + int2
+```
+```{python}
+#| echo: true
+int1 - int2
+```
+:::
+::: column
+`*`乘 `/`除
+```{python}
+#| echo: true
+int1 * int2
+```
+```{python}
+#| echo: true
+int1 / int2
+```
+:::
+:::
 
-## Common Data Structure in Python
+## \>大於 / \<小於 / ==等於 / !=不等於
 
--   向量 Vector
--   因子 Factor
--   列表 List
--   矩陣 Matrix
--   資料框 data.frame
--   屬性查詢函數
+```{python}
+#| echo: true
+int1 = 10
+int2 = int(5)
+print([int1, int2])
+```
 
-# 
+::: columns
+::: column
+`>`大於  `<`小於 
+```{python}
+#| echo: true
+int1 > int2
+```
+```{python}
+#| echo: true
+int1 < int2
+```
+:::
+::: column
+`==` 等於  `!=`不等於
+```{python}
+#| echo: true
+int1 == int2
+```
+```{python}
+#| echo: true
+int1 != int2
+```
+:::
+:::
+
+## and / or
+::: columns
+::: column
+`and`且
+```{python}
+#| echo: true
+10>5 and 10>1
+```
+```{python}
+#| echo: true
+10>5 and 1>5
+```
+:::
+::: column
+`or`或
+```{python}
+#| echo: true
+10>5 or 10>1
+```
+```{python}
+#| echo: true
+10>5 or 1>5
+```
+:::
+:::
+
+
+## Hands-on
+
+- 宣告一個**文字** "15"
+- 宣告一個**數字** 10
+- 試著相加看看？是否能相加？錯誤訊息的意思是什麼？
+
+# Common Data Structure 資料結構
+
+## Common Data Structure 資料結構
+
+::: columns
+::: {.column width="50%"}
+-   序列 (sequence)
+    -   表 (list)
+    -   定值表 (tuple)
+    -   範圍 (range)
+-   映射 (mapping)
+    -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   矩陣 (matrix, array)
+    -   一般矩陣
+    -   numpy矩陣
+-   資料框 (data frame)
+    -   pandas 資料框
+:::
+:::
+
+## 表 (list)
+
+-   使用方括號 `[ ]`宣告
+-   內容以`,`分隔
+-   內容的資料型態一定要相同
+-   可作運算
+
+```{python}
+#| echo: true
+list1 = [float1, float2, float3]
+print(list1)
+```
+
+## list的運算功能
+
+```{python}
+#| echo: true
+list1 = [float1, float2, float3]
+sum(list1)
+```
+
+## 定值表 (tuple)
+
+-   使用小括號 `( )`宣告
+-   內容以`,`分隔
+-   內容的資料型態可以不同
+
+```{python}
+#| echo: true
+tuple1 = (float1, float2, float3, text1, text2)
+print(tuple1)
+```
+
+## 範圍 (range)
+
+-   使用`range(數列起點,數列終點,間隔)`宣告
+-   若只有輸入一個參數，視為數列終點，起點設為預設值0
+-   若只有輸入兩個參數，則間隔設為預設值1
+-   終點不包括在內
+
+```{python}
+#| echo: true
+r1 = range(10)
+r2 = range(10,20)
+r3 = range(10,20,2)
+print([r1,r2,r3])
+```
+
+::: columns
+::: column
+```{python}
+#| echo: true
+for i in r1:
+  print(i)
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+for i in r3:
+  print(i)
+```
+:::
+:::
+
+
+## 字典 (dist)
+
+-   使用大括號 `{ }`宣告
+-   內容為`key : value`的組合，並以`,`分隔
+-   key不能重複，通常為字串
+
+```{python}
+#| echo: true
+dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
+print(dist1)
+```
+
+## sequence 取值
+
+-   sequence包含：list, tuple, range
+-   使用中括號加上index取值`變數名稱[index]`
+-   `index`從0開始
+
+| 位置  |  1  |  2  |  3  |  4  | ... |
+|:-----:|:---:|:---:|:---:|:---:|:---:|
+| index |  0  |  1  |  2  |  3  | ... |
+
+::: columns
+::: {.column width="60%"}
+```{python}
+#| echo: true
+list1 = [float1, float2, float3]
+print(list1)
+```
+
+```{python}
+#| echo: true
+list1[0]
+```
+:::
+
+::: {.column width="40%"}
+```{python}
+#| echo: true
+r2 = range(10,20)
+print(r2)
+```
+
+```{python}
+#| echo: true
+r2[5]
+```
+:::
+:::
+
+## mapping 取值
+
+-   mapping包含：dist
+-   使用中括號加上key取值`變數名稱[key]`
+
+```{python}
+#| echo: true
+dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
+print(dist1)
+```
+
+```{python}
+#| echo: true
+name=dist1["name"]
+print(name)
+```
+
+## Hands-on
+
+- 新增一sequence `a`，包含數字1到10
+- 新增一sequence `b`，包含數字1到20中的所有偶數
+- 取出`a` sequence 的第*4*個值
+
+
+## sequence + for
+
+sequence結構（list, tuple, range）和mapping結構（dist）均可作為迴圈依據
+
+`for` *變數* `in` *迴圈依據*:
+
+`縮排` 執行內容
+
+::: columns
+::: column
+```{python}
+#| echo: true
+print(list1)
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+for i in list1:
+  print(i)
+```
+:::
+:::
+
+依序將list結構的內容取出，設定為i，並印出來
+
+## mapping + for
+
+mapping結構（dist）預設取得部份為key
+
+-   使用`.values()`即可取value (值)
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+::: columns
+::: column
+```{python}
+#| echo: true
+for i in dist1:
+  print(i)
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+for i in dist1.values():
+  print(i)
+```
+:::
+:::
+
+## Hands-on
+
+- 新增一sequence `b`，包含數字1到20中的所有偶數
+- 取出`b` sequence 的第*5,6,7*個值
+
+- 新增一mapping `c`，內容為
+
+```{python}
+#| echo: true
+dist1 = {"id":[1,2,3,4], "name":["Ryan","Tom","Emma","Amy"], "School":"CGU"}
+```
+- 取出`id`中的第*3*個值
+- 取出`name`中的第*2*個值的第1個字元（字母）
+
+## 一般矩陣 (matrix, array)
+
+## numpy矩陣
+
+```{python}
+#| echo: true
+import numpy as np
+a = np.array([0, 0.5, 1.0, 1.5, 2.0]) 
+b = np.array(['a', 'b', 'c']) 
+c = np.arange(0, 10, 2) 
+print([a,b,c])
+```
+```{python}
+#| echo: true
+print(c[2:],c[:2] )
+```
+
+## numpy矩陣 - 計算功能
+
+```{python}
+#| echo: true
+print(a)
+a.sum() 
+a.mean() 
+a.std() 
+a.cumsum() 
+```
+## pandas 資料框
+
+```{python}
+#| echo: true
+import pandas as pd
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                  "Name":["Tom","Emma","Ryan"             ,"Amy"]})
+print(df1)
+```
+
+## pandas 資料框 - 取值
+```{python}
+#| echo: true
+df1.head(2)
+```
+```{python}
+#| echo: true
+df1.tail(2)
+```
+
+## pandas 資料框 - 取值
+```{python}
+#| echo: true
+df1["Name"]
+```
+```{python}
+#| echo: true
+df1[["Name"]]
+```
+## Hands-on
+
+
+
+## Common Data Structure 資料結構 - Recap
+
+使用`type()`函數可查看資料結構
+
+```{python}
+#| echo: true
+type(dist1)
+```
+
+::: columns
+::: {.column width="50%"}
+-   序列 (sequence)
+    -   表 (list)
+    -   定值表 (tuple)
+    -   範圍 (range)
+-   映射 (mapping)
+    -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   矩陣 (matrix, array)
+    -   一般矩陣
+    -   numpy矩陣
+-   資料框 (data frame)
+    -   pandas 資料框
+:::
+:::
