@@ -154,52 +154,58 @@ import datetime
 
 如`datetime`.`datetime.now()`：
 
-  - 第一個datetime為套件名稱
-  - 第二個為套件內資料類型，有`date`, `time`, `datetime`等，可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
-  - `.now()`為更進一步的功能（取得今日）
+-   第一個datetime為套件名稱
+-   第二個為套件內資料類型，有`date`, `time`, `datetime`等，可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
+-   `.now()`為更進一步的功能（取得今日）
 
 ```{python}
 #| echo: true
 today = datetime.datetime.now()
 print(today)
 ```
+
 ## 日期 (date)
 
 取得日期後，日期物件有許多內建的功能
 
-- 如`.year`，`.month`等
-- 可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
+-   如`.year`，`.month`等
+-   可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
 
 ```{python}
 #| echo: true
 print(today)
 ```
+
 ```{python}
 #| echo: true
 print(today.year)
 ```
+
 ```{python}
 #| echo: true
 print(today.month)
 ```
+
 ## 日期 (date)
 
 也可直接新增指定日期物件，使用方法為：
 
-- `datetime.date(年,月,日)`
-- `datetime.datetime(年,月,日,時,分,秒)`
-- 時分秒不指定會直接使用預設值
+-   `datetime.date(年,月,日)`
+-   `datetime.datetime(年,月,日,時,分,秒)`
+-   時分秒不指定會直接使用預設值
 
 ```{python}
 #| echo: true
 newdate = datetime.date(2024,1,23)
 print(newdate)
 ```
+
 ```{python}
 #| echo: true
 newdatetime = datetime.datetime(2024,1,23,23,23,23)
 print(newdatetime)
 ```
+
 ```{python}
 #| echo: true
 newdatetime = datetime.datetime(2024,1,23)
@@ -233,21 +239,26 @@ print([int1, int2])
 ::: columns
 ::: column
 `+`加 `-`減
+
 ```{python}
 #| echo: true
 int1 + int2
 ```
+
 ```{python}
 #| echo: true
 int1 - int2
 ```
 :::
+
 ::: column
 `*`乘 `/`除
+
 ```{python}
 #| echo: true
 int1 * int2
 ```
+
 ```{python}
 #| echo: true
 int1 / int2
@@ -266,22 +277,27 @@ print([int1, int2])
 
 ::: columns
 ::: column
-`>`大於  `<`小於 
+`>`大於 `<`小於
+
 ```{python}
 #| echo: true
 int1 > int2
 ```
+
 ```{python}
 #| echo: true
 int1 < int2
 ```
 :::
+
 ::: column
-`==` 等於  `!=`不等於
+`==` 等於 `!=`不等於
+
 ```{python}
 #| echo: true
 int1 == int2
 ```
+
 ```{python}
 #| echo: true
 int1 != int2
@@ -290,24 +306,30 @@ int1 != int2
 :::
 
 ## and / or
+
 ::: columns
 ::: column
 `and`且
+
 ```{python}
 #| echo: true
 10>5 and 10>1
 ```
+
 ```{python}
 #| echo: true
 10>5 and 1>5
 ```
 :::
+
 ::: column
 `or`或
+
 ```{python}
 #| echo: true
 10>5 or 10>1
 ```
+
 ```{python}
 #| echo: true
 10>5 or 1>5
@@ -315,12 +337,11 @@ int1 != int2
 :::
 :::
 
-
 ## Hands-on
 
-- 宣告一個**文字** "15"
-- 宣告一個**數字** 10
-- 試著相加看看？是否能相加？錯誤訊息的意思是什麼？
+-   宣告一個**文字** "15"
+-   宣告一個**數字** 10
+-   試著相加看看？是否能相加？錯誤訊息的意思是什麼？
 
 # Common Data Structure 資料結構
 
@@ -411,7 +432,6 @@ for i in r3:
 :::
 :::
 
-
 ## 字典 (dist)
 
 -   使用大括號 `{ }`宣告
@@ -481,10 +501,9 @@ print(name)
 
 ## Hands-on
 
-- 新增一sequence `a`，包含數字1到10
-- 新增一sequence `b`，包含數字1到20中的所有偶數
-- 取出`a` sequence 的第*4*個值
-
+-   新增一sequence `a`，包含數字1到10
+-   新增一sequence `b`，包含數字1到20中的所有偶數
+-   取出`a` sequence 的第*4*個值
 
 ## sequence + for
 
@@ -544,37 +563,155 @@ for i in dist1.values():
 
 ## Hands-on
 
-- 新增一sequence `b`，包含數字1到20中的所有偶數
-- 取出`b` sequence 的第*5,6,7*個值
+-   新增一sequence `b`，包含數字1到20中的所有偶數
 
-- 新增一mapping `c`，內容為
+-   取出`b` sequence 的第*5,6,7*個值
+
+-   新增一mapping `c`，內容為
 
 ```{python}
 #| echo: true
 dist1 = {"id":[1,2,3,4], "name":["Ryan","Tom","Emma","Amy"], "School":"CGU"}
 ```
-- 取出`id`中的第*3*個值
-- 取出`name`中的第*2*個值的第1個字元（字母）
+
+-   取出`id`中的第*3*個值
+-   取出`name`中的第*2*個值的第1個字元（字母）
 
 ## 一般矩陣 (matrix, array)
 
-## numpy矩陣
+- 可想成sequence (1維矩陣)的堆疊
+- sequence為row的組成
+- 直接以中括號分隔matrix的row和column
+
+| Col1 | Col2 | Col3 |
+|:----:|:----:|:----:|
+|  1   |  2   |  3   |
+|  4   |  5   |  6   |
+
+::: columns
+::: column
+```{python}
+#| echo: true
+matrix1 = [[1, 2, 3], 
+          [4, 5, 6]]
+print(matrix1)
+```
+:::
+::: column
+```{python}
+#| echo: true
+row1 = [1, 2, 3]
+row2 = [4, 5, 6]
+matrix2 = [row1, row2]
+print(matrix2)
+```
+:::
+:::
+
+## numpy矩陣 - 1維
+
+- 1維的情況下跟**List**很像，但是運算速度更快
+-可用sequence新增numpy矩陣
 
 ```{python}
 #| echo: true
 import numpy as np
 a = np.array([0, 0.5, 1.0, 1.5, 2.0]) 
-b = np.array(['a', 'b', 'c']) 
+list_string = ['a', 'b', 'c']
+b = np.array(list_string) 
+print([a,b])
+```
+
+或是用`arrange(起點,終點,間隔)`來生成numpy矩陣，如同`range()`的用法
+
+```{python}
+#| echo: true
 c = np.arange(0, 10, 2) 
-print([a,b,c])
+print(c)
+```
+
+## numpy矩陣 - 2維
+
+```{python}
+#| echo: true
+tow_d = np.array([row1,row2]) 
+print(tow_d)
+```
+
+## numpy矩陣 - 取值
+```{python}
+#| echo: true
+print(tow_d)
+```
+
+::: columns
+::: column
+```{python}
+#| echo: true
+print(tow_d[1:])
+```
+
+```{python}
+#| echo: true
+print(tow_d[:2])
+```
+::: 
+::: column
+`array`[`row`][`column`]
+```{python}
+#| echo: true
+print(tow_d[1][2])
+```
+:::
+:::
+
+## numpy矩陣 - 新增修改
+```{python}
+#| echo: true
+np1 = np.array([0, 0.5, 1.0, 1.5, 2.0]) 
+np2 = np.array([0, 5, 10, 15, 20]) 
+new_np = np.concatenate([np1, np2])
+print(new_np)
+```
+
+## numpy矩陣 - 新增修改 2維
+
+```{python}
+#| echo: true
+np.row_stack([np1,np2])
 ```
 ```{python}
 #| echo: true
-print(c[2:],c[:2] )
+np.column_stack([np1,np2])
+```
+## numpy矩陣 - 新增修改 2維
+
+方法二，供參考。`axis = 0` row堆疊，`axis = 1` column堆疊
+
+```{python}
+#| echo: true
+np1_2 = np.expand_dims(np1,0)
+np2_2 = np.expand_dims(np2,0)
+print(np1_2)
+```
+
+```{python}
+#| echo: true
+new_np0 = np.concatenate([np1_2, np2_2],axis=0)
+print(new_np0)
+```
+```{python}
+#| echo: true
+np1_2 = np.expand_dims(np1,0)
+np2_2 = np.expand_dims(np2,0)
+new_np1 = np.concatenate([np1_2, np2_2],axis=1)
+print(new_np1)
 ```
 
 ## numpy矩陣 - 計算功能
-
+`sum()`、`mean()`、`std()`、`cumsum()`、`max()`、`min()`、`count()`
+::: columns
+::: column
 ```{python}
 #| echo: true
 print(a)
@@ -583,7 +720,33 @@ a.mean()
 a.std() 
 a.cumsum() 
 ```
+:::
+::: column
+```{python}
+#| echo: true
+print(tow_d)
+tow_d.sum() 
+tow_d.mean() 
+tow_d.std() 
+tow_d.cumsum() 
+```
+:::
+::: column
+`axis`= 0 BY COLUMN, 1 BY ROW
+```{python}
+#| echo: true
+print(tow_d)
+tow_d.sum(axis=0) 
+tow_d.mean(axis=1) 
+```
+::: 
+::: 
+
 ## pandas 資料框
+
+- 使用前須載入`import pandas as pd`
+- 繼承所有numpy的優點，增加欄位名稱等資訊，並提供不少資料處理功能
+- 由dict組成
 
 ```{python}
 #| echo: true
@@ -594,27 +757,30 @@ print(df1)
 ```
 
 ## pandas 資料框 - 取值
+
 ```{python}
 #| echo: true
 df1.head(2)
 ```
+
 ```{python}
 #| echo: true
 df1.tail(2)
 ```
 
-## pandas 資料框 - 取值
+## pandas 資料框 - 取值 (column)
+
 ```{python}
 #| echo: true
 df1["Name"]
 ```
+
 ```{python}
 #| echo: true
 df1[["Name"]]
 ```
+
 ## Hands-on
-
-
 
 ## Common Data Structure 資料結構 - Recap
 
