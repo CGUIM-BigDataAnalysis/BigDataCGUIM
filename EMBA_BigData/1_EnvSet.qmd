@@ -1,6 +1,10 @@
 ---
 title: "1. Environment Setting"
-format: revealjs
+author: "Yi-Ju Tseng"
+format:
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
 editor: visual
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: "2. Python 101"
-format: revealjs
+author: "Yi-Ju Tseng"
+format:
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
 editor: visual
 ---
 
@@ -36,6 +40,7 @@ print(var2+var3)
 -   大小寫敏感
 
 ```{python}
+#| echo: true
 True
 False
 ```
@@ -49,7 +54,7 @@ False
 var1 = "test"
 print(var1)
 ```
-
+`函數名稱`(`參數1`,`參數2`,...)，多個參數用`,`分隔
 # Data Types 資料型態
 
 ## Data Types 資料型態
@@ -61,7 +66,7 @@ print(var1)
 
 ## 文字 (text, string, character)
 
--   一般文字，使用`雙引號`標註，或是使用`str(文字內容)`宣告
+-   一般文字，使用`單引號`或`雙引號`標註，或是使用`str(文字內容)`宣告
 -   就算內容為數字，只要使用雙引號標注，或是`str`宣告，即為文字型態（除非有做轉型）
 
 ```{python}
@@ -100,7 +105,7 @@ print([int1, int2, int3, int4, int5])
 **浮點數 float**：正數或負數，有小數點的數值
 
 -   直接指定，或是使用`float(數值)`宣告整數
--   若`數值`為整數，則**加入小數點**
+-   若`數值`為整數，則**自動增加小數點**
 -   若`數值`是文字型態，則強迫轉型
 
 ```{python}
@@ -156,7 +161,7 @@ import datetime
 
 -   第一個datetime為套件名稱
 -   第二個為套件內資料類型，有`date`, `time`, `datetime`等，可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
--   `.now()`為更進一步的功能（取得今日）
+-   `.now()`為更進一步的功能（取得今日的**日期物件**）
 
 ```{python}
 #| echo: true
@@ -166,7 +171,7 @@ print(today)
 
 ## 日期 (date)
 
-取得日期後，日期物件有許多內建的功能
+取得日期後，**日期物件**有許多內建的功能
 
 -   如`.year`，`.month`等
 -   可查閱[文件](https://docs.python.org/zh-tw/3/library/datetime.html#available-types)
@@ -238,13 +243,13 @@ print([int1, int2])
 
 ::: columns
 ::: column
-`+`加 `-`減
+`+`加 
 
 ```{python}
 #| echo: true
 int1 + int2
 ```
-
+`-`減
 ```{python}
 #| echo: true
 int1 - int2
@@ -252,13 +257,13 @@ int1 - int2
 :::
 
 ::: column
-`*`乘 `/`除
+`*`乘 
 
 ```{python}
 #| echo: true
 int1 * int2
 ```
-
+`/`除
 ```{python}
 #| echo: true
 int1 / int2
@@ -277,13 +282,13 @@ print([int1, int2])
 
 ::: columns
 ::: column
-`>`大於 `<`小於
+`>`大於 
 
 ```{python}
 #| echo: true
 int1 > int2
 ```
-
+`<`小於
 ```{python}
 #| echo: true
 int1 < int2
@@ -291,13 +296,13 @@ int1 < int2
 :::
 
 ::: column
-`==` 等於 `!=`不等於
+`==` 等於 
 
 ```{python}
 #| echo: true
 int1 == int2
 ```
-
+`!=`不等於
 ```{python}
 #| echo: true
 int1 != int2
@@ -366,6 +371,27 @@ int1 != int2
 :::
 :::
 
+## Common Data Structure 資料結構
+
+::: columns
+::: {.column width="50%"}
+-   **序列 (sequence)**
+    -   表 (list)
+    -   定值表 (tuple)
+    -   範圍 (range)
+-   映射 (mapping)
+    -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   矩陣 (matrix, array)
+    -   一般矩陣
+    -   numpy矩陣
+-   資料框 (data frame)
+    -   pandas 資料框
+:::
+:::
+
 ## 表 (list)
 
 -   使用方括號 `[ ]`宣告
@@ -384,8 +410,22 @@ print(list1)
 ```{python}
 #| echo: true
 list1 = [float1, float2, float3]
+print(list1)
+```
+`sum(`list物件名稱`)` 物件加總
+
+```{python}
+#| echo: true
 sum(list1)
 ```
+`max(`list物件名稱`)` 物件最大值
+```{python}
+#| echo: true
+list1 = [float1, float2, float3]
+max(list1)
+```
+
+可參考[文件](https://docs.python.org/zh-cn/3/library/functions.html)
 
 ## 定值表 (tuple)
 
@@ -429,6 +469,27 @@ for i in r1:
 for i in r3:
   print(i)
 ```
+:::
+:::
+
+## Common Data Structure 資料結構
+
+::: columns
+::: {.column width="50%"}
+-   序列 (sequence)
+    -   表 (list)
+    -   定值表 (tuple)
+    -   範圍 (range)
+-   **映射 (mapping)**
+    -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   矩陣 (matrix, array)
+    -   一般矩陣
+    -   numpy矩陣
+-   資料框 (data frame)
+    -   pandas 資料框
 :::
 :::
 
@@ -534,9 +595,8 @@ for i in list1:
 
 ## mapping + for
 
-mapping結構（dist）預設取得部份為key
-
--   使用`.values()`即可取value (值)
+- mapping結構（dist）預設取得部份為key
+- 使用`.values()`即可取value (值)
 
 ```{python}
 #| echo: true
@@ -577,6 +637,27 @@ dist1 = {"id":[1,2,3,4], "name":["Ryan","Tom","Emma","Amy"], "School":"CGU"}
 -   取出`id`中的第*3*個值
 -   取出`name`中的第*2*個值的第1個字元（字母）
 
+## Common Data Structure 資料結構
+
+::: columns
+::: {.column width="50%"}
+-   序列 (sequence)
+    -   表 (list)
+    -   定值表 (tuple)
+    -   範圍 (range)
+-   映射 (mapping)
+    -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   **矩陣 (matrix, array)**
+    -   一般矩陣
+    -   numpy矩陣
+-   資料框 (data frame)
+    -   pandas 資料框
+:::
+:::
+
 ## 一般矩陣 (matrix, array)
 
 - 可想成sequence (1維矩陣)的堆疊
@@ -611,7 +692,7 @@ print(matrix2)
 ## numpy矩陣 - 1維
 
 - 1維的情況下跟**List**很像，但是運算速度更快
--可用sequence新增numpy矩陣
+- 可用sequence新增numpy矩陣
 
 ```{python}
 #| echo: true
@@ -632,11 +713,15 @@ print(c)
 
 ## numpy矩陣 - 2維
 
+- 可用兩個sequence組合新增numpy矩陣
+- 預設以row為維度堆疊
+
 ```{python}
 #| echo: true
 tow_d = np.array([row1,row2]) 
 print(tow_d)
 ```
+
 
 ## numpy矩陣 - 取值
 ```{python}
@@ -646,6 +731,8 @@ print(tow_d)
 
 ::: columns
 ::: column
+- 使用中括號`[`index`]`取值
+- 可用slice功能，`1:`為從1開始到最後，`:2`為從0開始2到2（不包括2）
 ```{python}
 #| echo: true
 print(tow_d[1:])
@@ -657,7 +744,8 @@ print(tow_d[:2])
 ```
 ::: 
 ::: column
-`array`[`row`][`column`]
+- 一個維度一個`[]`，前row後column
+- `array`[`row`][`column`]
 ```{python}
 #| echo: true
 print(tow_d[1][2])
@@ -666,6 +754,8 @@ print(tow_d[1][2])
 :::
 
 ## numpy矩陣 - 新增修改
+- `np.concatenate(`想結合的numpy矩陣list`)`
+- 一維矩陣直接往後貼
 ```{python}
 #| echo: true
 np1 = np.array([0, 0.5, 1.0, 1.5, 2.0]) 
@@ -676,6 +766,11 @@ print(new_np)
 
 ## numpy矩陣 - 新增修改 2維
 
+2維矩陣可決定新增方向
+
+- `np.row_stack([np1,np2])` 使用新增row的想法組合
+- `np.column_stack([np1,np2])` 使用新增column的想法組合
+
 ```{python}
 #| echo: true
 np.row_stack([np1,np2])
@@ -684,112 +779,93 @@ np.row_stack([np1,np2])
 #| echo: true
 np.column_stack([np1,np2])
 ```
-## numpy矩陣 - 新增修改 2維
 
-方法二，供參考。`axis = 0` row堆疊，`axis = 1` column堆疊
 
-```{python}
-#| echo: true
-np1_2 = np.expand_dims(np1,0)
-np2_2 = np.expand_dims(np2,0)
-print(np1_2)
-```
-
-```{python}
-#| echo: true
-new_np0 = np.concatenate([np1_2, np2_2],axis=0)
-print(new_np0)
-```
-```{python}
-#| echo: true
-np1_2 = np.expand_dims(np1,0)
-np2_2 = np.expand_dims(np2,0)
-new_np1 = np.concatenate([np1_2, np2_2],axis=1)
-print(new_np1)
-```
 
 ## numpy矩陣 - 計算功能
 `sum()`、`mean()`、`std()`、`cumsum()`、`max()`、`min()`、`count()`
+
 ::: columns
 ::: column
 ```{python}
 #| echo: true
 print(a)
-a.sum() 
-a.mean() 
-a.std() 
-a.cumsum() 
+```
+```{python}
+#| echo: true
+print(a.sum())
+```
+```{python}
+#| echo: true
+print(a.mean())
+```
+```{python}
+#| echo: true
+print(a.std())
+```
+```{python}
+#| echo: true
+print(a.cumsum())
 ```
 :::
 ::: column
 ```{python}
 #| echo: true
 print(tow_d)
-tow_d.sum() 
-tow_d.mean() 
-tow_d.std() 
-tow_d.cumsum() 
+```
+```{python}
+#| echo: true
+print(tow_d.sum()) 
+```
+```{python}
+#| echo: true
+print(tow_d.mean()) 
+```
+```{python}
+#| echo: true
+print(tow_d.std()) 
+```
+```{python}
+#| echo: true
+print(tow_d.cumsum()) 
 ```
 :::
-::: column
+:::
+
+## numpy矩陣 - 計算功能
+`sum()`、`mean()`、`std()`、`cumsum()`、`max()`、`min()`、`count()`
+
 `axis`= 0 BY COLUMN, 1 BY ROW
+
+::: columns
+::: column
 ```{python}
 #| echo: true
 print(tow_d)
-tow_d.sum(axis=0) 
-tow_d.mean(axis=1) 
 ```
-::: 
-::: 
-
-## pandas 資料框
-
-- 使用前須載入`import pandas as pd`
-- 繼承所有numpy的優點，增加欄位名稱等資訊，並提供不少資料處理功能
-- 由dict組成
-
 ```{python}
 #| echo: true
-import pandas as pd
-df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
-                  "Name":["Tom","Emma","Ryan"             ,"Amy"]})
-print(df1)
+print(tow_d.sum(axis=0))
 ```
-
-## pandas 資料框 - 取值
-
 ```{python}
 #| echo: true
-df1.head(2)
+print(tow_d.sum(axis=1))
 ```
-
+:::
+::: column
 ```{python}
 #| echo: true
-df1.tail(2)
+print(tow_d.mean(axis=0))
 ```
-
-## pandas 資料框 - 取值 (column)
-
 ```{python}
 #| echo: true
-df1["Name"]
+print(tow_d.mean(axis=1))
 ```
+:::
+:::
 
-```{python}
-#| echo: true
-df1[["Name"]]
-```
 
-## Hands-on
-
-## Common Data Structure 資料結構 - Recap
-
-使用`type()`函數可查看資料結構
-
-```{python}
-#| echo: true
-type(dist1)
-```
+## Common Data Structure 資料結構
 
 ::: columns
 ::: {.column width="50%"}
@@ -799,6 +875,106 @@ type(dist1)
     -   範圍 (range)
 -   映射 (mapping)
     -   字典 (dist)
+:::
+
+::: {.column width="50%"}
+-   矩陣 (matrix, array)
+    -   一般矩陣
+    -   numpy矩陣
+-   **資料框 (data frame)**
+    -   pandas 資料框
+:::
+:::
+
+## pandas 資料框
+
+- 使用前須載入`import pandas as pd`
+- 增加欄位名稱等資訊，並提供不少資料處理功能
+- 由dict組成
+
+```{python}
+#| echo: true
+import pandas as pd
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+df1
+```
+
+## pandas 資料框 - 取值
+資料框物件名稱.`head(資料筆數)`：取前幾筆
+```{python}
+#| echo: true
+df1.head(2)
+```
+資料框物件名稱.`head(資料筆數)`：取後幾筆
+```{python}
+#| echo: true
+df1.tail(2)
+```
+
+## pandas 資料框 - 取值 (column)
+
+資料框物件名稱`[`欄位名稱`]`：取出sequence
+```{python}
+#| echo: true
+df1["Name"]
+```
+資料匡物件名稱`[`欄位名稱`]`：取出資料框
+```{python}
+#| echo: true
+df1[["Name"]]
+```
+
+
+## pandas 資料框 - 取值 (row)
+
+資料框物件名稱`[`row slice`]`
+```{python}
+#| echo: true
+df1[0:1]
+```
+
+
+## Hands-on
+
+- 使用Google生成式AI，請他生成一個儲存學生學號、姓名、成績的pandas資料框，並生成5筆資料
+- 試著取出學生成績欄位
+- 試著取出學生姓名與成績兩個欄位
+- 試著取出第3位學生的成績 (hint: sequence)
+
+## pandas 資料框 - 新增修改
+
+`pd`.`concat([pd物件1, pd物件2])`，預設為row方向的合併
+
+```{python}
+#| echo: true
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+df2 = pd.DataFrame({"ID":[5,6,7],
+                    "Name":["A","B","C"]})                 
+newdf = pd.concat([df1,df2])
+print(newdf)
+```
+
+## Check Data Type
+
+使用`type()`函數可查看資料結構
+
+```{python}
+#| echo: true
+type(dist1)
+```
+
+## Common Data Structure 資料結構 - Recap
+
+::: columns
+::: {.column width="50%"}
+-   序列 (sequence) 
+    -   表 (list) `[]`
+    -   定值表 (tuple) `()`
+    -   範圍 (range) `range()`
+-   映射 (mapping)
+    -   字典 (dist) `{key:value}`
 :::
 
 ::: {.column width="50%"}
