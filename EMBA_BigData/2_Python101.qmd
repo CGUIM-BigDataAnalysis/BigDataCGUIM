@@ -55,6 +55,7 @@ var1 = "test"
 print(var1)
 ```
 `函數名稱`(`參數1`,`參數2`,...)，多個參數用`,`分隔
+
 # Data Types 資料型態
 
 ## Data Types 資料型態
