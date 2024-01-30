@@ -10,18 +10,25 @@ editor: visual
 
 ## 資料分析步驟
 
-- **資料匯入** 
+- **資料匯入與匯出** 
 - 資料清洗處理
 - 資料分析
 - 資料呈現與視覺化
 
-## 資料匯入
+## 資料匯入與匯出
 
 - 從檔案匯入
+- 從Google drive匯入
 - 從網路匯入
 - 從Twitter匯入
-- 從Google drive匯入
 - 資料匯出
+
+## 前置作業
+```{python}
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+```
 
 # 從檔案匯入
 
@@ -32,7 +39,109 @@ editor: visual
 - 純文字資料 (無分隔)
 - 其他格式
 
+## .csv 逗號分隔格式檔案
+
+- .csv 為逗號分隔格式檔案
+- 可用`pandas`的`read_csv(檔案路徑)`功能將檔案匯入
+- 檔案路徑可以是本機端路徑，也可以是網址
+
+```{python}
+#| echo: true
+import pandas as pd
+df_csv = pd.read_csv("https://quality.data.gov.tw//dq_download_csv.php?nid=102775&md5_url=ea56d6e1f2642b2c5c44f9e8b6185d54")
+df_csv.head()
+```
+
 ## Hands-on - .csv檔案匯入
+
+- 以[上市公司每月營業收入彙總表](https://data.gov.tw/dataset/18420)為例
+- 複製`csv`資料下載網址
+- 用pandas 的 read_csv()函數將檔案匯入
+- 匯入後印出前5個row
+
+![](figures/downloadcsv.png)
+
+## .xls Excel格式檔案
+
+- 需要安裝`openpyxl`和`xlrd`套件
+
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install openpyxl xlrd
+```
+## .xls Excel格式檔案
+
+- 使用`pandas`套件中的`read_excel(檔案路徑)`功能
+- 檔案路徑可以是本機端路徑，也可以是網址
+- 可設定`sheet_name`參數指定工作表名稱
+
+```{python}
+#| echo: true
+house = pd.read_excel('https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/Data/%E6%96%B0%E7%AB%B9%E4%B8%8D%E5%8B%95%E7%94%A2.xls',sheet_name = "不動產買賣")  
+house.head()
+```
+## Hands-on - .xls Excel格式檔案
+
+- 以[雲林縣水位雨量站](https://data.gov.tw/dataset/145466)為例
+- 複製`Excel`資料下載網址
+- 用pandas 的 read_excel()函數將檔案匯入，記得設定工作表名稱
+- 匯入後印出第三個row
+
+# 從Google drive匯入
+
+## 從Google drive匯入
+
+- 需要安裝`PyDrive`套件
+
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install PyDrive
+```
+
+## 從Google drive匯入
+
+- 載入`PyDrive`套件
+
+## googlesheets4 package
+
+```{r eval=F}
+## install googlesheets4 from CRAN (already included in tidyverse)
+install.packages("googlesheets4")
+## load googlesheets4 package
+library(googlesheets4)
+```
+```{r echo=F,eval=T}
+library(googlesheets4)
+```
+
+## googlesheets4 package
+
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
+```{r}
+read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
+```
+
+## 需要開啟google 授權
+
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuth.png")
+```
+```{r echo=FALSE}
+knitr::include_graphics("figures/OAuthGoogle.png")
+```
+
+
+## googlesheets4 package
+
+使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
+```{r eval=F}
+read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
+```
+```{r echo=F}
+knitr::kable(read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0"))
+```
 
 
 
@@ -341,54 +450,6 @@ incremental:true
 - API (Application programming interfaces)
 - JSON格式檔案
 - 網頁爬蟲 Webscraping
-
-# 從Google drive匯入
-
-## 從Google drive匯入
-
-
-- googlesheets4 package
-
-
-## googlesheets4 package
-
-```{r eval=F}
-## install googlesheets4 from CRAN (already included in tidyverse)
-install.packages("googlesheets4")
-## load googlesheets4 package
-library(googlesheets4)
-```
-```{r echo=F,eval=T}
-library(googlesheets4)
-```
-
-## googlesheets4 package
-
-使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
-```{r}
-read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
-```
-
-## 需要開啟google 授權
-
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuth.png")
-```
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuthGoogle.png")
-```
-
-
-## googlesheets4 package
-
-使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
-```{r eval=F}
-read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
-```
-```{r echo=F}
-knitr::kable(read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0"))
-```
-
 
 
 # 資料匯出
