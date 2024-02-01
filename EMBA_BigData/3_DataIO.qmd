@@ -10,20 +10,21 @@ editor: visual
 
 ## 資料分析步驟
 
-- **資料匯入與匯出** 
-- 資料清洗處理
-- 資料分析
-- 資料呈現與視覺化
+-   **資料匯入與匯出**
+-   資料清洗處理
+-   資料分析
+-   資料呈現與視覺化
 
 ## 資料匯入與匯出
 
-- 從檔案匯入
-- 從Google drive匯入
-- 從網路匯入
-- 從Twitter匯入
-- 資料匯出
+-   從檔案匯入
+-   從Google drive匯入
+-   從網路匯入
+-   從Twitter匯入
+-   資料匯出
 
 ## 前置作業
+
 ```{python}
 import ssl
 
@@ -34,16 +35,16 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 ## 從檔案匯入
 
-- .csv 逗號分隔格式檔案
-- .xls Excel格式檔案
-- 純文字資料 (無分隔)
-- 其他格式
+-   .csv 逗號分隔格式檔案
+-   .xls Excel格式檔案
+-   純文字資料 (無分隔)
+-   其他格式
 
 ## .csv 逗號分隔格式檔案
 
-- .csv 為逗號分隔格式檔案
-- 可用`pandas`的`read_csv(檔案路徑)`功能將檔案匯入
-- 檔案路徑可以是本機端路徑，也可以是網址
+-   .csv 為逗號分隔格式檔案
+-   可用`pandas`的`read_csv(檔案路徑)`功能將檔案匯入
+-   檔案路徑可以是本機端路徑，也可以是網址
 
 ```{python}
 #| echo: true
@@ -54,408 +55,492 @@ df_csv.head()
 
 ## Hands-on - .csv檔案匯入
 
-- 以[上市公司每月營業收入彙總表](https://data.gov.tw/dataset/18420)為例
-- 複製`csv`資料下載網址
-- 用pandas 的 read_csv()函數將檔案匯入
-- 匯入後印出前5個row
+-   以[上市公司每月營業收入彙總表](https://data.gov.tw/dataset/18420)為例
+-   複製`csv`資料下載網址
+-   用pandas 的 read_csv()函數將檔案匯入
+-   匯入後印出前5個row
 
 ![](figures/downloadcsv.png)
 
 ## .xls Excel格式檔案
 
-- 需要安裝`openpyxl`和`xlrd`套件
+-   需要安裝`openpyxl`和`xlrd`套件
 
 ```{python}
 #| echo: true
 #| eval: false
 !pip3 install openpyxl xlrd
 ```
+
 ## .xls Excel格式檔案
 
-- 使用`pandas`套件中的`read_excel(檔案路徑)`功能
-- 檔案路徑可以是本機端路徑，也可以是網址
-- 可設定`sheet_name`參數指定工作表名稱
+-   使用`pandas`套件中的`read_excel(檔案路徑)`功能
+-   檔案路徑可以是本機端路徑，也可以是網址
+-   可設定`sheet_name`參數指定工作表名稱
 
 ```{python}
 #| echo: true
 house = pd.read_excel('https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/Data/%E6%96%B0%E7%AB%B9%E4%B8%8D%E5%8B%95%E7%94%A2.xls',sheet_name = "不動產買賣")  
 house.head()
 ```
+
 ## Hands-on - .xls Excel格式檔案
 
-- 以[雲林縣水位雨量站](https://data.gov.tw/dataset/145466)為例
-- 複製`Excel`資料下載網址
-- 用pandas 的 read_excel()函數將檔案匯入，記得設定工作表名稱
-- 匯入後印出第三個row
+-   以[雲林縣水位雨量站](https://data.gov.tw/dataset/145466)為例
+-   複製`Excel`資料下載網址
+-   用pandas 的 read_excel()函數將檔案匯入，記得設定工作表名稱
+-   匯入後印出第三個row
 
 # 從Google drive匯入
 
-## 從Google drive匯入
+## 從Google drive匯入 - google 試算表
 
-- 需要安裝`PyDrive`套件
+-   可直接用`pandas`套件
+-   需要加工連結，在原始連結最後加上`/export?format=csv`
+-   如果不是公開資料表，需要授權，可參考`google-api-python-client`套件
 
 ```{python}
 #| echo: true
-#| eval: false
-!pip3 install PyDrive
+link="https://docs.google.com/spreadsheets/d/19KtePrMIdmF1N3nyqQNFvp10JoN62cgAERhjFNcjJr8"
+csv_link="/export?format=csv"
+pd.read_csv(link+csv_link)
 ```
-
-## 從Google drive匯入
-
-- 載入`PyDrive`套件
-
-## googlesheets4 package
-
-```{r eval=F}
-## install googlesheets4 from CRAN (already included in tidyverse)
-install.packages("googlesheets4")
-## load googlesheets4 package
-library(googlesheets4)
-```
-```{r echo=F,eval=T}
-library(googlesheets4)
-```
-
-## googlesheets4 package
-
-使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
-```{r}
-read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
-```
-
-## 需要開啟google 授權
-
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuth.png")
-```
-```{r echo=FALSE}
-knitr::include_graphics("figures/OAuthGoogle.png")
-```
-
-
-## googlesheets4 package
-
-使用`read_sheet()`讀入[範例google sheet](https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0)
-```{r eval=F}
-read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0")
-```
-```{r echo=F}
-knitr::kable(read_sheet("https://docs.google.com/spreadsheets/d/13gnwAUXaxHATsZIGO3mPtdxLMxseE1oYNjgTV4tdFkk/edit#gid=0"))
-```
-
-
 
 # 從網路匯入
 
 ## 從網路匯入
 
-- Open Data
-- API (Application programming interfaces)
-- JSON格式檔案
-- 網頁爬蟲 Webscraping
+-   Open Data
+-   API (Application programming interfaces)
+-   JSON格式檔案
+-   網頁爬蟲 Webscraping
 
 ## Open Data 開放資料
 
-- 2011年推動開放政府與開放資料 ([維基百科](https://zh.wikipedia.org/wiki/%E9%96%8B%E6%94%BE%E8%B3%87%E6%96%99))
-- 不受著作權、專利權，以及其他管理機制所限制，任何人都可以自由出版使用
-- 常見的儲存方式為: 
-    - `CSV`
-    - `JSON`
-    - `XML`
-    
+-   2011年推動開放政府與開放資料 ([維基百科](https://zh.wikipedia.org/wiki/%E9%96%8B%E6%94%BE%E8%B3%87%E6%96%99))
+-   不受著作權、專利權，以及其他管理機制所限制，任何人都可以自由出版使用
+-   常見的儲存方式為:
+    -   `CSV`
+    -   `JSON`
+    -   `XML`
+
 ## Open Data 開放資料常見平台
 
-- [政府資料開放平台](https://data.gov.tw/)
-- [Data Taipei](https://data.taipei/)
-- [開放資料 x 開放桃園](https://data.tycg.gov.tw/)
+-   [政府資料開放平台](https://data.gov.tw/)
+-   [台北市資料大平台](https://data.taipei/)
+-   [桃園開放資料](https://data.tycg.gov.tw/)
 
 ## API
-- 應用程式介面
-- **A**pplication **P**rogramming **I**nterfaces
-- 為了讓第三方的開發者可以額外開發應用程式來強化他們的產品，推出可以與系統溝通的介面
-- 有API輔助可將資料擷取過程自動化
-    -  以下載Open Data為例，若檔案更新頻繁，使用手動下載相當耗時
-- [維基百科](https://zh.wikipedia.org/zh-tw/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8E%A5%E5%8F%A3)
+
+-   應用程式介面
+-   **A**pplication **P**rogramming **I**nterfaces
+-   為了讓第三方的開發者可以額外開發應用程式來強化他們的產品，推出可以與系統溝通的介面
+-   有API輔助可將資料擷取過程自動化
+    -   以下載Open Data為例，若檔案更新頻繁，使用手動下載相當耗時
+-   [維基百科](https://zh.wikipedia.org/zh-tw/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8E%A5%E5%8F%A3)
 
 ## API - Open Data
 
 ::: columns
 ::: column
-
-- [桃園公共自行車即時服務資料](http://data.tycg.gov.tw/opendata/datalist/datasetMeta?oid=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c)資料
-- 每日更新
-- 不可能每日手動下載
-- 提供透過**API**下載的服務
-- 透過API下載的資料格式: **JSON格式**
-
+-   [桃園公共自行車即時服務資料](http://data.tycg.gov.tw/opendata/datalist/datasetMeta?oid=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c)資料
+-   每日更新
+-   不可能每日手動下載
+-   提供透過**API**下載的服務
+-   透過API下載的資料格式: **JSON格式**
 :::
+
 ::: column
-
-- [桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
-    - **資料集ID**: 紀錄資料的基本參數，如包含欄位、更新頻率等
-    - **資料RID**: 資料集
-    - 擷取範例
-
+-   [桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
+    -   **資料集ID**: 紀錄資料的基本參數，如包含欄位、更新頻率等
+    -   **資料RID**: 資料集
+    -   擷取範例
 :::
 :::
-
 
 ## JSON格式檔案
 
-- JSON (**J**ava**s**cript **O**bject **N**otation)
-- 輕量級的資料交換語言
-- From **a**pplication **p**rogramming **i**nterfaces (APIs)
-- JavaScript、Java、Node.js應用
-- 一些NoSQL資料庫用JSON儲存資料：**MongoDB**
-- [Wiki](http://en.wikipedia.org/wiki/JSON)
+-   JSON (**J**ava**s**cript **O**bject **N**otation)
+-   輕量級的資料交換語言
+-   From **a**pplication **p**rogramming **i**nterfaces (APIs)
+-   JavaScript、Java、Node.js應用
+-   一些NoSQL資料庫用JSON儲存資料：**MongoDB**
+-   [Wiki](http://en.wikipedia.org/wiki/JSON)
+
+![](figures/json.png){width="383"}
 
 ## JSON檔案匯入
 
-- `jsonlite` package (套件使用前必須安裝)
-- `fromJSON()`函數載入JSON資料
-- 如果API網址為**https**，則需使用 `httr` package
-    - 使用`GET()`函數處理資料擷取網址
-- API網址參考[桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
-```{r message=FALSE,warning=FALSE,eval=T}
-library(jsonlite)
-APIData<-fromJSON("http://data.tycg.gov.tw/api/v1/rest/datastore/a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f?format=json")
+- 從網路載資料，需要安裝`requests`套件
+- 處理json資料，需要安裝與載入`json`套件
+
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install json requests
+```
+
+```{python}
+#| echo: true
+import json, requests
+```
+
+## JSON檔案匯入
+
+-   API網址參考[桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
+
+```{python}
+#| echo: true
+url="https://data.tycg.gov.tw/api/v1/rest/datastore/a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f?format=json"
+response = requests.get(url)
+data = response.json()  # Convert the response to JSON
+print(data)
+```
+
+## JSON檔案匯入
+
+探索資料，發現是dist (data)中放入另一個dist的list
+
+```{python}
+#| echo: true
+data["result"]["records"]
+```
+
+## JSON檔案匯入
+
+探索資料，發現是dist (data)中放入另一個dist的list
+
+```{python}
+#| echo: true
+data["result"]["records"][0]
 ```
 
 ## Hands-on - JSON檔案匯入練習
 
-- 練習用資料：[桃園市路外停車資訊](https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=f4cc0b12-86ac-40f9-8745-885bddc18f79&rid=0daad6e6-0632-44f5-bd25-5e1de1e9146f)
-- 使用檔案匯入**範例**，將資料匯入R中
-    - 提示：**fromJSON**
-- 使用str()函數觀察匯入的資料
-- 請問有幾筆觀察值？幾個欄位？
-
-
+-   練習用資料：[桃園市路外停車資訊](https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=f4cc0b12-86ac-40f9-8745-885bddc18f79&rid=0daad6e6-0632-44f5-bd25-5e1de1e9146f)
+-   使用檔案匯入**範例**，將資料匯入Python中
+    -   提示：設定url
+-   找到資料的儲存處，並將答案print出
 
 ## 網頁爬蟲 Webscraping
 
-- 不是每個網站都提供API
-- 人工複製貼上?!
-- 程式化的方式擷取網頁資料: **網頁爬蟲（Webscraping）**（[Webscraping Wiki](http://en.wikipedia.org/wiki/Web_scraping)）
-- 可能耗費很多網頁流量和資源 －很可能被鎖IP
-- 在R的處理辦法
-    - 當作XML檔案處理分析
-    - 使用`rvest` package輔助
-    
-## 網頁爬蟲 Webscraping-rvest
+-   不是每個網站都提供API
+-   人工複製貼上?!
+-   程式化的方式擷取網頁資料: **網頁爬蟲（Webscraping）**（[Webscraping Wiki](http://en.wikipedia.org/wiki/Web_scraping)）
+-   可能耗費很多網頁流量和資源 －很可能被鎖IP
+-   使用`beautifulsoup4` 套件輔助
 
-- 擷取條件的撰寫會因網頁語法不同而有差異
-- 使用**Google Chrome開發工具**輔助觀察擷取資料的條件
-    - 或使用**SelectorGadget**輔助
-    - 或使用**xpath-helper**輔助xpath標籤的擷取
-- 觀察需要擷取的資料所在HTML片段
-    - css class為`.eIzpqT`
+## 網頁爬蟲 Webscraping-beautifulsoup4
 
+需要先安裝`beautifulsoup4`以及`requests`套件。
 
-## 盤中奈米股資料爬取 -1
-
-[零股資料](https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm)
-
-```{r}
-library(rvest) 
-NanoStockUrl<-"https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm"
-NanoStockContent<-read_html(NanoStockUrl)
-NanoStockName<-
-  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% html_text()
-NanoStockPrice<-
-  NanoStockContent %>% html_nodes(".t3n1")%>% html_text()
-
-head(NanoStockName)
-head(NanoStockPrice)
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install beautifulsoup4
 ```
 
-## 盤中奈米股資料爬取 -2
+-   擷取條件的撰寫會因網頁語法不同而有差異
+-   使用**Google Chrome開發工具**輔助觀察擷取資料的條件
+  - 或是按右鍵，點選“檢查”
+-   或使用**SelectorGadget**輔助
+-   觀察需要擷取的資料所在HTML片段
+    -   css class, id 等
 
-```{r}
-NanoStockPriceTable<-
-  matrix(NanoStockPrice,ncol=6, byrow=TRUE)
-NanoStockNameClean<-gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
-                         '',
-                         NanoStockName)
-NanoStockData <- 
-    data.frame(name = NanoStockNameClean,
-               NanoStockPriceTable)
+## 即時股價爬取
 
+- [Yahoo 股市](https://tw.stock.yahoo.com/)
+- [Yahoo 股市 - 台積電](https://tw.stock.yahoo.com/quote/2330)
+
+```{python}
+#| echo: true
+from bs4 import BeautifulSoup
+import requests
+StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+res = requests.get(StockUrl)
+soup = BeautifulSoup(res.text, "html.parser")
 ```
 
-## 盤中奈米股資料爬取 -3
-
-```{r eval=F}
-NanoStockData
-```
-```{r echo=F}
-knitr::kable(NanoStockData) 
+```{python}
+#| echo: true
+price = soup.select(".Fz\(32px\)")
+price[0].get_text()
 ```
 
-    
+## 即時股價爬取 - 下載html
+
+- 使用`requests`套件的`get(網址)`函數，輸入網址，將網頁載入python分析環境。
+- 成功載入網頁後，針對該物件，使用`.text`取得網頁原始碼 (.html)
+
+```{python}
+#| echo: true
+StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+res = requests.get(StockUrl)
+res.text
+```
+
+
+## 即時股價爬取 - 解析html
+
+- 使用`BeautifulSoup`套件提供的解析方法`BeautifulSoup(html檔案,格式)`
+- 輸入剛剛載回來的html檔案`res.text`，以及設定格式`"html.parser"`，完成HTML解析
+- 解析後可使用`.prettify`取得排版後的網頁原始碼
+
+```{python}
+#| echo: true
+soup = BeautifulSoup(res.text, "html.parser")
+print(soup.prettify)
+```
+
+## 即時股價爬取 - 搜尋所需節點 -1
+
+- `find(節點條件)`: 取得第一個符合條件的節點 (`<>`內的內容)
+- `find_all(節點條件)`: 取得所有符合條件的節點 (`<>`內的內容)
+- `select_one()`: 取得第一個符合CSS條件的節點 (`class` or `id`等屬性)
+- `select()`: 取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+
+範例：class 包含 `Fz\(32px\)`
+
+```{python}
+#| echo: true
+soup = BeautifulSoup(res.text, "html.parser")
+price = soup.select(".Fz\(32px\)")
+price
+```
+
+## 即時股價爬取 - 取出需要的資料 -1 
+
+- `.get_text()`可抓取節點內文字
+- `.get("屬性名稱")`可抓取屬性內容
+
+```{python}
+#| echo: true
+price[0].get_text()
+```
+
+## 即時股價爬取 - 搜尋所需節點 -2
+
+- `find(節點條件)`: 取得第一個符合條件的節點 (`<>`內的內容)
+- `find_all(節點條件)`: 取得所有符合條件的節點 (`<>`內的內容)
+- `select_one()`: 取得第一個符合CSS條件的節點 (`class` or `id`等屬性)
+- `select()`: 取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+
+範例：class 包含 `price-detail-item `
+
+```{python}
+#| echo: true
+soup = BeautifulSoup(res.text, "html.parser")
+price_detail = soup.select(".price-detail-item")
+price_detail
+```
+
+## 即時股價爬取 - 取出需要的資料 -2
+
+- `.get_text()`可抓取節點內文字
+- `.get("屬性名稱")`可抓取屬性內容
+
+```{python}
+#| echo: true
+len(price_detail)
+```
+```{python}
+#| echo: true
+for price in price_detail:
+  price.get_text()
+```
+## 即時股價爬取 - 搜尋所需節點 -3
+
+- `find(節點條件)`: 取得第一個符合條件的節點 (`<>`內的內容)
+- `find_all(節點條件)`: 取得所有符合條件的節點 (`<>`內的內容)
+- `select_one()`: 取得第一個符合CSS條件的節點 (`class` or `id`等屬性)
+- `select()`: 取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+
+範例：class 包含 `StretchedBox`
+
+```{python}
+#| echo: true
+soup = BeautifulSoup(res.text, "html.parser")
+news = soup.select(".mega-item-header-link")
+news
+```
+
+## 即時股價爬取 - 取出需要的資料 -3
+
+- `.get_text()`可抓取節點內文字
+- `.get("屬性名稱")`可抓取屬性內容
+
+```{python}
+#| echo: true
+len(news)
+```
+```{python}
+#| echo: true
+for title_click in news:
+  title_click.get_text()
+```
+
+
+## 即時股價爬取 - 取出需要的資料 -4
+
+- `.get_text()`可抓取節點內文字
+- `.get("屬性名稱")`可抓取屬性內容
+
+```{python}
+#| echo: true
+for title_click in news:
+  title_click.get("href")
+```
+
+## 即時股價爬取 - 爬連結內的新聞
+
+- 得到連結後，重複上述步驟
+  - 下載html
+  - 解析html
+  - 搜尋所需節點
+  - 取出需要的資料
+
+首先取得連結list。補充內容：
+-   `sequence物件.append()`可新增內容至sequence中
+
+```{python}
+#| echo: true
+url_list = []
+for title_click in news:
+  url_list.append(title_click.get("href"))
+print(url_list)
+```
+
+## 即時股價爬取 - 爬連結內的新聞
+
+- 得到連結後，重複上述步驟
+  - 下載html
+  - 解析html
+  - 搜尋所需節點
+  - 取出需要的資料
+
+以第一個新聞連結為例，下載html後，重複步驟，取得本文
+```{python}
+#| echo: true
+res = requests.get(url_list[0])
+soup = BeautifulSoup(res.text, "html.parser")
+news_full = soup.select_one(".caas-body")
+print("標題: "+title +", 內文:" + news_full.get_text())
+```
+
+## 即時股價爬取 - 爬連結內的新聞
+
+- 得到連結後，重複上述步驟
+  - 下載html
+  - 解析html
+  - 搜尋所需節點
+  - 取出需要的資料
+
+用`for`迴圈一次做完所有連結
+```{python}
+#| echo: true
+for title_click in news:
+  title = title_click.get_text()
+  url = title_click.get("href")
+  res = requests.get(url)
+  soup = BeautifulSoup(res.text, "html.parser")
+  news_full = soup.select_one(".caas-body")
+  print("標題: "+title +", 內文:" + news_full.get_text())
+```
+
+
+## 即時股價爬取 - 爬連結內的新聞
+
+用`for`迴圈一次做完所有連結，並轉成pandas data frame
+```{python}
+#| echo: true
+newdf = []
+for title_click in news:
+  title = title_click.get_text()
+  url = title_click.get("href")
+  res = requests.get(url)
+  soup = BeautifulSoup(res.text, "html.parser")
+  news_full = soup.select_one(".caas-body")
+  add_news = pd.DataFrame({"title":[title],"content":[news_full.get_text()]})
+  newdf.append(add_news)
+
+pd.concat(newdf)
+```
+
 ## Hands-on 爬蟲練習
 
-- [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)
-- 試著爬出所有**標題**
-- 爬出的第三個標題是？
+-   [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)
+-   試著爬出所有**標題**
+-   爬出的第三個標題是？
 
+## 網頁爬蟲 進階版
+
+- 滾動式等動態網頁網頁，如剛剛的新聞
+  - [Python 進階爬蟲 by Andy Chiang](https://hackmd.io/@AndyChiang/DynamicCrawler)
 
 ## 網頁爬蟲 再想想？
 
-- 其實... 很多資料有其他存取方式，像API
-    - https://www.dcard.tw/_api/forums/cgu/posts
-    - https://www.dcard.tw/_api/posts/225917717
-    - https://www.dcard.tw/_api/posts/225917717/comments
-- 隱私問題 （OkCupid事件）
-    - [70,000 OkCupid Users Just Had Their Data Published](https://motherboard.vice.com/en_us/article/70000-okcupid-users-just-had-their-data-published)
-    
-    
-## 從Twitter匯入
-
-- Twitter API
-- rtweet package
-
-## Twitter API
-
-- https://developer.twitter.com/en/apps
-- 需有Twitter帳號並通過開發者審核
-
-## rtweet package
-
-```{r eval=F}
-## install rtweet from CRAN
-install.packages("rtweet")
-## load rtweet package
-library(rtweet)
-```
-
-## rtweet package - token 設定
-
-```{r}
-library(rtweet)
-create_token(
-  app = "teach0309",
-  consumer_key = "Wbba6ysyPKGstGAqohmtyWZOE",
-  consumer_secret = "GJweDzVvXGrbjz26bHTr3d6dFI7q9gFCH98f3Ct2yk3APPWigc",
-  access_token = "216362944-AxxvSiPBR7nBScfBks7thajSovUwFG6v67aNR3WP",
-  access_secret = "pF0OldOjiJxaBbPlQhx7V3VkA6MIgdzHHofar1DM0pX0G")
-```
-
-## rtweet package - 搜尋hashtag
-
-```{r eval=F}
-## search for 3000 tweets using the Taiwan hashtag
-rt <- search_tweets(
-  "#Taiwan", n = 3000, include_rts = FALSE
-)
-head(rt)
-```
-```{r echo=F}
-rt <- search_tweets(
-  "#Taiwan", n = 3000, include_rts = FALSE
-)
-knitr::kable(rt[1:6,1:4])
-```
-
-## rtweet package - 搜尋hashtag
-
-```{r echo=F}
-library(ggplot2)
-ts_plot(rt, "3 hours") +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
-  ggplot2::labs(
-    x = NULL, y = NULL,
-    title = "Frequency of #Taiwan Twitter statuses",
-    subtitle = "Twitter status (tweet) counts aggregated using three-hour intervals",
-    caption = "\nSource: Data collected from Twitter's REST API via rtweet"
-  )
-```
-
-## rtweet package - 取得趨勢
-
-```{r eval=F}
-sf <- get_trends("USA")
-head(sf)
-```
-```{r echo=F}
-sf <- get_trends("USA")
-knitr::kable(sf[1:4,1:4])
-```
-
-## rtweet package - 取得timeline
-
-```{r eval=F}
-tmls_Bezos <- get_timelines("JeffBezos", n = 1000)
-tmls_Musk <- get_timelines( "elonmusk", n = 1000)
-head(tmls_Bezos)
-head(tmls_Musk)
-```
-```{r echo=F}
-tmls_Bezos <- get_timelines("JeffBezos", n = 1000)
-tmls_Musk <- get_timelines( "elonmusk", n = 1000)
-knitr::kable(tmls_Bezos[1:6,c("full_text","source")])
-knitr::kable(tmls_Musk[1:6,c("full_text","source")])
-```
-
-## rtweet package - 取得timeline
-
-```{r echo=F}
-## plot the frequency of tweets for each user over time
-tmls_Musk %>%
-  dplyr::filter(created_at > "2022-11-01") %>%
-  ts_plot("days", trim = 1L) +
-  ggplot2::geom_point() +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(
-    legend.title = ggplot2::element_blank(),
-    legend.position = "bottom",
-    plot.title = ggplot2::element_text(face = "bold")) +
-  ggplot2::labs(
-    x = NULL, y = NULL,
-    title = "Frequency of Twitter statuses posted",
-    subtitle = "Twitter status (tweet) counts aggregated by day from  2022-11-01",
-    caption = "\nSource: Data collected from Twitter's REST API via rtweet"
-  )
-
-```
-
-
-## rtweet package - favorites
-
-```{r eval=F}
-## get user IDs of accounts favorited by Elon Musk
-em_flw <- get_favorites("elonmusk", n = 100)
-head(em_flw)
-```
-```{r echo=F,eval=T}
-## get user IDs of accounts favorited by Elon Musk
-em_flw <- get_favorites("elonmusk", n = 100)
-knitr::kable(em_flw[1:6,c("text", "created_at", "id_str")])
-```
-
-
-## Hands-on - X資料匯入練習
-
-type:alert
-incremental:true
-- 複製老師的Twitter access token
-- 使用rtweet package取得**蔡英文 Tsai Ing-wen**(iingwen)的timeline，共50筆tweets
-- 第一筆資料的retweet_count是多少?
-- 第二筆資料的favorite_count是多少?
+-   其實... 很多資料有其他存取方式，像API
+-   隱私問題 （OkCupid事件）
+    -   [70,000 OkCupid Users Just Had Their Data Published](https://motherboard.vice.com/en_us/article/70000-okcupid-users-just-had-their-data-published)
 
 
 ## 從網路匯入 - Recap
 
-- Open Data
-- API (Application programming interfaces)
-- JSON格式檔案
-- 網頁爬蟲 Webscraping
-
+-   Open Data
+-   API (Application programming interfaces)
+-   JSON格式檔案
+-   網頁爬蟲 Webscraping
 
 # 資料匯出
 
 ## 資料匯出
 
-- 文字檔 .txt
-- CSV檔 .csv
-- R物件 .rds
+-   文字檔 .txt
+-   CSV檔 .csv
+-   json檔 .json
+
+## 資料匯出 - 文字檔 .txt
+
+```{python}
+#| echo: true
+path = 'output_writeline.txt'
+f = open(path, 'w')
+lines1 = ['Hello World', '123', '456', '789']
+lines2 = ['Hello World\n', '123\n', '456\n', '789\n']
+f.writelines(lines1)
+f.writelines(lines2)
+f.close()
+```
+
+## 資料匯出 - 文字檔 .txt
+
+```{python}
+#| echo: true
+path = 'output_write.txt'
+f = open(path, 'w')
+lines1 = ['Hello World', '123', '456', '789']
+lines2 = ['Hello World\n', '123\n', '456\n', '789\n']
+f.write(lines1)
+f.write(lines2)
+f.close()
+```
+
+## 資料匯出 - CSV檔 .csv
+
+```{python}
+#| echo: true
+path = 'output_write.txt'
+f = open(path, 'w')
+lines1 = ['Hello World', '123', '456', '789']
+lines2 = ['Hello World\n', '123\n', '456\n', '789\n']
+f.write(lines1)
+f.write(lines2)
+f.close()
+```
+
+
+## 資料匯出 - json檔 .json
+
+
+
+

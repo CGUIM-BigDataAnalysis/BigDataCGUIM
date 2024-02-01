@@ -426,6 +426,7 @@ list1 = [float1, float2, float3]
 max(list1)
 ```
 
+
 可參考[文件](https://docs.python.org/zh-cn/3/library/functions.html)
 
 ## 定值表 (tuple)
@@ -543,6 +544,24 @@ r2[5]
 ```
 :::
 :::
+
+## sequence 新增修改
+
+-   sequence包含：list, tuple, range
+-   使用中括號加上index取值`變數名稱[index]`
+-   `sequence物件.append()`可新增內容至sequence中
+
+```{python}
+#| echo: true
+list1 = [float1, float2, float3]
+print(list1)
+```
+
+```{python}
+#| echo: true
+list1.append(5.5)
+print(list1)
+```
 
 ## mapping 取值
 
