@@ -548,7 +548,6 @@ r2[5]
 ## sequence 新增修改
 
 -   sequence包含：list, tuple, range
--   使用中括號加上index取值`變數名稱[index]`
 -   `sequence物件.append()`可新增內容至sequence中
 
 ```{python}
@@ -574,10 +573,22 @@ dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
 print(dist1)
 ```
 
+
+## mapping 新增修改
+
+-   mapping包含：dist
+-   `mapping物件.update()`可新增內容(key:value pairs)至mapping中
+
 ```{python}
 #| echo: true
-name=dist1["name"]
-print(name)
+dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
+print(dist1)
+```
+
+```{python}
+#| echo: true
+dist1.update({"age":25, "dept":"IM"})
+print(dist1)
 ```
 
 ## Hands-on
@@ -939,7 +950,7 @@ df1.tail(2)
 #| echo: true
 df1["Name"]
 ```
-資料匡物件名稱`[`欄位名稱`]`：取出資料框
+資料框物件名稱`[`欄位名稱`]`：取出資料框
 ```{python}
 #| echo: true
 df1[["Name"]]
@@ -961,6 +972,30 @@ df1[0:1]
 - 試著取出學生成績欄位
 - 試著取出學生姓名與成績兩個欄位
 - 試著取出第3位學生的成績 (hint: sequence)
+
+## pandas 資料框 - 設定index
+
+預設index為0~n的序列
+
+```{python}
+#| echo: true
+df_index = pd.DataFrame({"ID":[1, 2, 3, 4],
+       "Name":["Tom","Emma","Ryan","Amy"]},index=["a","b","c","d"])
+df_index
+```
+
+
+## pandas 資料框 - 設定index
+
+也可用已有的data frame設定，透過`.set_index(欄位名稱)`
+
+```{python}
+#| echo: true
+df_index2 = df1.set_index("ID")
+df_index2
+```
+
+
 
 ## pandas 資料框 - 新增修改
 
