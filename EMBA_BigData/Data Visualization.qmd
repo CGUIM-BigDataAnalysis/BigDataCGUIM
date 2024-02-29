@@ -39,7 +39,6 @@ matplotlib.font_manager.fontManager.addfont('taipei_sans_tc_beta.ttf')
 matplotlib.rc('font', family='Taipei Sans TC Beta')
 ```
 
-
 ```{python}
 # 空氣品質監測日平均值(一般污染物)
 # https://data.moenv.gov.tw/dataset/detail/AQX_P_19
@@ -107,7 +106,9 @@ plt.show()
 ```
 
 ### Hands-on
+
 看看一氧化碳(CO)的資料分布
+
 ```{python}
 # 請按照題目要求修改
 # 如修改正確，執行後會呈現圖形
@@ -118,10 +119,10 @@ plt.show()
 ```
 
 ## 散佈圖 Scatter plot
+
 除了PM2.5濃度的數值分佈、PM2.5濃度隨著時間的變化外，我們可能也會對各項空污數據間的關聯性有興趣，此時可以用散佈圖將有興趣的濃度分別放在x軸與y軸。在Python中，可用`seaborn`套件的`scatterplot()`函數作圖，輸入函數有x軸與y軸數據，分列如下：
 
-x軸：PM2.5濃度
-y軸：PM10濃度
+x軸：PM2.5濃度 y軸：PM10濃度
 
 ```{python}
 sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
@@ -131,14 +132,18 @@ plt.show()
 由上圖可知，PM2.5和PM10的資料分佈有一定關係，為了將此關係視覺化，可在散佈圖加上迴歸線。
 
 ## 散佈圖 Scatter plot + 迴歸線
+
 在散佈圖中加上迴歸線可使用`seaborn`套件的`regplot()`函數，使用方法與`scatterplot()`函數相同。
+
 ```{python}
 sns.regplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
 plt.show()
 ```
 
 ### Hands-on
+
 試著看看最近的空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
+
 ```{python}
 # 請按照題目要求修改
 # 如修改正確，會呈現圖形
@@ -151,12 +156,13 @@ plt.show()
 # 比較各組或不同時間數據的圖形制作
 
 ## 折線圖 Line chart
+
 在前述章節中，我們學會如何利用視覺化圖形觀察資料分佈，但若想要比較各組或不同時間的數據，如PM2.5濃度隨時間的變化，就需要使用其他視覺化的方法。 為了呈現各項數據與時間的關係，在此一樣先前範例載入的北京空氣污染數據。 如何呈現每天 PM2.5濃度的變化？
 
 可使用`seaborn`套件的`lineplot()`函數畫折線圖，此函數需要兩個參數，分別為x與y
 
-- x軸：日期
-- y軸：PM2.5濃度
+-   x軸：日期
+-   y軸：PM2.5濃度
 
 ```{python}
 sns.lineplot(x=pm25[pm25['sitename']=="麥寮"]['DateTime'], y=pm25[pm25['sitename']=="麥寮"]['concentration'])
@@ -164,7 +170,9 @@ plt.show()
 ```
 
 ### Hands-on
-請試著呈現林口測站在2024/1/1~2024/1/15的PM2.5濃度起伏
+
+請試著呈現林口測站在2024/1/1\~2024/1/15的PM2.5濃度起伏
+
 ```{python}
 # 請按照題目要求修改
 # 如修改正確，會呈現圖形
@@ -175,8 +183,10 @@ sns.lineplot(pm25Linkou['DateTime'], pm25Linkou['修改這裡'])
 plt.show()
 ```
 
-## [進階] 如何在折線圖中同時呈現所有氣體變化呢？
+## \[進階\] 如何在折線圖中同時呈現所有氣體變化呢？
+
 用單一折線圖有時不管用
+
 ```{python}
 sns.lineplot(df202401[df202401['itemengname']=="PM2.5"]['DateTime'], df202401[df202401['itemengname']=="PM2.5"]['concentration'])
 sns.lineplot(df202401[df202401['itemengname']=="PM10"]['DateTime'], df202401[df202401['itemengname']=="PM10"]['concentration'])
@@ -192,13 +202,14 @@ g.map(sns.lineplot, "DateTime", "concentration")
 ```
 
 ## 管制圖 Control chart
+
 管制圖可視為折線圖的延伸，如上圖所示，因PM2.5濃度在自然狀態下就會高低起伏，如何判斷正常的變化以及不正常的變化就變得非常重要，使用管制圖可快速判斷不正常的數值起伏。 如需了解更多管制圖的背景知識，可參考[wiki](https://zh.wikipedia.org/wiki/%E7%AE%A1%E5%88%B6%E5%9C%96)
 
 在此使用平均值加減兩倍標準差以及加減三倍標準差當作管制界線，並使用`matplotlib`套件的`axhline()`函數將平均值與管制界線加入原有的折線圖中。因`seaborn`是基於`matplotlib`套件為基礎開發的更高階套件，因此圖形可直接疊加。 以下範例中`axhline()`函數共有以下輸入參數
 
-- y: 計算平均值`mean()`，計算標準差`std()`，`skipna=True`為跳過空值
-- color: 修改線條顏色 （綠色g、黃色y、紅色r），其他顏色設定可參考[文件](https://matplotlib.org/tutorials/colors/colors.html)
-- linestyle: 修改線條樣式 （虛線），其他樣式設定可參考[文件](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html)
+-   y: 計算平均值`mean()`，計算標準差`std()`，`skipna=True`為跳過空值
+-   color: 修改線條顏色 （綠色g、黃色y、紅色r），其他顏色設定可參考[文件](https://matplotlib.org/tutorials/colors/colors.html)
+-   linestyle: 修改線條樣式 （虛線），其他樣式設定可參考[文件](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html)
 
 ```{python}
 sns.lineplot(dfpm25['DateTime'], dfpm25['concentration'])
@@ -218,6 +229,7 @@ plt.axhline(y=dfpm25['concentration'].mean(skipna=True)-
             color='r', linestyle=':')
 plt.show()
 ```
+
 由上圖可知，若以三倍標準差當作管制界線，一月初與一月底的幾個高峰可能為不正常變化，應考慮調查造成此變化的原因。
 
 ## 長條圖 Bar chart
@@ -226,11 +238,10 @@ plt.show()
 
 如比較各測站PM2.5超標的天數，可使用`seaborn`套件的`barplot()`函數，其中輸入兩個參數
 
-- x軸: 測站名稱
-- y軸: PM2.5超標的天數
+-   x軸: 測站名稱
+-   y軸: PM2.5超標的天數
 
 首先使用pandas的groupby().size().reset_index()計算資料中個風向的計數資料，並儲存成wddf變數。
-
 
 ```{python}
 pm25_count=pm25[pm25['concentration']>35].groupby('sitename').size().reset_index(name='size')
@@ -242,7 +253,6 @@ sns.barplot(x=pm25_count['sitename'],y=pm25_count['size'])
 plt.show()
 ```
 
-
 ```{python}
 pm25_sorted = pm25_count.sort_values('size')
 sns.barplot(x=pm25_sorted['sitename'],y=pm25_sorted['size'])
@@ -252,21 +262,22 @@ plt.show()
 由此圖可知此資料區間中，吹NNE風向的天數最多，再來是N，以及NE。
 
 ## 盒鬚圖 Box plot
+
 除了用直方圖得知PM2.5的濃度分佈外，如果想知道每個測站 PM2.5濃度 的分佈（中位數、四分位差、離群值等）是否有差異，可使用盒鬚圖，盒鬚圖的各點意義如下：
 
-- x軸：測站
-- y軸：PM2.5濃度
-- 盒（方塊）中線：中位數
-- 盒（方塊）上緣：第三 四分位差
-- 盒（方塊）下緣：第一 四分位差
-- 鬚（線條）上緣：
-- 鬚（線條）下緣：
-- 點：離群值
+-   x軸：測站
+-   y軸：PM2.5濃度
+-   盒（方塊）中線：中位數
+-   盒（方塊）上緣：第三 四分位差
+-   盒（方塊）下緣：第一 四分位差
+-   鬚（線條）上緣：
+-   鬚（線條）下緣：
+-   點：離群值
 
 使用seaborn套件的boxplot()函數，可製作盒鬚圖，輸入參數為：
 
-- x軸：月份
-- y軸：各月份要比較的數據分佈（此為PM2.5）
+-   x軸：月份
+-   y軸：各月份要比較的數據分佈（此為PM2.5）
 
 ```{python}
 pm25[['sitename','concentration']]
@@ -275,7 +286,9 @@ plt.show()
 ```
 
 ### Hands-on
+
 使用盒鬚圖比較各月PM2.5濃度有無差異
+
 ```{python}
 # 請按照題目要求修改
 # 如修改正確，會呈現一樣的圖形
@@ -287,7 +300,9 @@ plt.show()
 ```
 
 # 呈現相關性的圖形制作
+
 ## 泡泡圖 Bubble plot -1
+
 泡泡圖是散佈圖的延伸，散佈圖除了可以觀察資料分佈外，也可呈現兩組資料的相關性。
 
 在散佈圖中，每個點代表一組X與Y的數值，因此可比較XY數值，也可看出X與Y的關係。如比較PM2.5與PM10是否有關，在先前的範例中，可看出PM2.5和PM10是顯著的相關，也就是PM2.5越高，PM10就越高。
@@ -295,13 +310,16 @@ plt.show()
 泡泡圖維持散佈圖的X與Y軸關係，但在點的大小上增加變化，將原本二維(XY)的圖形延伸成三維(XY與泡泡大小)。
 
 ## 泡泡圖 Bubble plot -2
+
 首先如先前的教學，我們先做一般的散佈圖，X軸為PM2.5，Y軸為PM10：
+
 ```{python}
 sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
 plt.show()
 ```
 
 ## 泡泡圖 Bubble plot -3
+
 ```{python}
 sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'],size=df[df['itemengname']=="WIND_SPEED"]['concentration'])
 plt.show()
@@ -310,14 +328,18 @@ plt.show()
 由上圖可以發現各點的大小差距不大，導致分不太出來各點的大小差距
 
 ## 泡泡圖 Bubble plot -4
+
 可以透過sizes參數設定最大點與最小點的大小，即可畫出點大小差異較大的圖形
+
 ```{python}
 sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'],size=df[df['itemengname']=="WIND_SPEED"]['concentration'],sizes=(20, 200))
 plt.show()
 ```
 
 ### Hands-on
+
 使用泡泡圖呈現NO2與SO2的關係，並用氣溫（TEMP）當作泡泡大小，觀察這三個資料是否有相關
+
 ```{python}
 # 請按照題目要求修改
 # 如修改正確，會呈現一樣的圖形
@@ -330,10 +352,11 @@ plt.show()
 # 進階資料作圖
 
 ## 熱度圖 Heatmap
+
 熱度圖使用顏色的深淺來表示數值的大小，通常會搭配XY兩軸的變量，所以使用一張圖就能表示三個維度的資訊，使用seaborn套件的heatmap()函數，即可製作熱度圖。在製作熱度圖之前，必須先將輸入資料處理成對應格式，舉例來說，若想使用熱度圖呈現每天（X軸為日期），PM2.5、PM10、SO2、NO2（Y軸為此四種污染物）的濃度（著色），我們必須將Pandas資料框的index設定為日期，PM2.5、PM10、SO2以及NO2為欄位名稱，各欄位的值是當日該物質的濃度。
 
-最後將資料放入seaborn套件的heatmap()函數，即可製作熱度圖。
-有時使用內建色盤效果不一定好，可以透過設定cmap來調整色盤。 cmap的選擇可參考[官方文件](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
+最後將資料放入seaborn套件的heatmap()函數，即可製作熱度圖。 有時使用內建色盤效果不一定好，可以透過設定cmap來調整色盤。 cmap的選擇可參考[官方文件](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
+
 ```{python}
 df_long = df[df['itemengname'].isin("PM2.5","PM10","CO","NO2","O3")]
 df_long_linkou=df_long[df_long['sitename']=="林口"][["DateTime","itemengname","concentration"]]
@@ -341,12 +364,14 @@ df_wide_linkou = pd.pivot(df_long_linkou, index='itemengname', columns='DateTime
 ax = sns.heatmap(df_wide_linkou, cmap="YlGnBu")
 plt.show()
 ```
+
 ## 月曆熱度圖
+
 月曆熱度圖是熱度圖的延伸，一般來說，月曆熱度圖的各維度為：
 
-- X軸代表每年的"週"
-- Y軸代表星期一至星期天
-- 顏色的深淺則代表欲觀察數值
+-   X軸代表每年的"週"
+-   Y軸代表星期一至星期天
+-   顏色的深淺則代表欲觀察數值
 
 通常是為了觀察或呈現某一數值是否有季節或是隨著星期變化的趨勢。 在Python中，calmap套件提供非常快速製作月曆熱度圖的方法。與製作熱度圖相同，在製作月曆熱度圖時，也必須對資料做一定的處理。 首先將日期與感興趣的資料取出，方便後續呈現
 
@@ -357,15 +382,20 @@ df2023=df2023.set_index(['DateTime'])
 calmap.yearplot(df2023[df2023['itemengname']=='PM2.5']['concentration'], year=2023)
 plt.show()
 ```
+
 ## 矩形圖 Tree map
+
 Treemap(矩形式樹狀結構繪圖法)是以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊，可設定得值包括面積、顏色以及階層。
+
 ```{python}
 import squarify 
 df_sq = pd.DataFrame({'nb_people':[8,3,4,2], 
                    'group':["group A", "group B", "group C", "group D"] })
 df_sq
 ```
+
 ## 矩形圖 Tree map
+
 ```{python}
 squarify.plot(sizes=df_sq['nb_people'], 
               label=df_sq['group'], alpha=.8 )
@@ -374,8 +404,9 @@ plt.show()
 ```
 
 # 圖形樣式參數設定
-https://github.com/yijutseng/DataVisPython/blob/master/DataVisCode.ipynb
-# 參考資料
+
+https://github.com/yijutseng/DataVisPython/blob/master/DataVisCode.ipynb \# 參考資料
 
 ## Python資料視覺化參考資料
+
 https://github.com/yijutseng/DataVisPython/blob/master/DataVisCode.ipynb

@@ -8,10 +8,17 @@ format:
 editor: visual
 ---
 
-# 資料清洗與處理
+## 資料分析步驟
+
+-   資料匯入
+-   **資料清洗處理**
+-   資料分析
+-   資料呈現與視覺化
+
+## 資料清洗與處理
 
 -   Tidy Data
--   資料型別轉換處理
+-   資料型態轉換處理
 -   文字字串處理
 -   子集Subset
 -   排序
@@ -19,7 +26,18 @@ editor: visual
 -   長表轉寬表
 -   遺漏值處理
 
-# Tidy Data
+
+## 前置作業
+
+為了成功從https (加密封包傳輸)下載資料，首先取消證書驗證
+
+```{python}
+#| echo: true
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+```
+
+## Tidy Data
 
 type:sub-section
 
@@ -31,221 +49,402 @@ Each column is a variable. Each row is an observation.
 -   如果一定要多張表，中間一定要有index可以把表串起來
 -   One file, one table
 
-# 資料型別轉換處理
+# 資料型態轉換處理
 
-type:sub-section 包括**資料型別檢查**與**資料型別轉換**
+## 資料型態轉換處理
 
-資料型別:
+包括**資料型態檢查**與**資料型態轉換**
 
--   數值 (numeric)
--   字串 (character)
--   布林變數 (logic)
--   日期 (Date)
+Data Types 資料型態
 
-# 資料型別檢查 - is.
+-   **文字 (text, string, character)**
+-   **數值 (numeric)**
+-   **布林變數 (Boolean, logic)**
+-   **日期 (date)**
 
-使用`is.`函數檢查資料型別，回傳布林變數，若為**真**，回傳**TRUE**
 
--   是否為**數字** `is.numeric(變數名稱)`
--   是否為**文字** `is.character(變數名稱)`
--   是否為**布林變數** `is.logical(變數名稱)`
+## Check Data Type
 
-```{r}
-num<-100
-is.numeric(num)
-is.character(num)
+使用`type()`函數可查看資料結構
+
+```{python}
+#| echo: true
+import pandas as pd
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+type(df1)
 ```
 
-# 資料型別檢查 - class()
-
-使用`class(變數名稱)`函數，直接回傳**資料型別**
-
-```{r}
-class(num)
-class(Sys.Date())
+```{python}
+#| echo: true
+dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
+type(dist1)
 ```
 
-# 資料型別轉換 - as.
+## 資料型態檢查 - isinstance
 
-使用`as.`函數轉換型別
+使用`isinstance()`函數檢查資料型態，回傳布林變數，若為**真**，回傳**TRUE**
 
--   轉換為**數字** `as.numeric(變數名稱)`
--   轉換為**文字** `as.character(變數名稱)`
--   轉換為**布林變數** `as.logical(變數名稱)`
+-   是否為**數字** `isinstance(變數名稱,(int,float))`
+-   是否為**文字** `isinstance(變數名稱,str)`
+-   是否為**布林變數** `isinstance(變數名稱,bool)`
 
-```{r}
-cha<-"100"
-as.numeric(cha)
+```{python}
+#| echo: true
+num = 100
+isinstance(num,int)
 ```
 
-# 資料型別轉換 - as.
-
-若無法順利完成轉換，會回傳空值`NA`，並出現警告訊息
-
-```{r}
-as.numeric("abc")
+```{python}
+#| echo: true
+isinstance(num,float)
 ```
 
-# 資料型別轉換練習
-
-type:alert 回想起奈米股盤中交易的資料．．．
-
-```{r}
-library(rvest) 
-NanoStockUrl<-"https://fubon-ebrokerdj.fbs.com.tw/z/ze/zeg/zega_EBTW50E_I.djhtm"
-NanoStockContent<-read_html(NanoStockUrl)
-NanoStockName<-
-  NanoStockContent %>% html_nodes("#oAddCheckbox") %>% 
-    html_text()
-NanoStockPrice<-
-  NanoStockContent %>% html_nodes(".t3n1")%>% 
-    html_text()
-NanoStockPriceTable<-
-  matrix(NanoStockPrice,ncol=6, byrow=TRUE)
-NanoStockNameClean<-gsub('\\r|<|!|\\n|\\t|GenLink2stk|;|/|-|>',
-                         '',
-                         NanoStockName)
-NanoStockData <- 
-    data.frame(name = NanoStockNameClean,
-               NanoStockPriceTable)
-knitr::kable(NanoStockData) 
+```{python}
+#| echo: true
+isinstance(num,(int,float))
 ```
 
-# 資料型別轉換練習
 
-type:alert 成交股數、總成交值都是字串型別 (chr)
-
-```{r}
-str(NanoStockData)
+```{python}
+#| echo: true
+text = "100"
+isinstance(text,(int,float))
 ```
 
-該如何將這兩個欄位轉成數字呢？
+```{python}
+#| echo: true
+text = "100"
+isinstance(text,str)
+```
+
+
+# 資料型態轉換 - 複習Python 101
+
+使用`int()`, `float()`, `str()`函數轉換型態
+
+-   轉換為**整數** `int(變數名稱)`
+-   轉換為**浮點數** `float(變數名稱)`
+-   轉換為**文字** `str(變數名稱)`
+
+```{python}
+#| echo: true
+cha = "100"
+cha_int = int(cha)
+type(cha_int)
+```
+
+## 資料型態轉換 - as.
+
+若無法順利完成轉換，會出現錯誤訊息
+
+```{python}
+#| echo: true
+int("abc")
+```
+
+## Hands-on 資料型態轉換練習
+
+回想起台積電的資料
+
+```{python}
+#| echo: true
+import requests
+from bs4 import BeautifulSoup
+StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+res = requests.get(StockUrl)
+soup = BeautifulSoup(res.text, "html.parser")
+price_type = soup.select(".price-detail-item .C\(\#232a31\)")
+price_detail = soup.select(".price-detail-item .Fw\(600\)")
+type_list=[]
+price_list=[]
+for i in price_type:
+  type_list.append(i.get_text())
+for i in price_detail:
+  price_list.append(i.get_text())
+import pandas as pd
+price_df = pd.DataFrame({"Type" : type_list, "Price":price_list})
+```
+
+## Hands-on 資料型態轉換練習
+
+回想起台積電的資料
+
+```{python}
+price_df
+```
+
+## Hands-on 資料型態轉換練習
+
+- Price欄位的資料型態是？
+- 如何將Price欄位轉換成數字？
+- **Hint**: 先做該欄位第一個數字，以此類推
+
 
 # 文字字串處理
 
-type:sub-section
+## 文字字串處理
 
+-   基本查詢
 -   基本處理
 -   搜尋字串
--   [Regular Expression 正規表示式 \@ R](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/105/RegularExpression.md)
 
-# 基本處理
 
--   切割 `strsplit()` **Split**
--   子集 `substr()` **sub string**
--   大小寫轉換 `toupper()` `tolower()`
--   兩文字連接 `paste()` `paste0()`
--   文字取代 `gsub()` **substitute**
--   前後空白去除 `str_trim()` 需安裝`stringr` package **trim**
+## 基本查詢
 
-# 基本處理-切割
+-   字串長度 `len(變數名稱)`
+-   字串內包含某字的個數 `.count(某字)`
 
-strsplit (欲切割的字串,用什麼符號切割)
-
-```{r}
-strsplit ("Hello World"," ")
+```{python} 
+#| echo: true
+str_ex = "Hello World"
+len(str_ex)
+```
+```{python} 
+#| echo: true
+str_ex.count("o")
 ```
 
-# 基本處理-切割（多字元）\|
+## 基本處理
 
-strsplit (欲切割的字串,切割符號1\|切割符號2\|...)
+-   切割 `.split()` **Split**
+-   子集 `字串變數[:]` **sub string**, **Slice**
+-   大小寫轉換 `.upper()` `.lower()`
+-   兩文字連接 `+` `.join(字串清單list)`
+-   文字取代 `.replace(舊值,新值)` **substitute**
+-   前後空白去除 `.strip(字元,預設空白)` **trim**
 
-```{r}
-strsplit ("Hello World"," |o")
+## 基本處理-切割
+
+`字串變數.split(用什麼符號切割)`
+
+```{python} 
+#| echo: true
+str_ex = "Hello World"
+str_ex.split(" ")
 ```
 
-# 基本處理-子集（切一小段）
+## 基本處理-子集（切一小段）
 
-substr(欲做子集的字串,開始位置,結束位置)
-
-```{r}
-substr("Hello World", start=2,stop=4)
+`字串變數[開始位置:結束位置]`（不包含結束位置）
+```{python} 
+#| echo: true
+str_ex
+```
+```{python} 
+#| echo: true
+str_ex[1:5]
 ```
 
-# 基本處理-大小寫轉換
+## 基本處理-大小寫轉換
 
-```{r}
-toupper("Hello World")
-tolower("Hello World")
+-   `字串變數.upper()`
+-   `字串變數.lower()`
+
+```{python} 
+#| echo: true
+str_ex.upper()
+```
+```{python} 
+#| echo: true
+str_ex.lower()
 ```
 
-# 基本處理-兩文字連接
+## 基本處理-兩文字連接
 
-paste(欲連接的字串1, 欲連接的字串2, 欲連接的字串3,.... sep=中間用什麼符號分隔)
+-   字串1`+`字串2 
+-   `字串變數.join(字串清單list)`，字串變數為字串間隔
 
-```{r}
-paste("Hello", "World")
-paste("Hello", "World", sep='')
-paste0("Hello", "World")
+```{python} 
+#| echo: true
+"Hello" + "World"
+str_list = ["桃園市","龜山區","文化一路"]
+space = " "
+space.join(str_list)
 ```
 
-# 基本處理-文字取代
+## 基本處理-文字取代
 
-gsub(想要換掉的舊字串,想要換成的新字串,欲作取代的完整字串)
+`字串變數.replace(舊值,新值)` **substitute**
 
-```{r}
-gsub("o","0","Hello World")
+```{python} 
+#| echo: true
+str_ex.replace("o","0")
 ```
 
-# 基本處理-文字取代（多字元）\|
 
-gsub(想要換掉的舊字串1\|想要換掉的舊字串2\|...,想要換成的新字串,欲作取代的完整字串)
+## 基本處理-前後空白去除
 
-```{r}
-gsub("o|l","0","Hello World")
+
+`字串變數.strip(字元,預設空白)` **trim**
+
+```{python} 
+#| echo: true
+space_ex = "    CGU.   "
+space_ex.strip()
+```
+```{python} 
+#| echo: true
+dot_ex = "CGU."
+dot_ex.strip(".")
+```
+## Hands-on 字串基本處理
+
+回想起台積電的資料
+
+```{python}
+#| echo: true
+import requests
+from bs4 import BeautifulSoup
+StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+res = requests.get(StockUrl)
+soup = BeautifulSoup(res.text, "html.parser")
+price_type = soup.select(".price-detail-item .C\(\#232a31\)")
+price_detail = soup.select(".price-detail-item .Fw\(600\)")
+type_list=[]
+price_list=[]
+for i in price_type:
+  type_list.append(i.get_text())
+for i in price_detail:
+  price_list.append(i.get_text())
+import pandas as pd
+price_df = pd.DataFrame({"Type" : type_list, "Price":price_list})
 ```
 
-# 基本處理-前後空白去除
+## Hands-on 字串基本處理
 
-str_trim要使用前需要安裝與載入**stringr**套件
+回想起台積電的資料
 
-```{r}
-library(stringr)
-str_trim(" Hello World ")
+```{python}
+price_df
 ```
 
-# 搜尋字串
+## Hands-on 字串基本處理
 
--   通常使用在**比對文字向量**
+-   請把Price欄位中的%符號移除，並在相對應的Type欄位加上%符號
+-   請把Price欄位中,移除，再將整個Price欄位轉為數字
+
+
+## 搜尋字串
+
+-   使用`==`, `in`完整比對
 -   **有分大小寫**
--   依照回傳值的型態不同，有兩種常用函數
-    -   回傳符合條件之向量位置(index) `grep(搜尋條件,要搜尋的向量)`
-    -   回傳每個向量是否符合條件(TRUE or FALSE) `grepl(搜尋條件,要搜尋的向量)`
 
-```{r}
-##在姓名文字向量中尋找A，回傳包含"A"之元素位置
-grep("A",c("Alex","Tom","Amy","Joy","Emma")) 
+
+```{python} 
+#| echo: true
+str1="CGU"
+str2="cgu"
+str3="CGU"
+str1 == str2
+```
+```{python} 
+#| echo: true
+str1 == str3
+```
+```{python} 
+#| echo: true
+str1 in ["CGUST","NTU","NYCU"]
+```
+```{python} 
+#| echo: true
+str1 in ["CGUST","CGU","NYCU"]
+```
+## 搜尋字串 - 是否包含某字
+
+-   `字串變數.find(搜尋字串)`，回傳index，回傳-1表示沒有
+-   `字串變數.count(計算字串)`，回傳個數
+
+```{python} 
+#| echo: true
+str1
+```
+```{python} 
+#| echo: true
+str1.find("C")
+```
+```{python} 
+#| echo: true
+str2
+```
+```{python} 
+#| echo: true
+str2.find("C")
+```
+```{python} 
+#| echo: true
+str2.count("C")
 ```
 
-# 搜尋字串 - grepl()
+## 搜尋字串 - re套件
 
-```{r}
-##在姓名文字向量中尋找A，回傳各元素是否包含"A"
-grepl("A",c("Alex","Tom","Amy","Joy","Emma")) 
-##在姓名文字向量中尋找a，回傳各元素是否包含"a"
-grepl("a",c("Alex","Tom","Amy","Joy","Emma")) 
+使用正規表示式搜尋文字，需載入`re`套件(不用安裝)
+
+- `re.match("找尋目標","在哪找")`找字串是否為找尋目標開頭
+- `re.search("找尋目標","在哪找")`找字串是否包含為找尋目標
+
+```{python} 
+#| echo: true
+import re
+re.match("A","Alex")
+```
+```{python} 
+#| echo: true
+re.match("l","Alex")
+print(re.match("l","Alex"))
+```
+```{python} 
+#| echo: true
+re.search("l","Alex")
 ```
 
-# 搜尋字串 - grep()
+## 搜尋字串 - 基本正規表示式
 
-```{r}
-##在姓名文字向量中尋找A，回傳包含"A"的元素位置
-grep("A",c("Alex","Tom","Amy","Joy","Emma")) 
-##在姓名文字向量中尋找a，回傳包含"a"的元素位置
-grep("a",c("Alex","Tom","Amy","Joy","Emma")) 
+-   `re.search("找尋目標","在哪找")`，目標可以是正規表示式
+-   `^`開頭
+-   `$`結尾
+
+```{python} 
+#| echo: true
+re.search("^l","Alex")
+print(re.search("^l","Alex"))
+```
+```{python} 
+#| echo: true
+re.search("x$","Alex")
 ```
 
-# 搜尋字串 - grep()
 
-type:alert 多字元？
+## Hands-on 搜尋字串
 
-# 子集Subset - 一維資料
+## 搜尋字串 - 基本正規表示式
+
+-   `*`0-n個
+-   `+`1-n個
+-   `[]`包含某些字
+-   `d`包含0-9...
+-   [參考資料](https://selflearningsuccess.com/python-regex/#%E5%90%84%E7%A8%AE%E5%B9%AB%E5%8A%A9%E4%BD%A0%E6%AF%94%E5%B0%8D%E7%9A%84%E5%B7%A5%E5%85%B7)
+
+```{python} 
+#| echo: true
+re.search("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+","yjtseng@nycu.edu.tw")
+```
+
+```{python} 
+#| echo: true
+re.match("x$","Alex")
+```
+
+# 子集Subset
+
+## 子集Subset - 一維資料
 
 type:sub-section
 
 之前有介紹使用`[ ]`取出單一或多個元素的方法
 
-```{r}
+```{python} 
+#| echo: true
 letters ##R語言內建資料之一
 letters[1] ##取出letters向量的第一個元素
 ```
@@ -254,7 +453,8 @@ letters[1] ##取出letters向量的第一個元素
 
 也可以用“負號”去掉不要的資料
 
-```{r}
+```{python} 
+#| echo: true
 letters[c(1,3,5)] ##取出letters向量的第1,3,5個元素
 letters[c(-1,-3,-5)] ##取出letters向量除了第1,3,5個元素之外的所有元素
 ```
@@ -263,7 +463,7 @@ letters[c(-1,-3,-5)] ##取出letters向量除了第1,3,5個元素之外的所有
 
 若想要快速取得一向量的開頭與結尾元素，可使用`head()`和`tail()`函數
 
-```{r}
+```{python} #| echo: true
 head(letters,5) ##取出letters向量的前五個元素
 tail(letters,3) ##取出letters向量的後三個元素
 ```
@@ -311,7 +511,7 @@ type:sub-section
 
 使用向量做資料整合範例:
 
-```{r}
+```{python} #| echo: true
 rbind(c(1,2,3), #第一列
       c(4,5,6)  #第二列
       ) 
@@ -339,7 +539,7 @@ knitr::kable(tail(irisAdd,2))
 
 使用向量做資料整合範例:
 
-```{r}
+```{python} #| echo: true
 cbind(c(1,2,3), #第一行
       c(4,5,6)  #第二行
       ) 
@@ -376,7 +576,7 @@ knitr::kable(tail(irisAdd,1))
 
 原生的R環境可以用`merge()`函數將資料框結合，使用方法為`merge(資料框1,資料框2,by="結合依據欄位")`
 
-```{r}
+```{python} #| echo: true
 nameDF<-data.frame(ID=c(1,2,3,4,5),
                   Name=c("Amy","Bob","Chris","David","Emma"))
 scoreDF<-data.frame(ID=c(1,2,4),
@@ -418,7 +618,7 @@ knitr::kable(scoreDF)
 
 只保留兩張表都有的列 使用方法 `inner_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 inner_join(nameDF,scoreDF,by="ID")
 ```
@@ -427,7 +627,7 @@ inner_join(nameDF,scoreDF,by="ID")
 
 保留左邊的表所有的列 使用方法 `left_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 left_join(nameDF,scoreDF,by="ID")
 ```
@@ -436,7 +636,7 @@ left_join(nameDF,scoreDF,by="ID")
 
 保留右邊的表所有的列 使用方法 `right_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 right_join(nameDF,scoreDF,by="ID")
 ```
@@ -445,7 +645,7 @@ right_join(nameDF,scoreDF,by="ID")
 
 保留所有的列 使用方法 `full_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 full_join(nameDF,scoreDF,by="ID")
 ```
@@ -454,7 +654,7 @@ full_join(nameDF,scoreDF,by="ID")
 
 留下左邊的ID也有出現在右邊的表的列，右表資料不會輸出 使用方法 `semi_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 semi_join(nameDF,scoreDF,by="ID")
 ```
@@ -463,7 +663,7 @@ semi_join(nameDF,scoreDF,by="ID")
 
 留下左邊的ID沒有出現在右邊的表的列，右表資料不會輸出 使用方法 `anti_join(x, y, by = )`
 
-```{r}
+```{python} #| echo: true
 library(dplyr)
 anti_join(nameDF,scoreDF,by="ID")
 ```
@@ -505,7 +705,7 @@ knitr::kable(head(airquality,3))
 -   消滅Ozone, Solar.R, Wind, Temp
 -   將其他欄位的名稱整合至name欄位，數值整合至value欄位
 
-```{r}
+```{python} #| echo: true
 library(tidyr)
 ##欄位需要保留"Month","Day"
 ##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
@@ -528,7 +728,7 @@ knitr::kable(head(airqualityLong))
 -   消滅Ozone, Solar.R, Wind, Temp
 -   將其他欄位的名稱整合至name欄位，數值整合至value欄位
 
-```{r}
+```{python} #| echo: true
 library(tidyr)
 ##欄位需要保留"Month","Day"
 ##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
@@ -550,7 +750,7 @@ knitr::kable(head(airqualityLong))
 -   `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
 -   variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
 
-```{r}
+```{python} #| echo: true
 ##增加欄位由name定義
 airqualityWide<-
   pivot_wider(airqualityLong, 
@@ -576,7 +776,7 @@ type:sub-section
 
 如資料為向量，可使用`is.na()`來判斷資料是否為空值`NA`，若為真`TRUE`，則將資料移除。
 
-```{r}
+```{python} #| echo: true
 naVec<-c("a","b",NA,"d","e")
 is.na(naVec)
 naVec[!is.na(naVec)] ##保留所有在is.na()檢查回傳FALSE的元素
@@ -594,7 +794,7 @@ head(airquality,5)
 knitr::kable(head(airquality,5))
 ```
 
-```{r}
+```{python} #| echo: true
 complete.cases(airquality) 
 ```
 
