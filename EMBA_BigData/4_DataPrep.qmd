@@ -439,131 +439,123 @@ re.match("x$","Alex")
 
 ## 子集Subset - 一維資料
 
-type:sub-section
+之前有介紹使用`[ ]`取出單一或多個元素的方法，可應用於：
 
-之前有介紹使用`[ ]`取出單一或多個元素的方法
-
-```{python} 
-#| echo: true
-letters ##R語言內建資料之一
-letters[1] ##取出letters向量的第一個元素
-```
-
-# 子集Subset - 一維資料
-
-也可以用“負號”去掉不要的資料
+-   list: `[a,b,c,...]`, list[`index`]
+-   dist: `{key1:value1, key2:value2,...}`, dist[`key`]
 
 ```{python} 
 #| echo: true
-letters[c(1,3,5)] ##取出letters向量的第1,3,5個元素
-letters[c(-1,-3,-5)] ##取出letters向量除了第1,3,5個元素之外的所有元素
+list1 = ["Tom","Ryan","Mark"]
+list1[1] ##取出list的第二個元素
 ```
 
-# 子集Subset - 一維資料
-
-若想要快速取得一向量的開頭與結尾元素，可使用`head()`和`tail()`函數
-
-```{python} #| echo: true
-head(letters,5) ##取出letters向量的前五個元素
-tail(letters,3) ##取出letters向量的後三個元素
+```{python} 
+#| echo: true
+dist1 = {"Name":"Tom","Age":20,"Parents":"Mark"}
+dist1["Name"] ##取出dist中key為Name的value
 ```
 
-# 子集Subset - 二維資料
+## 子集Subset - 一維資料
 
-type:sub-section - 可針對列(Row)和行(Column)做子集 - 使用`[ ]`，但因應二維資料的需求，以`,`分隔列與行的篩選條件 - 資料篩選原則為**前Row,後Column**，**前列,後行** - 若不想篩選列，則在`,`前方保持**空白**即可。 - 篩選方式可輸入**位置(index)**、**欄位名稱**或輸入**布林變數(TRUE/FALSE)** - 輸入位置: `dataFrame[row index,column index]` - 輸入布林變數: `dataFrame[c(T,F,T),c(T,F,T)]` - 輸入欄位名稱: `dataFrame[row name,column name]` - 最後常用的是dplyr中的`select()`和`filter()`功能
+也可以用“負號”表示反向的順序，-1為最後一個值
 
-# 子集Subset - head()
-
-若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`head()`和`tail()`函數
-
-```{r eval=F}
-head(iris,5) ##取出iris資料框的前五列
+```{python} 
+#| echo: true
+list1[-1]
 ```
 
-```{r echo=F}
-knitr::kable(head(iris,5)) 
+## 子集Subset - 二維資料head()
+
+若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
+
+```{python} 
+#| echo: true
+import pandas as pd
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+
+df1.head(2)
 ```
 
-# 子集Subset - tail()
 
-若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`head()`和`tail()`函數
 
-```{r eval=F}
-tail(iris,3) ##取出iris資料框的後三列
+## 子集Subset - 二維資料tail()
+
+若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
+
+```{python}  
+#| echo: true
+df1.tail(2)
 ```
 
-```{r echo=F}
-knitr::kable(tail(iris,3))
+
+
+## 子集Subset - 二維資料 取值 (column)
+
+資料框物件名稱`[`欄位名稱`]`：取出sequence
+```{python}
+#| echo: true
+df1["Name"]
+```
+資料框物件名稱`[[`欄位名稱`]]`：取出資料框
+```{python}
+#| echo: true
+df1[["Name"]]
+```
+
+
+## 子集Subset - 二維資料 取值 (row)
+
+資料框物件名稱`[`row slice`]`
+```{python}
+#| echo: true
+df1[0:1]
 ```
 
 # 資料組合
 
-type:sub-section
+## 資料組合
 
 有時需要在資料框新增一列，或新增一行
 
--   Row 列的組合 `rbind()`
--   Column 行的組合 `cbind()`
+-   Row 的組合 `pd`.`concat([df1, df2])`
+-   Column 的組合 `cbind()`
 
-`rbind()`和`cbind()`的參數可以是向量，也可以是資料框
+## 資料組合 - .concat()
 
-# 資料組合 - rbind()
+`pd`.`concat([pd物件1, pd物件2])`，預設為row方向的合併
 
-使用向量做資料整合範例:
-
-```{python} #| echo: true
-rbind(c(1,2,3), #第一列
-      c(4,5,6)  #第二列
-      ) 
+```{python}
+#| echo: true
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+df2 = pd.DataFrame({"ID":[5,6,7],
+                    "Name":["A","B","C"]})                 
+newdf = pd.concat([df1,df2])
+print(newdf)
 ```
 
-# 資料組合 - rbind()
 
-使用資料框與向量做資料整合範例:
+## 資料組合 - .concat()
 
-```{r warning=F}
-irisAdd<-rbind(iris, #資料框
-      c(1,1,1,1,"versicolor")  #新增一列
-      ) 
+`pd`.`concat([pd物件1, pd物件2],axis=1)`，利用`axis=1`改為column方向的合併
+
+```{python} 
+#| echo: true
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+df2 = pd.DataFrame({"School":["NYCU","CGU","NTU"],
+                    "Score":[60,70,80]})                 
+newdf = pd.concat([df1,df2],axis=1)
+print(newdf)
 ```
 
-```{r eval=F}
-tail(irisAdd,2)
-```
 
-```{r echo=F}
-knitr::kable(tail(irisAdd,2)) 
-```
 
-# 資料組合 - cbind()
+# 資料結合 (Join in SQL)
 
-使用向量做資料整合範例:
-
-```{python} #| echo: true
-cbind(c(1,2,3), #第一行
-      c(4,5,6)  #第二行
-      ) 
-```
-
-# 資料組合 - cbind()
-
-使用資料框與向量做資料整合範例:
-
-```{r warning=F}
-irisAdd<-cbind(iris, #資料框
-      rep("Add",nrow(iris))  #新增一行
-      ) 
-```
-
-```{r eval=F}
-tail(irisAdd,1)
-```
-
-```{r echo=F}
-knitr::kable(tail(irisAdd,1)) 
-```
-
-# 資料結合 (Join)
+## 資料結合 (Join in SQL)
 
 除了按照行列順序的組合外，更常有的情形是依照某個欄位的值作為結合依據，如：
 
@@ -572,140 +564,167 @@ knitr::kable(tail(irisAdd,1))
     -   學號與宿舍床位資料框
 -   用縣市名稱與年度將人口資料與醫療資源資料結合
 
-# 資料結合 (Join)
+## 資料結合 (Join in SQL)
 
-原生的R環境可以用`merge()`函數將資料框結合，使用方法為`merge(資料框1,資料框2,by="結合依據欄位")`
+可以用`pd`.`merge()`函數將資料框結合，使用方法為`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
 
-```{python} #| echo: true
-nameDF<-data.frame(ID=c(1,2,3,4,5),
-                  Name=c("Amy","Bob","Chris","David","Emma"))
-scoreDF<-data.frame(ID=c(1,2,4),
-                  Score=c(60,90,50))
+```{python} 
+#| echo: true
+nameDF=pd.DataFrame({"ID":[1,2,3,4,5],
+                  "Name":["Amy","Bob","Chris","David","Emma"]})
+scoreDF=pd.DataFrame({"ID":[1,2,4],
+                  "Score":[60,90,50]})
 ```
 
-# 資料結合 (Join)
+## 資料結合 (Join in SQL)
 
-```{r, eval=F}
+資料範例
+
+::: columns
+:::
+```{python} 
+#| echo: true
 nameDF
 ```
-
-```{r, echo=F}
-knitr::kable(nameDF)
-```
-
-------------------------------------------------------------------------
-
-```{r, eval=F}
+:::
+:::
+```{python} 
+#| echo: true
 scoreDF
 ```
+:::
+:::
 
-```{r, echo=F}
-knitr::kable(scoreDF)
+## 資料結合 (Join in SQL)
+
+`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
+
+How:
+
+-   inner：保留有對應到的資料
+-   left：保留左邊資料框的所有資料
+-   right：保留右邊資料框的所有資料
+-   outer：保留所有資料
+
+## 資料結合 (Join) - inner
+
+::: columns
+:::
+```{python} 
+#| echo: true
+nameDF
+```
+:::
+:::
+```{python} 
+#| echo: true
+scoreDF
+```
+:::
+:::
+
+inner join - 預設
+
+```{python}  
+#| echo: true
+pd.merge(nameDF,scoreDF)
+```
+## 資料結合 (Join) - outer
+
+::: columns
+:::
+```{python} 
+#| echo: true
+nameDF
+```
+:::
+:::
+```{python} 
+#| echo: true
+scoreDF
+```
+:::
+:::
+
+outer join
+
+
+```{python}  
+#| echo: true
+pd.merge(nameDF,scoreDF,how="outer",on="ID")
 ```
 
-# 資料結合 (Join) 更有效率的做法
 
-`dplyr`套件提供更有效率的資料結合方法，包括:
+## 資料結合 (Join) - left
 
--   inner_join()：保留有對應到的資料
--   left_join()：保留左邊資料框的所有資料
--   right_join()：保留右邊資料框的所有資料
--   full_join()：保留所有資料
--   semi_join()
--   anti_join()
+::: columns
+:::
+```{python} 
+#| echo: true
+nameDF
+```
+:::
+:::
+```{python} 
+#| echo: true
+scoreDF
+```
+:::
+:::
 
-# 資料結合 - inner_join()
+left join
 
-只保留兩張表都有的列 使用方法 `inner_join(x, y, by = )`
 
-```{python} #| echo: true
-library(dplyr)
-inner_join(nameDF,scoreDF,by="ID")
+```{python}  
+#| echo: true
+pd.merge(nameDF,scoreDF,how="left",on="ID")
 ```
 
-# 資料結合 - left_join()
 
-保留左邊的表所有的列 使用方法 `left_join(x, y, by = )`
 
-```{python} #| echo: true
-library(dplyr)
-left_join(nameDF,scoreDF,by="ID")
-```
+## Hands-on 資料結合練習
 
-# 資料結合 - right_join()
 
-保留右邊的表所有的列 使用方法 `right_join(x, y, by = )`
-
-```{python} #| echo: true
-library(dplyr)
-right_join(nameDF,scoreDF,by="ID")
-```
-
-# 資料結合 - full_join()
-
-保留所有的列 使用方法 `full_join(x, y, by = )`
-
-```{python} #| echo: true
-library(dplyr)
-full_join(nameDF,scoreDF,by="ID")
-```
-
-# 資料結合 - semi_join()
-
-留下左邊的ID也有出現在右邊的表的列，右表資料不會輸出 使用方法 `semi_join(x, y, by = )`
-
-```{python} #| echo: true
-library(dplyr)
-semi_join(nameDF,scoreDF,by="ID")
-```
-
-# 資料結合 - anti_join()
-
-留下左邊的ID沒有出現在右邊的表的列，右表資料不會輸出 使用方法 `anti_join(x, y, by = )`
-
-```{python} #| echo: true
-library(dplyr)
-anti_join(nameDF,scoreDF,by="ID")
-```
-
-# 資料結合練習
-
-type:alert
-
--   下載[COVID-19案例數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
--   下載[COVID-19死亡數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
+-   下載或直接載入[COVID-19案例數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
+-   下載或直接載入[COVID-19死亡數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
 -   分別讀入兩個csv檔
--   依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，只留下有對應到的資料
+-   依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，**只留下有對應到的資料**
 -   請問結合後的資料有幾列？
 
 # 長表與寬表
 
-type:sub-section
+## 長表與寬表
+
 
 -   在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
--   `tidyr` package提供完整的轉換功能
-    -   寬表轉長表 `pivot_longer(資料框/寬表,cols=需要轉換成長表的欄位)`
-    -   長表轉寬表 `pivot_wider(資料框/長表,names_from=需要轉換成寬表的欄位)`
+-   `pandas` 套件提供完整的轉換功能
+-   `pd`.`pivot()`
 
-# 長表與寬表
+## 長表轉寬表
 
-原來的`airquality`資料框中，有Ozone, Solar.R, Wind, Temp, Month, Day等六個欄位 (Column)，屬於寬表
+以下是一個長表的範例
 
-```{r eval=F}
-head(airquality,3)
+```{python}  
+#| echo: true
+raw_data = {'patient': [1, 1, 1, 2, 2],
+                'obs': [1, 2, 3, 1, 2],
+          'treatment': [0, 1, 0, 1, 0],
+              'score': [6252, 24243, 2345, 2342, 23525]}
+
+df = pd.DataFrame(raw_data)
+df
 ```
 
-```{r echo=F}
-knitr::kable(head(airquality,3)) 
-```
 
-# 寬表轉長表 pivot_longer（）
+
+## 寬表轉長表 pivot_longer（）
 
 -   保留Month和Day兩個欄位
 -   消滅Ozone, Solar.R, Wind, Temp
 -   將其他欄位的名稱整合至name欄位，數值整合至value欄位
 
-```{python} #| echo: true
+```{python} 
+#| echo: true
 library(tidyr)
 ##欄位需要保留"Month","Day"
 ##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
@@ -714,21 +733,21 @@ airqualityLong<-
                cols = c("Ozone","Solar.R","Wind","Temp")) 
 ```
 
-```{r eval=F}
+```{python}  
+#| echo: true
 head(airqualityLong)
 ```
 
-```{r echo=F}
-knitr::kable(head(airqualityLong)) 
-```
 
-# 寬表轉長表 pivot_longer（）
+
+## 寬表轉長表 pivot_longer（）
 
 -   保留Month和Day兩個欄位
 -   消滅Ozone, Solar.R, Wind, Temp
 -   將其他欄位的名稱整合至name欄位，數值整合至value欄位
 
-```{python} #| echo: true
+```{python} 
+#| echo: true
 library(tidyr)
 ##欄位需要保留"Month","Day"
 ##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
@@ -737,75 +756,73 @@ airqualityLong<-
                cols = c(-"Month",-"Day")) 
 ```
 
-```{r eval=F}
+```{python}  
+#| echo: true
 head(airqualityLong)
 ```
 
-```{r echo=F}
-knitr::kable(head(airqualityLong)) 
-```
 
-# 長表轉寬表 pivot_wider（）
+## 長表轉寬表 pivot_wider（）
 
 -   `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
 -   variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
 
-```{python} #| echo: true
+```{python} 
+#| echo: true
 ##增加欄位由name定義
 airqualityWide<-
   pivot_wider(airqualityLong, 
               names_from="name") 
 ```
 
-```{r eval=F}
+```{python}  
+#| echo: true
 head(airqualityWide)
 ```
 
-```{r echo=F}
-knitr::kable(head(airqualityWide))
-```
 
 # 遺漏值處理
+
+## 遺漏值處理
 
 type:sub-section
 
 -   遺漏值(Missing Value)常常出現在真實資料內，在數值運算時常會有問題
 -   最簡單的方法是將有缺值的資料移除
 
-# 遺漏值處理 is.na()
+## 遺漏值處理 is.na()
 
 如資料為向量，可使用`is.na()`來判斷資料是否為空值`NA`，若為真`TRUE`，則將資料移除。
 
-```{python} #| echo: true
+```{python} 
+#| echo: true
 naVec<-c("a","b",NA,"d","e")
 is.na(naVec)
 naVec[!is.na(naVec)] ##保留所有在is.na()檢查回傳FALSE的元素
 ```
 
-# 遺漏值處理 complete.cases()
+## 遺漏值處理 complete.cases()
 
 若資料型態為資料框，可使用`complete.cases`來選出完整的資料列，如果資料列是完整的，則會回傳真TRUE
 
-```{r eval=F}
+```{python}  
+#| echo: true
 head(airquality,5)
 ```
 
-```{r echo=F}
-knitr::kable(head(airquality,5))
-```
 
-```{python} #| echo: true
+```{python} 
+#| echo: true
 complete.cases(airquality) 
 ```
 
-# 遺漏值處理 complete.cases()
+## 遺漏值處理 complete.cases()
 
 若資料型態為資料框，可使用`complete.cases`來選出完整的資料列，如果資料列(row)是完整的，則會回傳真TRUE
 
-```{r eval=F}
+```{python}  
+#| echo: true
 head(airquality[complete.cases(airquality),]) ##保留所有在complete.cases()檢查回傳TRUE的元素
 ```
 
-```{r echo=F}
-knitr::kable(head(airquality[complete.cases(airquality),]))
-```
+
