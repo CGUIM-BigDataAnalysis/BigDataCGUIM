@@ -139,6 +139,7 @@ type(cha_int)
 若無法順利完成轉換，會出現錯誤訊息
 
 ```{python}
+#| eval: false
 #| echo: true
 int("abc")
 ```
@@ -708,7 +709,6 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 #| echo: true
 raw_data = {'patient': [1, 1, 1, 2, 2],
                 'obs': [1, 2, 3, 1, 2],
-          'treatment': [0, 1, 0, 1, 0],
               'score': [6252, 24243, 2345, 2342, 23525]}
 
 df = pd.DataFrame(raw_data)
@@ -716,113 +716,76 @@ df
 ```
 
 
+## 長表轉寬表 .pivot()
 
-## 寬表轉長表 pivot_longer（）
-
--   保留Month和Day兩個欄位
--   消滅Ozone, Solar.R, Wind, Temp
--   將其他欄位的名稱整合至name欄位，數值整合至value欄位
+-   `df`資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表
+-   以`patient`為基準，obs欄位的值轉換為新欄位，並將score欄位填入
 
 ```{python} 
 #| echo: true
-library(tidyr)
-##欄位需要保留"Month","Day"
-##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
-airqualityLong<-
-  pivot_longer(airquality,
-               cols = c("Ozone","Solar.R","Wind","Temp")) 
-```
-
-```{python}  
-#| echo: true
-head(airqualityLong)
+df_wide=df.pivot(index='patient', columns='obs', values='score')
+df_wide
 ```
 
 
 
-## 寬表轉長表 pivot_longer（）
+## 寬表轉長表 pd.melt()
 
--   保留Month和Day兩個欄位
--   消滅Ozone, Solar.R, Wind, Temp
--   將其他欄位的名稱整合至name欄位，數值整合至value欄位
+寬表範例
 
 ```{python} 
 #| echo: true
-library(tidyr)
-##欄位需要保留"Month","Day"
-##欄位需要消滅"Ozone","Solar.R","Wind","Temp" -> 換轉換成"name"
-airqualityLong<-
-  pivot_longer(airquality,
-               cols = c(-"Month",-"Day")) 
+df = pd.DataFrame({'team': ['A', 'B', 'C', 'D'],
+                   'points': [88, 91, 99, 94],
+                   'assists': [12, 17, 24, 28],
+                   'rebounds': [22, 28, 30, 31]})
+df
 ```
 
-```{python}  
-#| echo: true
-head(airqualityLong)
-```
+## 寬表轉長表 pd.melt()
 
-
-## 長表轉寬表 pivot_wider（）
-
--   `airqualityLong`資料框中，剩下Month, Day, name, value等四個欄位 (Column)，屬於長表
--   variable欄位的值轉換為新欄位，並將value欄位填回新增的欄位
+-   保留team欄位
+-   消滅'points', 'assists', 'rebounds'
+-   將其他欄位的名稱整合至metric欄位，數值整合至amount欄位
 
 ```{python} 
 #| echo: true
-##增加欄位由name定義
-airqualityWide<-
-  pivot_wider(airqualityLong, 
-              names_from="name") 
+pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
+             var_name='metric', value_name='amount')
 ```
 
-```{python}  
-#| echo: true
-head(airqualityWide)
-```
 
 
 # 遺漏值處理
 
 ## 遺漏值處理
 
-type:sub-section
 
 -   遺漏值(Missing Value)常常出現在真實資料內，在數值運算時常會有問題
 -   最簡單的方法是將有缺值的資料移除
 
-## 遺漏值處理 is.na()
 
-如資料為向量，可使用`is.na()`來判斷資料是否為空值`NA`，若為真`TRUE`，則將資料移除。
 
-```{python} 
-#| echo: true
-naVec<-c("a","b",NA,"d","e")
-is.na(naVec)
-naVec[!is.na(naVec)] ##保留所有在is.na()檢查回傳FALSE的元素
-```
+## 遺漏值處理 .dropna()
 
-## 遺漏值處理 complete.cases()
-
-若資料型態為資料框，可使用`complete.cases`來選出完整的資料列，如果資料列是完整的，則會回傳真TRUE
+若資料型態為資料框，可使用`.dropna()`來選出完整的資料列
 
 ```{python}  
 #| echo: true
-head(airquality,5)
+df_wide
 ```
 
 
-```{python} 
-#| echo: true
-complete.cases(airquality) 
-```
+## 遺漏值處理 .dropna()
 
-## 遺漏值處理 complete.cases()
+若資料型態為資料框，可使用`.dropna()`來選出完整的資料列
 
-若資料型態為資料框，可使用`complete.cases`來選出完整的資料列，如果資料列(row)是完整的，則會回傳真TRUE
+-   axis=0: row based
+-   how = 'any': 只要有na就移除
 
 ```{python}  
 #| echo: true
-head(airquality[complete.cases(airquality),]) ##保留所有在complete.cases()檢查回傳TRUE的元素
+df_wide_clane=df_wide.dropna(axis = 0, how = 'any')
+df_wide_clane
 ```
-
 
