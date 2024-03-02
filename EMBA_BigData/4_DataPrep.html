@@ -420,9 +420,8 @@ Yi-Ju Tseng
 <li>資料型態轉換處理</li>
 <li>文字字串處理</li>
 <li>子集Subset</li>
-<li>排序</li>
 <li>資料組合</li>
-<li>長表轉寬表</li>
+<li>長寬表轉換</li>
 <li>遺漏值處理</li>
 </ul>
 </section>
@@ -436,7 +435,6 @@ Yi-Ju Tseng
 </section>
 <section id="tidy-data" class="slide level2">
 <h2>Tidy Data</h2>
-<p>type:sub-section</p>
 <p>Each column is a variable. Each row is an observation.</p>
 <ul>
 <li>一個欄位（Column）內只有一個數值，最好要有凡人看得懂的Column Name</li>
@@ -444,6 +442,18 @@ Yi-Ju Tseng
 <li>一張表裡面，有所有分析需要的資料</li>
 <li>如果一定要多張表，中間一定要有index可以把表串起來</li>
 <li>One file, one table</li>
+</ul>
+</section>
+<section id="資料清洗與處理-1" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li><strong>資料型態轉換處理</strong></li>
+<li>文字字串處理</li>
+<li>子集Subset</li>
+<li>資料組合</li>
+<li>長寬表轉換</li>
+<li>遺漏值處理</li>
 </ul>
 </section>
 <section>
@@ -503,6 +513,15 @@ Yi-Ju Tseng
 <pre><code>False</code></pre>
 </div>
 </div>
+</section>
+<section id="資料型態檢查---isinstance-1" class="slide level2">
+<h2>資料型態檢查 - isinstance</h2>
+<p>使用<code>isinstance()</code>函數檢查資料型態，回傳布林變數，若為<strong>真</strong>，回傳<strong>TRUE</strong></p>
+<ul>
+<li>是否為<strong>數字</strong> <code>isinstance(變數名稱,(int,float))</code></li>
+<li>是否為<strong>文字</strong> <code>isinstance(變數名稱,str)</code></li>
+<li>是否為<strong>布林變數</strong> <code>isinstance(變數名稱,bool)</code></li>
+</ul>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">isinstance</span>(num,(<span class="bu">int</span>,<span class="bu">float</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -523,10 +542,9 @@ Yi-Ju Tseng
 <pre><code>True</code></pre>
 </div>
 </div>
-</section></section>
-<section>
-<section id="資料型態轉換---複習python-101" class="title-slide slide level1 center">
-<h1>資料型態轉換 - 複習Python 101</h1>
+</section>
+<section id="資料型態轉換---複習python-101" class="slide level2">
+<h2>資料型態轉換 - 複習Python 101</h2>
 <p>使用<code>int()</code>, <code>float()</code>, <code>str()</code>函數轉換型態</p>
 <ul>
 <li>轉換為<strong>整數</strong> <code>int(變數名稱)</code></li>
@@ -542,8 +560,8 @@ Yi-Ju Tseng
 </div>
 </div>
 </section>
-<section id="資料型態轉換---as." class="slide level2">
-<h2>資料型態轉換 - as.</h2>
+<section id="資料型態轉換" class="slide level2">
+<h2>資料型態轉換</h2>
 <p>若無法順利完成轉換，會出現錯誤訊息</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="bu">int</span>(<span class="st">"abc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,6 +691,18 @@ Yi-Ju Tseng
 <li>如何將Price欄位轉換成數字？</li>
 <li><strong>Hint</strong>: 先做該欄位第一個數字，以此類推</li>
 </ul>
+</section>
+<section id="資料清洗與處理-2" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li><strong>文字字串處理</strong></li>
+<li>子集Subset</li>
+<li>資料組合</li>
+<li>長寬表轉換</li>
+<li>遺漏值處理</li>
+</ul>
 </section></section>
 <section>
 <section id="文字字串處理" class="title-slide slide level1 center">
@@ -710,12 +740,12 @@ Yi-Ju Tseng
 <section id="基本處理" class="slide level2">
 <h2>基本處理</h2>
 <ul>
-<li>切割 <code>.split()</code> <strong>Split</strong></li>
+<li>切割 <code>字串變數.split()</code> <strong>Split</strong></li>
 <li>子集 <code>字串變數[:]</code> <strong>sub string</strong>, <strong>Slice</strong></li>
-<li>大小寫轉換 <code>.upper()</code> <code>.lower()</code></li>
-<li>兩文字連接 <code>+</code> <code>.join(字串清單list)</code></li>
-<li>文字取代 <code>.replace(舊值,新值)</code> <strong>substitute</strong></li>
-<li>前後空白去除 <code>.strip(字元,預設空白)</code> <strong>trim</strong></li>
+<li>大小寫轉換 <code>字串變數.upper()</code> <code>字串變數.lower()</code></li>
+<li>兩文字連接 <code>+</code> <code>字串變數.join(字串清單list)</code></li>
+<li>文字取代 <code>字串變數.replace(舊值,新值)</code> <strong>substitute</strong></li>
+<li>前後空白去除 <code>字串變數.strip(字元,預設空白)</code> <strong>trim</strong></li>
 </ul>
 </section>
 <section id="基本處理-切割" class="slide level2">
@@ -807,6 +837,17 @@ Yi-Ju Tseng
 <pre><code>'CGU'</code></pre>
 </div>
 </div>
+</section>
+<section id="基本處理-1" class="slide level2">
+<h2>基本處理</h2>
+<ul>
+<li>切割 <code>字串變數.split()</code> <strong>Split</strong></li>
+<li>子集 <code>字串變數[:]</code> <strong>sub string</strong>, <strong>Slice</strong></li>
+<li>大小寫轉換 <code>字串變數.upper()</code> <code>字串變數.lower()</code></li>
+<li>兩文字連接 <code>+</code> <code>字串變數.join(字串清單list)</code></li>
+<li>文字取代 <code>字串變數.replace(舊值,新值)</code> <strong>substitute</strong></li>
+<li>前後空白去除 <code>字串變數.strip(字元,預設空白)</code> <strong>trim</strong></li>
+</ul>
 </section>
 <section id="hands-on-字串基本處理" class="slide level2">
 <h2>Hands-on 字串基本處理</h2>
@@ -1052,8 +1093,337 @@ Yi-Ju Tseng
 </div>
 </div>
 </section>
+<section id="搜尋字串---從list中搜尋" class="slide level2">
+<h2>搜尋字串 - 從list中搜尋</h2>
+<ul>
+<li>r = <code>re.compile("找尋目標")</code>，目標可以是正規表示式</li>
+<li><code>filter(r.search,想找的list)</code></li>
+</ul>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>mylist <span class="op">=</span> [<span class="st">"dog"</span>, <span class="st">"cat"</span>, <span class="st">"wildcat"</span>, <span class="st">"thundercat"</span>, <span class="st">"cow"</span>, <span class="st">"hooo"</span>,<span class="st">"catxx"</span>]</span>
+<span id="cb71-2"><a href="#cb71-2"></a>r <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">"cat"</span>)</span>
+<span id="cb71-3"><a href="#cb71-3"></a>newlist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(r.search, mylist)) </span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="bu">print</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['cat', 'wildcat', 'thundercat', 'catxx']</code></pre>
+</div>
+</div>
+</section>
 <section id="hands-on-搜尋字串" class="slide level2">
 <h2>Hands-on 搜尋字串</h2>
+<p>回想台北市腳踏車資料</p>
+<ul>
+<li>練習用資料：<a href="https://data.gov.tw/dataset/137993">YouBike2.0臺北市公共自行車即時資訊</a></li>
+<li>API地址<a href="https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json">在此</a></li>
+<li>將資料匯入Python中</li>
+<li>找到資料的儲存處</li>
+</ul>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a><span class="im">import</span> requests, json</span>
+<span id="cb73-2"><a href="#cb73-2"></a><span class="co"># step 1 requests.get</span></span>
+<span id="cb73-3"><a href="#cb73-3"></a>res <span class="op">=</span> requests.get(<span class="st">"https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"</span>)</span>
+<span id="cb73-4"><a href="#cb73-4"></a><span class="co"># step 2 conver to json</span></span>
+<span id="cb73-5"><a href="#cb73-5"></a>bike_data <span class="op">=</span> res.json()</span>
+<span id="cb73-6"><a href="#cb73-6"></a>bike_df <span class="op">=</span> pd.DataFrame(bike_data)</span>
+<span id="cb73-7"><a href="#cb73-7"></a>bike_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hands-on-搜尋字串-1" class="slide level2">
+<h2>Hands-on 搜尋字串</h2>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a><span class="im">import</span> requests, json</span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="co"># step 1 requests.get</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>res <span class="op">=</span> requests.get(<span class="st">"https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"</span>)</span>
+<span id="cb74-4"><a href="#cb74-4"></a><span class="co"># step 2 conver to json</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>bike_data <span class="op">=</span> res.json()</span>
+<span id="cb74-6"><a href="#cb74-6"></a>bike_df <span class="op">=</span> pd.DataFrame(bike_data)</span>
+<span id="cb74-7"><a href="#cb74-7"></a>bike_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sno</th>
+<th data-quarto-table-cell-role="th">sna</th>
+<th data-quarto-table-cell-role="th">tot</th>
+<th data-quarto-table-cell-role="th">sbi</th>
+<th data-quarto-table-cell-role="th">sarea</th>
+<th data-quarto-table-cell-role="th">mday</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">lng</th>
+<th data-quarto-table-cell-role="th">ar</th>
+<th data-quarto-table-cell-role="th">sareaen</th>
+<th data-quarto-table-cell-role="th">snaen</th>
+<th data-quarto-table-cell-role="th">aren</th>
+<th data-quarto-table-cell-role="th">bemp</th>
+<th data-quarto-table-cell-role="th">act</th>
+<th data-quarto-table-cell-role="th">srcUpdateTime</th>
+<th data-quarto-table-cell-role="th">updateTime</th>
+<th data-quarto-table-cell-role="th">infoTime</th>
+<th data-quarto-table-cell-role="th">infoDate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>500101001</td>
+<td>YouBike2.0_捷運科技大樓站</td>
+<td>28</td>
+<td>2</td>
+<td>大安區</td>
+<td>2024-03-02 11:56:20</td>
+<td>25.02605</td>
+<td>121.54360</td>
+<td>復興南路二段235號前</td>
+<td>Daan Dist.</td>
+<td>YouBike2.0_MRT Technology Bldg. Sta.</td>
+<td>No.235， Sec. 2， Fuxing S. Rd.</td>
+<td>26</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:56:20</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>500101002</td>
+<td>YouBike2.0_復興南路二段273號前</td>
+<td>21</td>
+<td>0</td>
+<td>大安區</td>
+<td>2024-03-02 11:37:14</td>
+<td>25.02565</td>
+<td>121.54357</td>
+<td>復興南路二段273號西側</td>
+<td>Daan Dist.</td>
+<td>YouBike2.0_No.273， Sec. 2， Fuxing S. Rd.</td>
+<td>No.273， Sec. 2， Fuxing S. Rd. (West)</td>
+<td>21</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:37:14</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>500101003</td>
+<td>YouBike2.0_國北教大實小東側門</td>
+<td>16</td>
+<td>13</td>
+<td>大安區</td>
+<td>2024-03-02 11:47:19</td>
+<td>25.02429</td>
+<td>121.54124</td>
+<td>和平東路二段96巷7號</td>
+<td>Daan Dist.</td>
+<td>YouBike2.0_NTUE Experiment Elementary School (...</td>
+<td>No. 7， Ln. 96， Sec. 2， Heping E. Rd</td>
+<td>3</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:47:19</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>500101004</td>
+<td>YouBike2.0_和平公園東側</td>
+<td>11</td>
+<td>4</td>
+<td>大安區</td>
+<td>2024-03-02 11:56:20</td>
+<td>25.02351</td>
+<td>121.54282</td>
+<td>和平東路二段118巷33號</td>
+<td>Daan Dist.</td>
+<td>YouBike2.0_Heping Park (East)</td>
+<td>No. 33， Ln. 118， Sec. 2， Heping E. Rd</td>
+<td>7</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:56:20</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>500101005</td>
+<td>YouBike2.0_辛亥復興路口西北側</td>
+<td>16</td>
+<td>16</td>
+<td>大安區</td>
+<td>2024-03-02 11:48:14</td>
+<td>25.02153</td>
+<td>121.54299</td>
+<td>復興南路二段368號</td>
+<td>Daan Dist.</td>
+<td>YouBike2.0_Xinhai Fuxing Rd. Intersection (Nor...</td>
+<td>No. 368， Sec. 2， Fuxing S. Rd.</td>
+<td>0</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:48:14</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1334</td>
+<td>500119087</td>
+<td>YouBike2.0_臺大總圖書館西南側</td>
+<td>30</td>
+<td>21</td>
+<td>臺大公館校區</td>
+<td>2024-03-02 11:39:14</td>
+<td>25.01690</td>
+<td>121.54031</td>
+<td>臺大圖書館西南側</td>
+<td>NTU Dist</td>
+<td>YouBike2.0_NTU Main Library(Southwest)</td>
+<td>NTU Main Library(Southwest)</td>
+<td>0</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:39:14</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1335</td>
+<td>500119088</td>
+<td>YouBike2.0_臺大黑森林西側</td>
+<td>20</td>
+<td>3</td>
+<td>臺大公館校區</td>
+<td>2024-03-02 11:18:19</td>
+<td>25.01995</td>
+<td>121.54347</td>
+<td>臺大霖澤館南側</td>
+<td>NTU Dist</td>
+<td>YouBike2.0_NTU Black Forest(West)</td>
+<td>NTU Tsai Lecture Hall(South)</td>
+<td>17</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:18:19</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1336</td>
+<td>500119089</td>
+<td>YouBike2.0_臺大獸醫館南側</td>
+<td>24</td>
+<td>12</td>
+<td>臺大公館校區</td>
+<td>2024-03-02 11:45:18</td>
+<td>25.01791</td>
+<td>121.54242</td>
+<td>臺大獸醫系館南側</td>
+<td>NTU Dist</td>
+<td>YouBike2.0_NTU Dept. of Veterinary Medicine(So...</td>
+<td>NTU Dept. of Veterinary Medicine(South)</td>
+<td>12</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:45:18</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1337</td>
+<td>500119090</td>
+<td>YouBike2.0_臺大新體育館東南側</td>
+<td>40</td>
+<td>30</td>
+<td>臺大公館校區</td>
+<td>2024-03-02 11:53:18</td>
+<td>25.02112</td>
+<td>121.53591</td>
+<td>臺大體育館東側</td>
+<td>NTU Dist</td>
+<td>YouBike2.0_NTU Sports Center(Southeast)</td>
+<td>NTU Sports Center(East)</td>
+<td>5</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 11:53:18</td>
+<td>2024-03-02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1338</td>
+<td>500119091</td>
+<td>YouBike2.0_臺大明達館北側(員工宿舍)</td>
+<td>18</td>
+<td>12</td>
+<td>臺大公館校區</td>
+<td>2024-03-02 10:40:29</td>
+<td>25.01816</td>
+<td>121.54469</td>
+<td>明達館北側前空地</td>
+<td>NTU Dist</td>
+<td>YouBike2.0_NTU Ming - Da Hall (Staff Dormitory)</td>
+<td>NTU Ming - Da Hall (North)</td>
+<td>6</td>
+<td>1</td>
+<td>2024-03-02 11:56:25</td>
+<td>2024-03-02 11:56:52</td>
+<td>2024-03-02 10:40:29</td>
+<td>2024-03-02</td>
+</tr>
+</tbody>
+</table>
+
+<p>1339 rows × 18 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="hands-on-搜尋字串-2" class="slide level2">
+<h2>Hands-on 搜尋字串</h2>
+<ul>
+<li>匯入台北市腳踏車資料</li>
+<li>找到所有“國小”的站點</li>
+</ul>
 </section>
 <section id="搜尋字串---基本正規表示式-1" class="slide level2">
 <h2>搜尋字串 - 基本正規表示式</h2>
@@ -1064,15 +1434,24 @@ Yi-Ju Tseng
 <li><code>d</code>包含0-9…</li>
 <li><a href="https://selflearningsuccess.com/python-regex/#%E5%90%84%E7%A8%AE%E5%B9%AB%E5%8A%A9%E4%BD%A0%E6%AF%94%E5%B0%8D%E7%9A%84%E5%B7%A5%E5%85%B7">參考資料</a></li>
 </ul>
-<div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>re.search(<span class="st">"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+"</span>,<span class="st">"yjtseng@nycu.edu.tw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1"></a>re.search(<span class="st">"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+"</span>,<span class="st">"yjtseng@nycu.edu.tw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>&lt;re.Match object; span=(0, 19), match='yjtseng@nycu.edu.tw'&gt;</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a>re.match(<span class="st">"x$"</span>,<span class="st">"Alex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+<section id="資料清洗與處理-3" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li>文字字串處理</li>
+<li><strong>子集Subset</strong></li>
+<li>資料組合</li>
+<li>長寬表轉換</li>
+<li>遺漏值處理</li>
+</ul>
 </section></section>
 <section>
 <section id="子集subset" class="title-slide slide level1 center">
@@ -1086,17 +1465,17 @@ Yi-Ju Tseng
 <li>list: <code>[a,b,c,...]</code>, list[<code>index</code>]</li>
 <li>dist: <code>{key1:value1, key2:value2,...}</code>, dist[<code>key</code>]</li>
 </ul>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a>list1 <span class="op">=</span> [<span class="st">"Tom"</span>,<span class="st">"Ryan"</span>,<span class="st">"Mark"</span>]</span>
-<span id="cb74-2"><a href="#cb74-2"></a>list1[<span class="dv">1</span>] <span class="co">##取出list的第二個元素</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1"></a>list1 <span class="op">=</span> [<span class="st">"Tom"</span>,<span class="st">"Ryan"</span>,<span class="st">"Mark"</span>]</span>
+<span id="cb77-2"><a href="#cb77-2"></a>list1[<span class="dv">1</span>] <span class="co">##取出list的第二個元素</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>'Ryan'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a>dist1 <span class="op">=</span> {<span class="st">"Name"</span>:<span class="st">"Tom"</span>,<span class="st">"Age"</span>:<span class="dv">20</span>,<span class="st">"Parents"</span>:<span class="st">"Mark"</span>}</span>
-<span id="cb76-2"><a href="#cb76-2"></a>dist1[<span class="st">"Name"</span>] <span class="co">##取出dist中key為Name的value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a>dist1 <span class="op">=</span> {<span class="st">"Name"</span>:<span class="st">"Tom"</span>,<span class="st">"Age"</span>:<span class="dv">20</span>,<span class="st">"Parents"</span>:<span class="st">"Mark"</span>}</span>
+<span id="cb79-2"><a href="#cb79-2"></a>dist1[<span class="st">"Name"</span>] <span class="co">##取出dist中key為Name的value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>'Tom'</code></pre>
 </div>
 </div>
@@ -1104,23 +1483,82 @@ Yi-Ju Tseng
 <section id="子集subset---一維資料-1" class="slide level2">
 <h2>子集Subset - 一維資料</h2>
 <p>也可以用“負號”表示反向的順序，-1為最後一個值</p>
-<div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a>list1[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="43">
-<pre><code>'Mark'</code></pre>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a><span class="bu">print</span>(list1)</span>
+<span id="cb81-2"><a href="#cb81-2"></a><span class="bu">print</span>(list1[<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Tom', 'Ryan', 'Mark']
+Mark</code></pre>
 </div>
 </div>
 </section>
 <section id="子集subset---二維資料head" class="slide level2">
 <h2>子集Subset - 二維資料head()</h2>
 <p>若想要快速取得資料框的前幾列(Row)或後幾列，也可使用<code>.head()</code>和<code>.tail()</code>函數</p>
-<div class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb80-2"><a href="#cb80-2"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb80-3"><a href="#cb80-3"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span>
-<span id="cb80-4"><a href="#cb80-4"></a></span>
-<span id="cb80-5"><a href="#cb80-5"></a>df1.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb83-2"><a href="#cb83-2"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb83-3"><a href="#cb83-3"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Tom</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Emma</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Ryan</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Amy</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a>df1.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1161,122 +1599,16 @@ Yi-Ju Tseng
 </div>
 </div>
 </div>
+</div>
+</div>
 </section>
 <section id="子集subset---二維資料tail" class="slide level2">
 <h2>子集Subset - 二維資料tail()</h2>
 <p>若想要快速取得資料框的前幾列(Row)或後幾列，也可使用<code>.head()</code>和<code>.tail()</code>函數</p>
-<div class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a>df1.tail(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>Ryan</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>Amy</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="子集subset---二維資料-取值-column" class="slide level2">
-<h2>子集Subset - 二維資料 取值 (column)</h2>
-<p>資料框物件名稱<code>[</code>欄位名稱<code>]</code>：取出sequence</p>
-<div class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1"></a>df1[<span class="st">"Name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
-<pre><code>0     Tom
-1    Emma
-2    Ryan
-3     Amy
-Name: Name, dtype: object</code></pre>
-</div>
-</div>
-<p>資料框物件名稱<code>[[</code>欄位名稱<code>]]</code>：取出資料框</p>
-<div class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a>df1[[<span class="st">"Name"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="47">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Tom</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Emma</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Ryan</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Amy</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="子集subset---二維資料-取值-row" class="slide level2">
-<h2>子集Subset - 二維資料 取值 (row)</h2>
-<p>資料框物件名稱<code>[</code>row slice<code>]</code></p>
-<div class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a>df1[<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <div>
 <style scoped="">
@@ -1307,12 +1639,253 @@ Name: Name, dtype: object</code></pre>
 <td>1</td>
 <td>Tom</td>
 </tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Emma</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Ryan</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Amy</td>
+</tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
+</div><div class="column">
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1"></a>df1.tail(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Ryan</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Amy</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="子集subset---二維資料-取值-column" class="slide level2">
+<h2>子集Subset - 二維資料 取值 (column)</h2>
+<div class="columns">
+<div class="column">
+<p>資料框物件名稱<code>[</code>欄位名稱<code>]</code>：取出sequence</p>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1"></a>df1[<span class="st">"Name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>0     Tom
+1    Emma
+2    Ryan
+3     Amy
+Name: Name, dtype: object</code></pre>
+</div>
+</div>
+</div><div class="column">
+<p>資料框物件名稱<code>[[</code>欄位名稱<code>]]</code>：取出資料框</p>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1"></a>df1[[<span class="st">"Name"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Tom</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Emma</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Ryan</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Amy</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="子集subset---二維資料-取值-row" class="slide level2">
+<h2>子集Subset - 二維資料 取值 (row)</h2>
+<p>資料框物件名稱<code>[</code>row slice<code>]</code></p>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Tom</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Emma</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Ryan</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Amy</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1"></a>df1[<span class="dv">0</span>:<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Tom</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="資料清洗與處理-4" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li>文字字串處理</li>
+<li>子集Subset</li>
+<li><strong>資料組合</strong></li>
+<li>長寬表轉換</li>
+<li>遺漏值處理</li>
+</ul>
 </section></section>
 <section>
 <section id="資料組合" class="title-slide slide level1 center">
@@ -1324,19 +1897,19 @@ Name: Name, dtype: object</code></pre>
 <p>有時需要在資料框新增一列，或新增一行</p>
 <ul>
 <li>Row 的組合 <code>pd</code>.<code>concat([df1, df2])</code></li>
-<li>Column 的組合 <code>cbind()</code></li>
+<li>Column 的組合 <code>pd</code>.<code>concat([df1, df2],axis=1)</code></li>
 </ul>
 </section>
 <section id="資料組合---.concat" class="slide level2">
 <h2>資料組合 - .concat()</h2>
 <p><code>pd</code>.<code>concat([pd物件1, pd物件2])</code>，預設為row方向的合併</p>
-<div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb86-2"><a href="#cb86-2"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span>
-<span id="cb86-3"><a href="#cb86-3"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>],</span>
-<span id="cb86-4"><a href="#cb86-4"></a>                    <span class="st">"Name"</span>:[<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>]})                 </span>
-<span id="cb86-5"><a href="#cb86-5"></a>newdf <span class="op">=</span> pd.concat([df1,df2])</span>
-<span id="cb86-6"><a href="#cb86-6"></a><span class="bu">print</span>(newdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb93-2"><a href="#cb93-2"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span>
+<span id="cb93-3"><a href="#cb93-3"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>],</span>
+<span id="cb93-4"><a href="#cb93-4"></a>                    <span class="st">"Name"</span>:[<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>]})                 </span>
+<span id="cb93-5"><a href="#cb93-5"></a>newdf <span class="op">=</span> pd.concat([df1,df2])</span>
+<span id="cb93-6"><a href="#cb93-6"></a><span class="bu">print</span>(newdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ID  Name
 0   1   Tom
@@ -1352,13 +1925,13 @@ Name: Name, dtype: object</code></pre>
 <section id="資料組合---.concat-1" class="slide level2">
 <h2>資料組合 - .concat()</h2>
 <p><code>pd</code>.<code>concat([pd物件1, pd物件2],axis=1)</code>，利用<code>axis=1</code>改為column方向的合併</p>
-<div class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
-<span id="cb88-2"><a href="#cb88-2"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span>
-<span id="cb88-3"><a href="#cb88-3"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">"School"</span>:[<span class="st">"NYCU"</span>,<span class="st">"CGU"</span>,<span class="st">"NTU"</span>],</span>
-<span id="cb88-4"><a href="#cb88-4"></a>                    <span class="st">"Score"</span>:[<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>]})                 </span>
-<span id="cb88-5"><a href="#cb88-5"></a>newdf <span class="op">=</span> pd.concat([df1,df2],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb88-6"><a href="#cb88-6"></a><span class="bu">print</span>(newdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb95-2"><a href="#cb95-2"></a>                    <span class="st">"Name"</span>:[<span class="st">"Tom"</span>,<span class="st">"Emma"</span>,<span class="st">"Ryan"</span>,<span class="st">"Amy"</span>]})</span>
+<span id="cb95-3"><a href="#cb95-3"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">"School"</span>:[<span class="st">"NYCU"</span>,<span class="st">"CGU"</span>,<span class="st">"NTU"</span>],</span>
+<span id="cb95-4"><a href="#cb95-4"></a>                    <span class="st">"Score"</span>:[<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>]})                 </span>
+<span id="cb95-5"><a href="#cb95-5"></a>newdf <span class="op">=</span> pd.concat([df1,df2],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb95-6"><a href="#cb95-6"></a><span class="bu">print</span>(newdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ID  Name School  Score
 0   1   Tom   NYCU   60.0
@@ -1388,124 +1961,35 @@ Name: Name, dtype: object</code></pre>
 <section id="資料結合-join-in-sql-2" class="slide level2">
 <h2>資料結合 (Join in SQL)</h2>
 <p>可以用<code>pd</code>.<code>merge()</code>函數將資料框結合，使用方法為<code>merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")</code></p>
-<div class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1"></a>nameDF<span class="op">=</span>pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>],</span>
-<span id="cb90-2"><a href="#cb90-2"></a>                  <span class="st">"Name"</span>:[<span class="st">"Amy"</span>,<span class="st">"Bob"</span>,<span class="st">"Chris"</span>,<span class="st">"David"</span>,<span class="st">"Emma"</span>]})</span>
-<span id="cb90-3"><a href="#cb90-3"></a>scoreDF<span class="op">=</span>pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>],</span>
-<span id="cb90-4"><a href="#cb90-4"></a>                  <span class="st">"Score"</span>:[<span class="dv">60</span>,<span class="dv">90</span>,<span class="dv">50</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a>nameDF<span class="op">=</span>pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>],</span>
+<span id="cb97-2"><a href="#cb97-2"></a>                  <span class="st">"Name"</span>:[<span class="st">"Amy"</span>,<span class="st">"Bob"</span>,<span class="st">"Chris"</span>,<span class="st">"David"</span>,<span class="st">"Emma"</span>]})</span>
+<span id="cb97-3"><a href="#cb97-3"></a>scoreDF<span class="op">=</span>pd.DataFrame({<span class="st">"ID"</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>],</span>
+<span id="cb97-4"><a href="#cb97-4"></a>                  <span class="st">"Score"</span>:[<span class="dv">60</span>,<span class="dv">90</span>,<span class="dv">50</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="資料結合-join-in-sql-3" class="slide level2">
 <h2>資料結合 (Join in SQL)</h2>
-<p>資料範例</p>
-<div class="columns">
-
-</div>
-<div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1"></a>nameDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="52">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>Amy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>Bob</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>Chris</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>David</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>5</td>
-<td>Emma</td>
-</tr>
-</tbody>
-</table>
-
+<p>資料範例 ::: columns ::: column</p>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1"></a><span class="bu">print</span>(nameDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID   Name
+0   1    Amy
+1   2    Bob
+2   3  Chris
+3   4  David
+4   5   Emma</code></pre>
 </div>
 </div>
-</div>
-<p>::: :::</p>
-<div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1"></a>scoreDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="53">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>60</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>90</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>4</td>
-<td>50</td>
-</tr>
-</tbody>
-</table>
-
-</div>
+<p>::: ::: column</p>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1"></a><span class="bu">print</span>(scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID  Score
+0   1     60
+1   2     90
+2   4     50</code></pre>
 </div>
 </div>
 <p>::: :::</p>
@@ -1524,120 +2008,34 @@ Name: Name, dtype: object</code></pre>
 <section id="資料結合-join---inner" class="slide level2">
 <h2>資料結合 (Join) - inner</h2>
 <div class="columns">
-
+<div class="column">
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1"></a><span class="bu">print</span>(nameDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID   Name
+0   1    Amy
+1   2    Bob
+2   3  Chris
+3   4  David
+4   5   Emma</code></pre>
 </div>
-<div class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1"></a>nameDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="54">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>Amy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>Bob</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>Chris</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>David</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>5</td>
-<td>Emma</td>
-</tr>
-</tbody>
-</table>
-
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1"></a><span class="bu">print</span>(scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID  Score
+0   1     60
+1   2     90
+2   4     50</code></pre>
 </div>
 </div>
 </div>
-<p>::: :::</p>
-<div class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1"></a>scoreDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="55">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>60</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>90</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>4</td>
-<td>50</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<p>::: :::</p>
 <p>inner join - 預設</p>
-<div class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1"></a>pd.merge(nameDF,scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="56">
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1"></a>pd.merge(nameDF,scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1691,120 +2089,34 @@ Name: Name, dtype: object</code></pre>
 <section id="資料結合-join---outer" class="slide level2">
 <h2>資料結合 (Join) - outer</h2>
 <div class="columns">
-
+<div class="column">
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1"></a><span class="bu">print</span>(nameDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID   Name
+0   1    Amy
+1   2    Bob
+2   3  Chris
+3   4  David
+4   5   Emma</code></pre>
 </div>
-<div class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1"></a>nameDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="57">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>Amy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>Bob</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>Chris</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>David</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>5</td>
-<td>Emma</td>
-</tr>
-</tbody>
-</table>
-
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1"></a><span class="bu">print</span>(scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID  Score
+0   1     60
+1   2     90
+2   4     50</code></pre>
 </div>
 </div>
 </div>
-<p>::: :::</p>
-<div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a>scoreDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="58">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>60</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>90</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>4</td>
-<td>50</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<p>::: :::</p>
 <p>outer join</p>
-<div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1"></a>pd.merge(nameDF,scoreDF,how<span class="op">=</span><span class="st">"outer"</span>,on<span class="op">=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="59">
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1"></a>pd.merge(nameDF,scoreDF,how<span class="op">=</span><span class="st">"outer"</span>,on<span class="op">=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1870,120 +2182,34 @@ Name: Name, dtype: object</code></pre>
 <section id="資料結合-join---left" class="slide level2">
 <h2>資料結合 (Join) - left</h2>
 <div class="columns">
-
+<div class="column">
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1"></a><span class="bu">print</span>(nameDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID   Name
+0   1    Amy
+1   2    Bob
+2   3  Chris
+3   4  David
+4   5   Emma</code></pre>
 </div>
-<div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1"></a>nameDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="60">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>Amy</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>Bob</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>Chris</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>David</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>5</td>
-<td>Emma</td>
-</tr>
-</tbody>
-</table>
-
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1"></a><span class="bu">print</span>(scoreDF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID  Score
+0   1     60
+1   2     90
+2   4     50</code></pre>
 </div>
 </div>
 </div>
-<p>::: :::</p>
-<div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1"></a>scoreDF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">ID</th>
-<th data-quarto-table-cell-role="th">Score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>60</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>90</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>4</td>
-<td>50</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<p>::: :::</p>
 <p>left join</p>
-<div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1"></a>pd.merge(nameDF,scoreDF,how<span class="op">=</span><span class="st">"left"</span>,on<span class="op">=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
+<div class="cell" data-execution_count="69">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1"></a>pd.merge(nameDF,scoreDF,how<span class="op">=</span><span class="st">"left"</span>,on<span class="op">=</span><span class="st">"ID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2055,6 +2281,18 @@ Name: Name, dtype: object</code></pre>
 <li>依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，<strong>只留下有對應到的資料</strong></li>
 <li>請問結合後的資料有幾列？</li>
 </ul>
+</section>
+<section id="資料清洗與處理-5" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li>文字字串處理</li>
+<li>子集Subset</li>
+<li>資料組合</li>
+<li><strong>長寬表轉換</strong></li>
+<li>遺漏值處理</li>
+</ul>
 </section></section>
 <section>
 <section id="長表與寬表" class="title-slide slide level1 center">
@@ -2072,14 +2310,14 @@ Name: Name, dtype: object</code></pre>
 <section id="長表轉寬表" class="slide level2">
 <h2>長表轉寬表</h2>
 <p>以下是一個長表的範例</p>
-<div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1"></a>raw_data <span class="op">=</span> {<span class="st">'patient'</span>: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>],</span>
-<span id="cb102-2"><a href="#cb102-2"></a>                <span class="st">'obs'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb102-3"><a href="#cb102-3"></a>              <span class="st">'score'</span>: [<span class="dv">6252</span>, <span class="dv">24243</span>, <span class="dv">2345</span>, <span class="dv">2342</span>, <span class="dv">23525</span>]}</span>
-<span id="cb102-4"><a href="#cb102-4"></a></span>
-<span id="cb102-5"><a href="#cb102-5"></a>df <span class="op">=</span> pd.DataFrame(raw_data)</span>
-<span id="cb102-6"><a href="#cb102-6"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="63">
+<div class="cell" data-execution_count="70">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1"></a>raw_data <span class="op">=</span> {<span class="st">'patient'</span>: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>],</span>
+<span id="cb117-2"><a href="#cb117-2"></a>                <span class="st">'obs'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb117-3"><a href="#cb117-3"></a>              <span class="st">'score'</span>: [<span class="dv">6252</span>, <span class="dv">24243</span>, <span class="dv">2345</span>, <span class="dv">2342</span>, <span class="dv">23525</span>]}</span>
+<span id="cb117-4"><a href="#cb117-4"></a></span>
+<span id="cb117-5"><a href="#cb117-5"></a>df <span class="op">=</span> pd.DataFrame(raw_data)</span>
+<span id="cb117-6"><a href="#cb117-6"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="68">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2148,10 +2386,13 @@ Name: Name, dtype: object</code></pre>
 <li><code>df</code>資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表</li>
 <li>以<code>patient</code>為基準，obs欄位的值轉換為新欄位，並將score欄位填入</li>
 </ul>
-<div class="cell" data-execution_count="65">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1"></a>df_wide<span class="op">=</span>df.pivot(index<span class="op">=</span><span class="st">'patient'</span>, columns<span class="op">=</span><span class="st">'obs'</span>, values<span class="op">=</span><span class="st">'score'</span>)</span>
-<span id="cb103-2"><a href="#cb103-2"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+</section>
+<section id="長表轉寬表-.pivot-1" class="slide level2">
+<h2>長表轉寬表 .pivot()</h2>
+<div class="cell" data-execution_count="71">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1"></a>df_wide<span class="op">=</span>df.pivot(index<span class="op">=</span><span class="st">'patient'</span>, columns<span class="op">=</span><span class="st">'obs'</span>, values<span class="op">=</span><span class="st">'score'</span>)</span>
+<span id="cb118-2"><a href="#cb118-2"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="69">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2205,13 +2446,13 @@ Name: Name, dtype: object</code></pre>
 <section id="寬表轉長表-pd.melt" class="slide level2">
 <h2>寬表轉長表 pd.melt()</h2>
 <p>寬表範例</p>
-<div class="cell" data-execution_count="66">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'team'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>],</span>
-<span id="cb104-2"><a href="#cb104-2"></a>                   <span class="st">'points'</span>: [<span class="dv">88</span>, <span class="dv">91</span>, <span class="dv">99</span>, <span class="dv">94</span>],</span>
-<span id="cb104-3"><a href="#cb104-3"></a>                   <span class="st">'assists'</span>: [<span class="dv">12</span>, <span class="dv">17</span>, <span class="dv">24</span>, <span class="dv">28</span>],</span>
-<span id="cb104-4"><a href="#cb104-4"></a>                   <span class="st">'rebounds'</span>: [<span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">31</span>]})</span>
-<span id="cb104-5"><a href="#cb104-5"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell" data-execution_count="72">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'team'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>],</span>
+<span id="cb119-2"><a href="#cb119-2"></a>                   <span class="st">'points'</span>: [<span class="dv">88</span>, <span class="dv">91</span>, <span class="dv">99</span>, <span class="dv">94</span>],</span>
+<span id="cb119-3"><a href="#cb119-3"></a>                   <span class="st">'assists'</span>: [<span class="dv">12</span>, <span class="dv">17</span>, <span class="dv">24</span>, <span class="dv">28</span>],</span>
+<span id="cb119-4"><a href="#cb119-4"></a>                   <span class="st">'rebounds'</span>: [<span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">31</span>]})</span>
+<span id="cb119-5"><a href="#cb119-5"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="70">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2280,10 +2521,13 @@ Name: Name, dtype: object</code></pre>
 <li>消滅’points’, ‘assists’, ‘rebounds’</li>
 <li>將其他欄位的名稱整合至metric欄位，數值整合至amount欄位</li>
 </ul>
-<div class="cell" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1"></a>pd.melt(df, id_vars<span class="op">=</span><span class="st">'team'</span>, value_vars<span class="op">=</span>[<span class="st">'points'</span>, <span class="st">'assists'</span>, <span class="st">'rebounds'</span>],</span>
-<span id="cb105-2"><a href="#cb105-2"></a>             var_name<span class="op">=</span><span class="st">'metric'</span>, value_name<span class="op">=</span><span class="st">'amount'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
+</section>
+<section id="寬表轉長表-pd.melt-2" class="slide level2">
+<h2>寬表轉長表 pd.melt()</h2>
+<div class="cell" data-execution_count="73">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1"></a>pd.melt(df, id_vars<span class="op">=</span><span class="st">'team'</span>, value_vars<span class="op">=</span>[<span class="st">'points'</span>, <span class="st">'assists'</span>, <span class="st">'rebounds'</span>],</span>
+<span id="cb120-2"><a href="#cb120-2"></a>             var_name<span class="op">=</span><span class="st">'metric'</span>, value_name<span class="op">=</span><span class="st">'amount'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="71">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2387,6 +2631,18 @@ Name: Name, dtype: object</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="資料清洗與處理-6" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li>文字字串處理</li>
+<li>子集Subset</li>
+<li>資料組合</li>
+<li>長寬表轉換</li>
+<li><strong>遺漏值處理</strong></li>
+</ul>
 </section></section>
 <section>
 <section id="遺漏值處理" class="title-slide slide level1 center">
@@ -2402,10 +2658,10 @@ Name: Name, dtype: object</code></pre>
 </section>
 <section id="遺漏值處理-.dropna" class="slide level2">
 <h2>遺漏值處理 .dropna()</h2>
-<p>若資料型態為資料框，可使用<code>.dropna()</code>來選出完整的資料列</p>
-<div class="cell" data-execution_count="68">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<p>若資料型態為資料框，可使用<code>.dropna()</code>選出完整的資料</p>
+<div class="cell" data-execution_count="74">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1"></a>df_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2458,15 +2714,15 @@ Name: Name, dtype: object</code></pre>
 </section>
 <section id="遺漏值處理-.dropna-1" class="slide level2">
 <h2>遺漏值處理 .dropna()</h2>
-<p>若資料型態為資料框，可使用<code>.dropna()</code>來選出完整的資料列</p>
+<p>若資料型態為資料框，可使用<code>.dropna()</code>選出完整的資料</p>
 <ul>
 <li>axis=0: row based</li>
 <li>how = ‘any’: 只要有na就移除</li>
 </ul>
-<div class="cell" data-execution_count="69">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1"></a>df_wide_clane<span class="op">=</span>df_wide.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">'any'</span>)</span>
-<span id="cb107-2"><a href="#cb107-2"></a>df_wide_clane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="68">
+<div class="cell" data-execution_count="75">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1"></a>df_wide_clane<span class="op">=</span>df_wide.dropna(axis <span class="op">=</span> <span class="dv">0</span>, how <span class="op">=</span> <span class="st">'any'</span>)</span>
+<span id="cb122-2"><a href="#cb122-2"></a>df_wide_clane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2510,6 +2766,18 @@ Name: Name, dtype: object</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="資料清洗與處理-7" class="slide level2">
+<h2>資料清洗與處理</h2>
+<ul>
+<li>Tidy Data</li>
+<li>資料型態轉換處理</li>
+<li>文字字串處理</li>
+<li>子集Subset</li>
+<li>資料組合</li>
+<li>長寬表轉換</li>
+<li>遺漏值處理</li>
+</ul>
 <div class="footer footer-default">
 
 </div>

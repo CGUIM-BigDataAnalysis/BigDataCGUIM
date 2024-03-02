@@ -21,9 +21,8 @@ editor: visual
 -   資料型態轉換處理
 -   文字字串處理
 -   子集Subset
--   排序
 -   資料組合
--   長表轉寬表
+-   長寬表轉換
 -   遺漏值處理
 
 
@@ -39,8 +38,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 ## Tidy Data
 
-type:sub-section
-
 Each column is a variable. Each row is an observation.
 
 -   一個欄位（Column）內只有一個數值，最好要有凡人看得懂的Column Name
@@ -48,6 +45,16 @@ Each column is a variable. Each row is an observation.
 -   一張表裡面，有所有分析需要的資料
 -   如果一定要多張表，中間一定要有index可以把表串起來
 -   One file, one table
+
+## 資料清洗與處理
+
+-   Tidy Data
+-   **資料型態轉換處理**
+-   文字字串處理
+-   子集Subset
+-   資料組合
+-   長寬表轉換
+-   遺漏值處理
 
 # 資料型態轉換處理
 
@@ -99,6 +106,13 @@ isinstance(num,int)
 #| echo: true
 isinstance(num,float)
 ```
+## 資料型態檢查 - isinstance
+
+使用`isinstance()`函數檢查資料型態，回傳布林變數，若為**真**，回傳**TRUE**
+
+-   是否為**數字** `isinstance(變數名稱,(int,float))`
+-   是否為**文字** `isinstance(變數名稱,str)`
+-   是否為**布林變數** `isinstance(變數名稱,bool)`
 
 ```{python}
 #| echo: true
@@ -119,7 +133,7 @@ isinstance(text,str)
 ```
 
 
-# 資料型態轉換 - 複習Python 101
+## 資料型態轉換 - 複習Python 101
 
 使用`int()`, `float()`, `str()`函數轉換型態
 
@@ -134,7 +148,7 @@ cha_int = int(cha)
 type(cha_int)
 ```
 
-## 資料型態轉換 - as.
+## 資料型態轉換
 
 若無法順利完成轉換，會出現錯誤訊息
 
@@ -181,6 +195,15 @@ price_df
 - 如何將Price欄位轉換成數字？
 - **Hint**: 先做該欄位第一個數字，以此類推
 
+## 資料清洗與處理
+
+-   Tidy Data
+-   資料型態轉換處理
+-   **文字字串處理**
+-   子集Subset
+-   資料組合
+-   長寬表轉換
+-   遺漏值處理
 
 # 文字字串處理
 
@@ -208,12 +231,12 @@ str_ex.count("o")
 
 ## 基本處理
 
--   切割 `.split()` **Split**
+-   切割 `字串變數.split()` **Split**
 -   子集 `字串變數[:]` **sub string**, **Slice**
--   大小寫轉換 `.upper()` `.lower()`
--   兩文字連接 `+` `.join(字串清單list)`
--   文字取代 `.replace(舊值,新值)` **substitute**
--   前後空白去除 `.strip(字元,預設空白)` **trim**
+-   大小寫轉換 `字串變數.upper()` `字串變數.lower()`
+-   兩文字連接 `+` `字串變數.join(字串清單list)`
+-   文字取代 `字串變數.replace(舊值,新值)` **substitute**
+-   前後空白去除 `字串變數.strip(字元,預設空白)` **trim**
 
 ## 基本處理-切割
 
@@ -289,6 +312,15 @@ space_ex.strip()
 dot_ex = "CGU."
 dot_ex.strip(".")
 ```
+## 基本處理
+
+-   切割 `字串變數.split()` **Split**
+-   子集 `字串變數[:]` **sub string**, **Slice**
+-   大小寫轉換 `字串變數.upper()` `字串變數.lower()`
+-   兩文字連接 `+` `字串變數.join(字串清單list)`
+-   文字取代 `字串變數.replace(舊值,新值)` **substitute**
+-   前後空白去除 `字串變數.strip(字元,預設空白)` **trim**
+
 ## Hands-on 字串基本處理
 
 回想起台積電的資料
@@ -414,9 +446,58 @@ print(re.search("^l","Alex"))
 #| echo: true
 re.search("x$","Alex")
 ```
+## 搜尋字串 - 從list中搜尋
 
+-   r = `re.compile("找尋目標")`，目標可以是正規表示式
+-   `filter(r.search,想找的list)`
+
+```{python} 
+#| echo: true
+mylist = ["dog", "cat", "wildcat", "thundercat", "cow", "hooo","catxx"]
+r = re.compile("cat")
+newlist = list(filter(r.search, mylist)) 
+print(newlist)
+```
 
 ## Hands-on 搜尋字串
+
+回想台北市腳踏車資料
+
+-   練習用資料：[YouBike2.0臺北市公共自行車即時資訊](https://data.gov.tw/dataset/137993)
+-   API地址[在此](https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json)
+-   將資料匯入Python中
+-   找到資料的儲存處
+
+```{python} 
+#| echo: true
+#| eval: false
+import requests, json
+# step 1 requests.get
+res = requests.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
+# step 2 conver to json
+bike_data = res.json()
+bike_df = pd.DataFrame(bike_data)
+bike_df
+```
+
+## Hands-on 搜尋字串
+
+```{python} 
+#| echo: true
+import requests, json
+# step 1 requests.get
+res = requests.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
+# step 2 conver to json
+bike_data = res.json()
+bike_df = pd.DataFrame(bike_data)
+bike_df
+```
+
+## Hands-on 搜尋字串
+
+-   匯入台北市腳踏車資料
+-   找到所有“國小”的站點
+
 
 ## 搜尋字串 - 基本正規表示式
 
@@ -430,11 +511,15 @@ re.search("x$","Alex")
 #| echo: true
 re.search("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+","yjtseng@nycu.edu.tw")
 ```
+## 資料清洗與處理
 
-```{python} 
-#| echo: true
-re.match("x$","Alex")
-```
+-   Tidy Data
+-   資料型態轉換處理
+-   文字字串處理
+-   **子集Subset**
+-   資料組合
+-   長寬表轉換
+-   遺漏值處理
 
 # 子集Subset
 
@@ -463,7 +548,8 @@ dist1["Name"] ##取出dist中key為Name的value
 
 ```{python} 
 #| echo: true
-list1[-1]
+print(list1)
+print(list1[-1])
 ```
 
 ## 子集Subset - 二維資料head()
@@ -475,44 +561,91 @@ list1[-1]
 import pandas as pd
 df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
                     "Name":["Tom","Emma","Ryan","Amy"]})
+```
+::: columns
+::: column
 
+```{python} 
+#| echo: true
+df1
+```
+:::
+::: column
+```{python} 
+#| echo: true
 df1.head(2)
 ```
-
-
+:::
+:::
 
 ## 子集Subset - 二維資料tail()
 
 若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
 
-```{python}  
+::: columns
+::: column
+
+```{python} 
+#| echo: true
+df1
+```
+:::
+::: column
+```{python} 
 #| echo: true
 df1.tail(2)
 ```
-
+:::
+:::
 
 
 ## 子集Subset - 二維資料 取值 (column)
 
+::: columns
+::: column
 資料框物件名稱`[`欄位名稱`]`：取出sequence
 ```{python}
 #| echo: true
 df1["Name"]
 ```
+:::
+::: column
 資料框物件名稱`[[`欄位名稱`]]`：取出資料框
 ```{python}
 #| echo: true
 df1[["Name"]]
 ```
-
+:::
+:::
 
 ## 子集Subset - 二維資料 取值 (row)
 
 資料框物件名稱`[`row slice`]`
+
+::: columns
+::: column
+```{python}
+#| echo: true
+df1
+```
+:::
+::: column
 ```{python}
 #| echo: true
 df1[0:1]
 ```
+:::
+:::
+
+## 資料清洗與處理
+
+-   Tidy Data
+-   資料型態轉換處理
+-   文字字串處理
+-   子集Subset
+-   **資料組合**
+-   長寬表轉換
+-   遺漏值處理
 
 # 資料組合
 
@@ -521,7 +654,7 @@ df1[0:1]
 有時需要在資料框新增一列，或新增一行
 
 -   Row 的組合 `pd`.`concat([df1, df2])`
--   Column 的組合 `cbind()`
+-   Column 的組合 `pd`.`concat([df1, df2],axis=1)`
 
 ## 資料組合 - .concat()
 
@@ -580,18 +713,17 @@ scoreDF=pd.DataFrame({"ID":[1,2,4],
 ## 資料結合 (Join in SQL)
 
 資料範例
-
 ::: columns
-:::
+::: column
 ```{python} 
 #| echo: true
-nameDF
+print(nameDF)
 ```
 :::
-:::
+::: column
 ```{python} 
 #| echo: true
-scoreDF
+print(scoreDF)
 ```
 :::
 :::
@@ -608,18 +740,17 @@ How:
 -   outer：保留所有資料
 
 ## 資料結合 (Join) - inner
-
 ::: columns
-:::
+::: column
 ```{python} 
 #| echo: true
-nameDF
+print(nameDF)
 ```
 :::
-:::
+::: column
 ```{python} 
 #| echo: true
-scoreDF
+print(scoreDF)
 ```
 :::
 :::
@@ -633,16 +764,16 @@ pd.merge(nameDF,scoreDF)
 ## 資料結合 (Join) - outer
 
 ::: columns
-:::
+::: column
 ```{python} 
 #| echo: true
-nameDF
+print(nameDF)
 ```
 :::
-:::
+::: column
 ```{python} 
 #| echo: true
-scoreDF
+print(scoreDF)
 ```
 :::
 :::
@@ -659,16 +790,16 @@ pd.merge(nameDF,scoreDF,how="outer",on="ID")
 ## 資料結合 (Join) - left
 
 ::: columns
-:::
+::: column
 ```{python} 
 #| echo: true
-nameDF
+print(nameDF)
 ```
 :::
-:::
+::: column
 ```{python} 
 #| echo: true
-scoreDF
+print(scoreDF)
 ```
 :::
 :::
@@ -691,6 +822,16 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 -   分別讀入兩個csv檔
 -   依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，**只留下有對應到的資料**
 -   請問結合後的資料有幾列？
+
+## 資料清洗與處理
+
+-   Tidy Data
+-   資料型態轉換處理
+-   文字字串處理
+-   子集Subset
+-   資料組合
+-   **長寬表轉換**
+-   遺漏值處理
 
 # 長表與寬表
 
@@ -721,6 +862,8 @@ df
 -   `df`資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表
 -   以`patient`為基準，obs欄位的值轉換為新欄位，並將score欄位填入
 
+## 長表轉寬表 .pivot()
+
 ```{python} 
 #| echo: true
 df_wide=df.pivot(index='patient', columns='obs', values='score')
@@ -748,13 +891,23 @@ df
 -   消滅'points', 'assists', 'rebounds'
 -   將其他欄位的名稱整合至metric欄位，數值整合至amount欄位
 
+## 寬表轉長表 pd.melt()
+
 ```{python} 
 #| echo: true
 pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
              var_name='metric', value_name='amount')
 ```
 
+## 資料清洗與處理
 
+-   Tidy Data
+-   資料型態轉換處理
+-   文字字串處理
+-   子集Subset
+-   資料組合
+-   長寬表轉換
+-   **遺漏值處理**
 
 # 遺漏值處理
 
@@ -768,7 +921,7 @@ pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
 
 ## 遺漏值處理 .dropna()
 
-若資料型態為資料框，可使用`.dropna()`來選出完整的資料列
+若資料型態為資料框，可使用`.dropna()`選出完整的資料
 
 ```{python}  
 #| echo: true
@@ -778,7 +931,7 @@ df_wide
 
 ## 遺漏值處理 .dropna()
 
-若資料型態為資料框，可使用`.dropna()`來選出完整的資料列
+若資料型態為資料框，可使用`.dropna()`選出完整的資料
 
 -   axis=0: row based
 -   how = 'any': 只要有na就移除
@@ -789,3 +942,12 @@ df_wide_clane=df_wide.dropna(axis = 0, how = 'any')
 df_wide_clane
 ```
 
+## 資料清洗與處理
+
+-   Tidy Data
+-   資料型態轉換處理
+-   文字字串處理
+-   子集Subset
+-   資料組合
+-   長寬表轉換
+-   遺漏值處理
