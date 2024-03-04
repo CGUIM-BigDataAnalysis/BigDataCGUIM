@@ -261,50 +261,63 @@ data['HR'].corr(data['height'])
 
 ## groupby
 
-以[房屋實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)為例，首先先[讀入二手屋資料](https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllOldData.csv)
+以[房屋實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)為例，首先先[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)
 
 ```{python} 
 #| echo: true
-house = pd.read_csv("https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/blob/master/EMBA_BigData/AllOldData.csv")
+house = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv")
 print(house)
+```
+## 資料清理
+
+```{python} 
+#| echo: true
+house=house[1:]
+print(house)
+```
+## 資料清理
+
+```{python} 
+#| echo: true
+house.info()
 ```
 
 ## 分組 pandas資料框.groupby()
 
 - `pandas資料框.groupby(by=分組依據)`設定分組依據
-- 計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均土地移轉總面積平方公尺**
+- 計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**總價元**
 
 
 ```{python} 
 #| echo: true
+house.groupby(by='鄉鎮市區')['總價元'].mean()
+house.groupby(by='鄉鎮市區').size()
+```
 
-house.g
-group_by(AllOldData,鄉鎮市區)%>%
-    summarise(nHouse=n(),
-      meanBuild=mean(建物移轉總面積平方公尺),
-      meanLand=mean(土地移轉總面積平方公尺))
+## 分組 pandas資料框.groupby()
+
+- `pandas資料框.groupby(by=分組依據)`設定分組依據
+- 計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**總價元**
+-   `pandas資料框.groupby(by=分組依據).agg(["計算1","計算2"])`
+
+```{python} 
+#| echo: true
+house.groupby(by='鄉鎮市區')['總價元'].agg(["size","mean"])
 ```
 
 
-分組 group_by()
+## 分組 pandas資料框.groupby()
 
 - 可設定**多個**分組依據
-- 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的**交易筆數**、**平均建物移轉總面積平方公尺**以及**平均總價元**
-```{r group2,eval=F}
-group_by(AllOldData,鄉鎮市區,交易標的)%>%
-    summarise(nHouse=n(),
-      meanBuild=mean(建物移轉總面積平方公尺),
-      meanPrice=mean(總價元))
-```
-```{r group2.1,echo=F}
-group2<-group_by(AllOldData,鄉鎮市區,交易標的)%>%
-    summarise(nHouse=n(),
-      meanBuild=mean(建物移轉總面積平方公尺),
-      meanPrice=mean(總價元))
-knitr::kable(head(group2,3))
+- 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的**交易筆數**以及**平均總價元**
+-   `pandas資料框.groupby(by=[分組依據1,分組依據2]).agg(["計算1","計算2"])`
+
+```{python} 
+#| echo: true
+house.groupby(by=['鄉鎮市區','交易標的'])['總價元'].agg(["size","mean"])
 ```
 
-排序 arrange()
+## 排序 arrange()
 
 排序功能，預設為**遞增排序**
 ```{r arrange1,eval=F}
@@ -315,7 +328,7 @@ arrange1<-arrange(AllOldData,總價元)
 knitr::kable(head(arrange1)) 
 ```
 
-遞減排序 arrange()
+## 遞減排序 arrange()
 
 使用`desc()`將要**遞減排序**的變數包起來，就可以遞減排序
 ```{r arrange2,eval=F}
@@ -326,39 +339,14 @@ arrange2<-arrange(AllOldData,desc(總價元))
 knitr::kable(head(arrange2,3))
 ```
 
-dplyr綜合範例
+## 分組計算+子集綜合範例
 
-- 結合`group_by()`、`summarise()`、`arrange()`，可完成一連串的資料分析
+- 結合分組、子集、統計運算，可完成一連串的資料分析
 - 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的交易筆數、平均總價元、平均單價元平方公尺，並依平均單價元平方公尺**由大到小排序**
-```{r arrange3,eval=F}
-group_by(AllOldData,鄉鎮市區,交易標的) %>%
-  summarise(nHouse=n(),
-    meanPrice=mean(總價元),
-    meanUPrice=mean(單價元平方公尺)) %>%
-  arrange(desc(meanUPrice))
-```
-```{r arrange3.1,echo=F}
-arrange3<-group_by(AllOldData,鄉鎮市區,交易標的) %>%
-  summarise(nHouse=n(),
-    meanPrice=mean(總價元),
-    meanUPrice=mean(單價元平方公尺)) %>%
-  arrange(desc(meanUPrice))
-knitr::kable(head(arrange3,3))
-```
 
-修改欄位名稱 rename()
 
-`新名稱=舊名稱`
-```{r rename1, eval=F}
-rename1<-rename(AllOldData,門牌=土地位置建物門牌)
-rename1[1:5,1:3]
-```
-```{r rename1w, echo=F}
-rename1<-rename(AllOldData,門牌=土地位置建物門牌)
-knitr::kable(rename1[1:5,1:3])
-```
 
-dplyr 綜合練習
+## dplyr 綜合練習
 
 type:alert
 incremental:true
