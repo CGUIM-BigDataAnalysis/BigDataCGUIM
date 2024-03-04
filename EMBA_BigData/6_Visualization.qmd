@@ -1,6 +1,10 @@
 ---
-title: "資料視覺化"
-format: revealjs
+title: "6. Data Visualization"
+author: "Yi-Ju Tseng"
+format:
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
 editor: visual
 ---
 

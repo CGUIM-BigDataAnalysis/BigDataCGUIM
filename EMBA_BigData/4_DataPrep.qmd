@@ -18,13 +18,12 @@ editor: visual
 ## 資料清洗與處理
 
 -   Tidy Data
+-   子集Subset
 -   資料型態轉換處理
 -   文字字串處理
--   子集Subset
 -   資料組合
 -   長寬表轉換
 -   遺漏值處理
-
 
 ## 前置作業
 
@@ -49,9 +48,150 @@ Each column is a variable. Each row is an observation.
 ## 資料清洗與處理
 
 -   Tidy Data
+-   **子集Subset**
+-   資料型態轉換處理
+-   文字字串處理
+-   資料組合
+-   長寬表轉換
+-   遺漏值處理
+
+# 子集Subset
+
+## 子集Subset - 一維資料
+
+之前有介紹使用`[ ]`取出單一或多個元素的方法，可應用於：
+
+-   list: `[a,b,c,...]`, list\[`index`\]
+-   dist: `{key1:value1, key2:value2,...}`, dist\[`key`\]
+
+```{python}
+#| echo: true
+list1 = ["Tom","Ryan","Mark"]
+list1[1] ##取出list的第二個元素
+```
+
+```{python}
+#| echo: true
+dist1 = {"Name":"Tom","Age":20,"Parents":"Mark"}
+dist1["Name"] ##取出dist中key為Name的value
+```
+
+## 子集Subset - 一維資料
+
+也可以用“負號”表示反向的順序，-1為最後一個值
+
+```{python}
+#| echo: true
+print(list1)
+print(list1[-1])
+```
+
+## 子集Subset - 二維資料head()
+
+若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
+
+```{python}
+#| echo: true
+import pandas as pd
+df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
+                    "Name":["Tom","Emma","Ryan","Amy"]})
+```
+
+::: columns
+::: column
+```{python}
+#| echo: true
+df1
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+df1.head(2)
+```
+:::
+:::
+
+## 子集Subset - 二維資料tail()
+
+若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
+
+::: columns
+::: column
+```{python}
+#| echo: true
+df1
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+df1.tail(2)
+```
+:::
+:::
+
+## 子集Subset - 二維資料 取值 (column)
+
+::: columns
+::: column
+資料框物件名稱`[`欄位名稱`]`：取出sequence
+
+```{python}
+#| echo: true
+df1["Name"]
+```
+:::
+
+::: column
+資料框物件名稱`[[`欄位名稱`]]`：取出資料框
+
+```{python}
+#| echo: true
+df1[["Name"]]
+```
+:::
+:::
+
+## 子集Subset - 二維資料 取值 (row)
+
+資料框物件名稱`[`row slice`]`
+
+::: columns
+::: column
+```{python}
+#| echo: true
+df1
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+df1[0:2]
+```
+:::
+:::
+
+## 子集Subset - Recap
+
+-   一維資料
+    -   list: `[a,b,c,...]`, list\[`index`\]
+    -   dist: `{key1:value1, key2:value2,...}`, dist\[`key`\]
+-   二維資料
+    -   column: 資料框物件`[`欄位名稱`]`：取出sequence
+    -   column: 資料框物件`[[`欄位名稱`]]`：取出資料框
+    -   row: 資料框物件`[`row slice`]` (ex. 資料框物件`[2:10]`)
+    -   row: 資料框物件`.head()`, 資料框物件`.tail()`函數
+
+## 資料清洗與處理
+
+-   Tidy Data
+-   子集Subset
 -   **資料型態轉換處理**
 -   文字字串處理
--   子集Subset
 -   資料組合
 -   長寬表轉換
 -   遺漏值處理
@@ -68,7 +208,6 @@ Data Types 資料型態
 -   **數值 (numeric)**
 -   **布林變數 (Boolean, logic)**
 -   **日期 (date)**
-
 
 ## Check Data Type
 
@@ -106,6 +245,7 @@ isinstance(num,int)
 #| echo: true
 isinstance(num,float)
 ```
+
 ## 資料型態檢查 - isinstance
 
 使用`isinstance()`函數檢查資料型態，回傳布林變數，若為**真**，回傳**TRUE**
@@ -119,7 +259,6 @@ isinstance(num,float)
 isinstance(num,(int,float))
 ```
 
-
 ```{python}
 #| echo: true
 text = "100"
@@ -131,7 +270,6 @@ isinstance(text,(int,float))
 text = "100"
 isinstance(text,str)
 ```
-
 
 ## 資料型態轉換 - 複習Python 101
 
@@ -158,6 +296,27 @@ type(cha_int)
 int("abc")
 ```
 
+## 資料型態轉換處理 - Recap
+
+::: columns
+::: column
+**資料型態檢查**
+
+-   `type()`查看資料結構
+-   **數字** `isinstance(變數,(int,float))`
+-   **文字** `isinstance(變數,str)`
+-   **布林變數** `isinstance(變數,bool)`
+:::
+
+::: column
+**資料型態轉換**
+
+-   轉換為**整數** `int(變數)`
+-   轉換為**浮點數** `float(變數)`
+-   轉換為**文字** `str(變數)`
+:::
+:::
+
 ## Hands-on 資料型態轉換練習
 
 回想起台積電的資料
@@ -191,16 +350,16 @@ price_df
 
 ## Hands-on 資料型態轉換練習
 
-- Price欄位的資料型態是？
-- 如何將Price欄位轉換成數字？
-- **Hint**: 先做該欄位第一個數字，以此類推
+-   Price欄位的資料型態是？
+-   如何將Price欄位轉換成數字？
+-   **Hint**: 先做該欄位第一個數字，以此類推
 
 ## 資料清洗與處理
 
 -   Tidy Data
+-   子集Subset
 -   資料型態轉換處理
 -   **文字字串處理**
--   子集Subset
 -   資料組合
 -   長寬表轉換
 -   遺漏值處理
@@ -213,18 +372,18 @@ price_df
 -   基本處理
 -   搜尋字串
 
-
 ## 基本查詢
 
 -   字串長度 `len(變數名稱)`
 -   字串內包含某字的個數 `.count(某字)`
 
-```{python} 
+```{python}
 #| echo: true
 str_ex = "Hello World"
 len(str_ex)
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str_ex.count("o")
 ```
@@ -242,7 +401,7 @@ str_ex.count("o")
 
 `字串變數.split(用什麼符號切割)`
 
-```{python} 
+```{python}
 #| echo: true
 str_ex = "Hello World"
 str_ex.split(" ")
@@ -251,11 +410,13 @@ str_ex.split(" ")
 ## 基本處理-子集（切一小段）
 
 `字串變數[開始位置:結束位置]`（不包含結束位置）
-```{python} 
+
+```{python}
 #| echo: true
 str_ex
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str_ex[1:5]
 ```
@@ -265,23 +426,29 @@ str_ex[1:5]
 -   `字串變數.upper()`
 -   `字串變數.lower()`
 
-```{python} 
+```{python}
 #| echo: true
 str_ex.upper()
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str_ex.lower()
 ```
 
 ## 基本處理-兩文字連接
 
--   字串1`+`字串2 
--   `字串變數.join(字串清單list)`，字串變數為字串間隔
+-   字串1`+`字串2
 
-```{python} 
+```{python}
 #| echo: true
 "Hello" + "World"
+```
+
+-   `字串變數.join(字串清單list)`，字串變數為字串間隔
+
+```{python}
+#| echo: true
 str_list = ["桃園市","龜山區","文化一路"]
 space = " "
 space.join(str_list)
@@ -291,28 +458,29 @@ space.join(str_list)
 
 `字串變數.replace(舊值,新值)` **substitute**
 
-```{python} 
+```{python}
 #| echo: true
+print(str_ex)
 str_ex.replace("o","0")
 ```
 
-
 ## 基本處理-前後空白去除
-
 
 `字串變數.strip(字元,預設空白)` **trim**
 
-```{python} 
+```{python}
 #| echo: true
 space_ex = "    CGU.   "
 space_ex.strip()
 ```
-```{python} 
+
+```{python}
 #| echo: true
 dot_ex = "CGU."
 dot_ex.strip(".")
 ```
-## 基本處理
+
+## 基本處理 - Recap
 
 -   切割 `字串變數.split()` **Split**
 -   子集 `字串變數[:]` **sub string**, **Slice**
@@ -354,57 +522,63 @@ price_df
 
 ## Hands-on 字串基本處理
 
--   請把Price欄位中的%符號移除，並在相對應的Type欄位加上%符號
--   請把Price欄位中,移除，再將整個Price欄位轉為數字
-
+-   請把Price欄位中的`%`符號移除，並在相對應的Type欄位加上%符號
+-   請把Price欄位中的`,`移除，再將整個Price欄位轉為數字
 
 ## 搜尋字串
 
 -   使用`==`, `in`完整比對
 -   **有分大小寫**
 
-
-```{python} 
+```{python}
 #| echo: true
 str1="CGU"
 str2="cgu"
 str3="CGU"
 str1 == str2
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str1 == str3
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str1 in ["CGUST","NTU","NYCU"]
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str1 in ["CGUST","CGU","NYCU"]
 ```
+
 ## 搜尋字串 - 是否包含某字
 
 -   `字串變數.find(搜尋字串)`，回傳index，回傳-1表示沒有
 -   `字串變數.count(計算字串)`，回傳個數
 
-```{python} 
+```{python}
 #| echo: true
 str1
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str1.find("C")
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str2
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str2.find("C")
 ```
-```{python} 
+
+```{python}
 #| echo: true
 str2.count("C")
 ```
@@ -413,51 +587,79 @@ str2.count("C")
 
 使用正規表示式搜尋文字，需載入`re`套件(不用安裝)
 
-- `re.match("找尋目標","在哪找")`找字串是否為找尋目標開頭
-- `re.search("找尋目標","在哪找")`找字串是否包含為找尋目標
+-   `re.match("找尋目標","在哪找")`找字串是否為找尋目標開頭
+-   `re.search("找尋目標","在哪找")`找字串是否包含為找尋目標
 
-```{python} 
+```{python}
 #| echo: true
 import re
 re.match("A","Alex")
 ```
-```{python} 
+
+```{python}
 #| echo: true
 re.match("l","Alex")
 print(re.match("l","Alex"))
 ```
-```{python} 
+
+```{python}
 #| echo: true
 re.search("l","Alex")
 ```
 
 ## 搜尋字串 - 基本正規表示式
 
--   `re.search("找尋目標","在哪找")`，目標可以是正規表示式
--   `^`開頭
--   `$`結尾
+-   `re.search("找尋目標","在哪找")`，`"找尋目標"`可以是正規表示式
+    -   `^`開頭
+    -   `$`結尾
 
-```{python} 
+```{python}
 #| echo: true
 re.search("^l","Alex")
 print(re.search("^l","Alex"))
 ```
-```{python} 
+
+```{python}
 #| echo: true
 re.search("x$","Alex")
 ```
+
 ## 搜尋字串 - 從list中搜尋
 
--   r = `re.compile("找尋目標")`，目標可以是正規表示式
+-   r = `re.compile("找尋目標")`，`"找尋目標"`可以是正規表示式
 -   `filter(r.search,想找的list)`
 
-```{python} 
+```{python}
 #| echo: true
 mylist = ["dog", "cat", "wildcat", "thundercat", "cow", "hooo","catxx"]
 r = re.compile("cat")
 newlist = list(filter(r.search, mylist)) 
 print(newlist)
 ```
+
+## 搜尋字串 - 基本正規表示式
+
+-   `*`0-n個
+-   `+`1-n個
+-   `[]`包含某些字
+-   `d`包含0-9...
+-   [參考資料](https://selflearningsuccess.com/python-regex/#%E5%90%84%E7%A8%AE%E5%B9%AB%E5%8A%A9%E4%BD%A0%E6%AF%94%E5%B0%8D%E7%9A%84%E5%B7%A5%E5%85%B7)
+
+```{python}
+#| echo: true
+re.search("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+","yjtseng@nycu.edu.tw")
+```
+
+## 搜尋字串 - Recap
+
+-   使用`==`, `in`完整比對
+-   `re.match("找尋目標","在哪找")`
+-   `re.search("找尋目標","在哪找")`
+-   "在哪找"如果是list
+    -   r = `re.compile("找尋目標")`
+    -   `filter(r.search,想找的list)`
+-   "找尋目標"可以是正規表示式
+    -   `^`開頭, `$`結尾
 
 ## Hands-on 搜尋字串
 
@@ -468,7 +670,7 @@ print(newlist)
 -   將資料匯入Python中
 -   找到資料的儲存處
 
-```{python} 
+```{python}
 #| echo: true
 #| eval: false
 import requests, json
@@ -476,173 +678,36 @@ import requests, json
 res = requests.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
 # step 2 conver to json
 bike_data = res.json()
+# step 3 conver to dataframe
 bike_df = pd.DataFrame(bike_data)
-bike_df
+print(bike_df)
 ```
 
 ## Hands-on 搜尋字串
 
-```{python} 
+```{python}
 #| echo: true
 import requests, json
 # step 1 requests.get
 res = requests.get("https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json")
 # step 2 conver to json
 bike_data = res.json()
+# step 3 conver to dataframe
 bike_df = pd.DataFrame(bike_data)
-bike_df
+print(bike_df)
 ```
 
 ## Hands-on 搜尋字串
 
--   匯入台北市腳踏車資料
+-   匯入台北市腳踏車資料 (詳見上面幾頁)
 -   找到所有“國小”的站點
 
-
-## 搜尋字串 - 基本正規表示式
-
--   `*`0-n個
--   `+`1-n個
--   `[]`包含某些字
--   `d`包含0-9...
--   [參考資料](https://selflearningsuccess.com/python-regex/#%E5%90%84%E7%A8%AE%E5%B9%AB%E5%8A%A9%E4%BD%A0%E6%AF%94%E5%B0%8D%E7%9A%84%E5%B7%A5%E5%85%B7)
-
-```{python} 
-#| echo: true
-re.search("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]+","yjtseng@nycu.edu.tw")
-```
 ## 資料清洗與處理
 
 -   Tidy Data
--   資料型態轉換處理
--   文字字串處理
--   **子集Subset**
--   資料組合
--   長寬表轉換
--   遺漏值處理
-
-# 子集Subset
-
-## 子集Subset - 一維資料
-
-之前有介紹使用`[ ]`取出單一或多個元素的方法，可應用於：
-
--   list: `[a,b,c,...]`, list[`index`]
--   dist: `{key1:value1, key2:value2,...}`, dist[`key`]
-
-```{python} 
-#| echo: true
-list1 = ["Tom","Ryan","Mark"]
-list1[1] ##取出list的第二個元素
-```
-
-```{python} 
-#| echo: true
-dist1 = {"Name":"Tom","Age":20,"Parents":"Mark"}
-dist1["Name"] ##取出dist中key為Name的value
-```
-
-## 子集Subset - 一維資料
-
-也可以用“負號”表示反向的順序，-1為最後一個值
-
-```{python} 
-#| echo: true
-print(list1)
-print(list1[-1])
-```
-
-## 子集Subset - 二維資料head()
-
-若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
-
-```{python} 
-#| echo: true
-import pandas as pd
-df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
-                    "Name":["Tom","Emma","Ryan","Amy"]})
-```
-::: columns
-::: column
-
-```{python} 
-#| echo: true
-df1
-```
-:::
-::: column
-```{python} 
-#| echo: true
-df1.head(2)
-```
-:::
-:::
-
-## 子集Subset - 二維資料tail()
-
-若想要快速取得資料框的前幾列(Row)或後幾列，也可使用`.head()`和`.tail()`函數
-
-::: columns
-::: column
-
-```{python} 
-#| echo: true
-df1
-```
-:::
-::: column
-```{python} 
-#| echo: true
-df1.tail(2)
-```
-:::
-:::
-
-
-## 子集Subset - 二維資料 取值 (column)
-
-::: columns
-::: column
-資料框物件名稱`[`欄位名稱`]`：取出sequence
-```{python}
-#| echo: true
-df1["Name"]
-```
-:::
-::: column
-資料框物件名稱`[[`欄位名稱`]]`：取出資料框
-```{python}
-#| echo: true
-df1[["Name"]]
-```
-:::
-:::
-
-## 子集Subset - 二維資料 取值 (row)
-
-資料框物件名稱`[`row slice`]`
-
-::: columns
-::: column
-```{python}
-#| echo: true
-df1
-```
-:::
-::: column
-```{python}
-#| echo: true
-df1[0:1]
-```
-:::
-:::
-
-## 資料清洗與處理
-
--   Tidy Data
--   資料型態轉換處理
--   文字字串處理
 -   子集Subset
+-   資料型態轉換處理
+-   文字字串處理
 -   **資料組合**
 -   長寬表轉換
 -   遺漏值處理
@@ -670,12 +735,11 @@ newdf = pd.concat([df1,df2])
 print(newdf)
 ```
 
-
 ## 資料組合 - .concat()
 
 `pd`.`concat([pd物件1, pd物件2],axis=1)`，利用`axis=1`改為column方向的合併
 
-```{python} 
+```{python}
 #| echo: true
 df1 = pd.DataFrame({"ID":[1, 2, 3, 4],
                     "Name":["Tom","Emma","Ryan","Amy"]})
@@ -685,7 +749,12 @@ newdf = pd.concat([df1,df2],axis=1)
 print(newdf)
 ```
 
+## 資料組合 - Recap
 
+有時需要在資料框新增一列，或新增一行
+
+-   Row 的組合 `pd`.`concat([df1, df2])`
+-   Column 的組合 `pd`.`concat([df1, df2],axis=1)`
 
 # 資料結合 (Join in SQL)
 
@@ -702,7 +771,7 @@ print(newdf)
 
 可以用`pd`.`merge()`函數將資料框結合，使用方法為`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
 
-```{python} 
+```{python}
 #| echo: true
 nameDF=pd.DataFrame({"ID":[1,2,3,4,5],
                   "Name":["Amy","Bob","Chris","David","Emma"]})
@@ -713,15 +782,17 @@ scoreDF=pd.DataFrame({"ID":[1,2,4],
 ## 資料結合 (Join in SQL)
 
 資料範例
+
 ::: columns
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(nameDF)
 ```
 :::
+
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(scoreDF)
 ```
@@ -740,82 +811,92 @@ How:
 -   outer：保留所有資料
 
 ## 資料結合 (Join) - inner
+
 ::: columns
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(nameDF)
 ```
 :::
+
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(scoreDF)
 ```
 :::
 :::
 
-inner join - 預設
+inner join - 預設:`merge(資料框left,資料框right,how="inner",on="結合欄位")`
 
-```{python}  
+```{python}
 #| echo: true
 pd.merge(nameDF,scoreDF)
 ```
+
 ## 資料結合 (Join) - outer
 
 ::: columns
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(nameDF)
 ```
 :::
+
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(scoreDF)
 ```
 :::
 :::
 
-outer join
+outer join: `merge(資料框left,資料框right,how="outer",on="結合欄位")`
 
-
-```{python}  
+```{python}
 #| echo: true
 pd.merge(nameDF,scoreDF,how="outer",on="ID")
 ```
-
 
 ## 資料結合 (Join) - left
 
 ::: columns
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(nameDF)
 ```
 :::
+
 ::: column
-```{python} 
+```{python}
 #| echo: true
 print(scoreDF)
 ```
 :::
 :::
 
-left join
+left join: `merge(資料框left,資料框right,how="left",on="結合欄位")`
 
-
-```{python}  
+```{python}
 #| echo: true
 pd.merge(nameDF,scoreDF,how="left",on="ID")
 ```
 
+## 資料結合 (Join) - Recap
 
+`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
+
+How:
+
+-   inner：保留有對應到的資料
+-   left：保留左邊資料框的所有資料
+-   right：保留右邊資料框的所有資料
+-   outer：保留所有資料
 
 ## Hands-on 資料結合練習
-
 
 -   下載或直接載入[COVID-19案例數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
 -   下載或直接載入[COVID-19死亡數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
@@ -826,9 +907,9 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 ## 資料清洗與處理
 
 -   Tidy Data
+-   子集Subset
 -   資料型態轉換處理
 -   文字字串處理
--   子集Subset
 -   資料組合
 -   **長寬表轉換**
 -   遺漏值處理
@@ -836,7 +917,6 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 # 長表與寬表
 
 ## 長表與寬表
-
 
 -   在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
 -   `pandas` 套件提供完整的轉換功能
@@ -846,7 +926,7 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 
 以下是一個長表的範例
 
-```{python}  
+```{python}
 #| echo: true
 raw_data = {'patient': [1, 1, 1, 2, 2],
                 'obs': [1, 2, 3, 1, 2],
@@ -856,7 +936,6 @@ df = pd.DataFrame(raw_data)
 df
 ```
 
-
 ## 長表轉寬表 .pivot()
 
 -   `df`資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表
@@ -864,19 +943,17 @@ df
 
 ## 長表轉寬表 .pivot()
 
-```{python} 
+```{python}
 #| echo: true
 df_wide=df.pivot(index='patient', columns='obs', values='score')
 df_wide
 ```
 
-
-
 ## 寬表轉長表 pd.melt()
 
 寬表範例
 
-```{python} 
+```{python}
 #| echo: true
 df = pd.DataFrame({'team': ['A', 'B', 'C', 'D'],
                    'points': [88, 91, 99, 94],
@@ -887,24 +964,50 @@ df
 
 ## 寬表轉長表 pd.melt()
 
--   保留team欄位
--   消滅'points', 'assists', 'rebounds'
--   將其他欄位的名稱整合至metric欄位，數值整合至amount欄位
+-   保留team欄位 `id_vars='team'`
+-   消滅'points', 'assists', 'rebounds' `value_vars=['points', 'assists', 'rebounds']`，若為全部非id的欄位，可以省略
+-   將其他欄位的名稱整合至metric欄位 `var_name='metric'`
+-   數值整合至amount欄位 `value_name='amount'`
+
+```{python}
+#| echo: true
+#| eval: false
+pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
+             var_name='metric', value_name='amount')
+```
+
+```{python}
+#| echo: true
+#| eval: false
+pd.melt(df, id_vars='team',
+             var_name='metric', value_name='amount')
+```
 
 ## 寬表轉長表 pd.melt()
 
-```{python} 
+```{python}
 #| echo: true
 pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
              var_name='metric', value_name='amount')
 ```
 
+## 長表轉寬表 - Recap
+
+-   長轉寬 `資料框.pivot()`
+-   寬轉長 `pd.melt()`
+
+## Hands-on 長表轉寬表
+
+-   直接載入[COVID-19案例數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
+-   保留Province/State,Country/Region,Lat,Long四個欄位，將剩下的**日期欄位轉成長表**
+-   請問轉換後的資料有幾列？
+
 ## 資料清洗與處理
 
 -   Tidy Data
+-   子集Subset
 -   資料型態轉換處理
 -   文字字串處理
--   子集Subset
 -   資料組合
 -   長寬表轉換
 -   **遺漏值處理**
@@ -913,21 +1016,17 @@ pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
 
 ## 遺漏值處理
 
-
 -   遺漏值(Missing Value)常常出現在真實資料內，在數值運算時常會有問題
--   最簡單的方法是將有缺值的資料移除
-
-
+-   最簡單的方法是將有缺值的資料移除 `.dropna()`
 
 ## 遺漏值處理 .dropna()
 
 若資料型態為資料框，可使用`.dropna()`選出完整的資料
 
-```{python}  
+```{python}
 #| echo: true
 df_wide
 ```
-
 
 ## 遺漏值處理 .dropna()
 
@@ -936,18 +1035,18 @@ df_wide
 -   axis=0: row based
 -   how = 'any': 只要有na就移除
 
-```{python}  
+```{python}
 #| echo: true
-df_wide_clane=df_wide.dropna(axis = 0, how = 'any')
-df_wide_clane
+df_wide_clean=df_wide.dropna(axis = 0, how = 'any')
+df_wide_clean
 ```
 
-## 資料清洗與處理
+## 資料清洗與處理 - Recap
 
 -   Tidy Data
+-   子集Subset
 -   資料型態轉換處理
 -   文字字串處理
--   子集Subset
 -   資料組合
 -   長寬表轉換
 -   遺漏值處理
