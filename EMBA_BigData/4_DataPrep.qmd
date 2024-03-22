@@ -936,12 +936,13 @@ df = pd.DataFrame(raw_data)
 df
 ```
 
-## 長表轉寬表 .pivot()
+## 長表轉寬表 資料框.pivot()
 
 -   `df`資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表
+-   `資料框.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
 -   以`patient`為基準，obs欄位的值轉換為新欄位，並將score欄位填入
 
-## 長表轉寬表 .pivot()
+## 長表轉寬表 資料框.pivot()
 
 ```{python}
 #| echo: true
@@ -993,8 +994,8 @@ pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
 
 ## 長表轉寬表 - Recap
 
--   長轉寬 `資料框.pivot()`
--   寬轉長 `pd.melt()`
+-   長轉寬 `資料框.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
+-   寬轉長 `pd.melt(id_vars=識別欄位, value_vars=要轉成長表的欄位,var_name=新增欄位名稱, value_name=新增內容名稱)`
 
 ## Hands-on 長表轉寬表
 
