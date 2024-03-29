@@ -14,6 +14,7 @@ When you click the **Render** button a presentation will be generated that inclu
 
 ```{python}
 #!pip install numpy matplotlib pandas sklearn seaborn calmap squarify plotly
+#!pip install calmap
 ```
 
 ```{python}
@@ -76,13 +77,9 @@ df.dtypes
 ```
 
 ```{python}
-df['concentration'] = df['concentration'].astype('float')
+df['concentration'] = pd.to_numeric(df['concentration'].replace("x",np.nan))
 ```
 
-```{python}
-df['concentration'] = df['concentration'].replace('x',np.nan)
-df['concentration'] = df['concentration'].astype('float')
-```
 
 ```{python}
 # Parse String To DateTime
@@ -114,6 +111,8 @@ plt.show()
 看看一氧化碳(CO)的資料分布
 
 ```{python}
+#| eval: false
+#| echo: true
 # 請按照題目要求修改
 # 如修改正確，執行後會呈現圖形
 # 修改錯誤則會有錯誤訊息
@@ -149,6 +148,8 @@ plt.show()
 試著看看最近的空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
 
 ```{python}
+#| eval: false
+#| echo: true
 # 請按照題目要求修改
 # 如修改正確，會呈現圖形
 # 如修改錯誤，則會有錯誤訊息
@@ -178,6 +179,8 @@ plt.show()
 請試著呈現林口測站在2024/1/1\~2024/1/15的PM2.5濃度起伏
 
 ```{python}
+#| eval: false
+#| echo: true
 # 請按照題目要求修改
 # 如修改正確，會呈現圖形
 # 如修改錯誤，則會有錯誤訊息
@@ -294,6 +297,8 @@ plt.show()
 使用盒鬚圖比較各月PM2.5濃度有無差異
 
 ```{python}
+#| eval: false
+#| echo: true
 # 請按照題目要求修改
 # 如修改正確，會呈現一樣的圖形
 # 如修改錯誤，則會有錯誤訊息
@@ -345,6 +350,8 @@ plt.show()
 使用泡泡圖呈現NO2與SO2的關係，並用氣溫（TEMP）當作泡泡大小，觀察這三個資料是否有相關
 
 ```{python}
+#| eval: false
+#| echo: true
 # 請按照題目要求修改
 # 如修改正確，會呈現一樣的圖形
 # 如修改錯誤，則會有錯誤訊息

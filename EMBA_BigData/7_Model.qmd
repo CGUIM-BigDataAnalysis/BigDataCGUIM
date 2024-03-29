@@ -1,0 +1,297 @@
+---
+title: "7. Data Modeling"
+author: "Yi-Ju Tseng"
+format:
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
+editor: visual
+---
+
+## 資料分析步驟
+
+-   資料匯入
+-   資料清洗處理
+-   資料分析
+-   資料呈現與視覺化
+-   **建模**
+
+## 資料建模
+
+-   機器學習簡介
+-   AutoML
+-   深度學習簡介
+-   AutoDL
+-   (補充資料)scikit-learn - ML with Python 常用套件
+-   (補充資料)keras - DL with Python 常用套件
+
+
+
+## 前置作業
+
+為了成功從https (加密封包傳輸)下載資料，首先取消證書驗證
+
+```{python}
+#| echo: true
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+```
+
+## 什麼案子可以用AI?
+
+-   有資料
+-   學的會
+-   學的好有很大的貢獻
+-   對AI接受度高
+
+最後….
+
+做個Proof of concept看看會不會成 (快速好用的軟體)
+
+# Machine Learning 機器學習簡介
+
+## 機器學習簡介
+
+從輸入資料學習新資訊，用來預測事件或協助決策
+
+-   Classical Learning 傳統的機器學習
+    -   Supervised learning 監督式學習
+    -   Unsupervised learning 非監督式學習
+-   Ensemble Method 集成方法
+    -   Stacking
+    -   Bagging
+    -   Boosting
+-   Reinforcement Learning 強化學習
+
+## Classical Learning 傳統的機器學習
+
+![](https://i.vas3k.blog/7w1.jpg)
+
+[Source](https://vas3k.com/blog/machine_learning/)
+
+## 監督式學習 Supervised learning
+
+有答案的資料
+
+-   Regression 迴歸：真實的'值'（股票、氣溫）
+    -   Linear Regression 線性迴歸
+    -   Support Vector Regression (SVR)
+    -   Decision Tree Regression
+    
+## 監督式學習 Supervised learning
+
+有答案的資料
+
+-   Classification 分類：分兩類（P/N, Yes/No, M/F, Sick/Not sick）/分多類 (A/B/C/D)
+    -   Logistic Regression 羅吉斯迴歸、邏輯迴歸
+    -   Support Vector Machines 支持向量機
+    -   Decision Trees 決策樹
+    -   K-Nearest Neighbor
+    -   Artificial Neural Networks 類神經網路
+    -   Deep Learning 深度學習
+
+## 非監督式學習 Unsupervised learning
+
+沒有答案的資料
+
+-   Clustering 分群
+    -   Hierarchical clustering 階層式分群
+    -   K-means clustering
+    -   Artificial Neural Networks 類神經網路
+    -   Deep Learning 深度學習
+-   Association Rules 關聯式規則
+
+## Ensemble Method 集成方法
+
+-   Bagging
+    -   Bootstrap aggregating，套袋法
+    -   Random Forest
+-   Boosting
+    -   XGBoost
+    -   LightGBM
+
+
+## 模型驗證
+
+-   在完成模型訓練後，為了驗證模型訓練的好不好，需要用一組**獨立的測試資料**，來做模型的驗證
+-   在訓練模型前，必須特別留意是否有保留一份**獨立的測試資料**，並確保在訓練模型時都不用到此獨立資料集
+-   資料集可分為以下兩種：
+    -   **訓練組Training set**, Development set: 讓演算法學到知識
+    -   **測試組Test set**, Validation set: 驗證學的怎麼樣
+    
+## 模型驗證方法
+
+
+# AutoML
+
+## AutoML
+
+-   AutoML為快速建模的工具
+-   市面上有許多AutoML的套件
+-   `pycaret`
+
+```{python}
+#| echo: true
+#| eval: false
+!pip install pycaret scikit-learn
+```
+
+
+## 載入所需套件
+
+```{python}
+#| echo: true
+import numpy as np
+import pandas as pd
+import seaborn as sb #畫圖
+import scipy #統計
+
+# 載入PyCaret AutoML套件
+import pycaret
+from pycaret.classification import *
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+from sklearn import metrics
+```
+
+## 載入資料
+
+```{python}
+#| echo: true
+cancer = datasets.load_breast_cancer()
+X = pd.DataFrame(cancer["data"], columns=cancer["feature_names"])
+y = pd.DataFrame(cancer["target"], columns=["target"])
+print(X)
+```
+
+## 拆分成訓練集與測試集
+
+-   `train_test_split(X,y,test_size=比例,random_state=隨機種子)` 
+-    依照設定比例將資料隨機分為訓練組與測試組
+
+```{python}
+#| echo: true
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+print(X_train.size)
+print(X_test.size)
+```
+
+## 整合訓練集
+
+`pd.concat([df1,df2], axis = 1)` 左右整合`df1`和`df2`
+
+```{python}
+#| echo: true
+train = pd.concat([X_train,y_train], axis=1)
+print(train)
+```
+
+## 自動訓練
+
+-   `setup(有標籤的訓練資料,targe=標籤名稱)` 設定 PyCaret AutoML環境
+-   `compare_models()` 選擇最好的模型
+
+```{python}
+#| echo: true
+automlclassifier = setup(train, target="target")
+best_model = compare_models()
+print(best_model)
+```
+## 模型評估
+
+`evaluate_model(模型物件)` 評估模型內容
+
+```{python}
+#| echo: true
+evaluate_model(best_model)
+```
+
+## 用在測試集上（模型驗證）
+
+-   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型用在測試集中
+-   `metrics.accuracy_score(正確答案,預測答案)`計算準確率
+
+```{python}
+#| echo: true
+y_pred_pycaret = predict_model(best_model, data = X_test)
+# 預測結果
+result = metrics.accuracy_score(y_test, y_pred_pycaret["prediction_label"])
+print("PyCaret Testing Data Accuracy: %.5f" % result)
+```
+
+## 測在其他資料上
+
+鐵達尼號資料集
+
+```{python}
+#| echo: true
+train = pd.read_csv("https://raw.githubusercontent.com/pplonski/datasets-for-start/master/Titanic/train.csv")
+test = pd.read_csv("https://raw.githubusercontent.com/pplonski/datasets-for-start/master/Titanic/test_with_Survived.csv")
+
+print(train)
+```
+
+## 自動訓練
+
+```{python}
+#| echo: true
+# 設定 PyCaret AutoML環境
+automlclassifier = setup(train, target="Survived")
+# 選擇最好的模型
+best_model = compare_models()
+print(best_model)
+# 模型評估
+evaluate_model(best_model)
+```
+
+## 用在測試集上（模型驗證）
+
+```{python}
+#| echo: true
+# 使用最好的模型預測測試集
+y_pred_pycaret = predict_model(best_model, data = test)
+# 預測結果
+print("PyCaret Testing Data Accuracy: %.5f" % metrics.accuracy_score(test['Survived'], y_pred_pycaret["prediction_label"]))
+```
+
+
+
+## Hands-on AutoML
+
+-   載入預測用資料集 
+    -   [資料]()           
+    -   [Source](https://finance.yahoo.com/quote/NVDA/history)
+
+# Deep Learning 深度學習
+
+## Deep Learning 深度學習
+
+##? 
+
+```{python}
+#| echo: true
+
+```
+## Artificial Neural Networks 類神經網路
+
+![](images/clipboard-652675243.png)
+
+# AutoDL
+
+## AutoDL
+
+## Hands-on AutoDL
+
+
+# scikit-learn - ML with Python 常用套件
+
+## scikit-learn - ML with Python 常用套件
+
+## Hands-on scikit-learn
+
+# keras - DL with Python 常用套件
+
+## keras - DL with Python 常用套件
+
+## Hands-on keras
+
