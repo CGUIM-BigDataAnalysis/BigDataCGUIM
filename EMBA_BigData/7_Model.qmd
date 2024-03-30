@@ -21,11 +21,9 @@ editor: visual
 -   機器學習簡介
 -   AutoML
 -   深度學習簡介
--   AutoDL
+-   AutoKeras
 -   (補充資料)scikit-learn - ML with Python 常用套件
 -   (補充資料)keras - DL with Python 常用套件
-
-
 
 ## 前置作業
 
@@ -47,6 +45,15 @@ ssl._create_default_https_context = ssl._create_unverified_context
 最後….
 
 做個Proof of concept看看會不會成 (快速好用的軟體)
+
+## 資料建模
+
+-   **機器學習簡介**
+-   AutoML
+-   深度學習簡介
+-   AutoKeras
+-   (補充資料)scikit-learn - ML with Python 常用套件
+-   (補充資料)keras - DL with Python 常用套件
 
 # Machine Learning 機器學習簡介
 
@@ -77,7 +84,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
     -   Linear Regression 線性迴歸
     -   Support Vector Regression (SVR)
     -   Decision Tree Regression
-    
+
 ## 監督式學習 Supervised learning
 
 有答案的資料
@@ -110,7 +117,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
     -   XGBoost
     -   LightGBM
 
-
 ## 模型驗證
 
 -   在完成模型訓練後，為了驗證模型訓練的好不好，需要用一組**獨立的測試資料**，來做模型的驗證
@@ -118,24 +124,33 @@ ssl._create_default_https_context = ssl._create_unverified_context
 -   資料集可分為以下兩種：
     -   **訓練組Training set**, Development set: 讓演算法學到知識
     -   **測試組Test set**, Validation set: 驗證學的怎麼樣
-    
+
 ## 模型驗證方法
 
+![](images/clipboard-1611147261.png)
+
+## 資料建模
+
+-   機器學習簡介
+-   **AutoML**
+-   深度學習簡介
+-   AutoKeras
+-   (補充資料)scikit-learn - ML with Python 常用套件
+-   (補充資料)keras - DL with Python 常用套件
 
 # AutoML
 
 ## AutoML
 
 -   AutoML為快速建模的工具
--   市面上有許多AutoML的套件
--   `pycaret`
+-   市面上有許多AutoML的套件，包括 `pycaret`
+-   `scikit-learn`則是在python中執行機器學習模型訓練的重要套件
 
 ```{python}
 #| echo: true
 #| eval: false
 !pip install pycaret scikit-learn
 ```
-
 
 ## 載入所需套件
 
@@ -161,13 +176,13 @@ from sklearn import metrics
 cancer = datasets.load_breast_cancer()
 X = pd.DataFrame(cancer["data"], columns=cancer["feature_names"])
 y = pd.DataFrame(cancer["target"], columns=["target"])
-print(X)
+print(X.head())
 ```
 
 ## 拆分成訓練集與測試集
 
--   `train_test_split(X,y,test_size=比例,random_state=隨機種子)` 
--    依照設定比例將資料隨機分為訓練組與測試組
+-   `train_test_split(X,y,test_size=比例,random_state=隨機種子)`
+-   依照設定比例將資料隨機分為訓練組與測試組
 
 ```{python}
 #| echo: true
@@ -183,7 +198,7 @@ print(X_test.size)
 ```{python}
 #| echo: true
 train = pd.concat([X_train,y_train], axis=1)
-print(train)
+print(train.head())
 ```
 
 ## 自動訓練
@@ -197,6 +212,7 @@ automlclassifier = setup(train, target="target")
 best_model = compare_models()
 print(best_model)
 ```
+
 ## 模型評估
 
 `evaluate_model(模型物件)` 評估模型內容
@@ -214,7 +230,6 @@ evaluate_model(best_model)
 ```{python}
 #| echo: true
 y_pred_pycaret = predict_model(best_model, data = X_test)
-# 預測結果
 result = metrics.accuracy_score(y_test, y_pred_pycaret["prediction_label"])
 print("PyCaret Testing Data Accuracy: %.5f" % result)
 ```
@@ -228,51 +243,69 @@ print("PyCaret Testing Data Accuracy: %.5f" % result)
 train = pd.read_csv("https://raw.githubusercontent.com/pplonski/datasets-for-start/master/Titanic/train.csv")
 test = pd.read_csv("https://raw.githubusercontent.com/pplonski/datasets-for-start/master/Titanic/test_with_Survived.csv")
 
-print(train)
+print(train.head())
 ```
 
 ## 自動訓練
 
+-   `setup(有標籤的訓練資料,targe=標籤名稱)` 設定 PyCaret AutoML環境
+-   `compare_models()` 選擇最好的模型
+
 ```{python}
 #| echo: true
-# 設定 PyCaret AutoML環境
 automlclassifier = setup(train, target="Survived")
-# 選擇最好的模型
 best_model = compare_models()
 print(best_model)
-# 模型評估
+```
+
+## 模型評估
+
+-   `evaluate_model(模型物件)` 評估模型內容
+
+```{python}
+#| echo: true
+#| eval: false
 evaluate_model(best_model)
 ```
 
 ## 用在測試集上（模型驗證）
 
+-   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型用在測試集中
+-   `metrics.accuracy_score(正確答案,預測答案)`計算準確率
+
 ```{python}
 #| echo: true
-# 使用最好的模型預測測試集
 y_pred_pycaret = predict_model(best_model, data = test)
-# 預測結果
 print("PyCaret Testing Data Accuracy: %.5f" % metrics.accuracy_score(test['Survived'], y_pred_pycaret["prediction_label"]))
 ```
 
-
-
 ## Hands-on AutoML
 
--   載入預測用資料集 
-    -   [資料](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv)           
+-   預測單一股票股價會漲還是會跌
+-   載入預測用資料集
+    -   [資料](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv)\
     -   [Source](https://finance.yahoo.com/quote/NVDA/history)
-    
+
 ```{python}
 #| echo: true
 import pandas as pd
 stock_data = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv",index_col="Date")
-stock_data.head()
+print(stock_data.head())
 ```
+
+## Hands-on AutoML 資料前處理
+
+計算漲跌
+
 ```{python}
 #| echo: true
 stock_data = stock_data.assign(change = stock_data['Close'].diff())
-stock_data.head()
+print(stock_data.head())
 ```
+
+## Hands-on AutoML 資料前處理
+
+計算移動平均
 
 ```{python}
 #| echo: true
@@ -286,8 +319,10 @@ def make_ma(i,j,df,price='Close'):
 # 3日移動平均到90日移動平均
 stock_ana=make_ma(3,90,stock_data)
 stock_ana = stock_ana[90:]
-stock_ana.head()
+print(stock_ana.head())
 ```
+
+## Hands-on AutoML 切訓練集與測試集
 
 ```{python}
 #| echo: true
@@ -298,64 +333,464 @@ print(X_test.size)
 print(y_train.describe())
 ```
 
+## Hands-on AutoML 訓練資料整合
+
+其他的就交給你們自己嘗試了....
 
 ```{python}
 #| echo: true
 train = pd.concat([X_train,y_train], axis=1)
-print(train)
+print(train.head())
 ```
 
+## 資料建模
 
-```{python}
-#| echo: true
-automlclassifier = setup(train, target="res")
-best_model = compare_models()
-print(best_model)
-```
-
-```{python}
-#| echo: true
-evaluate_model(best_model)
-```
-
-```{python}
-#| echo: true
-y_pred_pycaret = predict_model(best_model, data = X_test)
-# 預測結果
-result = metrics.accuracy_score(y_test, y_pred_pycaret["prediction_label"])
-print("PyCaret Testing Data Accuracy: %.5f" % result)
-```
+-   機器學習簡介
+-   AutoML
+-   **深度學習簡介**
+-   AutoKeras
+-   (補充資料)scikit-learn - ML with Python 常用套件
+-   (補充資料)keras - DL with Python 常用套件
 
 # Deep Learning 深度學習
 
 ## Deep Learning 深度學習
 
-##? 
+以神經網路為基礎，發展出適合不同資料的架構
 
-```{python}
-#| echo: true
+-   前饋式多層感知機 multiple layer perceptron (MLP)
+-   卷積神經網路 convolutional neural network (CNN)
+-   遞迴神經網路 recurrent neural networks (RNN)
+-   Transformer
 
-```
 ## Artificial Neural Networks 類神經網路
 
 ![](images/clipboard-652675243.png)
 
-# AutoDL
+## 卷積神經網路 CNN - 卷積層
 
-## AutoDL
+![](images/clipboard-2813420183.png) [Source](https://medium.com/@data_datum/deep-learning-in-5-minutes-part-1-convolutional-neural-networks-13ea4e0b486f)
 
-## Hands-on AutoDL
+## 卷積神經網路 CNN - 卷積層
 
+![](images/clipboard-1126543387.png) [Source](https://datagen.tech/guides/computer-vision/cnn-convolutional-neural-network/)
 
-# scikit-learn - ML with Python 常用套件
+## Pooling池化層
+
+![](images/clipboard-1034372709.png) [Source](https://journal.caa-international.org/articles/10.5334/jcaa.32)
+
+## Pooling池化層
+
+![](images/clipboard-234368210.png) [Source](https://medium.com/@bdhuma/6-basic-things-to-know-about-convolution-daef5e1bc411)
+
+## Example code with keras
+
+-   From [keras](https://keras.io/examples/vision/mnist_convnet/)
+-   Load packages
+
+```{python}
+#| echo: true
+import numpy as np
+import keras
+from keras import layers
+```
+
+## 資料前處理
+
+-   Model / data parameters
+-   區分訓練集與測試集
+
+```{python}
+#| echo: true
+#| cache: true
+num_classes = 10
+input_shape = (28, 28, 1)
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+```
+
+## 資料前處理
+
+-   像素標準化 Scale images to the \[0, 1\] range
+-   確認資料維度(28, 28, 1)
+
+```{python}
+#| echo: true
+#| cache: true
+x_train = x_train.astype("float32") / 255
+x_test = x_test.astype("float32") / 255
+x_train = np.expand_dims(x_train, -1)
+x_test = np.expand_dims(x_test, -1)
+print("x_train shape:", x_train.shape)
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
+```
+
+## 看一下資料（視覺化）
+
+```{python}
+#| echo: true
+#| cache: true
+import matplotlib.pyplot as plt
+n = 5
+fig, axs = plt.subplots(nrows=n, ncols=n, sharex=True, sharey=True, figsize=(12, 12))
+for i in range(n**2):
+    ax = axs[i // n, i % n]
+    (-x_train[i]+1)/2
+    ax.imshow((-x_train[i, :, :, 0] + 1)/2, cmap=plt.cm.gray)
+    ax.axis('off')
+plt.tight_layout()
+plt.show()
+y_test = keras.utils.to_categorical(y_test, num_classes)
+```
+
+## 看一下資料（視覺化）
+
+```{python}
+#| echo: true
+#| cache: true
+plt.show()
+plt.clf()
+```
+
+## 資料類別轉換
+
+將0\~9轉換為二維的分類答案
+
+```{python}
+#| echo: true
+#| cache: true
+y_train = keras.utils.to_categorical(y_train, num_classes)
+y_test = keras.utils.to_categorical(y_test, num_classes)
+print(y_test)
+```
+
+## 模型架構設計
+
+```{python}
+#| echo: true
+#| cache: true
+model = keras.Sequential(
+    [
+        keras.Input(shape=input_shape), ## 28,28,1
+        layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
+        layers.MaxPooling2D(pool_size=(2, 2)),
+        layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
+        layers.MaxPooling2D(pool_size=(2, 2)),
+        layers.Flatten(), #5x5x64
+        layers.Dropout(0.5),
+        layers.Dense(num_classes, activation="softmax"),
+    ]
+)
+model.summary()
+```
+
+## 模型架構設計
+
+```{python}
+#| echo: true
+#| cache: true
+model.summary()
+```
+
+## 模型訓練
+
+```{python}
+#| echo: true
+#| cache: true
+batch_size = 128
+epochs = 5
+
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
+```
+
+## 模型驗證
+
+```{python}
+#| echo: true
+#| eval: false
+#| cache: true
+score = model.evaluate(x_test, y_test, verbose=0)
+print("Test loss:", score[0])
+print("Test accuracy:", score[1])
+```
+
+## 其他常見的 CNN進化版
+
+Pre-trained on ImageNet
+
+-   ConvNeXt 2022 [keras](https://keras.io/api/applications/convnext/)
+-   EfficientNetV2 2021 [keras](https://keras.io/api/applications/efficientnet_v2/)
+-   InceptionResNetV2 2017 [keras](https://keras.io/api/applications/inceptionresnetv2/)
+-   InceptionV3 2016 [keras](https://keras.io/api/applications/inceptionv3/)
+-   ResNet 2015 [keras](https://keras.io/api/applications/resnet/)
+
+## 遞迴神經網路 RNN
+
+![](images/clipboard-1492941963.png)
+
+[Source](https://www.geeksforgeeks.org/introduction-to-recurrent-neural-network/)
+
+## 遞迴神經網路 RNN
+
+![](images/clipboard-3000971289.png)
+
+[Source](https://towardsdatascience.com/a-brief-introduction-to-recurrent-neural-networks-638f64a61ff4)
+
+## Example code with keras (LSTM)
+
+[Source](https://wenwender.wordpress.com/2019/10/18/%E5%AF%A6%E4%BD%9C%E9%80%8F%E9%81%8Elstm%E9%A0%90%E6%B8%AC%E8%82%A1%E7%A5%A8/)
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+## 載入股價資料
+
+-   載入之前用過的NVDA股價
+
+```{python}
+#| echo: true
+NVDA = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv")
+print(NVDA.head())
+```
+
+## 視覺化股價變化
+
+```{python}
+#| echo: false
+fig=plt.figure(figsize=(20,8))
+plt.plot(NVDA["Close"],color='red',label='close')
+plt.plot(NVDA["Open"],color='green',label='open')
+plt.show()
+plt.clf()
+```
+
+## 切分訓練集與測試集
+
+-   在時間序列分析中，利用日期切分訓練組與測試組也很常見
+-   分析收盤價（`Close`）
+
+```{python}
+#| echo: true
+test = NVDA[NVDA["Date"]>'2022-01-01']
+train = NVDA[:len(NVDA)-len(test)]
+train_set = train['Close']
+test_set = test['Close']
+```
+
+## 訓練資料前處理
+
+-   `MinMaxScaler`做資料的標準化，把資料轉換成0\~1的區間
+-   `reshape`做資料的重整
+
+```{python}
+#| echo: true
+from sklearn.preprocessing import MinMaxScaler 
+sc = MinMaxScaler(feature_range = (0, 1))
+train_set= train_set.values.reshape(-1,1)
+training_set_scaled = sc.fit_transform(train_set)
+```
+
+## 訓練資料前處理
+
+-   LSTM為使用一段時間序列資料預測下一點或多點
+-   需要把資料切成一段一段，這裡以14天為單位
+
+```{python}
+#| echo: true
+X_train, y_train = [], []
+days = 14
+for i in range(days,len(train_set)):
+    X_train.append(training_set_scaled[i-days:i-1, 0]) 
+    y_train.append(training_set_scaled[i, 0]) 
+X_train, y_train = np.array(X_train), np.array(y_train) 
+X_train = np.reshape(X_train, 
+                         (X_train.shape[0], X_train.shape[1], 1))
+
+print(X_train[0])
+print(y_train[0])
+```
+
+## 訓練資料前處理
+
+```{python}
+#| echo: true
+print(X_train[0])
+print(y_train[0])
+```
+
+## 載入模型訓練需要套件
+
+```{python}
+#| echo: true
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Dropout,BatchNormalization
+```
+
+## 訓練簡單的LSTM模型
+
+僅用一層LSTM
+
+```{python}
+#| echo: true
+#| cache: true
+keras.backend.clear_session()
+regressor = Sequential()
+regressor.add(LSTM(units = 100, input_shape = (X_train.shape[1], 1)))
+regressor.add(Dense(units = 1))
+regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
+```
+
+## 觀看訓練情形
+
+```{python}
+#| echo: true
+#| cache: true
+history = regressor.fit(X_train, y_train, epochs = 100, batch_size = 16)
+```
+
+## 觀看訓練情形
+
+```{python}
+#| echo: true
+#| cache: true
+plt.title('train_loss')
+plt.ylabel('loss')
+plt.xlabel('Epoch')
+plt.plot( history.history["loss"])
+plt.show()
+plt.clf()
+```
+
+## 預測資料前處理
+
+同上邏輯，處理成14天`days`一段資料
+
+```{python}
+#| echo: true
+dataset_total = pd.concat((train['Close'], test['Close']), axis = 0)
+inputs = dataset_total[len(dataset_total) - len(test) - days:].values
+inputs = inputs.reshape(-1,1)
+inputs = sc.transform(inputs)
+X_test = []
+for i in range(days, len(inputs)):
+    X_test.append(inputs[i-days:i-1, 0])
+X_test = np.array(X_test)
+X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+print(X_test[0])
+```
+
+## 預測
+
+因為資料有標準化，因此用`sc.inverse_transform`還原
+
+```{python}
+#| echo: true
+predicted_stock_price = regressor.predict(X_test)
+predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+```
+
+## 視覺化預測結果
+
+```{python}
+#| echo: true
+plt.plot(test['Close'].values, color = 'black', label = 'Real NVDA Stock Price')
+plt.plot(predicted_stock_price, color = 'green', label = 'Predicted NVDA Stock Price')
+plt.title('NVDA Stock Price Prediction')
+plt.xlabel('Time')
+plt.ylabel('Stock Price')
+plt.legend()
+plt.show()
+plt.clf()
+```
+
+## 視覺化預測結果
+
+```{python}
+#| echo: false
+plt.plot(test['Close'].values, color = 'black', label = 'Real NVDA Stock Price')
+plt.plot(predicted_stock_price, color = 'green', label = 'Predicted NVDA Stock Price')
+plt.title('NVDA Stock Price Prediction')
+plt.xlabel('Time')
+plt.ylabel('Stock Price')
+plt.legend()
+plt.show()
+plt.clf()
+```
+
+## 資料建模
+
+-   機器學習簡介
+-   AutoML
+-   深度學習簡介
+-   **AutoKeras**
+-   (補充資料)scikit-learn - ML with Python 常用套件
+-   (補充資料)keras - DL with Python 常用套件
+
+# AutoKeras
+
+## AutoKeras
+
+```{python}
+#| echo: true
+#| eval: false
+!pip install autokeras tensorflow
+```
+
+## 載入MNIST資料
+
+```{python}
+#| echo: true
+from keras.datasets import mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+print(x_train.shape)  # (60000, 28, 28)
+print(y_train.shape)  # (60000,)
+print(y_train[:3])  # array([7, 2, 1], dtype=uint8)
+```
+
+## 自動訓練模型
+
+-   `clf = ak.ImageClassifier()`新增一個可以做影像分類的訓練器
+-   `clf.fit(訓練資料, 訓練標籤, epochs = 做幾輪)`開始訓練模型
+-   `clf.evaluate(測試資料, 測試答案)`驗證模型成效
+
+```{python}
+#| echo: true
+#| cache: true
+#| eval: false
+import autokeras as ak
+# Initialize the ImageClassifier.
+clf = ak.ImageClassifier(max_trials=3)
+# Search for the best model.
+clf.fit(x_train, y_train, epochs=5)
+# Evaluate on the testing data.
+print("Accuracy: {accuracy}".format(accuracy=clf.evaluate(x_test, y_test)))
+```
+
+## 資料建模
+
+-   機器學習簡介
+-   AutoML
+-   深度學習簡介
+-   AutoKeras
+-   **(補充資料)scikit-learn - ML with Python 常用套件**
+-   **(補充資料)keras - DL with Python 常用套件**
+
+# 補充資源
 
 ## scikit-learn - ML with Python 常用套件
 
-## Hands-on scikit-learn
-
-# keras - DL with Python 常用套件
+-   [手把手教學使用(Scikit-Learn)中文教學_鐵達尼號 by 顏瑋良 (WeiLiang,Yan)](https://www.kaggle.com/code/orangecatman/scikit-learn)
 
 ## keras - DL with Python 常用套件
 
-## Hands-on keras
-
+-   [【Day 18】開始寫程式拉！第三站：重要函式庫－Keras by iThome 鐵人賽 John](https://ithelp.ithome.com.tw/articles/10224345)
