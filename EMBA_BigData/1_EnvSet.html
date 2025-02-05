@@ -6,9 +6,8 @@
 <script src="1_EnvSet_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="1_EnvSet_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1_EnvSet_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="1_EnvSet_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="1_EnvSet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+<link href="1_EnvSet_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Yi-Ju Tseng">
   <title>1. Environment Setting</title>
@@ -31,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -95,208 +94,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="1_EnvSet_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="1_EnvSet_files/libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
   <link href="1_EnvSet_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="1_EnvSet_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="1_EnvSet_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -447,7 +249,7 @@ Yi-Ju Tseng
 <li><p>AI!</p></li>
 </ol>
 
-<img data-src="figures/colab1.png" width="300" class="r-stretch quarto-figure-center"></section>
+<img data-src="figures/colab1.png" class="quarto-figure quarto-figure-center r-stretch" width="300"></section>
 <section id="google-generative-ai" class="slide level2">
 <h2>Google Generative AI</h2>
 <p><img data-src="figures/AI1.png" width="400"></p>
@@ -464,226 +266,361 @@ Yi-Ju Tseng
 </ul>
 </section></section>
 <section>
-<section id="packages" class="title-slide slide level1 center">
-<h1>Packages</h1>
+<section id="libraries" class="title-slide slide level1 center">
+<h1>Libraries</h1>
 
 </section>
-<section id="python-and-python-packages" class="slide level2">
-<h2>Python and Python Packages</h2>
+<section id="python-and-python-library-packages" class="slide level2">
+<h2>Python and Python Library (Packages)</h2>
 <p>Python: 程式核心 (iPhone)</p>
 
 <img data-src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&amp;hei=1112&amp;fmt=png-alpha&amp;qlt=80&amp;.v=1551226036668" width="423" class="r-stretch quarto-figure-center"><p class="caption">plot of chunk unnamed-chunk-4</p></section>
-<section id="python-and-python-packages-1" class="slide level2">
-<h2>Python and Python Packages</h2>
-<p>Python Packages: 附加程式 (APP)</p>
+<section id="python-and-python-library-packages-1" class="slide level2">
+<h2>Python and Python Library (Packages)</h2>
+<p>Python Library: 附加程式 (APP)</p>
 
 <img data-src="https://3c.yipee.cc/wp-content/uploads/2019/06/a7ffbaa3df50d7cafe6801a8a8d7a3bf-620x320.jpg" class="r-stretch"><p><a href="https://www.apple.com/">圖片來源</a></p>
 </section></section>
 <section>
-<section id="python-base-other-packages" class="title-slide slide level1 center">
-<h1>Python = Base + Other Packages</h1>
+<section id="python-base-other-libraries" class="title-slide slide level1 center">
+<h1>Python = Base + Other Libraries</h1>
 
 </section>
-<section id="install-pacakgeslib" class="slide level2">
-<h2>Install pacakges/lib</h2>
+<section id="install-libraries" class="slide level2">
+<h2>Install Libraries</h2>
 <ul>
 <li><code>!</code> <code>pip3</code> <code>install</code> package names</li>
 </ul>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">!</span>pip3 install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7ada97f8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="op">!</span>pip3 install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Google Colab has multiple build-in packages, you can check in the notebook</li>
 </ul>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">!</span>pip <span class="bu">list</span> <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="11aad796" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="op">!</span>pip <span class="bu">list</span> <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Package                      Version  Location                                                                        Installer
----------------------------- -------- ------------------------------------------------------------------------------- ---------
-absl-py                      1.4.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-adjustText                   0.8      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-anyio                        3.6.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-appnope                      0.1.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-argon2-cffi                  21.3.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-argon2-cffi-bindings         21.2.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-arrow                        1.2.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-asttokens                    2.2.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-astunparse                   1.6.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-attrs                        22.2.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-backcall                     0.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-beautifulsoup4               4.11.2   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-bioinfokit                   2.1.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages
-bleach                       6.0.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-cachetools                   5.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-certifi                      2023.5.7 /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-cffi                         1.15.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-charset-normalizer           3.1.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-comm                         0.1.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-contourpy                    1.0.7    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-cycler                       0.11.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-DateTime                     5.4      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-debugpy                      1.6.6    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-decorator                    5.1.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-defusedxml                   0.7.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-einops                       0.6.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-executing                    1.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-fastjsonschema               2.16.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-filelock                     3.12.2   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-flatbuffers                  23.3.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-fonttools                    4.39.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-fqdn                         1.5.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-gast                         0.4.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-google-auth                  2.17.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-google-auth-oauthlib         1.0.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-google-pasta                 0.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-grpcio                       1.54.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-h5py                         3.8.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-idna                         3.4      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ipykernel                    6.21.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ipython                      8.11.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ipython-genutils             0.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ipywidgets                   8.0.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-isoduration                  20.11.0  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jax                          0.4.8    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jedi                         0.18.2   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Jinja2                       3.1.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-joblib                       1.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jsonpointer                  2.3      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jsonschema                   4.17.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter                      1.0.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter_client               8.0.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter-console              6.6.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter_core                 5.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter-events               0.6.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter_server               2.4.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyter_server_terminals     0.4.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyterlab-pygments          0.2.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-jupyterlab-widgets           3.0.5    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-keras                        2.13.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-kiwisolver                   1.4.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-libclang                     16.0.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Markdown                     3.4.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-MarkupSafe                   2.1.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-matplotlib                   3.7.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-matplotlib-inline            0.1.6    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-matplotlib-venn              0.11.9   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-mistune                      2.0.5    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ml-dtypes                    0.1.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-mpmath                       1.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-nbclassic                    0.5.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-nbclient                     0.7.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-nbconvert                    7.2.9    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-nbformat                     5.7.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-nest-asyncio                 1.5.6    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-networkx                     3.1      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-notebook                     6.5.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-notebook_shim                0.2.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-numpy                        1.23.5   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-oauthlib                     3.2.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-opt-einsum                   3.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-packaging                    23.0     /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pandas                       1.5.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pandocfilters                1.5.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-parso                        0.8.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-patsy                        0.5.3    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pexpect                      4.8.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pickleshare                  0.7.5    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Pillow                       9.4.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pip                          23.2.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-platformdirs                 3.1.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-prometheus-client            0.16.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-prompt-toolkit               3.0.38   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-protobuf                     4.23.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-psutil                       5.9.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-ptyprocess                   0.7.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pure-eval                    0.2.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pyasn1                       0.5.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pyasn1-modules               0.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pycparser                    2.21     /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pydot                        1.4.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Pygments                     2.14.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pyparsing                    3.0.9    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pyrsistent                   0.19.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-python-dateutil              2.8.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-python-json-logger           2.0.7    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pytz                         2022.7.1 /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-PyYAML                       5.3.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-pyzmq                        25.0.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-qtconsole                    5.4.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-QtPy                         2.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-requests                     2.30.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-requests-oauthlib            1.3.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-rfc3339-validator            0.1.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-rfc3986-validator            0.1.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-rsa                          4.9      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-scikit-learn                 1.2.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-scipy                        1.10.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-seaborn                      0.12.2   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Send2Trash                   1.8.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-setuptools                   65.5.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-six                          1.16.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-sniffio                      1.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-soupsieve                    2.4      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-stack-data                   0.6.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-statsmodels                  0.13.5   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-sympy                        1.12     /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tab-transformer-pytorch      0.2.6    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tableone                     0.7.12   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tabulate                     0.9.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorboard                  2.13.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorboard-data-server      0.7.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorflow                   2.13.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorflow-addons            0.21.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorflow-estimator         2.13.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tensorflow-io-gcs-filesystem 0.32.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-termcolor                    2.3.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-terminado                    0.17.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-textwrap3                    0.9.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-threadpoolctl                3.1.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tinycss2                     1.2.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-torch                        2.0.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-torchaudio                   2.0.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-torchvision                  0.15.2   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-tornado                      6.2      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-traitlets                    5.9.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-typeguard                    2.13.3   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-typing_extensions            4.5.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-uri-template                 1.2.0    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-urllib3                      2.0.2    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-wcwidth                      0.2.6    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-webcolors                    1.12     /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-webencodings                 0.5.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-websocket-client             1.5.1    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-Werkzeug                     2.3.4    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-wheel                        0.40.0   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-widgetsnbextension           4.0.5    /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-wrapt                        1.14.1   /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-zope.interface               6.1      /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages pip
-
-[notice] A new release of pip is available: 23.2.1 -&gt; 23.3.2
-[notice] To update, run: pip install --upgrade pip</code></pre>
+<pre><code>Package                            Version              Location                                                            Installer
+---------------------------------- -------------------- ------------------------------------------------------------------- ---------
+agate                              1.12.0               c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+agate-dbf                          0.2.3                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+agate-excel                        0.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+agate-sql                          0.7.2                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+alabaster                          0.7.12               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+anaconda-client                    1.9.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+anaconda-navigator                 2.1.1                c:\users\yjtseng\anaconda3\lib\site-packages
+anaconda-project                   0.10.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+anyio                              2.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+appdirs                            1.4.4                c:\users\yjtseng\anaconda3\lib\site-packages
+argh                               0.26.2               c:\users\yjtseng\anaconda3\lib\site-packages
+argon2-cffi                        20.1.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+arrow                              0.13.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+asn1crypto                         1.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+astroid                            2.6.6                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+astropy                            4.3.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+async-generator                    1.10                 c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+atomicwrites                       1.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+attrs                              21.2.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+autopep8                           1.5.7                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Babel                              2.9.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+backcall                           0.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+backports.functools-lru-cache      1.6.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+backports.shutil-get-terminal-size 1.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+backports.tempfile                 1.0                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+backports.weakref                  1.0.post1            c:\users\yjtseng\anaconda3\lib\site-packages
+bcrypt                             3.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+beautifulsoup4                     4.10.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+binaryornot                        0.4.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+bitarray                           2.3.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+bkcharts                           0.2                  c:\users\yjtseng\anaconda3\lib\site-packages
+black                              19.10b0              c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+bleach                             4.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+bokeh                              2.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+boto                               2.49.0               c:\users\yjtseng\anaconda3\lib\site-packages
+Bottleneck                         1.3.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+brotlipy                           0.7.0                c:\users\yjtseng\anaconda3\lib\site-packages
+cached-property                    1.5.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+certifi                            2021.10.8            c:\users\yjtseng\anaconda3\lib\site-packages
+cffi                               1.14.6               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+chardet                            4.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+charset-normalizer                 2.0.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+click                              8.0.3                c:\users\yjtseng\anaconda3\lib\site-packages
+cloudpickle                        2.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+clyent                             1.2.2                c:\users\yjtseng\anaconda3\lib\site-packages
+colorama                           0.4.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+comtypes                           1.1.10               c:\users\yjtseng\anaconda3\lib\site-packages
+conda                              4.11.0               c:\users\yjtseng\anaconda3\lib\site-packages
+conda-build                        3.21.6               c:\users\yjtseng\anaconda3\lib\site-packages
+conda-content-trust                0+unknown            c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+conda-pack                         0.6.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+conda-package-handling             1.7.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+conda-repo-cli                     1.0.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+conda-token                        0.3.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+conda-verify                       3.4.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+contextlib2                        0.6.0.post1          c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+cookiecutter                       1.7.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+cryptography                       3.4.8                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+csvkit                             2.0.1                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+cycler                             0.10.0               c:\users\yjtseng\anaconda3\lib\site-packages
+Cython                             0.29.24              c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+cytoolz                            0.11.0               c:\users\yjtseng\anaconda3\lib\site-packages
+daal4py                            2021.3.0             c:\users\yjtseng\anaconda3\lib\site-packages
+dask                               2021.10.0            c:\users\yjtseng\anaconda3\lib\site-packages
+dbfread                            2.0.7                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+debugpy                            1.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+decorator                          5.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+defusedxml                         0.7.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+diff-match-patch                   20200713             c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+distributed                        2021.10.0            c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+docutils                           0.17.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+entrypoints                        0.3                  c:\users\yjtseng\anaconda3\lib\site-packages
+et-xmlfile                         1.1.0                c:\users\yjtseng\anaconda3\lib\site-packages
+fastcache                          1.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+filelock                           3.3.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+flake8                             3.9.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Flask                              1.1.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+fonttools                          4.25.0               c:\users\yjtseng\anaconda3\lib\site-packages
+fsspec                             2021.10.1            c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+future                             0.18.2               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+gevent                             21.8.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+glob2                              0.7                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+greenlet                           1.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+h5py                               3.2.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+HeapDict                           1.0.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+html5lib                           1.1                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+idna                               3.2                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+imagecodecs                        2021.8.26            c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+imageio                            2.9.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+imagesize                          1.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+importlib-metadata                 4.8.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+inflection                         0.5.1                c:\users\yjtseng\anaconda3\lib\site-packages
+iniconfig                          1.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+intervaltree                       3.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ipykernel                          6.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ipython                            7.29.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ipython-genutils                   0.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ipywidgets                         7.6.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+isodate                            0.6.1                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+isort                              5.9.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+itsdangerous                       2.0.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jdcal                              1.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jedi                               0.18.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Jinja2                             2.11.3               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jinja2-time                        0.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+joblib                             1.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+json5                              0.9.6                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jsonschema                         3.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyter                            1.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyter-client                     6.1.12               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyter-console                    6.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyter-core                       4.8.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyter-server                     1.4.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyterlab                         3.2.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyterlab-pygments                0.1.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyterlab-server                  2.8.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+jupyterlab-widgets                 1.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+keyring                            23.1.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+kiwisolver                         1.3.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+lazy-object-proxy                  1.6.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+leather                            0.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+libarchive-c                       2.9                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+llvmlite                           0.37.0               c:\users\yjtseng\anaconda3\lib\site-packages
+locket                             0.2.1                c:\users\yjtseng\anaconda3\lib\site-packages\locket-0.2.1-py3.9.egg
+lxml                               4.6.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+MarkupSafe                         1.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+matplotlib                         3.4.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+matplotlib-inline                  0.1.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+mccabe                             0.6.1                c:\users\yjtseng\anaconda3\lib\site-packages
+menuinst                           1.4.18               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+mistune                            0.8.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+mkl-fft                            1.3.1                c:\users\yjtseng\anaconda3\lib\site-packages
+mkl-random                         1.2.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+mkl-service                        2.4.0                c:\users\yjtseng\anaconda3\lib\site-packages
+mock                               4.0.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+more-itertools                     8.10.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+mpmath                             1.2.1                c:\users\yjtseng\anaconda3\lib\site-packages
+msgpack                            1.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+multipledispatch                   0.6.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+munkres                            1.1.4                c:\users\yjtseng\anaconda3\lib\site-packages
+mypy-extensions                    0.4.3                c:\users\yjtseng\anaconda3\lib\site-packages
+navigator-updater                  0.2.1                c:\users\yjtseng\anaconda3\lib\site-packages
+nbclassic                          0.2.6                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+nbclient                           0.5.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+nbconvert                          6.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+nbformat                           5.1.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+nest-asyncio                       1.5.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+networkx                           2.6.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+nltk                               3.6.5                c:\users\yjtseng\anaconda3\lib\site-packages
+nose                               1.3.7                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+notebook                           6.4.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+numba                              0.54.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+numexpr                            2.7.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+numpy                              1.20.3               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+numpydoc                           1.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+olefile                            0.46                 c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+openpyxl                           3.0.9                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+packaging                          21.0                 c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pandas                             1.3.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pandocfilters                      1.4.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+paramiko                           2.7.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+parsedatetime                      2.6                  c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+parso                              0.8.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+partd                              1.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+path                               16.0.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pathlib2                           2.3.6                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pathspec                           0.7.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+patsy                              0.5.2                c:\users\yjtseng\anaconda3\lib\site-packages
+pep8                               1.7.1                c:\users\yjtseng\anaconda3\lib\site-packages
+pexpect                            4.8.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pickleshare                        0.7.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Pillow                             8.4.0                c:\users\yjtseng\anaconda3\lib\site-packages
+pip                                21.3.1               c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+pkginfo                            1.7.1                c:\users\yjtseng\anaconda3\lib\site-packages
+pluggy                             0.13.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ply                                3.11                 c:\users\yjtseng\anaconda3\lib\site-packages
+poyo                               0.5.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+prometheus-client                  0.11.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+prompt-toolkit                     3.0.20               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+psutil                             5.8.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ptyprocess                         0.7.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+py                                 1.10.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pycodestyle                        2.7.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pycosat                            0.6.3                c:\users\yjtseng\anaconda3\lib\site-packages
+pycparser                          2.20                 c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pycurl                             7.44.1               c:\users\yjtseng\anaconda3\lib\site-packages
+pydocstyle                         6.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyerfa                             2.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyflakes                           2.3.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Pygments                           2.10.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+PyJWT                              2.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pylint                             2.9.6                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyls-spyder                        0.4.0                c:\users\yjtseng\anaconda3\lib\site-packages
+PyNaCl                             1.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyodbc                             4.0.0-unsupported    c:\users\yjtseng\anaconda3\lib\site-packages
+pyOpenSSL                          21.0.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyparsing                          3.0.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pyreadline                         2.1                  c:\users\yjtseng\anaconda3\lib\site-packages
+pyrsistent                         0.18.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+PySocks                            1.7.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pytest                             6.2.4                c:\users\yjtseng\anaconda3\lib\site-packages
+python-dateutil                    2.8.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+python-lsp-black                   1.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+python-lsp-jsonrpc                 1.0.0                c:\users\yjtseng\anaconda3\lib\site-packages
+python-lsp-server                  1.2.4                c:\users\yjtseng\anaconda3\lib\site-packages
+python-slugify                     5.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pytimeparse                        1.1.8                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+pytz                               2021.3               c:\users\yjtseng\anaconda3\lib\site-packages
+PyWavelets                         1.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pywin32                            228                  c:\users\yjtseng\anaconda3\lib\site-packages
+pywin32-ctypes                     0.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+pywinpty                           0.5.7                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+PyYAML                             6.0                  c:\users\yjtseng\anaconda3\lib\site-packages
+pyzmq                              22.2.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+QDarkStyle                         3.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+qstylizer                          0.1.10               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+QtAwesome                          1.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+qtconsole                          5.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+QtPy                               1.10.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+regex                              2021.8.3             c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+requests                           2.26.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+rope                               0.19.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Rtree                              0.9.7                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+ruamel-yaml-conda                  0.15.100             c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+scikit-image                       0.18.3               c:\users\yjtseng\anaconda3\lib\site-packages
+scikit-learn                       0.24.2               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+scikit-learn-intelex               2021.20210714.120553 c:\users\yjtseng\anaconda3\lib\site-packages
+scipy                              1.7.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+seaborn                            0.11.2               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Send2Trash                         1.8.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+setuptools                         58.0.4               c:\users\yjtseng\anaconda3\lib\site-packages
+simplegeneric                      0.8.1                c:\users\yjtseng\anaconda3\lib\site-packages
+singledispatch                     3.7.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sip                                4.19.13              c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+six                                1.16.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sniffio                            1.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+snowballstemmer                    2.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sortedcollections                  2.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sortedcontainers                   2.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+soupsieve                          2.2.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+Sphinx                             4.2.0                c:\users\yjtseng\anaconda3\lib\site-packages
+sphinxcontrib-applehelp            1.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-devhelp              1.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-htmlhelp             2.0.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-jsmath               1.0.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-qthelp               1.0.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-serializinghtml      1.1.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+sphinxcontrib-websupport           1.2.4                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+spyder                             5.1.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+spyder-kernels                     2.1.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+SQLAlchemy                         1.4.22               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+statsmodels                        0.12.2               c:\users\yjtseng\anaconda3\lib\site-packages
+sympy                              1.9                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tables                             3.6.1                c:\users\yjtseng\anaconda3\lib\site-packages
+TBB                                0.2                  c:\users\yjtseng\anaconda3\lib\site-packages
+tblib                              1.7.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+terminado                          0.9.4                c:\users\yjtseng\anaconda3\lib\site-packages
+testpath                           0.5.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+text-unidecode                     1.3                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+textdistance                       4.2.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+threadpoolctl                      2.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+three-merge                        0.1.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tifffile                           2021.7.2             c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tinycss                            0.4                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+toml                               0.10.2               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+toolz                              0.11.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tornado                            6.1                  c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tqdm                               4.62.3               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+traitlets                          5.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+typed-ast                          1.4.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+typing-extensions                  3.10.0.2             c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+tzdata                             2024.1               c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+ujson                              4.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+unicodecsv                         0.14.1               c:\users\yjtseng\anaconda3\lib\site-packages
+Unidecode                          1.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+urllib3                            1.26.7               c:\users\yjtseng\anaconda3\lib\site-packages
+watchdog                           2.1.3                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+wcwidth                            0.2.5                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+webencodings                       0.5.1                c:\users\yjtseng\anaconda3\lib\site-packages
+Werkzeug                           2.0.2                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+wheel                              0.37.0               c:\users\yjtseng\anaconda3\lib\site-packages
+whichcraft                         0.6.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+widgetsnbextension                 3.5.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+win-inet-pton                      1.1.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+win-unicode-console                0.5                  c:\users\yjtseng\anaconda3\lib\site-packages
+wincertstore                       0.2                  c:\users\yjtseng\anaconda3\lib\site-packages
+wrapt                              1.12.1               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+xlrd                               1.2.0                c:\users\yjtseng\anaconda3\lib\site-packages                        pip
+XlsxWriter                         3.0.1                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+xlwings                            0.24.9               c:\users\yjtseng\anaconda3\lib\site-packages
+xlwt                               1.3.0                c:\users\yjtseng\anaconda3\lib\site-packages
+xmltodict                          0.12.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+yapf                               0.31.0               c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+zict                               2.0.0                c:\users\yjtseng\anaconda3\lib\site-packages
+zipp                               3.6.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda
+zope.event                         4.5.0                c:\users\yjtseng\anaconda3\lib\site-packages
+zope.interface                     5.4.0                c:\users\yjtseng\anaconda3\lib\site-packages                        conda</code></pre>
 </div>
 </div>
 </section>
-<section id="import-packageslibraries" class="slide level2">
-<h2>Import packages/libraries</h2>
-<p>We will use the following packages in python for the first try.</p>
+<section id="import-libraries" class="slide level2">
+<h2>Import libraries</h2>
+<p>We will use the following libraries in python for the first try.</p>
 <ul>
 <li><code>pandas</code></li>
 </ul>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e9c3a5b5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="install-packages-hands-on" class="slide level2">
-<h2>Install packages hands-on</h2>
+<section id="install-libraries-hands-on" class="slide level2">
+<h2>Install libraries hands-on</h2>
 <ul>
 <li>在剛剛新增的<strong>Notebook</strong>中，輸入<code>!pip3 install pandas</code></li>
 </ul>
 </section></section>
 <section>
 <section id="setup-the-environment-on-your-own-computer-for-your-reference" class="title-slide slide level1 center">
-<h1>Setup the environment on your own computer (For your reference)</h1>
+<h1>Setup the environment on your own computer (for your reference)</h1>
 
 </section>
 <section id="python-installation" class="slide level2">
@@ -696,8 +633,8 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
 </ul>
 
 <img data-src="figures/checkjupyter.png" class="r-stretch"></section>
-<section id="packageslibraries-installation" class="slide level2">
-<h2>Packages/libraries installation</h2>
+<section id="libraries-installation" class="slide level2">
+<h2>Libraries installation</h2>
 <p>In <strong>CMD</strong> (Windows) or <strong>terminal</strong> (Mac or Linux), type</p>
 <pre><code>pip3 install pandas jupyter seaborn</code></pre>
 <p>to install packages</p>
@@ -710,7 +647,7 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
 <li><a href="https://jupyter.org/">Jupyter notebook</a> is a really good python interface for data analysis (of course including statistic).</li>
 <li>You can install and using <strong>Jupyter notebook</strong> in different ways.
 <ul>
-<li>We have installed <code>jupyter</code> library in the previous step</li>
+<li>We have installed <code>jupyter</code> library in the previous slide</li>
 </ul></li>
 <li>Check the <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">document</a> for more instruction</li>
 </ul>
@@ -719,15 +656,15 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
 <h2>1. Download and install <a href="https://code.visualstudio.com/">VS Code</a></h2>
 <p><a href="https://code.visualstudio.com/">VS Code</a> <img data-src="figures/vscode_down.png"></p>
 </section>
-<section id="check-python-and-jupyter-package" class="slide level2">
-<h2>2. Check python and jupyter package</h2>
-<p>Make sure you have installed <code>python</code> and <code>jupyter</code> package (see previous slide)</p>
+<section id="check-python-and-jupyter-libraries" class="slide level2">
+<h2>2. Check python and jupyter libraries</h2>
+<p>Make sure you have installed <code>python</code> and <code>jupyter</code> libraries (see previous slides)</p>
 <p>@ Terminal or CMD or Python</p>
 
 <img data-src="figures/checkjupyter.png" class="r-stretch"></section>
 <section id="install-python-extension" class="slide level2">
 <h2>3. Install Python extension</h2>
-<p>In VS Code, click <strong>Extensions</strong>, search python, and install the extension</p>
+<p>In VS Code, click <strong>Extensions</strong>, search “python”, and install the extension</p>
 <p><img data-src="figures/pthext.png"> <strong>Jupyter</strong> extension is also useful</p>
 </section>
 <section id="trust-your-workspace" class="slide level2">
@@ -746,12 +683,14 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
 <section id="now-we-are-ready-to-start" class="slide level2">
 <h2>6. Now we are ready to start!</h2>
 
-<img data-src="figures/jp.png" class="r-stretch"><div class="footer footer-default">
+
+<img data-src="figures/jp.png" class="r-stretch"></section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
 
 </div>
-</section></section>
-    </div>
-  </div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="1_EnvSet_files/libs/revealjs/dist/reveal.js"></script>
@@ -776,12 +715,12 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -802,7 +741,7 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -935,7 +874,7 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -993,18 +932,7 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1036,11 +964,48 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1050,8 +1015,17 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1065,7 +1039,11 @@ zope.interface               6.1      /Library/Frameworks/Python.framework/Versi
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
