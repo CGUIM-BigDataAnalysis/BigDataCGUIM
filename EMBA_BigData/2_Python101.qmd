@@ -23,6 +23,7 @@ editor: visual
 
 -   使用 `=` 設定變數
 -   **變數名稱** `=` **變數內容(值)**
+-   **變數名稱1, 變數名稱2** `=` **變數內容1(值1), 變數內容2(值2)**
 
 ```{python}
 #| echo: true
@@ -34,7 +35,7 @@ print(var2+var3)
 
 ## Variable 變數命名規則
 
--   不可使用保留字
+-   不可使用**保留字**
     -   會變色的基本上都是保留字，如`True`, `False`等，在Python有功能的字串
 -   只能由數字`0-9`、字母`A-Z` `a-z`，或是底線組成`_`，且不可以數字開頭
 -   大小寫敏感
@@ -54,6 +55,7 @@ False
 var1 = "test"
 print(var1)
 ```
+
 `函數名稱`(`參數1`,`參數2`,...)，多個參數用`,`分隔
 
 # Data Types 資料型態
@@ -121,7 +123,7 @@ print([float1, float2, float3])
 
 `True` or `False`
 
-::: columns
+::::: columns
 ::: column
 ```{python}
 #| echo: true
@@ -137,7 +139,7 @@ b = 1 < 2
 print(b)
 ```
 :::
-:::
+:::::
 
 ## 日期 (date)
 
@@ -146,12 +148,12 @@ Python中並無內建的日期型態，必須使用`datetime`套件，使用前�
 ```{python}
 #| echo: true
 #| eval: false
-!pip3 install datetime
+!pip3 install datetime # install
 ```
 
 ```{python}
 #| echo: true
-import datetime
+import datetime # import
 ```
 
 ## 日期 (date)
@@ -202,19 +204,19 @@ print(today.month)
 
 ```{python}
 #| echo: true
-newdate = datetime.date(2024,1,23)
+newdate = datetime.date(2025,1,23)
 print(newdate)
 ```
 
 ```{python}
 #| echo: true
-newdatetime = datetime.datetime(2024,1,23,23,23,23)
+newdatetime = datetime.datetime(2025,1,23,22,45,59)
 print(newdatetime)
 ```
 
 ```{python}
 #| echo: true
-newdatetime = datetime.datetime(2024,1,23)
+newdatetime = datetime.datetime(2025,1,23)
 print(newdatetime)
 ```
 
@@ -242,15 +244,17 @@ int2 = int(5)
 print([int1, int2])
 ```
 
-::: columns
+::::: columns
 ::: column
-`+`加 
+`+`加
 
 ```{python}
 #| echo: true
 int1 + int2
 ```
+
 `-`減
+
 ```{python}
 #| echo: true
 int1 - int2
@@ -258,19 +262,21 @@ int1 - int2
 :::
 
 ::: column
-`*`乘 
+`*`乘
 
 ```{python}
 #| echo: true
 int1 * int2
 ```
+
 `/`除
+
 ```{python}
 #| echo: true
 int1 / int2
 ```
 :::
-:::
+:::::
 
 ## \>大於 / \<小於 / ==等於 / !=不等於
 
@@ -281,15 +287,17 @@ int2 = int(5)
 print([int1, int2])
 ```
 
-::: columns
+::::: columns
 ::: column
-`>`大於 
+`>`大於
 
 ```{python}
 #| echo: true
 int1 > int2
 ```
+
 `<`小於
+
 ```{python}
 #| echo: true
 int1 < int2
@@ -297,23 +305,25 @@ int1 < int2
 :::
 
 ::: column
-`==` 等於 
+`==` 等於
 
 ```{python}
 #| echo: true
 int1 == int2
 ```
+
 `!=`不等於
+
 ```{python}
 #| echo: true
 int1 != int2
 ```
 :::
-:::
+:::::
 
 ## and / or
 
-::: columns
+::::: columns
 ::: column
 `and`且
 
@@ -341,7 +351,7 @@ int1 != int2
 10>5 or 1>5
 ```
 :::
-:::
+:::::
 
 ## Hands-on
 
@@ -353,7 +363,7 @@ int1 != int2
 
 ## Common Data Structure 資料結構
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   序列 (sequence)
     -   表 (list)
@@ -370,11 +380,11 @@ int1 != int2
 -   資料框 (data frame)
     -   pandas 資料框
 :::
-:::
+:::::
 
 ## Common Data Structure 資料結構
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   **序列 (sequence)**
     -   表 (list)
@@ -391,73 +401,122 @@ int1 != int2
 -   資料框 (data frame)
     -   pandas 資料框
 :::
-:::
+:::::
 
 ## 表 (list)
 
--   使用方括號 `[ ]`宣告
--   內容以`,`分隔
--   內容的資料型態一定要相同
+A collection allows us to put many values in a single “variable”
+
+-   surrounded by square brackets`[ ]`
+-   separated by commas`,`
+-   element can be *any* Python object
+-   can be empty
 -   可作運算
 
 ```{python}
 #| echo: true
-list1 = [float1, float2, float3]
+list1 = [3.5, 4.6, 5.7]
 print(list1)
 ```
 
-## list的運算功能
+## list and for loop
+
+依序將list結構的內容取出，設定為x，並印出來
 
 ```{python}
 #| echo: true
-list1 = [float1, float2, float3]
-print(list1)
-```
-`sum(`list物件名稱`)` 物件加總
-
-```{python}
-#| echo: true
-sum(list1)
-```
-`max(`list物件名稱`)` 物件最大值
-```{python}
-#| echo: true
-list1 = [float1, float2, float3]
-max(list1)
+friends = ['Joseph', 'Glenn', 'Sally']
+for x in friends:
+    print('Happy New Year:',  x)
+print('Done!')
 ```
 
+## list 取值
 
-可參考[文件](https://docs.python.org/zh-cn/3/library/functions.html)
+-   sequence包含：list, tuple, range
+-   使用中括號加上index取值`變數名稱[index]`
+-   `index`從0開始
 
-## 定值表 (tuple)
-
--   使用小括號 `( )`宣告
--   內容以`,`分隔
--   內容的資料型態可以不同
+| 位置  |  1  |  2  |  3  |  4  | ... |
+|:-----:|:---:|:---:|:---:|:---:|:---:|
+| index |  0  |  1  |  2  |  3  | ... |
 
 ```{python}
 #| echo: true
-tuple1 = (float1, float2, float3, text1, text2)
-print(tuple1)
+print(friends)
+```
+
+```{python}
+#| echo: true
+print(friends[0])
+```
+
+```{python}
+#| echo: true
+print(friends[1])
+```
+
+```{python}
+#| echo: true
+print(friends[2])
+```
+
+## list 取值 - slice
+
+`start`:`up to but not including`
+
+```{python}
+#| echo: true
+print(friends)
+```
+
+```{python}
+#| echo: true
+print(friends[1:2])
+```
+
+```{python}
+#| echo: true
+print(friends[:2])
+```
+
+```{python}
+#| echo: true
+print(friends[:1])
 ```
 
 ## 範圍 (range)
 
--   使用`range(數列起點,數列終點,間隔)`宣告
+-   使用`range(數列起點,數列終點[不包含],間隔)`宣告
 -   若只有輸入一個參數，視為數列終點，起點設為預設值0
 -   若只有輸入兩個參數，則間隔設為預設值1
--   終點不包括在內
 
 ```{python}
 #| echo: true
 r1 = range(10)
-r2 = range(10,20)
-r3 = range(10,20,2)
-print([r1,r2,r3])
+print(r1)
 ```
 
-::: columns
+```{python}
+#| echo: true
+r2 = range(10,20)
+print(r2)
+```
+
+```{python}
+#| echo: true
+r3 = range(10,20,2)
+print(r3)
+```
+
+## 範圍 (range)
+
+::::: columns
 ::: column
+```{python}
+print(r1)
+```
+
 ```{python}
 #| echo: true
 for i in r1:
@@ -467,16 +526,152 @@ for i in r1:
 
 ::: column
 ```{python}
+print(r3)
+```
+
+```{python}
 #| echo: true
 for i in r3:
   print(i)
 ```
 :::
+:::::
+
+## list and for loop - range
+
+```{python}
+#| echo: true
+friends = ['Joseph', 'Glenn', 'Sally']
+print(len(friends))
+```
+
+```{python}
+#| echo: true
+print(range(len(friends)))
+```
+
+::::: columns
+::: column
+```{python}
+#| echo: true
+for x in friends:
+    print('Happy New Year:',  x)
+print('Done!')
+```
 :::
+
+::: column
+```{python}
+#| echo: true
+for i in range(len(friends)) :
+    friend = friends[i]
+    print(friend)
+print('Done!')
+```
+:::
+:::::
+
+## list 新增修改
+
+-   Lists are “mutable”
+    -   we can change an element of a list using the index operator
+
+```{python}
+#| echo: true
+print(friends)
+```
+
+```{python}
+#| echo: true
+friends[0]='new friend'
+print(friends)
+```
+
+## list 新增修改 +
+
+We can create a new list by adding `+` two existing lists together
+
+```{python}
+#| echo: true
+friend_cs = ['Joseph', 'Glenn', 'Sally']
+friend_md = ['Alex', 'John', 'Ray']
+print(friend_cs+friend_md)
+```
+
+## list 新增修改 append
+
+We can create an empty list and then add elements using the `append` method
+
+```{python}
+#| echo: true
+print(friend_cs)
+```
+
+```{python}
+#| echo: true
+friend_cs.append('Megan')
+print(friend_cs)
+```
+
+## list的運算功能
+
+```{python}
+#| echo: true
+list1 = [3.5, 4.6, 5.7]
+print(list1)
+```
+
+`sum(`list物件名稱`)` 物件加總
+
+```{python}
+#| echo: true
+sum(list1)
+```
+
+`max(`list物件名稱`)` 物件最大值
+
+```{python}
+#| echo: true
+list1 = [3.5, 4.6, 5.7]
+max(list1)
+```
+
+可參考[文件](https://docs.python.org/zh-cn/3/library/functions.html)
+
+## 定值表 (tuple)
+
+-   Like `list`...
+-   surrounded by square brackets`( )`
+-   separated by commas`,`
+-   Tuples are “immutable” --\> *More Efficient*
+    -   No `.append()`, `.sort()`, etc
+
+```{python}
+#| echo: true
+tuple1 = (3.5, 4.6, 5.7, "111", "222")
+print(tuple1)
+```
+
+## 定值表 (tuple) assignment
+
+We can also put a tuple on the left-hand side of an assignment statement
+
+```{python}
+#| echo: true
+(x, y) = (4, 'fred')
+print(y)
+```
+
+
+## Hands-on
+
+-   新增一sequence `a`，包含數字1到10
+-   新增一sequence `b`，包含數字1到20中的所有偶數
+-   取出`a` sequence 的第*4*個值
 
 ## Common Data Structure 資料結構
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   序列 (sequence)
     -   表 (list)
@@ -493,149 +688,157 @@ for i in r3:
 -   資料框 (data frame)
     -   pandas 資料框
 :::
-:::
+:::::
 
-## 字典 (dist)
 
+# 映射 (mapping)
+
+## 字典 Dictionaries (dist)
+
+-   Dictionaries are Python’s most powerful data collection
 -   使用大括號 `{ }`宣告
 -   內容為`key : value`的組合，並以`,`分隔
 -   key不能重複，通常為字串
 
 ```{python}
 #| echo: true
-dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
+dist1 = {"id":1, "name":"Ryan","age":20, "School":"NYCU"}
 print(dist1)
 ```
 
-## sequence 取值
-
--   sequence包含：list, tuple, range
--   使用中括號加上index取值`變數名稱[index]`
--   `index`從0開始
-
-| 位置  |  1  |  2  |  3  |  4  | ... |
-|:-----:|:---:|:---:|:---:|:---:|:---:|
-| index |  0  |  1  |  2  |  3  | ... |
-
-::: columns
-::: {.column width="60%"}
-```{python}
-#| echo: true
-list1 = [float1, float2, float3]
-print(list1)
-```
-
-```{python}
-#| echo: true
-list1[0]
-```
-:::
-
-::: {.column width="40%"}
-```{python}
-#| echo: true
-r2 = range(10,20)
-print(r2)
-```
-
-```{python}
-#| echo: true
-r2[5]
-```
-:::
-:::
-
-## sequence 新增修改
-
--   sequence包含：list, tuple, range
--   `sequence物件.append()`可新增內容至sequence中
-
-```{python}
-#| echo: true
-list1 = [float1, float2, float3]
-print(list1)
-```
-
-```{python}
-#| echo: true
-list1.append(5.5)
-print(list1)
-```
-
-## mapping 取值
+## mapping 取值 \[ \]
 
 -   mapping包含：dist
 -   使用中括號加上key取值`變數名稱[key]`
 
 ```{python}
 #| echo: true
-dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
 print(dist1)
 ```
 
+```{python}
+#| echo: true
+print(dist1['age'])
+```
 
-## mapping 新增修改
+## mapping 取值 .keys()
+
+\[key1, key2, ...\]
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+```{python}
+#| echo: true
+print(dist1.keys())
+```
+
+## mapping 取值 .values()
+
+\[value1, value2, ...\]
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+```{python}
+#| echo: true
+print(dist1.values())
+```
+
+## mapping 取值 .items()
+
+\[(key1, value1), (key2, value2),...\]
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+```{python}
+#| echo: true
+print(dist1.items())
+```
+
+## mapping 新增修改 .update()
 
 -   mapping包含：dist
--   `mapping物件.update()`可新增內容(key:value pairs)至mapping中
+-   `mapping物件.update()`可新增或修改內容(key:value pairs)至mapping中
 
 ```{python}
 #| echo: true
-dist1 = {"id":1, "name":"Ryan", "School":"CGU"}
 print(dist1)
 ```
 
 ```{python}
 #| echo: true
-dist1.update({"age":25, "dept":"IM"})
+dist1.update({"age":25, "dept":"CS"})
+print(dist1)
+```
+
+## mapping 新增修改 \[ \]
+
+`[ ]`取值後寫回
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+```{python}
+#| echo: true
+dist1['age']=dist1['age']+10
+print(dist1)
+```
+
+## mapping 新增修改 .get()
+
+-   `.get(key, 0)` 取值
+    -   key: key
+    -   0: any default value
+
+```{python}
+#| echo: true
+print(dist1)
+```
+
+```{python}
+#| echo: true
+dist1['age']=dist1.get('age', 0)+10
 print(dist1)
 ```
 
 ## Hands-on
 
--   新增一sequence `a`，包含數字1到10
--   新增一sequence `b`，包含數字1到20中的所有偶數
--   取出`a` sequence 的第*4*個值
+-   新增一mapping `dist1`，內容為
 
-## sequence + for
-
-sequence結構（list, tuple, range）和mapping結構（dist）均可作為迴圈依據
-
-`for` *變數* `in` *迴圈依據*:
-
-`縮排` 執行內容
-
-::: columns
-::: column
 ```{python}
 #| echo: true
-print(list1)
+dist1 = {"id":[1,2,3,4], 
+        "name":["Ryan","Tom","Emma","Amy"], 
+        "School":"NYCU"}
 ```
-:::
 
-::: column
-```{python}
-#| echo: true
-for i in list1:
-  print(i)
-```
-:::
-:::
-
-依序將list結構的內容取出，設定為i，並印出來
+-   取出`id`中的第*3*個值
+-   取出`name`中的第*2*個值的第1個字元（字母）
 
 ## mapping + for
 
-- mapping結構（dist）預設取得部份為key
-- 使用`.values()`即可取value (值)
+-   mapping結構（dist）預設取得部份為key
+-   使用`.values()`即可取value (值)
 
 ```{python}
 #| echo: true
 print(dist1)
 ```
 
-::: columns
+::::: columns
 ::: column
+Key
+
 ```{python}
 #| echo: true
 for i in dist1:
@@ -644,33 +847,82 @@ for i in dist1:
 :::
 
 ::: column
+Value
+
 ```{python}
 #| echo: true
 for i in dist1.values():
   print(i)
 ```
 :::
-:::
+:::::
 
-## Hands-on
-
--   新增一sequence `b`，包含數字1到20中的所有偶數
-
--   取出`b` sequence 的第*5,6,7*個值
-
--   新增一mapping `c`，內容為
+## mapping + for - key and value
 
 ```{python}
 #| echo: true
-dist1 = {"id":[1,2,3,4], "name":["Ryan","Tom","Emma","Amy"], "School":"CGU"}
+print(dist1)
 ```
 
--   取出`id`中的第*3*個值
--   取出`name`中的第*2*個值的第1個字元（字母）
+先得到key，再取得value
+
+```{python}
+#| echo: true
+for key in dist1:
+  print(key, dist1[key])
+```
+
+或是直接使用`.items()`
+
+```{python}
+#| echo: true
+for key,value in dist1.items():
+  print(key, value)
+```
+
+## Hands-on
+
+Most Common Name? Edit the ???? parts
+
+```{python}
+#| echo: true
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen']
+```
+
+Use dist and for to get the most common name and its count
+
+::::: columns
+::: column
+```{python}
+#| echo: true
+#| eval: false
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen']
+counts = dict()
+for name in ??? : # edit here
+    if name not in counts: 
+      counts[name] = ??? # edit here
+    else :
+      ??? # edit here
+print(counts)
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+#| eval: false
+names = ['csev', 'cwen', 'csev', 'zqian', 'cwen']
+counts = dict()
+for name in ??? : # edit here
+    counts[name] = ??? + 1 # edit here
+print(counts)
+```
+:::
+:::::
 
 ## Common Data Structure 資料結構
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   序列 (sequence)
     -   表 (list)
@@ -687,20 +939,20 @@ dist1 = {"id":[1,2,3,4], "name":["Ryan","Tom","Emma","Amy"], "School":"CGU"}
 -   資料框 (data frame)
     -   pandas 資料框
 :::
-:::
+:::::
 
 ## 一般矩陣 (matrix, array)
 
-- 可想成sequence (1維矩陣)的堆疊
-- sequence為row的組成
-- 直接以中括號分隔matrix的row和column
+-   可想成sequence (1維矩陣)的堆疊
+-   sequence為row的組成
+-   直接以中括號分隔matrix的row和column
 
 | Col1 | Col2 | Col3 |
 |:----:|:----:|:----:|
 |  1   |  2   |  3   |
 |  4   |  5   |  6   |
 
-::: columns
+::::: columns
 ::: column
 ```{python}
 #| echo: true
@@ -709,6 +961,7 @@ matrix1 = [[1, 2, 3],
 print(matrix1)
 ```
 :::
+
 ::: column
 ```{python}
 #| echo: true
@@ -718,12 +971,12 @@ matrix2 = [row1, row2]
 print(matrix2)
 ```
 :::
-:::
+:::::
 
 ## numpy矩陣 - 1維
 
-- 1維的情況下跟**List**很像，但是運算速度更快
-- 可用sequence新增numpy矩陣
+-   1維的情況下跟**List**很像，但是運算速度更快
+-   可用sequence新增numpy矩陣
 
 ```{python}
 #| echo: true
@@ -744,8 +997,8 @@ print(c)
 
 ## numpy矩陣 - 2維
 
-- 可用兩個sequence組合新增numpy矩陣
-- 預設以row為維度堆疊
+-   可用兩個sequence組合新增numpy矩陣
+-   預設以row為維度堆疊
 
 ```{python}
 #| echo: true
@@ -753,17 +1006,18 @@ tow_d = np.array([row1,row2])
 print(tow_d)
 ```
 
-
 ## numpy矩陣 - 取值
+
 ```{python}
 #| echo: true
 print(tow_d)
 ```
 
-::: columns
+::::: columns
 ::: column
-- 使用中括號`[`index`]`取值
-- 可用slice功能，`1:`為從1開始到最後，`:2`為從0開始2到2（不包括2）
+-   使用中括號`[`index`]`取值
+-   可用slice功能，`1:`為從1開始到最後，`:2`為從0開始2到2（不包括2）
+
 ```{python}
 #| echo: true
 print(tow_d[1:])
@@ -773,20 +1027,24 @@ print(tow_d[1:])
 #| echo: true
 print(tow_d[:2])
 ```
-::: 
+:::
+
 ::: column
-- 一個維度一個`[]`，前row後column
-- `array`[`row`][`column`]
+-   一個維度一個`[]`，前row後column
+-   `array`\[`row`\]\[`column`\]
+
 ```{python}
 #| echo: true
 print(tow_d[1][2])
 ```
 :::
-:::
+:::::
 
 ## numpy矩陣 - 新增修改
-- `np.concatenate(`想結合的numpy矩陣list`)`
-- 一維矩陣直接往後貼
+
+-   `np.concatenate(`想結合的numpy矩陣list`)`
+-   一維矩陣直接往後貼
+
 ```{python}
 #| echo: true
 np1 = np.array([0, 0.5, 1.0, 1.5, 2.0]) 
@@ -799,106 +1057,119 @@ print(new_np)
 
 2維矩陣可決定新增方向
 
-- `np.row_stack([np1,np2])` 使用新增row的想法組合
-- `np.column_stack([np1,np2])` 使用新增column的想法組合
+-   `np.row_stack([np1,np2])` 使用新增row的想法組合
+-   `np.column_stack([np1,np2])` 使用新增column的想法組合
 
 ```{python}
 #| echo: true
 np.row_stack([np1,np2])
 ```
+
 ```{python}
 #| echo: true
 np.column_stack([np1,np2])
 ```
 
-
-
 ## numpy矩陣 - 計算功能
+
 `sum()`、`mean()`、`std()`、`cumsum()`、`max()`、`min()`、`count()`
 
-::: columns
+::::: columns
 ::: column
 ```{python}
 #| echo: true
 print(a)
 ```
+
 ```{python}
 #| echo: true
 print(a.sum())
 ```
+
 ```{python}
 #| echo: true
 print(a.mean())
 ```
+
 ```{python}
 #| echo: true
 print(a.std())
 ```
+
 ```{python}
 #| echo: true
 print(a.cumsum())
 ```
 :::
+
 ::: column
 ```{python}
 #| echo: true
 print(tow_d)
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.sum()) 
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.mean()) 
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.std()) 
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.cumsum()) 
 ```
 :::
-:::
+:::::
 
 ## numpy矩陣 - 計算功能
+
 `sum()`、`mean()`、`std()`、`cumsum()`、`max()`、`min()`、`count()`
 
 `axis`= 0 BY COLUMN, 1 BY ROW
 
-::: columns
+::::: columns
 ::: column
 ```{python}
 #| echo: true
 print(tow_d)
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.sum(axis=0))
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.sum(axis=1))
 ```
 :::
+
 ::: column
 ```{python}
 #| echo: true
 print(tow_d.mean(axis=0))
 ```
+
 ```{python}
 #| echo: true
 print(tow_d.mean(axis=1))
 ```
 :::
-:::
-
+:::::
 
 ## Common Data Structure 資料結構
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   序列 (sequence)
     -   表 (list)
@@ -915,13 +1186,13 @@ print(tow_d.mean(axis=1))
 -   **資料框 (data frame)**
     -   pandas 資料框
 :::
-:::
+:::::
 
 ## pandas 資料框
 
-- 使用前須載入`import pandas as pd`
-- 增加欄位名稱等資訊，並提供不少資料處理功能
-- 由dict組成
+-   使用前須載入`import pandas as pd`
+-   增加欄位名稱等資訊，並提供不少資料處理功能
+-   由dict組成
 
 ```{python}
 #| echo: true
@@ -932,12 +1203,16 @@ df1
 ```
 
 ## pandas 資料框 - 取值
+
 資料框物件名稱.`head(資料筆數)`：取前幾筆
+
 ```{python}
 #| echo: true
 df1.head(2)
 ```
+
 資料框物件名稱.`head(資料筆數)`：取後幾筆
+
 ```{python}
 #| echo: true
 df1.tail(2)
@@ -946,36 +1221,38 @@ df1.tail(2)
 ## pandas 資料框 - 取值 (column)
 
 資料框物件名稱`[`欄位名稱`]`：取出sequence
+
 ```{python}
 #| echo: true
 df1["Name"]
 ```
+
 資料框物件名稱`[[`欄位名稱`]]`：取出資料框
+
 ```{python}
 #| echo: true
 df1[["Name"]]
 ```
 
-
 ## pandas 資料框 - 取值 (row)
 
 資料框物件名稱`[`row slice`]`
+
 ```{python}
 #| echo: true
 df1[0:1]
 ```
 
-
 ## Hands-on
 
-- 使用Google生成式AI，請他生成一個儲存學生學號、姓名、成績的pandas資料框，並生成5筆資料
-- 試著取出學生成績欄位
-- 試著取出學生姓名與成績兩個欄位
-- 試著取出第3位學生的成績 (hint: sequence)
+-   使用Google生成式AI，請他生成一個儲存學生學號、姓名、成績的pandas資料框，並生成5筆資料
+-   試著取出學生成績欄位
+-   試著取出學生姓名與成績兩個欄位
+-   試著取出第3位學生的成績 (hint: sequence)
 
 ## pandas 資料框 - 設定index
 
-預設index為0~n的序列
+預設index為0\~n的序列
 
 ```{python}
 #| echo: true
@@ -983,7 +1260,6 @@ df_index = pd.DataFrame({"ID":[1, 2, 3, 4],
        "Name":["Tom","Emma","Ryan","Amy"]},index=["a","b","c","d"])
 df_index
 ```
-
 
 ## pandas 資料框 - 設定index
 
@@ -994,8 +1270,6 @@ df_index
 df_index2 = df1.set_index("ID")
 df_index2
 ```
-
-
 
 ## pandas 資料框 - 新增修改
 
@@ -1022,9 +1296,9 @@ type(dist1)
 
 ## Common Data Structure 資料結構 - Recap
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
--   序列 (sequence) 
+-   序列 (sequence)
     -   表 (list) `[]`
     -   定值表 (tuple) `()`
     -   範圍 (range) `range()`
@@ -1039,4 +1313,4 @@ type(dist1)
 -   資料框 (data frame)
     -   pandas 資料框
 :::
-:::
+:::::

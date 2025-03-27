@@ -15,13 +15,15 @@ editor: visual
 -   資料分析
 -   資料呈現與視覺化
 
-## 資料匯入與匯出
 
--   從檔案匯入
--   從Google drive匯入
--   從API匯入
--   網頁爬蟲
--   資料匯出
+## Data input and output
+
+-   Data input
+    -   From file
+    -   From google drive
+    -   From API
+    -   Webscrapping
+-   Data output
 
 ## 前置作業
 
@@ -33,20 +35,30 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 ```
 
-# 從檔案匯入
+## Data input and output
 
-## 從檔案匯入
+-   **Data input**
+    -   **From file**
+    -   From google drive
+    -   From API
+    -   Webscrapping
+-   Data output
+
+# From File
+
+## From File
 
 -   .csv 逗號分隔格式檔案
 -   .xls Excel格式檔案
--   純文字資料 (無分隔)
+-   .pkl pickle格式檔案 **python常用**
+-   純文字資料
 -   其他格式
 
 ## .csv 逗號分隔格式檔案
 
 -   .csv 為逗號分隔格式檔案
--   可用`pandas`的`read_csv(檔案路徑)`功能將檔案匯入
--   檔案路徑可以是本機端路徑，也可以是網址
+-   `pandas`的`read_csv(路徑)`，將檔案匯入
+-   路徑可以是*本機端路徑*，也可以是*網址*
 
 ```{python}
 #| echo: true
@@ -66,7 +78,7 @@ df_csv.head()
 
 -   以[上市公司每月營業收入彙總表](https://data.gov.tw/dataset/18420)為例
 -   複製`csv`資料下載網址
--   用pandas 的 `read_csv()`函數將檔案匯入
+-   用`pandas` 的 `read_csv()`函數將檔案匯入
 -   匯入後印出前5個row
 
 ![](figures/downloadcsv.png)
@@ -83,9 +95,9 @@ df_csv.head()
 
 ## .xls Excel格式檔案
 
--   使用`pandas`套件中的`read_excel(檔案路徑)`功能
--   檔案路徑可以是本機端路徑，也可以是網址
--   可設定`sheet_name`參數指定工作表名稱
+-   使用`pandas`的`read_excel(路徑)`
+-   路徑可以是*本機端路徑*，也可以是*網址*
+-   可設定`sheet_name`參數指定*工作表名稱*
 
 ```{python}
 #| echo: true
@@ -97,20 +109,39 @@ house.head()
 ## .xls Excel格式檔案
 
 ```{python}
-house.head()
+print(house.head())
 ```
 
 ## Hands-on - .xls Excel格式檔案
 
--   以[雲林縣水位雨量站](https://data.gov.tw/dataset/145466)為例
+-   以[水位雨量站](https://data.gov.tw/dataset/145466)為例
 -   複製`Excel`資料下載網址
 -   用pandas 的 `read_excel()`函數將檔案匯入，記得設定工作表名稱
 -   匯入後印出第三個row
 
+## .pkl pickle格式檔案
+
+-   python專用，可儲存 python 的工作階段與變數
+-   常用functions
+    -   `dumps`, `dump`:儲存
+    -   `loads`, `load`:讀取
+-   確保使用信任來源的pickle檔案以避免安全風險
+-   `with ... as ...:`可自動在執行完區塊程式後將檔案關閉
+
+```{python}
+#| echo: true
+import pickle
+with open("cash_rate.pkl", 'rb') as f: 
+    cash = pickle.load(f) 
+    
+print(type(cash))
+```
+
 ## 純文字資料
 
 -   使用`oepn(檔名)`開啟檔案
--   使用`檔案物件.read()`讀取內容。**一次取全部，不換行**
+    -   以sequence形式儲存
+-   使用`檔案物件.read()`讀取內容。**一次取全部**
 -   讀取完畢後，使用`檔案物件.close()`關閉檔案
 
 ```{python}
@@ -147,10 +178,33 @@ print(f.readline())
 f.close()
 ```
 
+## dist + for + open
+
+```{python}
+#| echo: true
+name = 'trump.txt'
+handle = open(name)
+
+counts = dict()
+for line in handle:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word,0) + 1
+
+bigcount = None
+bigword = None
+for word,count in counts.items():
+    if bigcount is None or count > bigcount:
+        bigword = word
+        bigcount = count
+
+print(bigword, bigcount)
+```
+
 ## 其他格式
 
 -   以圖片為例，需安裝並載入繪圖用套件`matplotlib`
--   使用`plt.imread(圖片檔案)`載入圖片，為RGB向量
+-   使用`plt.imread(路徑)`載入圖片，為RGB向量
 
 ```{python}
 #| echo: true
@@ -162,7 +216,7 @@ f.close()
 #| echo: true
 import matplotlib
 import matplotlib.pyplot as plt
-im = plt.imread('figures/cgu_logo.png') 
+im = plt.imread('figures/nycu_logo.png') 
 print(im)
 plt.imshow(im, 'gray')
 plt.show()
@@ -179,18 +233,29 @@ plt.imshow(im, 'gray')
 plt.show()
 ```
 
+## Data input and output
+
+-   **Data input**
+    -   From file
+    -   **From google drive**
+    -   From API
+    -   Webscrapping
+-   Data output
+
 # 從Google drive匯入
 
 ## 從Google drive匯入 - google 試算表
 
--   可直接用`pandas`套件
--   注意原始連結後方，須為文件ID，若有`/edit#gid=0`或`/edit?usp=sharing`字樣，請刪除
+-   `pandas`套件
+-   注意原始連結後方，須為文件ID
+    -   若有`/edit#gid=0`或`/edit?usp=sharing`字樣，請刪除
 -   需要加工連結，在原始連結最後加上`/export?format=csv`
--   如果不是公開資料表，需要授權，可參考`google-api-python-client`套件
+-   如果不是公開資料表，需要授權
+    -   參考`google-api-python-client`套件
 
 ```{python}
 #| echo: true
-link="https://docs.google.com/spreadsheets/d/1B7tTfBZ6DKIV-OH6rQEz3J1Poh928r08WqAqiIdVeqM"
+link="https://docs.google.com/spreadsheets/d/1WqkYGfZZinxqhyqnbHIDC4NrHXbApfm8m8EvFR4SPAU"
 csv_link="/export?format=csv"
 pd.read_csv(link+csv_link)
 ```
@@ -201,16 +266,45 @@ pd.read_csv(link+csv_link)
 pd.read_csv(link+csv_link)
 ```
 
+## 從Google drive匯入 - google 試算表
+
+```{python}
+print(pd.read_csv(link+csv_link))
+```
+
 ## Hands-on - google 試算表匯入
 
--   以[Example Spreadsheet](https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms)為例
--   加工連結 (**hint**:上一頁投影片)
+-   以[Example Spreadsheet](https://docs.google.com/spreadsheets/d/1wmcc6e8n9bvIQgps6MgFLyLCcq6DWx-3uP2uLIA9rnU)為例
+-   加工連結 (**hint**:前兩頁投影片)
 -   用pandas 的 `pd.read_csv()`函數將檔案匯入
 -   匯入後印出第Home State column
 
-# 從API匯入
+## 從Google drive匯入 - 下載後匯入
 
-## 從API匯入
+使用`gdown`指令，並輸入google drive 檔案ID
+
+https://drive.google.com/uc?id=1ivP1VeeU0QTdN1pJcudEaIgKO33DMDm7
+
+```{python}
+#| echo: true
+#| eval: false
+!gdown '1ivP1VeeU0QTdN1pJcudEaIgKO33DMDm7'
+```
+
+執行後會儲存在工作路徑中，在用相對應的方法匯入即可
+
+## Data input and output
+
+-   **Data input**
+    -   From file
+    -   From google drive
+    -   **From API**
+    -   Webscrapping
+-   Data output
+
+# From API
+
+## From API
 
 -   Open Data
 -   API (Application programming interfaces)
@@ -229,7 +323,8 @@ pd.read_csv(link+csv_link)
 
 -   [政府資料開放平台](https://data.gov.tw/)
 -   [台北市資料大平台](https://data.taipei/)
--   [桃園開放資料](https://data.tycg.gov.tw/)
+-   [桃園開放資料](https://opendata.tycg.gov.tw/)
+-   [新竹市政府資料開放平臺](https://opendata.hccg.gov.tw/)
 
 ## API
 
@@ -242,24 +337,13 @@ pd.read_csv(link+csv_link)
 
 ## API - Open Data
 
-::: columns
-::: column
--   [桃園公共自行車即時服務資料](http://data.tycg.gov.tw/opendata/datalist/datasetMeta?oid=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c)資料
+-   \[桃園公共自行車即時服務資料\]https://opendata.tycg.gov.tw/datalist/5ca2bfc7-9ace-4719-88ae-4034b9a5a55c)資料
 -   每日更新
 -   不可能每日手動下載
 -   提供透過**API**下載的服務
 -   透過API下載的資料格式: **JSON格式**
-:::
 
-::: column
--   [桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)
-    -   **資料集ID**: 紀錄資料的基本參數，如包含欄位、更新頻率等
-    -   **資料RID**: 資料集
-    -   擷取範例
-:::
-:::
-
-## JSON格式檔案
+## JSON format
 
 -   JSON (**J**ava**s**cript **O**bject **N**otation)
 -   輕量級的資料交換語言
@@ -289,15 +373,15 @@ import json, requests
 ## JSON檔案匯入
 
 -   API網址參考[臺中市公共自行車(YouBike2.0)](https://opendata.taichung.gov.tw/search/6e38eb56-0e9a-4b9e-806d-23cd35d44d6b)
--   點選API獲取相關資訊
+-   點選**API**獲取相關資訊
 -   使用`requests`套件的`get(網址)`擷取資料
--   本API好像會檔短時間內擷取多次，因此放入`params = {'param':'1'}`以及`headers = {'Connection':'close'}`設定
+-   此API會檔短時間內擷取多次的要求，因此放入`params = {'param':'1'}`以及`headers = {'Connection':'close'}`設定
 -   最後將使用`回傳結果.json()`，將檔案轉成JSON格式
 
 ```{python}
 #| echo: true
 #| cache: true
-url="https://datacenter.taichung.gov.tw/swagger/OpenData/86dfad5c-540c-4479-bb7d-d7439d34eeb1"
+url="https://datacenter.taichung.gov.tw/swagger/OpenData/34a848ab-eeb3-44fd-a842-a09cb3209a7d"
 response = requests.get(url, params = {'param':'1'}, headers = {'Connection':'close'})
 data = response.json()  # Convert the response to JSON
 ```
@@ -347,12 +431,23 @@ data["retVal"][0]
     -   提示：設定url
 -   找到資料的儲存處，並將答案print出
 
-## 從API匯入 - Recap
+## From API - Recap
 
 -   Open Data
 -   API (Application programming interfaces)
 -   JSON格式檔案 `requests.get()`下載，`.json`轉型
--   用`type()`查看資料類別，`keys()`查看資料擷取方法，並印出來試試看
+-   用`type()`查看資料類別
+-   若為dist，則可使用`keys()`查看資料擷取方法，並印出來試試看
+
+
+## Data input and output
+
+-   **Data input**
+    -   From file
+    -   From google drive
+    -   From API
+    -   **Webscrapping**
+-   Data output
 
 # 網頁爬蟲 Webscraping
 
@@ -371,7 +466,7 @@ data["retVal"][0]
 ```{python}
 #| echo: true
 #| eval: false
-!pip3 install beautifulsoup4
+!pip3 install beautifulsoup4 requests
 ```
 
 -   擷取條件的撰寫會因網頁語法不同而有差異
@@ -383,23 +478,31 @@ data["retVal"][0]
 
 ## 即時股價爬取
 
--   [Yahoo 股市](https://tw.stock.yahoo.com/)
--   [Yahoo 股市 - 台積電](https://tw.stock.yahoo.com/quote/2330)
+-   [Google 財經](ttps://www.google.com/finance/)
+-   [Google 財經 - 台積電](https://www.google.com/finance/quote/2330:TPE?hl=zh-TW)
 
 ```{python}
 #| echo: true
 from bs4 import BeautifulSoup
 import requests
-StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+StockUrl = "https://www.google.com/finance/quote/2330:TPE?hl=zh-TW"
 res = requests.get(StockUrl)
 soup = BeautifulSoup(res.text, "html.parser")
 ```
 
 ```{python}
 #| echo: true
-price = soup.select(".Fz\(32px\)")
+price = soup.select(".fxKbKc")
 price[0].get_text()
 ```
+
+## HTML/XML 101
+
+-   Element: `<a class=’link’ href=’url’>29.99</a>`
+-   Start tag: `<a>`
+-   End tag: `</a>`
+-   Attribute屬性: `href=’url’`, `class=’link’`
+-   Text文字: `29.99`
 
 ## 即時股價爬取 - 下載html
 
@@ -408,7 +511,7 @@ price[0].get_text()
 
 ```{python}
 #| echo: true
-StockUrl = "https://tw.stock.yahoo.com/quote/2330"
+StockUrl = "https://www.google.com/finance/quote/2330:TPE?hl=zh-TW"
 res = requests.get(StockUrl)
 res.text[0:1000] ## print first 1000 chars
 ```
@@ -424,36 +527,43 @@ res.text[0:1000] ## print first 1000 chars
 soup = BeautifulSoup(res.text, "html.parser")
 ```
 
-## 即時股價爬取 - 搜尋所需節點 -1
+## 即時股價爬取 - 搜尋所需element -1
 
--   `find(節點條件)`:
-    -   取得第一個符合條件的節點 (`<>`內的內容)
--   `find_all(節點條件)`
-    -   取得所有符合條件的節點 (`<>`內的內容)
+Python 搜尋法，多用於搜尋`<>`tag內的內容
+
+-   `find(tag名稱)`:
+    -   取得第一個符合條件的element
+-   `find_all(tag名稱)`
+    -   取得所有符合條件的elements
+
+## 即時股價爬取 - 搜尋所需element -1
+
+CCS selector 搜尋法，有較多彈性
+
 -   `select_one()`
-    -   取得第一個符合CSS條件的節點 (`class` or `id`等屬性)
+    -   取得第一個符合CSS條件的element (`class` or `id`等屬性)
 -   `select()`
-    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+    -   取得所有符合CSS條件的elements (`class` or `id`等屬性)
 
-## 即時股價爬取 - 搜尋所需節點 -1
+## 即時股價爬取 - 搜尋所需element -1
 
-範例：class 包含 `Fz\(32px\)`
+範例：class 包含 `fxKbKc`
 
 -   `select()`
-    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+    -   取得所有符合CSS條件的elements (`class` or `id`等屬性)
 -   `class=`可用`.`代表
 -   `id=`可用`#`代表
 
 ```{python}
 #| echo: true
 soup = BeautifulSoup(res.text, "html.parser")
-price = soup.select(".Fz\(32px\)")
+price = soup.select(".fxKbKc")
 price
 ```
 
 ## 即時股價爬取 - 取出需要的資料 -1
 
--   `.get_text()`可抓取節點內文字
+-   `.get_text()`可抓取element內文字
 -   `.get("屬性名稱")`可抓取屬性內容
 
 ```{python}
@@ -461,23 +571,23 @@ price
 price[0].get_text()
 ```
 
-## 即時股價爬取 - 搜尋所需節點 -2
+## 即時股價爬取 - 搜尋所需element -2
 
-範例：class 包含 `price-detail-item`
+範例：class 包含 `gyFHrc`
 
 -   `select()`
-    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+    -   取得所有符合CSS條件的elements (`class` or `id`等屬性)
 
 ```{python}
 #| echo: true
 soup = BeautifulSoup(res.text, "html.parser")
-price_detail = soup.select(".price-detail-item")
+price_detail = soup.select(".gyFHrc")
 price_detail
 ```
 
 ## 即時股價爬取 - 取出需要的資料 -2
 
--   `.get_text()`可抓取節點內文字
+-   `.get_text()`可抓取element內文字
 -   `.get("屬性名稱")`可抓取屬性內容
 
 ```{python}
@@ -491,22 +601,22 @@ for price in price_detail:
   print(price.get_text())
 ```
 
-## 即時股價爬取 - 搜尋所需節點 -3
+## 即時股價爬取 - 搜尋所需element -3
 
-範例：class 包含 `StretchedBox`
+範例：class 包含 `z4rs2b`
 
--   `select()`: 取得所有符合CSS條件的節點 (`class` or `id`等屬性)
+-   `select()`: 取得所有符合CSS條件的element (`class` or `id`等屬性)
 
 ```{python}
 #| echo: true
 soup = BeautifulSoup(res.text, "html.parser")
-news = soup.select(".mega-item-header-link")
+news = soup.select(".z4rs2b")
 news
 ```
 
 ## 即時股價爬取 - 取出需要的資料 -3
 
--   `.get_text()`可抓取節點內文字
+-   `.get_text()`可抓取element內文字
 -   `.get("屬性名稱")`可抓取屬性內容
 
 ```{python}
@@ -528,18 +638,18 @@ for title_click in news:
 -   提示：
     -   下載html `requests.get(網址)`
     -   解析html `BeautifulSoup(下載網頁.text, "html.parser")`\
-    -   搜尋所需節點 `find(節點)`, `select(css條件)`
+    -   搜尋所需element `find(tag name)`, `select(css條件)`
     -   取出需要的資料 `get_text()`, `get(屬性名稱)`
 
 ## 即時股價爬取 - 取出需要的資料 -4
 
--   `.get_text()`可抓取節點內文字
+-   `.get_text()`可抓取element內文字
 -   `.get("屬性名稱")`可抓取屬性內容
 
 ```{python}
 #| echo: true
 for title_click in news:
-  print(title_click.get("href"))
+  print(title_click.find("a").get("href"))
 ```
 
 ## 即時股價爬取 - 爬連結內的新聞
@@ -547,7 +657,7 @@ for title_click in news:
 -   得到連結後，重複上述步驟
     -   下載html `requests.get(網址)`
     -   解析html `BeautifulSoup(下載網頁.text, "html.parser")`\
-    -   搜尋所需節點 `find(節點)`, `select(css條件)`
+    -   搜尋所需element `find(tag名稱)`, `select(css條件)`
     -   取出需要的資料 `get_text()`, `get(屬性名稱)`
 
 ## 即時股價爬取 - 爬連結內的新聞
@@ -563,7 +673,7 @@ for title_click in news:
 url_list = []
 title_list = []
 for title_click in news:
-  url_list.append(title_click.get("href"))
+  url_list.append(title_click.find("a").get("href"))
   title_list.append(title_click.get_text())
 print(url_list)
 ```
@@ -574,25 +684,13 @@ print(url_list)
 
 ```{python}
 #| echo: true
-res = requests.get(url_list[0])
+res = requests.get(url_list[1])
 soup = BeautifulSoup(res.text, "html.parser")
-news_full = soup.select_one(".caas-body")
-print("標題: "+title_list[0] +", 內文:" + news_full.get_text())
-```
-
-## 即時股價爬取 - 爬連結內的新聞
-
-用`for`迴圈一次做完所有連結
-
-```{python}
-#| echo: true
-for title_click in news:
-  title = title_click.get_text()
-  url = title_click.get("href")
-  res = requests.get(url)
-  soup = BeautifulSoup(res.text, "html.parser")
-  news_full = soup.select_one(".caas-body")
-  print("標題: "+title +", 內文:" + news_full.get_text())
+news_full = soup.select("p")
+full_text = ""
+for news_para in news_full:
+  full_text = full_text + news_para.get_text()
+print("標題: "+title_list[1] +", 內文:" + full_text)
 ```
 
 ## 即時股價爬取 - 爬連結內的新聞
@@ -604,11 +702,14 @@ for title_click in news:
 newdf = []
 for title_click in news:
   title = title_click.get_text()
-  url = title_click.get("href")
+  url = title_click.find("a").get("href")
   res = requests.get(url)
   soup = BeautifulSoup(res.text, "html.parser")
-  news_full = soup.select_one(".caas-body")
-  add_news = pd.DataFrame({"title":[title],"content":[news_full.get_text()]})
+  news_full = soup.select("p")
+  full_text = ""
+  for news_para in news_full:
+    full_text = full_text + news_para.get_text()
+  add_news = pd.DataFrame({"title":[title],"content":[full_text]})
   newdf.append(add_news)
 
 newdf_pd=pd.concat(newdf)
@@ -629,7 +730,7 @@ newdf_pd
 -   提示：
     -   下載html `requests.get(網址)`
     -   解析html `BeautifulSoup(下載網頁.text, "html.parser")`\
-    -   搜尋所需節點 `find(節點)`, `select(css條件)`
+    -   搜尋所需element `find(tag名稱)`, `select(css條件)`
     -   取出需要的資料 `get_text()`, `get(屬性名稱)`
 -   一頁一頁爬 or for 迴圈都可以
 
@@ -648,8 +749,17 @@ newdf_pd
 
 -   下載html `requests.get(網址)`
 -   解析html `BeautifulSoup(下載網頁.text, "html.parser")`
--   搜尋所需節點 `find(節點)`, `select(css條件)`
+-   搜尋所需element `find(tag名稱)`, `select(css條件)`
 -   取出需要的資料 `get_text()`, `get(屬性名稱)`
+
+## Data input and output
+
+-   Data input
+    -   From file
+    -   From google drive
+    -   From API
+    -   Webscrapping
+-   **Data output**
 
 # 資料匯出
 
@@ -658,6 +768,7 @@ newdf_pd
 -   文字檔 .txt
 -   CSV檔 .csv
 -   json檔 .json
+-   pickle檔 .pkl
 
 ## 資料匯出 - 文字檔 .txt
 
@@ -701,7 +812,7 @@ f.close()
 
 ```{python}
 #| echo: true
-newdf_pd.to_csv("news.csv")
+house.to_csv("house.csv")
 ```
 
 ## 資料匯出 - json檔 .json
@@ -712,20 +823,60 @@ DataFrame中一定要有index
 
 ```{python}
 #| echo: true
-newdf_pd = newdf_pd.set_index('title')
-newdf_pd.to_json("news_json.csv")
-newdf_pd
+house.to_json("house.json")
+house
+```
+
+## 資料匯出 - pickle檔 .pkl
+
+-   python專用，可儲存 python 的工作階段與變數
+-   常用functions
+    -   `dumps`, `dump`:儲存
+    -   `loads`, `load`:讀取
+
+```{python}
+#| echo: true
+with open("house.pkl", "wb") as file:
+    pickle.dump(house, file)
 ```
 
 ## Hands-on 資料匯出
 
 -   [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)
--   試著爬出最新一頁的所有**標題**
+-   試著爬出最新一頁的所有**標題** (Hint!)
 -   將標題存成一個資料框
 -   儲存標題資料框，檔名為ptt.csv
+
+## Hands-on 資料匯出
+
+```{python}
+#| echo: true
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+# step 1 download url
+res = requests.get("https://www.ptt.cc/bbs/Tech_Job/index.html")
+# step 2 parse html
+soup = BeautifulSoup(res.text, "html.parser")
+# step 3 select tags/css
+title_tags = soup.select(".title a")
+print(title_tags)
+# step 4 get the data
+title_list=[] 
+for title in title_tags:
+  title_list.append(title.get_text())
+```
 
 ## 資料匯出 - Recap
 
 -   文字檔 .txt `writelines(內容)`
 -   CSV檔 .csv `pandas_df.to_csv(檔名)`
 -   json檔 .json `pandas_df.to_json(檔名)`
+
+## References
+
+-   [Python for Everybody](https://www.py4e.com/)
+    -   Some contents are from Python for Everybody, and these contents are Copyright 2010- Charles R. Severance (www.dr-chuck.com) of the University of Michigan School of Information and open.umich.edu and made available under a Creative Commons Attribution 4.0 License.
+-   [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+
+# Questions?
