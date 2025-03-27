@@ -1,0 +1,1252 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"3. Data I/O\"\n",
+        "author: \"Yi-Ju Tseng\"\n",
+        "format:\n",
+        "  revealjs:\n",
+        "    slide-number: c/t\n",
+        "    show-slide-number: all\n",
+        "editor: visual\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## 資料分析步驟\n",
+        "\n",
+        "-   **資料匯入與匯出**\n",
+        "-   資料清洗處理\n",
+        "-   資料分析\n",
+        "-   資料呈現與視覺化\n",
+        "\n",
+        "## 資料匯入與匯出\n",
+        "\n",
+        "-   從檔案匯入\n",
+        "-   從Google drive匯入\n",
+        "-   從API匯入\n",
+        "-   網頁爬蟲\n",
+        "-   資料匯出\n",
+        "\n",
+        "## 前置作業\n",
+        "\n",
+        "為了成功從https (加密封包傳輸)下載資料，首先取消證書驗證\n"
+      ],
+      "id": "f160d3fd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "import ssl\n",
+        "ssl._create_default_https_context = ssl._create_unverified_context"
+      ],
+      "id": "a873d89f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# 從檔案匯入\n",
+        "\n",
+        "## 從檔案匯入\n",
+        "\n",
+        "-   .csv 逗號分隔格式檔案\n",
+        "-   .xls Excel格式檔案\n",
+        "-   純文字資料 (無分隔)\n",
+        "-   其他格式\n",
+        "\n",
+        "## .csv 逗號分隔格式檔案\n",
+        "\n",
+        "-   .csv 為逗號分隔格式檔案\n",
+        "-   可用`pandas`的`read_csv(檔案路徑)`功能將檔案匯入\n",
+        "-   檔案路徑可以是本機端路徑，也可以是網址\n"
+      ],
+      "id": "0c17b89d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "import pandas as pd\n",
+        "url = \"https://quality.data.gov.tw//dq_download_csv.php?nid=102775&md5_url=ea56d6e1f2642b2c5c44f9e8b6185d54\"\n",
+        "df_csv = pd.read_csv(url)\n",
+        "df_csv.head()"
+      ],
+      "id": "ce5f07f3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## .csv 逗號分隔格式檔案\n"
+      ],
+      "id": "9c8e6731"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df_csv.head()"
+      ],
+      "id": "9959a2a9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on - .csv檔案匯入\n",
+        "\n",
+        "-   以[上市公司每月營業收入彙總表](https://data.gov.tw/dataset/18420)為例\n",
+        "-   複製`csv`資料下載網址\n",
+        "-   用pandas 的 `read_csv()`函數將檔案匯入\n",
+        "-   匯入後印出前5個row\n",
+        "\n",
+        "![](figures/downloadcsv.png)\n",
+        "\n",
+        "## .xls Excel格式檔案\n",
+        "\n",
+        "-   需要安裝`openpyxl`和`xlrd`套件\n"
+      ],
+      "id": "eb144669"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: false\n",
+        "!pip3 install openpyxl xlrd"
+      ],
+      "id": "a5e787d7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## .xls Excel格式檔案\n",
+        "\n",
+        "-   使用`pandas`套件中的`read_excel(檔案路徑)`功能\n",
+        "-   檔案路徑可以是本機端路徑，也可以是網址\n",
+        "-   可設定`sheet_name`參數指定工作表名稱\n"
+      ],
+      "id": "6661fa59"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "url = 'https://github.com/CGUIM-BigDataAnalysis/BigDataCGUIM/raw/master/EMBA_BigData/Data/%E6%96%B0%E7%AB%B9%E4%B8%8D%E5%8B%95%E7%94%A2.xls'\n",
+        "house = pd.read_excel(url,sheet_name = \"不動產買賣\")  \n",
+        "house.head()"
+      ],
+      "id": "3dbf9867",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## .xls Excel格式檔案\n"
+      ],
+      "id": "a5f0ee3e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "house.head()"
+      ],
+      "id": "1db5809b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on - .xls Excel格式檔案\n",
+        "\n",
+        "-   以[雲林縣水位雨量站](https://data.gov.tw/dataset/145466)為例\n",
+        "-   複製`Excel`資料下載網址\n",
+        "-   用pandas 的 `read_excel()`函數將檔案匯入，記得設定工作表名稱\n",
+        "-   匯入後印出第三個row\n",
+        "\n",
+        "## 純文字資料\n",
+        "\n",
+        "-   使用`oepn(檔名)`開啟檔案\n",
+        "-   使用`檔案物件.read()`讀取內容。**一次取全部，不換行**\n",
+        "-   讀取完畢後，使用`檔案物件.close()`關閉檔案\n"
+      ],
+      "id": "f1c1ab5a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "f = open(\"output_write.txt\")\n",
+        "print(f.read())\n",
+        "f.close()"
+      ],
+      "id": "ea7fc205",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 純文字資料\n",
+        "\n",
+        "-   使用`oepn(檔名)`開啟檔案\n",
+        "-   使用`檔案物件.readlines()`讀取內容。**一次取全部，分行存成list**\n",
+        "-   讀取完畢後，使用`檔案物件.close()`關閉檔案\n"
+      ],
+      "id": "20d5709e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "f = open(\"output_write.txt\")\n",
+        "print(f.readlines())\n",
+        "f.close()"
+      ],
+      "id": "92addb9b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 純文字資料\n",
+        "\n",
+        "-   使用`oepn(檔名)`開啟檔案\n",
+        "-   使用`檔案物件.readline()`讀取內容。**逐行讀**\n",
+        "-   讀取完畢後，使用`檔案物件.close()`關閉檔案\n"
+      ],
+      "id": "2d1806e5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "f = open(\"output_write.txt\")\n",
+        "print(f.readline())\n",
+        "print(f.readline())\n",
+        "f.close()"
+      ],
+      "id": "49a58f83",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 其他格式\n",
+        "\n",
+        "-   以圖片為例，需安裝並載入繪圖用套件`matplotlib`\n",
+        "-   使用`plt.imread(圖片檔案)`載入圖片，為RGB向量\n"
+      ],
+      "id": "0d2657a4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: false\n",
+        "!pip3 install matplotlib"
+      ],
+      "id": "17e6492e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "import matplotlib\n",
+        "import matplotlib.pyplot as plt\n",
+        "im = plt.imread('figures/cgu_logo.png') \n",
+        "print(im)\n",
+        "plt.imshow(im, 'gray')\n",
+        "plt.show()"
+      ],
+      "id": "c2772846",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 其他格式\n",
+        "\n",
+        "-   使用`plt.imshow(向量)`呈現圖片\n",
+        "-   `plt.show()`在視窗中呈現圖片內容\n"
+      ],
+      "id": "38ddf321"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "plt.imshow(im, 'gray')\n",
+        "plt.show()"
+      ],
+      "id": "63e797bf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# 從Google drive匯入\n",
+        "\n",
+        "## 從Google drive匯入 - google 試算表\n",
+        "\n",
+        "-   可直接用`pandas`套件\n",
+        "-   注意原始連結後方，須為文件ID，若有`/edit#gid=0`或`/edit?usp=sharing`字樣，請刪除\n",
+        "-   需要加工連結，在原始連結最後加上`/export?format=csv`\n",
+        "-   如果不是公開資料表，需要授權，可參考`google-api-python-client`套件\n"
+      ],
+      "id": "038045e8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "link=\"https://docs.google.com/spreadsheets/d/1B7tTfBZ6DKIV-OH6rQEz3J1Poh928r08WqAqiIdVeqM\"\n",
+        "csv_link=\"/export?format=csv\"\n",
+        "pd.read_csv(link+csv_link)"
+      ],
+      "id": "53fb2d8d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 從Google drive匯入 - google 試算表\n"
+      ],
+      "id": "ff3f0884"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "pd.read_csv(link+csv_link)"
+      ],
+      "id": "c128f7e7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on - google 試算表匯入\n",
+        "\n",
+        "-   以[Example Spreadsheet](https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms)為例\n",
+        "-   加工連結 (**hint**:上一頁投影片)\n",
+        "-   用pandas 的 `pd.read_csv()`函數將檔案匯入\n",
+        "-   匯入後印出第Home State column\n",
+        "\n",
+        "# 從API匯入\n",
+        "\n",
+        "## 從API匯入\n",
+        "\n",
+        "-   Open Data\n",
+        "-   API (Application programming interfaces)\n",
+        "-   JSON格式檔案\n",
+        "\n",
+        "## Open Data 開放資料\n",
+        "\n",
+        "-   2011年推動開放政府與開放資料 ([維基百科](https://zh.wikipedia.org/wiki/%E9%96%8B%E6%94%BE%E8%B3%87%E6%96%99))\n",
+        "-   不受著作權、專利權，以及其他管理機制所限制，任何人都可以自由出版使用\n",
+        "-   常見的儲存方式為:\n",
+        "    -   `CSV`\n",
+        "    -   `JSON`\n",
+        "    -   `XML`\n",
+        "\n",
+        "## Open Data 開放資料常見平台\n",
+        "\n",
+        "-   [政府資料開放平台](https://data.gov.tw/)\n",
+        "-   [台北市資料大平台](https://data.taipei/)\n",
+        "-   [桃園開放資料](https://data.tycg.gov.tw/)\n",
+        "\n",
+        "## API\n",
+        "\n",
+        "-   應用程式介面\n",
+        "-   **A**pplication **P**rogramming **I**nterfaces\n",
+        "-   為了讓第三方的開發者可以額外開發應用程式來強化他們的產品，推出可以與系統溝通的介面\n",
+        "-   有API輔助可將資料擷取過程自動化\n",
+        "    -   以下載Open Data為例，若檔案更新頻繁，使用手動下載相當耗時\n",
+        "-   [維基百科](https://zh.wikipedia.org/zh-tw/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8E%A5%E5%8F%A3)\n",
+        "\n",
+        "## API - Open Data\n",
+        "\n",
+        "::: columns\n",
+        "::: column\n",
+        "-   [桃園公共自行車即時服務資料](http://data.tycg.gov.tw/opendata/datalist/datasetMeta?oid=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c)資料\n",
+        "-   每日更新\n",
+        "-   不可能每日手動下載\n",
+        "-   提供透過**API**下載的服務\n",
+        "-   透過API下載的資料格式: **JSON格式**\n",
+        ":::\n",
+        "\n",
+        "::: column\n",
+        "-   [桃園公共自行車即時服務資料API資訊](http://data.tycg.gov.tw/opendata/datalist/datasetMeta/outboundDesc?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f)\n",
+        "    -   **資料集ID**: 紀錄資料的基本參數，如包含欄位、更新頻率等\n",
+        "    -   **資料RID**: 資料集\n",
+        "    -   擷取範例\n",
+        ":::\n",
+        ":::\n",
+        "\n",
+        "## JSON格式檔案\n",
+        "\n",
+        "-   JSON (**J**ava**s**cript **O**bject **N**otation)\n",
+        "-   輕量級的資料交換語言\n",
+        "-   From **a**pplication **p**rogramming **i**nterfaces (APIs)\n",
+        "-   JavaScript、Java、Node.js應用\n",
+        "-   一些NoSQL資料庫用JSON儲存資料：**MongoDB**\n",
+        "-   [Wiki](http://en.wikipedia.org/wiki/JSON)\n",
+        "\n",
+        "![](figures/json.png){width=\"383\"}\n",
+        "\n",
+        "## JSON檔案匯入\n",
+        "\n",
+        "-   從網路載資料，需要安裝`requests`套件\n",
+        "-   處理json資料，需要安裝與載入`json`套件\n"
+      ],
+      "id": "bb34e864"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: false\n",
+        "!pip3 install json requests"
+      ],
+      "id": "85d65f35",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "import json, requests"
+      ],
+      "id": "eaed9677",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## JSON檔案匯入\n",
+        "\n",
+        "-   API網址參考[臺中市公共自行車(YouBike2.0)](https://opendata.taichung.gov.tw/search/6e38eb56-0e9a-4b9e-806d-23cd35d44d6b)\n",
+        "-   點選API獲取相關資訊\n",
+        "-   使用`requests`套件的`get(網址)`擷取資料\n",
+        "-   本API好像會檔短時間內擷取多次，因此放入`params = {'param':'1'}`以及`headers = {'Connection':'close'}`設定\n",
+        "-   最後將使用`回傳結果.json()`，將檔案轉成JSON格式\n"
+      ],
+      "id": "a2e7c324"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "#| echo: true\n",
+        "url=\"https://datacenter.taichung.gov.tw/swagger/OpenData/86dfad5c-540c-4479-bb7d-d7439d34eeb1\"\n",
+        "response = requests.get(url, params = {'param':'1'}, headers = {'Connection':'close'})\n",
+        "data = response.json()  # Convert the response to JSON"
+      ],
+      "id": "e2e7c8f9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## JSON檔案匯入\n",
+        "\n",
+        "探索資料，使用`.keys()`查看keys\n"
+      ],
+      "id": "130d1804"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "type(data)"
+      ],
+      "id": "57ad9a92",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "data.keys()"
+      ],
+      "id": "5575d191",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "type(data[\"retVal\"])"
+      ],
+      "id": "442abf56",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## JSON檔案匯入\n",
+        "\n",
+        "探索資料，發現是dist (data)中retVal key儲存含有資料的list\n"
+      ],
+      "id": "8d2a7e01"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "data[\"retVal\"][0:2]"
+      ],
+      "id": "6c2c9ef7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## JSON檔案匯入\n",
+        "\n",
+        "探索資料，發現是dist (data)中retVal key儲存含有資料的list\n"
+      ],
+      "id": "972b8be4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "data[\"retVal\"][0]"
+      ],
+      "id": "73a34714",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on - JSON檔案匯入練習\n",
+        "\n",
+        "-   練習用資料：[YouBike2.0臺北市公共自行車即時資訊](https://data.gov.tw/dataset/137993)\n",
+        "-   API地址[在此](https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json)\n",
+        "-   使用檔案匯入**範例**，將資料匯入Python中\n",
+        "    -   提示：設定url\n",
+        "-   找到資料的儲存處，並將答案print出\n",
+        "\n",
+        "## 從API匯入 - Recap\n",
+        "\n",
+        "-   Open Data\n",
+        "-   API (Application programming interfaces)\n",
+        "-   JSON格式檔案 `requests.get()`下載，`.json`轉型\n",
+        "-   用`type()`查看資料類別，`keys()`查看資料擷取方法，並印出來試試看\n",
+        "\n",
+        "# 網頁爬蟲 Webscraping\n",
+        "\n",
+        "## 網頁爬蟲 Webscraping\n",
+        "\n",
+        "-   不是每個網站都提供API\n",
+        "-   人工複製貼上?!\n",
+        "-   程式化的方式擷取網頁資料: **網頁爬蟲（Webscraping）**（[Webscraping Wiki](http://en.wikipedia.org/wiki/Web_scraping)）\n",
+        "-   可能耗費很多網頁流量和資源 －很可能被鎖IP\n",
+        "-   使用`beautifulsoup4` 套件輔助\n",
+        "\n",
+        "## 網頁爬蟲 Webscraping-beautifulsoup4\n",
+        "\n",
+        "需要先安裝`beautifulsoup4`以及`requests`套件。\n"
+      ],
+      "id": "60a922db"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: false\n",
+        "!pip3 install beautifulsoup4"
+      ],
+      "id": "597544f6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   擷取條件的撰寫會因網頁語法不同而有差異\n",
+        "-   使用**Google Chrome開發工具**輔助觀察擷取資料的條件\n",
+        "    -   或是按右鍵，點選“檢查”\n",
+        "    -   或使用**SelectorGadget**輔助\n",
+        "-   觀察需要擷取的資料所在HTML片段\n",
+        "    -   css class, id 等\n",
+        "\n",
+        "## 即時股價爬取\n",
+        "\n",
+        "-   [Yahoo 股市](https://tw.stock.yahoo.com/)\n",
+        "-   [Yahoo 股市 - 台積電](https://tw.stock.yahoo.com/quote/2330)\n"
+      ],
+      "id": "553a1b71"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "from bs4 import BeautifulSoup\n",
+        "import requests\n",
+        "StockUrl = \"https://tw.stock.yahoo.com/quote/2330\"\n",
+        "res = requests.get(StockUrl)\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")"
+      ],
+      "id": "22d2d33b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "price = soup.select(\".Fz\\(32px\\)\")\n",
+        "price[0].get_text()"
+      ],
+      "id": "ba0bcdad",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 下載html\n",
+        "\n",
+        "-   使用`requests`套件的`get(網址)`函數，輸入網址，將網頁載入python分析環境。\n",
+        "-   成功載入網頁後，針對該物件，使用`.text`取得網頁原始碼 (.html)\n"
+      ],
+      "id": "1b360e63"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "StockUrl = \"https://tw.stock.yahoo.com/quote/2330\"\n",
+        "res = requests.get(StockUrl)\n",
+        "res.text[0:1000] ## print first 1000 chars"
+      ],
+      "id": "833b44a2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 解析html\n",
+        "\n",
+        "-   使用`BeautifulSoup`套件提供的解析方法`BeautifulSoup(html檔案,格式)`\n",
+        "    -   輸入剛剛載回來的html檔案`res.text`，以及設定格式`\"html.parser\"`，完成HTML解析\n",
+        "-   解析後可使用`解析後內容.prettify`取得排版後的網頁原始碼\n"
+      ],
+      "id": "765da240"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")"
+      ],
+      "id": "97bdbbb8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 搜尋所需節點 -1\n",
+        "\n",
+        "-   `find(節點條件)`:\n",
+        "    -   取得第一個符合條件的節點 (`<>`內的內容)\n",
+        "-   `find_all(節點條件)`\n",
+        "    -   取得所有符合條件的節點 (`<>`內的內容)\n",
+        "-   `select_one()`\n",
+        "    -   取得第一個符合CSS條件的節點 (`class` or `id`等屬性)\n",
+        "-   `select()`\n",
+        "    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)\n",
+        "\n",
+        "## 即時股價爬取 - 搜尋所需節點 -1\n",
+        "\n",
+        "範例：class 包含 `Fz\\(32px\\)`\n",
+        "\n",
+        "-   `select()`\n",
+        "    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)\n",
+        "-   `class=`可用`.`代表\n",
+        "-   `id=`可用`#`代表\n"
+      ],
+      "id": "13e2e332"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "price = soup.select(\".Fz\\(32px\\)\")\n",
+        "price"
+      ],
+      "id": "34889337",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 取出需要的資料 -1\n",
+        "\n",
+        "-   `.get_text()`可抓取節點內文字\n",
+        "-   `.get(\"屬性名稱\")`可抓取屬性內容\n"
+      ],
+      "id": "6a147dfe"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "price[0].get_text()"
+      ],
+      "id": "828db23d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 搜尋所需節點 -2\n",
+        "\n",
+        "範例：class 包含 `price-detail-item`\n",
+        "\n",
+        "-   `select()`\n",
+        "    -   取得所有符合CSS條件的節點 (`class` or `id`等屬性)\n"
+      ],
+      "id": "6d3a55f7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "price_detail = soup.select(\".price-detail-item\")\n",
+        "price_detail"
+      ],
+      "id": "a4e33037",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 取出需要的資料 -2\n",
+        "\n",
+        "-   `.get_text()`可抓取節點內文字\n",
+        "-   `.get(\"屬性名稱\")`可抓取屬性內容\n"
+      ],
+      "id": "9b40e806"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "len(price_detail)"
+      ],
+      "id": "f4904bcf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "for price in price_detail:\n",
+        "  print(price.get_text())"
+      ],
+      "id": "3ddb140f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 搜尋所需節點 -3\n",
+        "\n",
+        "範例：class 包含 `StretchedBox`\n",
+        "\n",
+        "-   `select()`: 取得所有符合CSS條件的節點 (`class` or `id`等屬性)\n"
+      ],
+      "id": "ac3a0a1a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "news = soup.select(\".mega-item-header-link\")\n",
+        "news"
+      ],
+      "id": "2718d313",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 取出需要的資料 -3\n",
+        "\n",
+        "-   `.get_text()`可抓取節點內文字\n",
+        "-   `.get(\"屬性名稱\")`可抓取屬性內容\n"
+      ],
+      "id": "e5f31d49"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "len(news)"
+      ],
+      "id": "dd74ef4f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "for title_click in news:\n",
+        "  print(title_click.get_text())"
+      ],
+      "id": "107e849d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on 爬蟲練習\n",
+        "\n",
+        "-   [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)\n",
+        "-   試著爬出所有**標題**\n",
+        "-   爬出的第三個標題是？\n",
+        "-   提示：\n",
+        "    -   下載html `requests.get(網址)`\n",
+        "    -   解析html `BeautifulSoup(下載網頁.text, \"html.parser\")`\\\n",
+        "    -   搜尋所需節點 `find(節點)`, `select(css條件)`\n",
+        "    -   取出需要的資料 `get_text()`, `get(屬性名稱)`\n",
+        "\n",
+        "## 即時股價爬取 - 取出需要的資料 -4\n",
+        "\n",
+        "-   `.get_text()`可抓取節點內文字\n",
+        "-   `.get(\"屬性名稱\")`可抓取屬性內容\n"
+      ],
+      "id": "121821dc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "for title_click in news:\n",
+        "  print(title_click.get(\"href\"))"
+      ],
+      "id": "5e057418",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 爬連結內的新聞\n",
+        "\n",
+        "-   得到連結後，重複上述步驟\n",
+        "    -   下載html `requests.get(網址)`\n",
+        "    -   解析html `BeautifulSoup(下載網頁.text, \"html.parser\")`\\\n",
+        "    -   搜尋所需節點 `find(節點)`, `select(css條件)`\n",
+        "    -   取出需要的資料 `get_text()`, `get(屬性名稱)`\n",
+        "\n",
+        "## 即時股價爬取 - 爬連結內的新聞\n",
+        "\n",
+        "首先取得連結list。\n",
+        "\n",
+        "補充內容：\n",
+        "\n",
+        "-   `sequence物件.append()`可新增內容至sequence中\n"
+      ],
+      "id": "054bb31e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "url_list = []\n",
+        "title_list = []\n",
+        "for title_click in news:\n",
+        "  url_list.append(title_click.get(\"href\"))\n",
+        "  title_list.append(title_click.get_text())\n",
+        "print(url_list)"
+      ],
+      "id": "5b6641fa",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 爬連結內的新聞\n",
+        "\n",
+        "以第一個新聞連結為例，下載html後，重複步驟，取得本文\n"
+      ],
+      "id": "9b943f67"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "res = requests.get(url_list[0])\n",
+        "soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "news_full = soup.select_one(\".caas-body\")\n",
+        "print(\"標題: \"+title_list[0] +\", 內文:\" + news_full.get_text())"
+      ],
+      "id": "2e1771e4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 爬連結內的新聞\n",
+        "\n",
+        "用`for`迴圈一次做完所有連結\n"
+      ],
+      "id": "ff7f766c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "for title_click in news:\n",
+        "  title = title_click.get_text()\n",
+        "  url = title_click.get(\"href\")\n",
+        "  res = requests.get(url)\n",
+        "  soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "  news_full = soup.select_one(\".caas-body\")\n",
+        "  print(\"標題: \"+title +\", 內文:\" + news_full.get_text())"
+      ],
+      "id": "4f64a283",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 爬連結內的新聞\n",
+        "\n",
+        "用`for`迴圈一次做完所有連結，並轉成pandas data frame\n"
+      ],
+      "id": "10ff01c1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "newdf = []\n",
+        "for title_click in news:\n",
+        "  title = title_click.get_text()\n",
+        "  url = title_click.get(\"href\")\n",
+        "  res = requests.get(url)\n",
+        "  soup = BeautifulSoup(res.text, \"html.parser\")\n",
+        "  news_full = soup.select_one(\".caas-body\")\n",
+        "  add_news = pd.DataFrame({\"title\":[title],\"content\":[news_full.get_text()]})\n",
+        "  newdf.append(add_news)\n",
+        "\n",
+        "newdf_pd=pd.concat(newdf)\n",
+        "newdf_pd"
+      ],
+      "id": "2290b53c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 即時股價爬取 - 爬連結內的新聞\n"
+      ],
+      "id": "a2d7dfc6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "newdf_pd"
+      ],
+      "id": "e8372005",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on 爬蟲練習\n",
+        "\n",
+        "-   [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)\n",
+        "-   試著爬出**最新的一頁**、**前一頁**以及**前前一頁**的所有**標題**和**內文網址**\n",
+        "-   總共爬出幾個標題？\n",
+        "-   提示：\n",
+        "    -   下載html `requests.get(網址)`\n",
+        "    -   解析html `BeautifulSoup(下載網頁.text, \"html.parser\")`\\\n",
+        "    -   搜尋所需節點 `find(節點)`, `select(css條件)`\n",
+        "    -   取出需要的資料 `get_text()`, `get(屬性名稱)`\n",
+        "-   一頁一頁爬 or for 迴圈都可以\n",
+        "\n",
+        "## 網頁爬蟲 進階版\n",
+        "\n",
+        "-   滾動式等動態網頁網頁，如剛剛的新聞\n",
+        "    -   [Python 進階爬蟲 by Andy Chiang](https://hackmd.io/@AndyChiang/DynamicCrawler)\n",
+        "\n",
+        "## 網頁爬蟲 再想想？\n",
+        "\n",
+        "-   其實... 很多資料有其他存取方式，像API\n",
+        "-   隱私問題 （OkCupid事件）\n",
+        "    -   [70,000 OkCupid Users Just Had Their Data Published](https://motherboard.vice.com/en_us/article/70000-okcupid-users-just-had-their-data-published)\n",
+        "\n",
+        "## 網頁爬蟲 Webscraping - Recap\n",
+        "\n",
+        "-   下載html `requests.get(網址)`\n",
+        "-   解析html `BeautifulSoup(下載網頁.text, \"html.parser\")`\n",
+        "-   搜尋所需節點 `find(節點)`, `select(css條件)`\n",
+        "-   取出需要的資料 `get_text()`, `get(屬性名稱)`\n",
+        "\n",
+        "# 資料匯出\n",
+        "\n",
+        "## 資料匯出\n",
+        "\n",
+        "-   文字檔 .txt\n",
+        "-   CSV檔 .csv\n",
+        "-   json檔 .json\n",
+        "\n",
+        "## 資料匯出 - 文字檔 .txt\n",
+        "\n",
+        "-   首先使用`open(檔案名稱)`開啟檔案\n",
+        "-   使用`檔案.writelines(資料)`寫入內容\n",
+        "-   `檔案.writelines(資料)`的資料可以是列表\n"
+      ],
+      "id": "32f2a115"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "path = 'output_writeline.txt'\n",
+        "f = open(path, 'w')\n",
+        "lines1 = ['Hello World', '123', '456', '789']\n",
+        "lines2 = ['Hello World\\n', '123\\n', '456\\n', '789\\n']\n",
+        "f.writelines(lines1)\n",
+        "f.writelines(lines2)\n",
+        "f.close()"
+      ],
+      "id": "4653c0f5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 資料匯出 - 文字檔 .txt\n",
+        "\n",
+        "-   首先使用`open(檔案名稱)`開啟檔案\n",
+        "-   使用`檔案.write(資料)`寫入內容\n",
+        "-   `檔案.write(資料)`的資料必須是文字\n"
+      ],
+      "id": "fdc35fcd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "path = 'output_write.txt'\n",
+        "f = open(path, 'w')\n",
+        "for t in lines1:\n",
+        "  f.write(t)\n",
+        "  \n",
+        "for t in lines2:\n",
+        "  f.write(t)\n",
+        "\n",
+        "f.close()"
+      ],
+      "id": "f79c935c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 資料匯出 - CSV檔 .csv\n",
+        "\n",
+        "使用`pandas` Data frame物件中的`.to_csv(檔名)`儲存檔案。\n"
+      ],
+      "id": "f8dd109a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "newdf_pd.to_csv(\"news.csv\")"
+      ],
+      "id": "285ab550",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 資料匯出 - json檔 .json\n",
+        "\n",
+        "使用`pandas` Data frame物件中的`.to_json(檔名)`儲存檔案。\n",
+        "\n",
+        "DataFrame中一定要有index\n"
+      ],
+      "id": "190d4da6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "newdf_pd = newdf_pd.set_index('title')\n",
+        "newdf_pd.to_json(\"news_json.csv\")\n",
+        "newdf_pd"
+      ],
+      "id": "d1e04435",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Hands-on 資料匯出\n",
+        "\n",
+        "-   [Ptt Tech_Job 版](https://www.ptt.cc/bbs/Tech_Job/index.html)\n",
+        "-   試著爬出最新一頁的所有**標題**\n",
+        "-   將標題存成一個資料框\n",
+        "-   儲存標題資料框，檔名為ptt.csv\n",
+        "\n",
+        "## 資料匯出 - Recap\n",
+        "\n",
+        "-   文字檔 .txt `writelines(內容)`\n",
+        "-   CSV檔 .csv `pandas_df.to_csv(檔名)`\n",
+        "-   json檔 .json `pandas_df.to_json(檔名)`"
+      ],
+      "id": "31ff7de2"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Library/Frameworks/Python.framework/Versions/3.11/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
