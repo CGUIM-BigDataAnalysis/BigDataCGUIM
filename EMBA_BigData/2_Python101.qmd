@@ -39,10 +39,12 @@ print(var2+var3)
     -   會變色的基本上都是保留字，如`True`, `False`等，在Python有功能的字串
 -   只能由數字`0-9`、字母`A-Z` `a-z`，或是底線組成`_`，且不可以數字開頭
 -   大小寫敏感
-
 ```{python}
 #| echo: true
 True
+```
+```{python}
+#| echo: true
 False
 ```
 
@@ -143,7 +145,7 @@ print(b)
 
 ## 日期 (date)
 
-Python中並無內建的日期型態，必須使用`datetime`套件，使用前要記得載入（import）
+Python中並無內建的日期型態，必須使用`datetime`套件，使用前要記得載入（`import`）
 
 ```{python}
 #| echo: true
@@ -411,7 +413,7 @@ A collection allows us to put many values in a single “variable”
 -   separated by commas`,`
 -   element can be *any* Python object
 -   can be empty
--   可作運算
+-   可作簡單運算 (numpy array還是最佳解)
 
 ```{python}
 #| echo: true
@@ -477,12 +479,12 @@ print(friends[1:2])
 
 ```{python}
 #| echo: true
-print(friends[:2])
+print(friends[:2]) #0:2
 ```
 
 ```{python}
 #| echo: true
-print(friends[:1])
+print(friends[:1]) #0:1
 ```
 
 ## 範圍 (range)
@@ -574,7 +576,7 @@ print('Done!')
 ## list 新增修改
 
 -   Lists are “mutable”
-    -   we can change an element of a list using the index operator
+    -   we can change an element of a list using the **index operator**
 
 ```{python}
 #| echo: true
@@ -743,7 +745,10 @@ print(dist1.keys())
 #| echo: true
 print(dist1)
 ```
-
+```{python}
+#| echo: true
+print(dist1.keys())
+```
 ```{python}
 #| echo: true
 print(dist1.values())
@@ -757,7 +762,14 @@ print(dist1.values())
 #| echo: true
 print(dist1)
 ```
-
+```{python}
+#| echo: true
+print(dist1.keys())
+```
+```{python}
+#| echo: true
+print(dist1.values())
+```
 ```{python}
 #| echo: true
 print(dist1.items())
