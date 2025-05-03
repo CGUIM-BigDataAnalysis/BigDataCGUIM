@@ -80,7 +80,6 @@ df.dtypes
 df['concentration'] = pd.to_numeric(df['concentration'].replace("x",np.nan))
 ```
 
-
 ```{python}
 # Parse String To DateTime
 df['DateTime']=pd.to_datetime(df['monitordate'],

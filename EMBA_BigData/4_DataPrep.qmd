@@ -175,6 +175,27 @@ df1[0:2]
 :::
 :::
 
+
+## 子集Subset - 二維資料 取row & column
+
+資料框物件名稱.`loc[row,column]`
+
+::: columns
+::: column
+```{python}
+#| echo: true
+df1
+```
+:::
+
+::: column
+```{python}
+#| echo: true
+df1.loc[0:2,"Name"]
+```
+:::
+:::
+
 ## 子集Subset - Recap
 
 -   一維資料
@@ -185,6 +206,7 @@ df1[0:2]
     -   column: 資料框物件`[[`欄位名稱`]]`：取出資料框
     -   row: 資料框物件`[`row slice`]` (ex. 資料框物件`[2:10]`)
     -   row: 資料框物件`.head()`, 資料框物件`.tail()`函數
+    -   row and col: 資料框物件名稱`.loc[row,column]`
 
 ## 資料清洗與處理
 
