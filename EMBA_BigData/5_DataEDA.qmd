@@ -15,7 +15,6 @@ editor: visual
 -   **資料分析**
 -   資料呈現與視覺化
 
-
 ## 資料分析大綱
 
 -   什麼是探索式資料分析
@@ -35,37 +34,34 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 ## 什麼是探索式資料分析
 
-- 探索式資料分析 (**E**xploratory **D**ata **A**nalysis)
-- 在資料量 大/雜/髒 的時候，探索式資料分析非常重要
-- 運用**視覺化**、**基本的統計**等工具，反覆的探索**資料特性**，獲取資料所包含的資訊、結構和特點
-- 在進行複雜或嚴謹的分析之前，必須要對資料有更多認識，才能訂定**對的資料分析方向**
-- 通常**不需要**嚴謹的假設和細節呈現
-
+-   探索式資料分析 (**E**xploratory **D**ata **A**nalysis)
+-   在資料量 大/雜/髒 的時候，探索式資料分析非常重要
+-   運用**視覺化**、**基本的統計**等工具，反覆的探索**資料特性**，獲取資料所包含的資訊、結構和特點
+-   在進行複雜或嚴謹的分析之前，必須要對資料有更多認識，才能訂定**對的資料分析方向**
+-   通常**不需要**嚴謹的假設和細節呈現
 
 ## 探索式資料分析
 
-- 分析各變數間的**關聯性**，看是否有預料之外的有趣發現
-- 觀察資料內容是否符合預期，若否，檢查資料**是否有誤**
-- 檢查資料是否符合分析前的假設
+-   分析各變數間的**關聯性**，看是否有預料之外的有趣發現
+-   觀察資料內容是否符合預期，若否，檢查資料**是否有誤**
+-   檢查資料是否符合分析前的假設
 
 透過探索式分析來**調整分析的方向**，減少因分析方向錯誤所造成的時間浪費。
 
 ## 探索式資料分析
 
-- 圖形化Graphical
-    - 單變量Univariate
-    - 雙變量Bivariate
-    - 多變量Multivariate
-    
-- 量化Quantitative (基礎統計)
-    - 單變量Univariate
-    - 雙變量Bivariate
-    - 多變量Multivariate
+-   圖形化Graphical
+    -   單變量Univariate
+    -   雙變量Bivariate
+    -   多變量Multivariate
+-   量化Quantitative (基礎統計)
+    -   單變量Univariate
+    -   雙變量Bivariate
+    -   多變量Multivariate
 
 ## 圖形化的分析
 
 包括做圖與列表，將會在下章節介紹，本章節著重於量化的分析方式。
-
 
 ## 資料分析大綱
 
@@ -80,14 +76,15 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 資料初步統計，量化的分析方式可包含
 
-- 計算集中趨勢 Central Tendency
-    - 平均值 Mean `資料序列.mean()` or `st.mean(資料序列)`
-    - 中位數 Median `資料序列.median()` or `st.median(資料序列)`
+-   計算集中趨勢 Central Tendency
+    -   平均值 Mean `資料框欄位.mean()` or `st.mean(資料框欄位)`
+    -   中位數 Median `資料框欄位.median()` or `st.median(資料框欄位)`
 
-    
+`st`為`import statistics as st`取名的套件縮寫
+
 ## 單變量量化分析- 集中趨勢
 
-```{python} 
+```{python}
 #| echo: true
 import statistics as st
 import pandas as pd
@@ -97,37 +94,38 @@ print(data)
 
 ## 單變量量化分析- 集中趨勢
 
-平均值 Mean `資料序列.mean()` or `st.mean(資料序列)`
+平均值 Mean `資料框欄位.mean()` or `st.mean(資料框欄位)`
 
-```{python} 
+```{python}
 #| echo: true
 st.mean(data['height'])
 ```
-```{python} 
+
+```{python}
 #| echo: true
 data['height'].mean()
 ```
 
-
 ## 單變量量化分析- 集中趨勢
 
 -   The pandas series’s function can deal with multiple columns
-    -   get multiple columns using `[[column 1,column 2]]`
+    -   得到多個欄位的資料可用`data[[column 1,column 2]]`，`data`為資料框名稱
 
-```{python} 
+```{python}
 #| echo: true
 data[['height','weight']].mean()
 ```
 
 ## 單變量量化分析- 集中趨勢
 
-中位數 Median `資料序列.median()` or `st.median(資料序列)`
+中位數 Median `資料框欄位.median()` or `st.median(資料框欄位)`
 
-```{python} 
+```{python}
 #| echo: true
 st.median(data['height'])
 ```
-```{python} 
+
+```{python}
 #| echo: true
 data['height'].median()
 ```
@@ -136,53 +134,51 @@ data['height'].median()
 
 計算資料分散程度可包含
 
-- 最小值 Min `min()`
-- 最大值 Max `max()`
-- 範圍 Range `range()`
-- 四分位差 Quartiles `quantile()`
-- 變異數 Variance `st.var(資料)` or `pandas資料序列.var()`
-- 標準差 Standard deviation `st.stdev(資料)` or `pandas資料序列.std()`
-    
+-   最小值 Min `資料框欄位.min()`
+-   最大值 Max `資料框欄位.max()`
+-   四分位差 Quartiles `資料框欄位.quantile()`
+-   變異數 Variance `st.var(資料框欄位)` or `pandas資料框欄位.var()`
+-   標準差 Standard deviation `st.stdev(資料框欄位)` or `pandas資料框欄位.std()`
+
 ## 單變量量化分析- 分散程度
 
-::: columns
+::::: columns
 ::: column
-
-```{python} 
+```{python}
 #| echo: true
 st.variance(data['height'])
 ```
 
-```{python} 
+```{python}
 #| echo: true
 data['height'].var()
 ```
 :::
+
 ::: column
-```{python} 
+```{python}
 #| echo: true
 st.stdev(data['height'])
 ```
 
-```{python} 
+```{python}
 #| echo: true
 data['height'].std()
 ```
 :::
-:::
+:::::
 
 ## 單變量量化分析- 分散程度
 
-
 -   `st.quantiles(pandas series, n=the number of partitions)`
--   `pandas資料序列.quantile(percentiles you want to get)`
+-   `pandas資料框欄位.quantile(percentiles you want to get)`
 
-```{python} 
+```{python}
 #| echo: true
 st.quantiles(data['height'],n=4)
 ```
 
-```{python} 
+```{python}
 #| echo: true
 data['height'].quantile([0.25,0.5,0.75])
 ```
@@ -191,25 +187,26 @@ data['height'].quantile([0.25,0.5,0.75])
 
 -   It is impossible to get all the statistics one by one
 -   pandas series provide a warp up function
-    -   `pandas資料序列.describe()`
-    
-```{python} 
+    -   `pandas資料框欄位.describe()`
+
+```{python}
 #| echo: true
 data['height'].describe()
 ```
 
 ## 單變量量化分析- 一次搞定
 
-```{python} 
+```{python}
 #| echo: true
 print(data.describe())
 ```
 
 ## Hands-on 資料清理
+
 -   以[房屋實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)為例，首先載入[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)
 -   可明顯看出除了中文欄位名稱外，第一個row是英文欄位名稱，而不是資料
 
-```{python} 
+```{python}
 #| echo: true
 house = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv")
 print(house)
@@ -217,30 +214,29 @@ print(house)
 
 ## Hands-on 資料清理
 
--   更新資料框，使用row做子集的方式`資料框[row slice]`，將第一個row刪除
+-   更新資料框，使用row做子集的方式`資料框變數[row slice]`，將第一個row刪除
 
-```{python} 
+```{python}
 #| echo: true
 house=house[1:]
 print(house)
 ```
 
-##  Hands-on 資料清理
+## Hands-on 資料清理
 
-使用`資料框.info()`查看資料框內容
+使用`資料框變數.info()`查看資料框內容
 
-```{python} 
+```{python}
 #| echo: true
 house.info()
 ```
 
-##  Hands-on 單變量量化分析
+## Hands-on 單變量量化分析
 
 -   分析[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)資料
 -   試著統計平均**總價元**
 -   試著統計平均**單價元平方公尺**
--   Hint: 資料型態可能需要調整(`pd.to_numeric(pandas資料序列)`)
-
+-   Hint: 資料型態需要調整(`pd.to_numeric(pandas資料框欄位)`)
 
 ## 資料分析大綱
 
@@ -253,24 +249,25 @@ house.info()
 
 ## 雙變量量化分析
 
-- 列聯表 Crosstabs 
-    -   `pd.crosstab(pandas資料序列1,pandas資料序列2)`
-- 相關性 Correlation 
-    -   `pandas資料序列.corr(另一個pandas資料序列)`
+-   列聯表 Crosstabs
+    -   `pd.crosstab(pandas資料框欄位1,pandas資料框欄位2)`，`pd`為套件縮寫
+-   相關性 Correlation
+    -   `pandas資料框欄位.corr(另一個pandas資料框欄位)`
 
 ## 資料前處理 - 1/3
 
-為了後續範例，新增一個demo用資料，**高打擊率**，定義為打擊率>0.274
+為了後續範例，新增一個demo用資料，**高打擊率**，定義為打擊率\>0.274
 
-```{python} 
+```{python}
 #| echo: true
 data['bavg']>0.274
 ```
+
 ## 資料前處理 - 2/3
 
 用`資料框.assign(欄位名稱=欄位資料)`新增新的欄位
 
-```{python} 
+```{python}
 #| echo: true
 data = data.assign(high_rate=pd.Series(data['bavg']>0.274).values)
 ```
@@ -279,7 +276,7 @@ data = data.assign(high_rate=pd.Series(data['bavg']>0.274).values)
 
 查看結果
 
-```{python} 
+```{python}
 #| echo: true
 print(data)
 ```
@@ -289,9 +286,9 @@ print(data)
 -   列連表多用在類別與類別資料的關係分析
 -   **左右撇子**與**打擊率高還是低**的關係
 
-`pd.crosstab(pandas資料序列1,pandas資料序列2)`
+`pd.crosstab(pandas資料框欄位1,pandas資料框欄位2)`，`pd`為套件縮寫
 
-```{python} 
+```{python}
 #| echo: true
 pd.crosstab(data['handedness'],data['high_rate'])
 ```
@@ -301,23 +298,23 @@ pd.crosstab(data['handedness'],data['high_rate'])
 -   相關性多用在連續與連續資料的關係分析
 -   **全壘打數**跟**體重**的關聯性（相關係數）
 
-`pandas資料序列.corr(另一個pandas資料序列)`
+`pandas資料框欄位.corr(另一個pandas資料框欄位)`
 
-```{python} 
+```{python}
 #| echo: true
 data['HR'].corr(data['weight'])
 ```
 
-```{python} 
+```{python}
 #| echo: true
 data['HR'].corr(data['height'])
 ```
-##  Hands-on 雙變量量化分析
+
+## Hands-on 雙變量量化分析
 
 -   分析[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)資料
 -   試著統計平均**總價元**和**單價元平方公尺**的相關性
--   Hint: 資料型態可能需要調整(`pd.to_numeric(pandas資料序列)`)
-
+-   Hint: 資料型態需要調整(`pd.to_numeric(pandas資料框欄位)`)
 
 ## 資料分析大綱
 
@@ -330,61 +327,56 @@ data['HR'].corr(data['height'])
 
 ## 量化的分析方式 w/ Python
 
-- 大多可用內建函數完成計算
-- 但是在探索式分析時，常常需要**資料分組**
-    - 觀察**男性**和**女性**的血壓差異
-    - **A隊**與**B隊**的三分球命中率差異
-    - **中鋒**和**後衛**的助攻次數
-    - ...等
-- 若只用基本的內建函數計算，相當耗時
+-   大多可用內建函數完成計算
+-   但是在探索式分析時，常常需要**資料分組**
+    -   觀察**男性**和**女性**的血壓差異
+    -   **A隊**與**B隊**的三分球命中率差異
+    -   **中鋒**和**後衛**的助攻次數
+    -   ...等
+-   若只用基本的內建函數計算，相當耗時
     -   必須搭配pandas 內的 `groupby`
-
 
 ## 分組 pandas資料框.groupby()
 
 以[房屋實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)為例，首先先[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)
 
-```{python} 
+```{python}
 #| echo: true
 house = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv")
 house = house[1:]
 print(house)
 ```
 
-
 ## 分組 pandas資料框.groupby()
 
--   `pandas資料框.groupby(by=分組依據)`設定分組依據
+-   `pandas資料框.groupby(by=分組依據欄位)`設定分組依據
 -   計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**總價元**
--   `pandas資料序列.mean()`可知平均，`pandas資料框.size()`可知資料筆數
+-   `pandas資料框欄位.mean()`可知平均，`pandas資料框.size()`可知資料筆數
 
-
-```{python} 
+```{python}
 #| echo: true
 house = house.assign(總價元n=pd.to_numeric(house["總價元"]))
 house.groupby(by='鄉鎮市區')['總價元n'].mean()
 ```
+
 ## 分組 pandas資料框.groupby()
 
--   `pandas資料序列.mean()`可知平均，`pandas資料框.size()`可知資料筆數
+-   `pandas資料框欄位.mean()`可知平均，`pandas資料框.size()`可知資料筆數
 
-```{python} 
+```{python}
 #| echo: true
 house.groupby(by='鄉鎮市區').size()
 ```
-
-
-
 
 ## 分組 pandas資料框.groupby()
 
 能不能一起處理？
 
-- `pandas資料框.groupby(by=分組依據)`設定分組依據
-- 計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**總價元**
+-   `pandas資料框.groupby(by=分組依據)`設定分組依據
+-   計算各**鄉鎮市區**（以鄉鎮市區作為分組依據）的**交易筆數**、**總價元**
 -   `pandas資料框.groupby(by=分組依據)[欄位名稱].agg(["計算1","計算2"])`
 
-```{python} 
+```{python}
 #| echo: true
 house.groupby(by='鄉鎮市區')['總價元n'].agg(["size","mean"])
 ```
@@ -393,19 +385,18 @@ house.groupby(by='鄉鎮市區')['總價元n'].agg(["size","mean"])
 
 -   `pandas資料框.groupby(by=分組依據)[欄位名稱].agg(["計算1","計算2"])`
 
-```{python} 
+```{python}
 #| echo: true
 house.groupby(by='鄉鎮市區')['總價元n'].agg(["size","mean"])
 ```
 
-
 ## 分組 pandas資料框.groupby()
 
-- 可設定**多個**分組依據
-- 計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的**交易筆數**以及**平均總價元**
+-   可用欄位名稱的list設定**多個**分組依據
+-   計算各**鄉鎮市區**各**交易標的**（以鄉鎮市區和交易標的作為分組依據）的**交易筆數**以及**平均總價元**
 -   `pandas資料框.groupby(by=[分組依據1,分組依據2])[欄位名稱].agg(["計算1","計算2"])`
 
-```{python} 
+```{python}
 #| echo: true
 house.groupby(by=['鄉鎮市區','交易標的'])['總價元n'].agg(["size","mean"])
 ```
@@ -414,31 +405,28 @@ house.groupby(by=['鄉鎮市區','交易標的'])['總價元n'].agg(["size","mea
 
 -   `pandas資料框.groupby(by=[分組依據1,分組依據2])[欄位名稱].agg(["計算1","計算2"])`
 
-```{python} 
+```{python}
 #| echo: true
 print(house.groupby(by=['鄉鎮市區','交易標的'])['總價元n'].agg(["size","mean"]))
 ```
 
 ## Hands-on 探索式資料分析 綜合練習
 
-
 以[房屋實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)為例，首先先載入[桃園市不動產買賣](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv)資料
 
-```{python} 
+```{python}
 #| echo: true
 import pandas as pd
 house = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv")
 house = house[1:]
 ```
 
-
 ## Hands-on 探索式資料分析 綜合練習
 
-- 試著用“子集”方法，篩選出所有**交易標的**為**房地(土地+建物)+車位**且**建物移轉總面積平方公尺**大於**100**的交易資料
-- 依**鄉鎮市區**和**建物型態**分組，計算交易的平均**總價元**，平均**單價元平方公尺**
+-   試著用“子集”方法，篩選出所有**交易標的**為**房地(土地+建物)+車位**且**建物移轉總面積平方公尺**大於**100**的交易資料
+-   依**鄉鎮市區**和**建物型態**分組，計算交易的平均**總價元**，平均**單價元平方公尺**
 
-
-```{python} 
+```{python}
 #| echo: true
 selected_house = house[house["交易標的"]=="房地(土地+建物)+車位"]
 selected_house = selected_house.assign(area=pd.to_numeric(selected_house["建物移轉總面積平方公尺"]))

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="5_DataEDA_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="5_DataEDA_files/libs/clipboard/clipboard.min.js"></script>
 <script src="5_DataEDA_files/libs/quarto-html/tabby.min.js"></script>
 <script src="5_DataEDA_files/libs/quarto-html/popper.min.js"></script>
 <script src="5_DataEDA_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="5_DataEDA_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="5_DataEDA_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="5_DataEDA_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Yi-Ju Tseng">
   <title>5. Data EDA</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -221,7 +221,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -385,7 +386,7 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
@@ -425,9 +426,9 @@ Yi-Ju Tseng
 <section id="前置作業" class="slide level2">
 <h2>前置作業</h2>
 <p>為了成功從https (加密封包傳輸)下載資料，首先取消證書驗證</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> ssl</span>
-<span id="cb1-2"><a href="#cb1-2"></a>ssl._create_default_https_context <span class="op">=</span> ssl._create_unverified_context</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="202c4974" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> ssl</span>
+<span id="cb1-2"><a href=""></a>ssl._create_default_https_context <span class="op">=</span> ssl._create_unverified_context</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="什麼是探索式資料分析" class="slide level2">
@@ -490,18 +491,19 @@ Yi-Ju Tseng
 <ul>
 <li>計算集中趨勢 Central Tendency
 <ul>
-<li>平均值 Mean <code>資料序列.mean()</code> or <code>st.mean(資料序列)</code></li>
-<li>中位數 Median <code>資料序列.median()</code> or <code>st.median(資料序列)</code></li>
+<li>平均值 Mean <code>資料框欄位.mean()</code> or <code>st.mean(資料框欄位)</code></li>
+<li>中位數 Median <code>資料框欄位.median()</code> or <code>st.median(資料框欄位)</code></li>
 </ul></li>
 </ul>
+<p><code>st</code>為<code>import statistics as st</code>取名的套件縮寫</p>
 </section>
 <section id="單變量量化分析--集中趨勢" class="slide level2">
 <h2>單變量量化分析- 集中趨勢</h2>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> statistics <span class="im">as</span> st</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-3"><a href="#cb2-3"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/yijutseng/StatwithPython/main/baseball_data.csv"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="71696c4a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> statistics <span class="im">as</span> st</span>
+<span id="cb2-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href=""></a>data <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/yijutseng/StatwithPython/main/baseball_data.csv"</span>)</span>
+<span id="cb2-4"><a href=""></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                name handedness  height  weight   bavg   HR
 0      Jose Cardenal      Right      70     150  0.275  138
@@ -522,15 +524,15 @@ Yi-Ju Tseng
 </section>
 <section id="單變量量化分析--集中趨勢-1" class="slide level2">
 <h2>單變量量化分析- 集中趨勢</h2>
-<p>平均值 Mean <code>資料序列.mean()</code> or <code>st.mean(資料序列)</code></p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>st.mean(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>平均值 Mean <code>資料框欄位.mean()</code> or <code>st.mean(資料框欄位)</code></p>
+<div id="3b2b3274" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>st.mean(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>72.80655737704917</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>data[<span class="st">'height'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="41de9acf" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>data[<span class="st">'height'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>72.80655737704917</code></pre>
 </div>
@@ -541,11 +543,11 @@ Yi-Ju Tseng
 <ul>
 <li>The pandas series’s function can deal with multiple columns
 <ul>
-<li>get multiple columns using <code>[[column 1,column 2]]</code></li>
+<li>得到多個欄位的資料可用<code>data[[column 1,column 2]]</code>，<code>data</code>為資料框名稱</li>
 </ul></li>
 </ul>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>data[[<span class="st">'height'</span>,<span class="st">'weight'</span>]].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a72acb1c" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>data[[<span class="st">'height'</span>,<span class="st">'weight'</span>]].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>height     72.806557
 weight    187.449180
@@ -555,15 +557,15 @@ dtype: float64</code></pre>
 </section>
 <section id="單變量量化分析--集中趨勢-3" class="slide level2">
 <h2>單變量量化分析- 集中趨勢</h2>
-<p>中位數 Median <code>資料序列.median()</code> or <code>st.median(資料序列)</code></p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>st.median(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>中位數 Median <code>資料框欄位.median()</code> or <code>st.median(資料框欄位)</code></p>
+<div id="8fdfb5bf" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>st.median(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>73</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>data[<span class="st">'height'</span>].median()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d9fd6c54" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>data[<span class="st">'height'</span>].median()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>73.0</code></pre>
 </div>
@@ -573,60 +575,58 @@ dtype: float64</code></pre>
 <h2>單變量量化分析- 分散程度</h2>
 <p>計算資料分散程度可包含</p>
 <ul>
-<li>最小值 Min <code>min()</code></li>
-<li>最大值 Max <code>max()</code></li>
-<li>範圍 Range <code>range()</code></li>
-<li>四分位差 Quartiles <code>quantile()</code></li>
-<li>變異數 Variance <code>st.var(資料)</code> or <code>pandas資料序列.var()</code></li>
-<li>標準差 Standard deviation <code>st.stdev(資料)</code> or <code>pandas資料序列.std()</code></li>
+<li>最小值 Min <code>資料框欄位.min()</code></li>
+<li>最大值 Max <code>資料框欄位.max()</code></li>
+<li>四分位差 Quartiles <code>資料框欄位.quantile()</code></li>
+<li>變異數 Variance <code>st.var(資料框欄位)</code> or <code>pandas資料框欄位.var()</code></li>
+<li>標準差 Standard deviation <code>st.stdev(資料框欄位)</code> or <code>pandas資料框欄位.std()</code></li>
 </ul>
 </section>
 <section id="單變量量化分析--分散程度-1" class="slide level2">
 <h2>單變量量化分析- 分散程度</h2>
 <div class="columns">
 <div class="column">
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>st.variance(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="428590cd" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>st.variance(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>3.2223252804141502</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>data[<span class="st">'height'</span>].var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7e7da106" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>data[<span class="st">'height'</span>].var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>3.2223252804141502</code></pre>
 </div>
 </div>
 </div><div class="column">
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>st.stdev(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d70c74b6" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>st.stdev(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>1.7950836416206768</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>data[<span class="st">'height'</span>].std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="87f45856" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>data[<span class="st">'height'</span>].std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>1.7950836416206768</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="單變量量化分析--分散程度-2" class="slide level2">
 <h2>單變量量化分析- 分散程度</h2>
 <ul>
 <li><code>st.quantiles(pandas series, n=the number of partitions)</code></li>
-<li><code>pandas資料序列.quantile(percentiles you want to get)</code></li>
+<li><code>pandas資料框欄位.quantile(percentiles you want to get)</code></li>
 </ul>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>st.quantiles(data[<span class="st">'height'</span>],n<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c97dd7e4" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>st.quantiles(data[<span class="st">'height'</span>],n<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>[72.0, 73.0, 74.0]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>data[<span class="st">'height'</span>].quantile([<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cfee7dd5" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>data[<span class="st">'height'</span>].quantile([<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>0.25    72.0
 0.50    73.0
@@ -641,11 +641,11 @@ Name: height, dtype: float64</code></pre>
 <li>It is impossible to get all the statistics one by one</li>
 <li>pandas series provide a warp up function
 <ul>
-<li><code>pandas資料序列.describe()</code></li>
+<li><code>pandas資料框欄位.describe()</code></li>
 </ul></li>
 </ul>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>data[<span class="st">'height'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="daedd55f" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a>data[<span class="st">'height'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>count    305.000000
 mean      72.806557
@@ -661,8 +661,8 @@ Name: height, dtype: float64</code></pre>
 </section>
 <section id="單變量量化分析--一次搞定-1" class="slide level2">
 <h2>單變量量化分析- 一次搞定</h2>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">print</span>(data.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="698f784d" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="bu">print</span>(data.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           height      weight       bavg          HR
 count  305.000000  305.000000  305.00000  305.000000
@@ -682,9 +682,9 @@ max     78.000000  230.000000    0.32800  563.000000</code></pre>
 <li>以<a href="https://plvr.land.moi.gov.tw/DownloadOpenData">房屋實價登錄資料</a>為例，首先載入<a href="https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv">桃園市不動產買賣</a></li>
 <li>可明顯看出除了中文欄位名稱外，第一個row是英文欄位名稱，而不是資料</li>
 </ul>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c13678ad" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
+<span id="cb30-2"><a href=""></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                      鄉鎮市區              交易標的  \
 0    The villages and towns urban district  transaction sign   
@@ -823,11 +823,11 @@ max     78.000000  230.000000    0.32800  563.000000</code></pre>
 <section id="hands-on-資料清理-1" class="slide level2">
 <h2>Hands-on 資料清理</h2>
 <ul>
-<li>更新資料框，使用row做子集的方式<code>資料框[row slice]</code>，將第一個row刪除</li>
+<li>更新資料框，使用row做子集的方式<code>資料框變數[row slice]</code>，將第一個row刪除</li>
 </ul>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>house<span class="op">=</span>house[<span class="dv">1</span>:]</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ee3c195c" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>house<span class="op">=</span>house[<span class="dv">1</span>:]</span>
+<span id="cb32-2"><a href=""></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    鄉鎮市區          交易標的              土地位置建物門牌 土地移轉總面積平方公尺 都市土地使用分區 非都市土地使用分區  \
 1    桃園區  房地(土地+建物)+車位  桃園市桃園區大業路一段１２１巷１２號九樓       35.44        住       NaN   
@@ -887,9 +887,9 @@ max     78.000000  230.000000    0.32800  563.000000</code></pre>
 </section>
 <section id="hands-on-資料清理-2" class="slide level2">
 <h2>Hands-on 資料清理</h2>
-<p>使用<code>資料框.info()</code>查看資料框內容</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>house.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>使用<code>資料框變數.info()</code>查看資料框內容</p>
+<div id="a656685b" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a>house.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 837 entries, 1 to 837
@@ -940,7 +940,7 @@ memory usage: 215.9+ KB</code></pre>
 <li>分析<a href="https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv">桃園市不動產買賣</a>資料</li>
 <li>試著統計平均<strong>總價元</strong></li>
 <li>試著統計平均<strong>單價元平方公尺</strong></li>
-<li>Hint: 資料型態可能需要調整(<code>pd.to_numeric(pandas資料序列)</code>)</li>
+<li>Hint: 資料型態需要調整(<code>pd.to_numeric(pandas資料框欄位)</code>)</li>
 </ul>
 </section>
 <section id="資料分析大綱-2" class="slide level2">
@@ -962,19 +962,19 @@ memory usage: 215.9+ KB</code></pre>
 <ul>
 <li>列聯表 Crosstabs
 <ul>
-<li><code>pd.crosstab(pandas資料序列1,pandas資料序列2)</code></li>
+<li><code>pd.crosstab(pandas資料框欄位1,pandas資料框欄位2)</code>，<code>pd</code>為套件縮寫</li>
 </ul></li>
 <li>相關性 Correlation
 <ul>
-<li><code>pandas資料序列.corr(另一個pandas資料序列)</code></li>
+<li><code>pandas資料框欄位.corr(另一個pandas資料框欄位)</code></li>
 </ul></li>
 </ul>
 </section>
 <section id="資料前處理---13" class="slide level2">
 <h2>資料前處理 - 1/3</h2>
 <p>為了後續範例，新增一個demo用資料，<strong>高打擊率</strong>，定義為打擊率&gt;0.274</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>data[<span class="st">'bavg'</span>]<span class="op">&gt;</span><span class="fl">0.274</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8b68efaa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a>data[<span class="st">'bavg'</span>]<span class="op">&gt;</span><span class="fl">0.274</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0       True
 1      False
@@ -994,15 +994,15 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <section id="資料前處理---23" class="slide level2">
 <h2>資料前處理 - 2/3</h2>
 <p>用<code>資料框.assign(欄位名稱=欄位資料)</code>新增新的欄位</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>data <span class="op">=</span> data.assign(high_rate<span class="op">=</span>pd.Series(data[<span class="st">'bavg'</span>]<span class="op">&gt;</span><span class="fl">0.274</span>).values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9f94f01f" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a>data <span class="op">=</span> data.assign(high_rate<span class="op">=</span>pd.Series(data[<span class="st">'bavg'</span>]<span class="op">&gt;</span><span class="fl">0.274</span>).values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="資料前處理---33" class="slide level2">
 <h2>資料前處理 - 3/3</h2>
 <p>查看結果</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fafe3a45" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                name handedness  height  weight   bavg   HR  high_rate
 0      Jose Cardenal      Right      70     150  0.275  138       True
@@ -1027,9 +1027,9 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <li>列連表多用在類別與類別資料的關係分析</li>
 <li><strong>左右撇子</strong>與<strong>打擊率高還是低</strong>的關係</li>
 </ul>
-<p><code>pd.crosstab(pandas資料序列1,pandas資料序列2)</code></p>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>pd.crosstab(data[<span class="st">'handedness'</span>],data[<span class="st">'high_rate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>pd.crosstab(pandas資料框欄位1,pandas資料框欄位2)</code>，<code>pd</code>為套件縮寫</p>
+<div id="aa656163" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a>pd.crosstab(data[<span class="st">'handedness'</span>],data[<span class="st">'high_rate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 <style scoped="">
@@ -1046,7 +1046,7 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
     }
 </style>
 
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th">high_rate</th>
@@ -1088,15 +1088,15 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <li>相關性多用在連續與連續資料的關係分析</li>
 <li><strong>全壘打數</strong>跟<strong>體重</strong>的關聯性（相關係數）</li>
 </ul>
-<p><code>pandas資料序列.corr(另一個pandas資料序列)</code></p>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>data[<span class="st">'HR'</span>].corr(data[<span class="st">'weight'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>pandas資料框欄位.corr(另一個pandas資料框欄位)</code></p>
+<div id="9a1a6464" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a>data[<span class="st">'HR'</span>].corr(data[<span class="st">'weight'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>0.09421430339662694</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>data[<span class="st">'HR'</span>].corr(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="70e68d32" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>data[<span class="st">'HR'</span>].corr(data[<span class="st">'height'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>0.09656365344308959</code></pre>
 </div>
@@ -1107,7 +1107,7 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <ul>
 <li>分析<a href="https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv">桃園市不動產買賣</a>資料</li>
 <li>試著統計平均<strong>總價元</strong>和<strong>單價元平方公尺</strong>的相關性</li>
-<li>Hint: 資料型態可能需要調整(<code>pd.to_numeric(pandas資料序列)</code>)</li>
+<li>Hint: 資料型態需要調整(<code>pd.to_numeric(pandas資料框欄位)</code>)</li>
 </ul>
 </section>
 <section id="資料分析大綱-3" class="slide level2">
@@ -1144,10 +1144,10 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <section id="分組-pandas資料框.groupby" class="slide level2">
 <h2>分組 pandas資料框.groupby()</h2>
 <p>以<a href="https://plvr.land.moi.gov.tw/DownloadOpenData">房屋實價登錄資料</a>為例，首先先<a href="https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv">桃園市不動產買賣</a></p>
-<div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
-<span id="cb46-2"><a href="#cb46-2"></a>house <span class="op">=</span> house[<span class="dv">1</span>:]</span>
-<span id="cb46-3"><a href="#cb46-3"></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="76429f8c" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
+<span id="cb46-2"><a href=""></a>house <span class="op">=</span> house[<span class="dv">1</span>:]</span>
+<span id="cb46-3"><a href=""></a><span class="bu">print</span>(house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    鄉鎮市區          交易標的              土地位置建物門牌 土地移轉總面積平方公尺 都市土地使用分區 非都市土地使用分區  \
 1    桃園區  房地(土地+建物)+車位  桃園市桃園區大業路一段１２１巷１２號九樓       35.44        住       NaN   
@@ -1208,13 +1208,13 @@ Name: bavg, Length: 305, dtype: bool</code></pre>
 <section id="分組-pandas資料框.groupby-1" class="slide level2">
 <h2>分組 pandas資料框.groupby()</h2>
 <ul>
-<li><code>pandas資料框.groupby(by=分組依據)</code>設定分組依據</li>
+<li><code>pandas資料框.groupby(by=分組依據欄位)</code>設定分組依據</li>
 <li>計算各<strong>鄉鎮市區</strong>（以鄉鎮市區作為分組依據）的<strong>交易筆數</strong>、<strong>總價元</strong></li>
-<li><code>pandas資料序列.mean()</code>可知平均，<code>pandas資料框.size()</code>可知資料筆數</li>
+<li><code>pandas資料框欄位.mean()</code>可知平均，<code>pandas資料框.size()</code>可知資料筆數</li>
 </ul>
-<div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>house <span class="op">=</span> house.assign(總價元n<span class="op">=</span>pd.to_numeric(house[<span class="st">"總價元"</span>]))</span>
-<span id="cb48-2"><a href="#cb48-2"></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f0a4a8bd" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a>house <span class="op">=</span> house.assign(總價元n<span class="op">=</span>pd.to_numeric(house[<span class="st">"總價元"</span>]))</span>
+<span id="cb48-2"><a href=""></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>鄉鎮市區
 中壢區    1.639229e+07
@@ -1237,10 +1237,10 @@ Name: 總價元n, dtype: float64</code></pre>
 <section id="分組-pandas資料框.groupby-2" class="slide level2">
 <h2>分組 pandas資料框.groupby()</h2>
 <ul>
-<li><code>pandas資料序列.mean()</code>可知平均，<code>pandas資料框.size()</code>可知資料筆數</li>
+<li><code>pandas資料框欄位.mean()</code>可知平均，<code>pandas資料框.size()</code>可知資料筆數</li>
 </ul>
-<div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e7aa144f" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>鄉鎮市區
 中壢區    179
@@ -1268,8 +1268,8 @@ dtype: int64</code></pre>
 <li>計算各<strong>鄉鎮市區</strong>（以鄉鎮市區作為分組依據）的<strong>交易筆數</strong>、<strong>總價元</strong></li>
 <li><code>pandas資料框.groupby(by=分組依據)[欄位名稱].agg(["計算1","計算2"])</code></li>
 </ul>
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="393a7c5f" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 <style scoped="">
@@ -1286,7 +1286,7 @@ dtype: int64</code></pre>
     }
 </style>
 
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -1377,8 +1377,8 @@ dtype: int64</code></pre>
 <ul>
 <li><code>pandas資料框.groupby(by=分組依據)[欄位名稱].agg(["計算1","計算2"])</code></li>
 </ul>
-<div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="36db3907" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a>house.groupby(by<span class="op">=</span><span class="st">'鄉鎮市區'</span>)[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 <style scoped="">
@@ -1395,7 +1395,7 @@ dtype: int64</code></pre>
     }
 </style>
 
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -1484,12 +1484,12 @@ dtype: int64</code></pre>
 <section id="分組-pandas資料框.groupby-5" class="slide level2">
 <h2>分組 pandas資料框.groupby()</h2>
 <ul>
-<li>可設定<strong>多個</strong>分組依據</li>
+<li>可用欄位名稱的list設定<strong>多個</strong>分組依據</li>
 <li>計算各<strong>鄉鎮市區</strong>各<strong>交易標的</strong>（以鄉鎮市區和交易標的作為分組依據）的<strong>交易筆數</strong>以及<strong>平均總價元</strong></li>
 <li><code>pandas資料框.groupby(by=[分組依據1,分組依據2])[欄位名稱].agg(["計算1","計算2"])</code></li>
 </ul>
-<div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>house.groupby(by<span class="op">=</span>[<span class="st">'鄉鎮市區'</span>,<span class="st">'交易標的'</span>])[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b71de169" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a>house.groupby(by<span class="op">=</span>[<span class="st">'鄉鎮市區'</span>,<span class="st">'交易標的'</span>])[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 <style scoped="">
@@ -1506,7 +1506,7 @@ dtype: int64</code></pre>
     }
 </style>
 
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -1767,8 +1767,8 @@ dtype: int64</code></pre>
 <ul>
 <li><code>pandas資料框.groupby(by=[分組依據1,分組依據2])[欄位名稱].agg(["計算1","計算2"])</code></li>
 </ul>
-<div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="bu">print</span>(house.groupby(by<span class="op">=</span>[<span class="st">'鄉鎮市區'</span>,<span class="st">'交易標的'</span>])[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4f37e672" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="bu">print</span>(house.groupby(by<span class="op">=</span>[<span class="st">'鄉鎮市區'</span>,<span class="st">'交易標的'</span>])[<span class="st">'總價元n'</span>].agg([<span class="st">"size"</span>,<span class="st">"mean"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   size          mean
 鄉鎮市區 交易標的                            
@@ -1822,10 +1822,10 @@ dtype: int64</code></pre>
 <section id="hands-on-探索式資料分析-綜合練習" class="slide level2">
 <h2>Hands-on 探索式資料分析 綜合練習</h2>
 <p>以<a href="https://plvr.land.moi.gov.tw/DownloadOpenData">房屋實價登錄資料</a>為例，首先先載入<a href="https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv">桃園市不動產買賣</a>資料</p>
-<div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb57-2"><a href="#cb57-2"></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
-<span id="cb57-3"><a href="#cb57-3"></a>house <span class="op">=</span> house[<span class="dv">1</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="258bc346" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb57-2"><a href=""></a>house <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/h_lvr_land_a.csv"</span>)</span>
+<span id="cb57-3"><a href=""></a>house <span class="op">=</span> house[<span class="dv">1</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hands-on-探索式資料分析-綜合練習-1" class="slide level2">
@@ -1834,10 +1834,10 @@ dtype: int64</code></pre>
 <li>試著用“子集”方法，篩選出所有<strong>交易標的</strong>為<strong>房地(土地+建物)+車位</strong>且<strong>建物移轉總面積平方公尺</strong>大於<strong>100</strong>的交易資料</li>
 <li>依<strong>鄉鎮市區</strong>和<strong>建物型態</strong>分組，計算交易的平均<strong>總價元</strong>，平均<strong>單價元平方公尺</strong></li>
 </ul>
-<div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>selected_house <span class="op">=</span> house[house[<span class="st">"交易標的"</span>]<span class="op">==</span><span class="st">"房地(土地+建物)+車位"</span>]</span>
-<span id="cb58-2"><a href="#cb58-2"></a>selected_house <span class="op">=</span> selected_house.assign(area<span class="op">=</span>pd.to_numeric(selected_house[<span class="st">"建物移轉總面積平方公尺"</span>]))</span>
-<span id="cb58-3"><a href="#cb58-3"></a>selected_house[selected_house[<span class="st">"area"</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b8bccc50" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a>selected_house <span class="op">=</span> house[house[<span class="st">"交易標的"</span>]<span class="op">==</span><span class="st">"房地(土地+建物)+車位"</span>]</span>
+<span id="cb58-2"><a href=""></a>selected_house <span class="op">=</span> selected_house.assign(area<span class="op">=</span>pd.to_numeric(selected_house[<span class="st">"建物移轉總面積平方公尺"</span>]))</span>
+<span id="cb58-3"><a href=""></a>selected_house[selected_house[<span class="st">"area"</span>]<span class="op">&gt;</span><span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 <style scoped="">
@@ -1854,7 +1854,7 @@ dtype: int64</code></pre>
     }
 </style>
 
-<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
@@ -2153,8 +2153,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -2183,7 +2185,6 @@ dtype: int64</code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -2400,18 +2401,7 @@ dtype: int64</code></pre>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -2443,11 +2433,50 @@ dtype: int64</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -2457,8 +2486,17 @@ dtype: int64</code></pre>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -2472,7 +2510,11 @@ dtype: int64</code></pre>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

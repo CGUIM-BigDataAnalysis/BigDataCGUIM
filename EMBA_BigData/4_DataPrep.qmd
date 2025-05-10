@@ -396,8 +396,8 @@ price_df
 
 ## 基本查詢
 
--   字串長度 `len(變數名稱)`
--   字串內包含某字的個數 `.count(某字)`
+-   字串長度 `len(字串變數)`
+-   字串內包含某字的個數 `.字串變數.count(某字)`
 
 ```{python}
 #| echo: true
@@ -410,12 +410,18 @@ len(str_ex)
 str_ex.count("o")
 ```
 
+## 套用到整個資料框欄位的字串中
+
+再取出欄位後，加上`.str`，再加上預計套用的功能。
+
+文字取代 `資料框變數[欄位名稱].str.replace(舊值,新值)` **substitute**
+
 ## 基本處理
 
 -   切割 `字串變數.split()` **Split**
 -   子集 `字串變數[:]` **sub string**, **Slice**
--   大小寫轉換 `字串變數.upper()` `字串變數.lower()`
--   兩文字連接 `+` `字串變數.join(字串清單list)`
+-   大小寫轉換 `字串變數.upper()` , `字串變數.lower()`
+-   兩文字連接 `+` , `字串變數.join(字串清單list)`
 -   文字取代 `字串變數.replace(舊值,新值)` **substitute**
 -   前後空白去除 `字串變數.strip(字元,預設空白)` **trim**
 
@@ -547,6 +553,8 @@ price_df
 -   請把Price欄位中的`%`符號移除，並在相對應的Type欄位加上%符號
 -   請把Price欄位中的`,`移除，再將整個Price欄位轉為數字
 
+提示：`pd.to_numeric(資料框變數.欄位)`可一次將整個欄位轉換成數字。
+
 ## 搜尋字串
 
 -   使用`==`, `in`完整比對
@@ -580,6 +588,7 @@ str1 in ["CGUST","CGU","NYCU"]
 -   `字串變數.find(搜尋字串)`，回傳index，回傳-1表示沒有
 -   `字串變數.count(計算字串)`，回傳個數
 
+
 ```{python}
 #| echo: true
 str1
@@ -604,6 +613,14 @@ str2.find("C")
 #| echo: true
 str2.count("C")
 ```
+
+
+
+## 搜尋字串 - 資料框欄位
+
+-   `資料框變數[”欄位名“].str.find(搜尋字串)`，回傳index，回傳-1表示沒有
+-   `資料框變數[”欄位名“].str.count(計算字串)`，回傳個數
+-   `資料框變數[”欄位名“].str.contains(搜尋字串)`，回傳True or False
 
 ## 搜尋字串 - re套件
 
@@ -646,10 +663,10 @@ print(re.search("^l","Alex"))
 re.search("x$","Alex")
 ```
 
-## 搜尋字串 - 從list中搜尋
+## 搜尋字串 - 從list或資料框欄位中搜尋
 
 -   r = `re.compile("找尋目標")`，`"找尋目標"`可以是正規表示式
--   `filter(r.search,想找的list)`
+-   `filter(r.search,想找的list/想找的資料框欄位)`
 
 ```{python}
 #| echo: true
@@ -743,9 +760,14 @@ print(bike_df)
 -   Row 的組合 `pd`.`concat([df1, df2])`
 -   Column 的組合 `pd`.`concat([df1, df2],axis=1)`
 
-## 資料組合 - .concat()
 
-`pd`.`concat([pd物件1, pd物件2])`，預設為row方向的合併
+`pd`為pandas import時取的縮寫名稱，`df1`, `df2`為兩個要結合的資料框變數
+
+## 資料組合 - pd.concat()
+
+`pd`.`concat([df1, df2])`，預設為row方向的合併。
+
+`pd`為pandas import時取的縮寫名稱，`df1`, `df2`為兩個要結合的資料框變數
 
 ```{python}
 #| echo: true
@@ -757,9 +779,11 @@ newdf = pd.concat([df1,df2])
 print(newdf)
 ```
 
-## 資料組合 - .concat()
+## 資料組合 - pd.concat()
 
-`pd`.`concat([pd物件1, pd物件2],axis=1)`，利用`axis=1`改為column方向的合併
+`pd`.`concat([df1, df2],axis=1)`，利用`axis=1`改為column方向的合併。
+
+`pd`為pandas import時取的縮寫名稱，`df1`, `df2`為兩個要結合的資料框變數
 
 ```{python}
 #| echo: true
@@ -778,6 +802,8 @@ print(newdf)
 -   Row 的組合 `pd`.`concat([df1, df2])`
 -   Column 的組合 `pd`.`concat([df1, df2],axis=1)`
 
+`pd`為pandas import時取的縮寫名稱，`df1`, `df2`為兩個要結合的資料框變數
+
 # 資料結合 (Join in SQL)
 
 ## 資料結合 (Join in SQL)
@@ -791,7 +817,9 @@ print(newdf)
 
 ## 資料結合 (Join in SQL)
 
-可以用`pd`.`merge()`函數將資料框結合，使用方法為`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
+可以用`pd`.`merge()`函數將資料框結合，使用方法為`pd.merge(資料框left,資料框right,how=["left","right","inner","outer"],on="結合依據欄位")`
+
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
 
 ```{python}
 #| echo: true
@@ -823,11 +851,13 @@ print(scoreDF)
 
 ## 資料結合 (Join in SQL)
 
-`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
+`pd.merge(資料框left,資料框right,how=["left","right","inner","outer"],on="結合依據欄位")`
 
-How:
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
 
--   inner：保留有對應到的資料
+`how`參數設定:
+
+-   inner：保留有對應到的資料（預設）
 -   left：保留左邊資料框的所有資料
 -   right：保留右邊資料框的所有資料
 -   outer：保留所有資料
@@ -850,7 +880,9 @@ print(scoreDF)
 :::
 :::
 
-inner join - 預設:`merge(資料框left,資料框right,how="inner",on="結合欄位")`
+inner join - 預設:`pd.merge(資料框left,資料框right,how="inner",on="結合欄位")`
+
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
 
 ```{python}
 #| echo: true
@@ -875,8 +907,14 @@ print(scoreDF)
 :::
 :::
 
-outer join: `merge(資料框left,資料框right,how="outer",on="結合欄位")`
+outer join: 
 
+`pd.merge(資料框left,資料框right,how="outer",on="結合欄位")`
+
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
+
+## 資料結合 (Join) - outer
+`pd.merge(資料框left,資料框right,how="outer",on="結合欄位")`
 ```{python}
 #| echo: true
 pd.merge(nameDF,scoreDF,how="outer",on="ID")
@@ -900,8 +938,12 @@ print(scoreDF)
 :::
 :::
 
-left join: `merge(資料框left,資料框right,how="left",on="結合欄位")`
+left join: `pd.merge(資料框left,資料框right,how="left",on="結合欄位")`
 
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
+
+## 資料結合 (Join) - left
+`pd.merge(資料框left,資料框right,how="left",on="結合欄位")`
 ```{python}
 #| echo: true
 pd.merge(nameDF,scoreDF,how="left",on="ID")
@@ -909,9 +951,11 @@ pd.merge(nameDF,scoreDF,how="left",on="ID")
 
 ## 資料結合 (Join) - Recap
 
-`merge(資料框left,資料框right,how="["left","right","inner","outer"],on="結合依據欄位")`
+`pd.merge(資料框left,資料框right,how=["left","right","inner","outer"],on="結合依據欄位")`
 
-How:
+`pd`為pandas import時取的縮寫名稱，`資料框left`, `資料框right`為兩個要結合的資料框變數。
+
+`how`:
 
 -   inner：保留有對應到的資料
 -   left：保留左邊資料框的所有資料
@@ -924,6 +968,7 @@ How:
 -   下載或直接載入[COVID-19死亡數資料](https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
 -   分別讀入兩個csv檔
 -   依照Province/State,Country/Region,Lat,Long四個欄位，將兩張表格結合，**只留下有對應到的資料**
+    -   多個欄位：`on`參數設定維多個欄位組成的list，如`on=['Province/State','Country/Region','Lat','Long']` 
 -   請問結合後的資料有幾列？
 
 ## 資料清洗與處理
@@ -942,7 +987,7 @@ How:
 
 -   在資料處理的過程中，常因各種需求，需要執行長寬表互換的動作
 -   `pandas` 套件提供完整的轉換功能
--   `pd`.`pivot()`
+-   `pd`.`pivot()`，`pd`為pandas import時取的縮寫名稱
 
 ## 長表轉寬表
 
@@ -961,11 +1006,10 @@ df
 ## 長表轉寬表 資料框.pivot()
 
 -   `df`資料框中，共有patient, obs, score等四個欄位 (Column)，屬於長表
--   `資料框.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
--   以`patient`為基準，obs欄位的值轉換為新欄位，並將score欄位填入
+-   `資料框變數.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
 
 ## 長表轉寬表 資料框.pivot()
-
+範例：以`patient`為基準，`obs`欄位的值轉換為新欄位，並將`score`欄位填入
 ```{python}
 #| echo: true
 df_wide=df.pivot(index='patient', columns='obs', values='score')
@@ -986,11 +1030,11 @@ df
 ```
 
 ## 寬表轉長表 pd.melt()
-
--   保留team欄位 `id_vars='team'`
--   消滅'points', 'assists', 'rebounds' `value_vars=['points', 'assists', 'rebounds']`，若為全部非id的欄位，可以省略
--   將其他欄位的名稱整合至metric欄位 `var_name='metric'`
--   數值整合至amount欄位 `value_name='amount'`
+-   使用`pd.melt(資料匡變數,各種參數)`將寬表轉為長表
+-   保留team欄位，設定參數`id_vars='team'`
+-   消滅'points', 'assists', 'rebounds'，設定參數`value_vars=['points', 'assists', 'rebounds']`，若為全部非id的欄位，可以省略
+-   將其他欄位的名稱整合至metric欄位，設定參數`var_name='metric'`
+-   數值整合至amount欄位，設定參數`value_name='amount'`
 
 ```{python}
 #| echo: true
@@ -1016,8 +1060,8 @@ pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
 
 ## 長表轉寬表 - Recap
 
--   長轉寬 `資料框.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
--   寬轉長 `pd.melt(id_vars=識別欄位, value_vars=要轉成長表的欄位,var_name=新增欄位名稱, value_name=新增內容名稱)`
+-   長轉寬 `資料框變數.pivot(index=識別欄位, columns=轉寬表欄位名稱, values=轉寬表欄位內容)`
+-   寬轉長 `pd.melt(資料框變數, id_vars=識別欄位, value_vars=要轉成長表的欄位,var_name=新增欄位名稱, value_name=新增內容名稱)`
 
 ## Hands-on 長表轉寬表
 
@@ -1040,23 +1084,23 @@ pd.melt(df, id_vars='team', value_vars=['points', 'assists', 'rebounds'],
 ## 遺漏值處理
 
 -   遺漏值(Missing Value)常常出現在真實資料內，在數值運算時常會有問題
--   最簡單的方法是將有缺值的資料移除 `.dropna()`
+-   最簡單的方法是將有缺值的資料移除 `資料框變數.dropna()`
 
-## 遺漏值處理 .dropna()
+## 遺漏值處理 df.dropna()
 
-若資料型態為資料框，可使用`.dropna()`選出完整的資料
+若資料型態為資料框，可使用`資料框變數.dropna()`選出完整的資料
 
 ```{python}
 #| echo: true
 df_wide
 ```
 
-## 遺漏值處理 .dropna()
+## 遺漏值處理 df.dropna()
 
-若資料型態為資料框，可使用`.dropna()`選出完整的資料
+若資料型態為資料框，可使用`資料框變數.dropna()`選出完整的資料
 
--   axis=0: row based
--   how = 'any': 只要有na就移除
+-   `axis=0`: row based
+-   `how = 'any'`: 只要有na就移除
 
 ```{python}
 #| echo: true
