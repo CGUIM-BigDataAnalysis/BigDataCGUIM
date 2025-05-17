@@ -196,7 +196,7 @@ print(X_test.size)
 
 ## 整合訓練集
 
-使用`pd.concat([X_train,y_train], axis = 1)` 左右整合`df1`和`df2`兩個資料框，這兩個資料框內容分別為分類標籤（答案）`y_train`以及分類用特徵`X_train`。
+使用`pd.concat([X_train,y_train], axis = 1)` 左右整合`X_train`和`y_train`兩個資料框，這兩個資料框內容分別為分類標籤（答案）`y_train`以及分類用特徵`X_train`。
 
 ```{python}
 #| echo: true
@@ -229,7 +229,7 @@ evaluate_model(best_model)
 
 -   `predict_model(訓練出來的模型物件,data = 測試資料)` 將訓練好的模型`best_model`用在測試集`X_test`中，並儲存成預測結果變數`y_pred_pycaret`
 -   `metrics.accuracy_score(正確答案,預測答案)`計算準確率，預測答案可從前一個功能的預測結果變數取出（在`prediction_label`欄位中）
-
+    -   `metrics`來自`from sklearn import metrics`
 ```{python}
 #| echo: true
 y_pred_pycaret = predict_model(best_model, data = X_test)
@@ -275,7 +275,7 @@ evaluate_model(best_model)
 
 -   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型`best_model`用在測試集`test`中
 -   `metrics.accuracy_score(正確答案,預測答案)`計算準確率
-
+    -   `metrics`來自`from sklearn import metrics`
 ```{python}
 #| echo: true
 y_pred_pycaret = predict_model(best_model, data = test)
@@ -284,7 +284,7 @@ print("PyCaret Testing Data Accuracy: %.5f" % metrics.accuracy_score(test['Survi
 
 ## Hands-on AutoML
 
--   預測單一股票股價會漲還是會跌
+-   使用過去的3日移動平均到90日移動平均股價，訓練模型，預測單一股票股價會漲還是會跌
 -   載入預測用資料集
     -   [資料](https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv)\
     -   [Source](https://finance.yahoo.com/quote/NVDA/history)
@@ -338,13 +338,22 @@ print(y_train.describe())
 
 ## Hands-on AutoML 訓練資料整合
 
-其他的就交給你們自己嘗試了....
+
 
 ```{python}
 #| echo: true
 train = pd.concat([X_train,y_train], axis=1)
 print(train.head())
 ```
+
+## Hands-on AutoML 開始建模
+其他的就交給你們自己嘗試了....步驟：
+
+1.    setup(有標籤的訓練資料,targe=標籤名稱) 設定 PyCaret AutoML環境
+2.    compare_models() 選擇最好的模型
+3.    evaluate_model(模型物件) 評估模型內容
+4.    predict_model(訓練出來的模型,data = 測試資料) 將訓練好的模型用在測試集中
+5.    metrics.accuracy_score(正確答案,預測答案)計算準確率
 
 ## 資料建模
 
@@ -428,6 +437,7 @@ print(x_train)
 
 ## 資料前處理
 
+增加維度，以符合CNN模型需要輸入通道數量的規範
 ```{python}
 #| echo: true
 #| cache: true
@@ -469,10 +479,16 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 ## 看一下資料（視覺化）
 
 ```{python}
-#| echo: true
 #| cache: true
+n = 5
+fig, axs = plt.subplots(nrows=n, ncols=n, sharex=True, sharey=True, figsize=(12, 12))
+for i in range(n**2):
+    ax = axs[i // n, i % n]
+    (-x_train[i]+1)/2
+    ax.imshow((-x_train[i, :, :, 0] + 1)/2, cmap=plt.cm.gray)
+    ax.axis('off')
+plt.tight_layout()
 plt.show()
-plt.clf()
 ```
 
 ## 資料類別轉換
@@ -507,7 +523,6 @@ model = keras.Sequential(
         layers.Dense(num_classes, activation="softmax"),
     ]
 )
-model.summary()
 ```
 
 ## 模型架構設計
@@ -525,9 +540,7 @@ model.summary()
 #| cache: true
 batch_size = 128
 epochs = 5
-
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 ```
 
