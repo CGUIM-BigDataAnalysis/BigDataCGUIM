@@ -8,354 +8,954 @@ format:
 editor: visual
 ---
 
-## Load Libraries
+# Visualization with Matplotlib
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Importing Matplotlib
 
-```{python}
-#!pip install numpy matplotlib pandas sklearn seaborn calmap squarify plotly
-#!pip install calmap
+```{python} 
+#| echo: true
+# !pip3 install matplotlib
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 ```
 
+`plt` 為常用介面
+
+載入其他重要的library
+
+```{python} 
+#| echo: true
+import numpy as np
+import pandas as pd
+```
+
+## Figure
+
+**figure** (from `plt.Figure`) 包含軸、點、文字等內容的物件
+
+`plt` 來自`import matplotlib.pyplot as plt`
+
+```{python} 
+#| echo: true
+fig = plt.figure()
+```
+
+## Saving Figures
+
+`fig.savefig()`存圖
+
+```{python} 
+#| echo: true
+fig.savefig('my_figure.png')
+```
+
+-   檔案格式由副檔名指定
+-   PNG, JPG, PDF, TIFF, and more.
+
+```{python} 
+#| echo: true
+fig.canvas.get_supported_filetypes()
+```
+
+
+# Simple Line Plots 
+
+
+## Plotting a Simple Function
+
+使用 `plt.plot(x,y)`, `plt`來自`import matplotlib.pyplot as plt`
+
+```{python} 
+#| echo: true
+x = np.linspace(0, 10, 100) #(start, stop, num)
+plt.plot(x, np.sin(x))
+```
+
+
+## Multiple Lines in One Plot
+
+多次呼叫 `plt.plot`可直接疊圖
+
+```{python} 
+#| echo: true
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+```
+
+
+## Customizing Line Color
+在`plt.plot()` 中使用 `color` 參數指定顏色
+```{python} 
+#| echo: true
+plt.plot(x, np.sin(x - 0), color='blue')        # by name
+plt.plot(x, np.sin(x - 1), color='g')           # short code (r, g, b, c, m, y, k)
+plt.plot(x, np.sin(x - 2), color='0.75')        # grayscale
+plt.plot(x, np.sin(x - 3), color='#FFDD44')     # hex code
+plt.plot(x, np.sin(x - 4), color=(1.0,0.2,0.3)) # RGB tuple
+plt.plot(x, np.sin(x - 5), color='chartreuse')  # HTML color name
+```
+
+## Customizing Line Style
+在`plt.plot()`中使用`linestyle` 參數指定線段樣式
+```{python} 
+#| echo: true
+plt.plot(x, x + 0, linestyle='solid')
+plt.plot(x, x + 1, linestyle='dashed')
+plt.plot(x, x + 2, linestyle='dashdot')
+plt.plot(x, x + 3, linestyle='dotted')
+# Short codes:
+plt.plot(x, x + 4, linestyle='-')   # solid
+plt.plot(x, x + 5, linestyle='--')  # dashed
+plt.plot(x, x + 6, linestyle='-.')  # dashdot
+plt.plot(x, x + 7, linestyle=':')   # dotted
+```
+
+## Customizing Line Color and Style
+
+```{python} 
+#| echo: true
+plt.plot(x, x + 0, '-g')  # solid green
+plt.plot(x, x + 1, '--c') # dashed cyan
+plt.plot(x, x + 2, '-.k') # dashdot black
+plt.plot(x, x + 3, ':r')  # dotted red
+```
+
+
+## Adjusting Axes Limits
+
+`plt.axis([xmin, xmax, ymin, ymax])`設定圖片範圍限制，limits要用list包起來`[xmin, xmax, ymin, ymax]`
+
+```{python} 
+#| echo: true
+plt.axis([-1, 11, -1.5, 1.5]) 
+```
+
+
+## Adding Titles, Labels, and Legends
+
+`plt.title()`, `plt.xlabel()`, `plt.ylabel()`
+
+```{python} 
+#| echo: true
+plt.plot(x, np.sin(x))
+plt.title("A Sine Curve")
+plt.xlabel("x")
+plt.ylabel("sin(x)")
+```
+
+## Adding Titles, Labels, and Legends
+
+要呈現圖標，先在 `plt.plot()` 時增加 `label` 參數，最後呼叫 `plt.legend()`
+
+```{python} 
+#| echo: true
+plt.plot(x, np.sin(x), '-g', label='sin(x)')
+plt.plot(x, np.cos(x), ':b', label='cos(x)')
+plt.legend()
+```
+
+## Hands-on - Line Plot
+設定:
+
+1. Load library
 ```{python}
-# Load library for visualization
+#| echo: true
 import matplotlib
 import matplotlib.pyplot as plt
-import seaborn as sns
-import calmap
-# Load library for data precessing
-import pandas as pd  
-import numpy as np
 ```
-
+2. 中文問題....
 ```{python}
-!pip install wget
-!python -m wget -o taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-```
-
-```{python}
+#| echo: true
+#| eval: false
 # colab顯示繁體中文 問題：matplotlib繪圖，會發生中文無法顯示的問題
 # 先下載台北黑體字型
-!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+!gdown '1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_' --output TaipeiSansTCBeta-Regular.ttf
+```
+```{python}
+#| echo: true
 # 新增字體
-matplotlib.font_manager.fontManager.addfont('taipei_sans_tc_beta.ttf')
+matplotlib.font_manager.fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
 # 將 font-family 設為 Taipei Sans TC Beta
 # 設定完後，之後的圖表都可以顯示中文了
 matplotlib.rc('font', family='Taipei Sans TC Beta')
 ```
 
+## Hands-on - Line Plot
+Data: 空氣品質監測日平均值(一般污染物)
 ```{python}
-# 空氣品質監測日平均值(一般污染物)
+#| echo: true
+#| eval: false
 # https://data.moenv.gov.tw/dataset/detail/AQX_P_19
 # https://drive.google.com/drive/folders/1OrMlB4hP8nnW_0bYwoHRO6DRXWNk1qvy?usp=sharing
-!gdown --id '1P3qrYrynZhXDC13dVo5KhDXmld5OGZz1' --output Data/202310.csv
-!gdown --id '1P1Kv1ZmPOYyi83DJKUIPoksM31vJJiS5' --output Data/202311.csv
-!gdown --id '1P0mojOXgvVbXImnRTPQemm7dCkLDLKAC' --output Data/202312.csv
-!gdown --id '1OwAf366l-iItXV4foJemw5QdMuD3JgMc' --output Data/202401.csv
+!gdown '1P3qrYrynZhXDC13dVo5KhDXmld5OGZz1' --output 202310.csv
+!gdown '1P1Kv1ZmPOYyi83DJKUIPoksM31vJJiS5' --output 202311.csv
+!gdown '1P0mojOXgvVbXImnRTPQemm7dCkLDLKAC' --output 202312.csv
+!gdown '1OwAf366l-iItXV4foJemw5QdMuD3JgMc' --output 202401.csv
+```
+## Hands-on - Line Plot
+Data
+```{python}
+#| echo: true
+df202401 = pd.read_csv('202401.csv') 
+df202312 = pd.read_csv('202312.csv') 
+df202311 = pd.read_csv('202311.csv') 
+df202310 = pd.read_csv('202310.csv') 
+df_air = pd.concat([df202401,df202312,df202311,df202310],axis=0, ignore_index=True)
+print(df_air.head())
 ```
 
+## Hands-on - Line Plot
+Data Clean: Remove the quotes “” of column headers
 ```{python}
-# 讀檔
-df202401 = pd.read_csv('Data/202401.csv') 
-df202312 = pd.read_csv('Data/202312.csv') 
-df202311 = pd.read_csv('Data/202311.csv') 
-df202310 = pd.read_csv('Data/202310.csv') 
-df = pd.concat([df202401,df202312,df202311,df202310],axis=0)
-df.head()
-```
-
-```{python}
+#| echo: true
 new_headers = []
-for header in df.columns: # data.columns is your list of headers
+for header in df_air.columns: # data.columns is your list of headers
     header = header.strip('"') # Remove the quotes off each header
     new_headers.append(header) # Save the new strings without the quotes
-df.columns = new_headers # Replace the old headers with the new list
+df_air.columns = new_headers # Replace the old headers with the new list
+print(df_air.head())
+```
+
+## Hands-on - Line Plot
+Data Clean: Data type
+
+```{python}
+#| echo: true
+df_air['concentration'].dtypes
+```
+```{python}
+#| echo: true
+df_air['concentration'][0:5]
+```
+`pd.to_numeric(List or Series, errors={‘ignore’, ‘raise’, ‘coerce’})`
+```{python}
+#| echo: true
+df_air['concentration'] = pd.to_numeric(df_air['concentration'], 
+                                        errors="coerce")
 ```
 
 ```{python}
-df.dtypes
+#| echo: true
+df_air['concentration'].dtypes
 ```
 
+## Hands-on - Line Plot
+Data Clean: Data type
 ```{python}
-df['concentration'] = pd.to_numeric(df['concentration'].replace("x",np.nan))
+#| echo: true
+df_air['monitordate'].dtypes
 ```
-
+`pd.to_datetime(List or Series, errors={‘ignore’, ‘raise’, ‘coerce’},format=)`
 ```{python}
+#| echo: true
 # Parse String To DateTime
-df['DateTime']=pd.to_datetime(df['monitordate'],
+df_air['DateTime']=pd.to_datetime(df_air['monitordate'],
                               format='%Y-%m-%d')
 ```
 
 ```{python}
-df.dtypes
-```
-
-# 呈現資料分佈的圖形制作
-
-## 直方圖 Histogram
-
-```{python}
-pm25 = df[df['itemengname']=="PM2.5"]
-sns.histplot(data=pm25,x="concentration")
-plt.show()
-```
-
-```{python}
-sns.histplot(data=df[df['itemengname']=="PM10"],x="concentration")
-plt.show()
-```
-
-### Hands-on
-
-看看一氧化碳(CO)的資料分布
-
-```{python}
-#| eval: false
 #| echo: true
-# 請按照題目要求修改
-# 如修改正確，執行後會呈現圖形
-# 修改錯誤則會有錯誤訊息
-# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
-sns.histplot(data=df[df['itemengname']=="修改這裡"],x="concentration")
-plt.show()
+df_air.dtypes
 ```
 
-## 散佈圖 Scatter plot
+## Hands-on - Line Plot
 
-除了PM2.5濃度的數值分佈、PM2.5濃度隨著時間的變化外，我們可能也會對各項空污數據間的關聯性有興趣，此時可以用散佈圖將有興趣的濃度分別放在x軸與y軸。在Python中，可用`seaborn`套件的`scatterplot()`函數作圖，輸入函數有x軸與y軸數據，分列如下：
+請試著呈現林口測站在2024/1/1\~2024/1/15的PM2.5濃度，要呈現figure legend，也要呈現x y 軸的名字
 
-x軸：PM2.5濃度 y軸：PM10濃度
+Hint: 
 
+-   Subset, Boolean masking
+-   `df.sort_values(by=column)` (`df` can be any DataFrame)
 ```{python}
-sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
+pm25 = df_air[df_air['itemengname']=="PM2.5"]
+pm25Linkou = pm25[pm25['sitename']=="林口"]
+pm25Linkou2024 = pm25Linkou[(pm25Linkou['DateTime']>=pd.to_datetime("2024-01-01")) & (pm25Linkou['DateTime']<=pd.to_datetime("2024-01-15"))]
+pm25Linkou2024 = pm25Linkou2024.sort_values(by="DateTime")
+print(pm25Linkou2024)
+```
+## Hands-on - Line Plot
+
+請試著呈現林口測站在2024/1/1\~2024/1/15的PM2.5濃度，要呈現figure legend，也要呈現x y 軸的名字
+
+Ref:
+```{python}
+plt.plot(pm25Linkou2024['DateTime'], pm25Linkou2024['concentration'],label="林口")
+plt.legend()
+plt.xlabel("Date")
+plt.ylabel("PM2.5")
 plt.show()
 ```
+## Line Plot - Seaborn
 
-由上圖可知，PM2.5和PM10的資料分佈有一定關係，為了將此關係視覺化，可在散佈圖加上迴歸線。
-
-## 散佈圖 Scatter plot + 迴歸線
-
-在散佈圖中加上迴歸線可使用`seaborn`套件的`regplot()`函數，使用方法與`scatterplot()`函數相同。
+`sns.lineplot(x,y)`, `x` `y` 為資料點
 
 ```{python}
-sns.regplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
-plt.show()
-```
-
-### Hands-on
-
-試著看看最近的空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
-
-```{python}
-#| eval: false
 #| echo: true
-# 請按照題目要求修改
-# 如修改正確，會呈現圖形
-# 如修改錯誤，則會有錯誤訊息
-# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
-sns.regplot(df[修改這裡]['concentration'],df[修改這裡]['concentration'])
-plt.show()
+import seaborn as sns
+sns.lineplot(x=pm25Linkou2024['DateTime'], 
+              y=pm25Linkou2024['concentration'])
 ```
 
-# 比較各組或不同時間數據的圖形制作
+## Line Plot - Seaborn
 
-## 折線圖 Line chart
-
-在前述章節中，我們學會如何利用視覺化圖形觀察資料分佈，但若想要比較各組或不同時間的數據，如PM2.5濃度隨時間的變化，就需要使用其他視覺化的方法。 為了呈現各項數據與時間的關係，在此一樣先前範例載入的北京空氣污染數據。 如何呈現每天 PM2.5濃度的變化？
-
-可使用`seaborn`套件的`lineplot()`函數畫折線圖，此函數需要兩個參數，分別為x與y
-
--   x軸：日期
--   y軸：PM2.5濃度
+`sns.lineplot(data, x, y)`, `x` `y` 表示 column names 
 
 ```{python}
-sns.lineplot(x=pm25[pm25['sitename']=="麥寮"]['DateTime'], y=pm25[pm25['sitename']=="麥寮"]['concentration'])
-plt.show()
-```
-
-### Hands-on
-
-請試著呈現林口測站在2024/1/1\~2024/1/15的PM2.5濃度起伏
-
-```{python}
-#| eval: false
 #| echo: true
-# 請按照題目要求修改
-# 如修改正確，會呈現圖形
-# 如修改錯誤，則會有錯誤訊息
-# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位
-pm25Linkou = pm25[pm25['sitename']=="修改這裡"]
-sns.lineplot(pm25Linkou['DateTime'], pm25Linkou['修改這裡'])
+sns.lineplot(data = pm25Linkou2024, x='DateTime', y='concentration')
+```
+
+# Simple Scatter Plots 
+
+## What is a Scatter Plot?
+
+-   散佈圖**scatter plot**會將每一筆資料以點、圓圈或其他形狀單獨顯示，而不是用線條連接
+-   適合用來觀察兩個或多個變數之間的關係
+
+
+## Scatter Plots with `plt.plot()`
+
+`plt.plot(x,y,marker,color)`, `marker` 設定點的樣式, `color` 設定顏色
+
+```{python} 
+#| echo: true
+x = np.linspace(0, 10, 30)
+y = np.sin(x)
+plt.plot(x, y, 'o', color='black')
+```
+
+## Scatter Plots - marker shape
+`'o'`, `'.'`, `','`, `'x'`, `'+'`, `'v'`, `'^'`, `''`, `'s'`, `'d'` ...
+```{python} 
+#| echo: true
+rng = np.random.RandomState(0)
+for marker in ['o', '.', ',', 'x', '+', 'v', '^', '', 's', 'd']:
+    plt.plot(rng.rand(5), rng.rand(5), marker, label=f"marker='{marker}'")
+plt.legend()
+```
+
+## Line styles and marker shape
+
+結合標記與線條樣式，以製作更複雜的圖表
+
+```{python} 
+#| echo: true
+plt.plot(x, y, '-ok') # solid, circle, black
+```
+
+## Line styles and marker shape
+
+使用額外的參數來自訂標記和線條
+
+```{python} 
+#| echo: true
+plt.plot(x, y, '-p', color='gray', # solid, pentagon
+         markersize=15, linewidth=4,
+         markerfacecolor='white',
+         markeredgecolor='gray',
+         markeredgewidth=2)
+```
+
+
+## Scatter Plots with `plt.scatter`
+
+`plt.scatter(x, y)` 可針對對每個點的**size**, **color**及其他屬性進行個別控制。
+
+```{python}
+#| echo: true
+plt.scatter(x, y, marker='o')
+```
+
+## Varying color and size - Bubble chart
+Data:
+```{python} 
+#| echo: true
+rng = np.random.RandomState(0)
+x = rng.randn(100)
+y = rng.randn(100)
+colors = rng.rand(100)
+sizes = 1000 * rng.rand(100)
+```
+
+Parameters:
+
+-   `c`: color for each point
+-   `s` size
+-   `alpha` transparency
+-   `cmap` colormap (more details later)
+
+## with varying color and size - Bubble chart
+```{python} 
+#| echo: true
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap='viridis')
+plt.colorbar()  # Show color scale
+```
+
+## Visualizing Multidimensional Data
+
+Iris dataset, visualizing four features at once.
+
+Data:
+```{python} 
+#| echo: true
+# !pip3 install scikit-learn
+from sklearn.datasets import load_iris
+iris = load_iris()
+features = iris.data.T
+print(features)
+```
+
+## Visualizing Multidimensional Data
+x/y 位置、大小與顏色都分別代表不同的資料維度。
+```{python} 
+#| echo: true
+plt.scatter(features[0], features[1], alpha=0.2,
+            s=100*features[3], c=iris.target, cmap='viridis')
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+```
+## Visualizing Multidimensional Data
+
+```{python} 
+plt.scatter(features[0], features[1], alpha=0.2,
+            s=100*features[3], c=iris.target, cmap='viridis')
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+```
+
+## `plot` vs. `scatter`: Efficiency Note
+
+-   對於小型資料集，`plt.plot` 和 `plt.scatter` 都很不錯
+-   對於大型資料集（數千個點以上），`plt.plot` 的效率較高，因為所有點都使用相同的樣式繪製
+-   `plt.scatter` 在處理大型資料集時效率較低，因為它允許對每個點進行個別自訂，必須逐一繪製每個點。
+
+## Hands-on - Scatter Plot
+試著看看空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
+
+因NO2和SO2資料筆數對不起來（有些日期有多筆資料），需要先處理
+
+-   groupby將資料以日期、測站名稱以及污染物名稱分組，計算平均
+-   使用`資料框.unstack()`展開成寬表
+
+## Hands-on - Scatter Plot
+```{python}
+#| echo: true
+air_mean = df_air.groupby(['DateTime', 'sitename', 'itemengname']).concentration.mean().to_frame()
+air_wide = air_mean.unstack()
+print(air_wide)
+```
+
+## Hands-on - Scatter Plot
+試著看看空氣污染資料中，NO2濃度與SO2濃度有沒有相關？
+Ref:
+```{python}
+fig = plt.figure()
+plt.plot(air_wide["concentration","NO2"],air_wide["concentration","SO2"],marker='o', linestyle='')
 plt.show()
 ```
 
-## \[進階\] 如何在折線圖中同時呈現所有氣體變化呢？
+## Hands-on - Scatter Plot
 
-用單一折線圖有時不管用
+使用泡泡圖呈現NO2與SO2的關係，並用風速（WIND_SPEED）當作泡泡大小，觀察這些資料是否有相關
 
 ```{python}
-sns.lineplot(df202401[df202401['itemengname']=="PM2.5"]['DateTime'], df202401[df202401['itemengname']=="PM2.5"]['concentration'])
-sns.lineplot(df202401[df202401['itemengname']=="PM10"]['DateTime'], df202401[df202401['itemengname']=="PM10"]['concentration'])
-sns.lineplot(df202401[df202401['itemengname']=="CO"]['DateTime'], df202401[df202401['itemengname']=="CO"]['concentration'])
-sns.lineplot(df202401[df202401['itemengname']=="NO2"]['DateTime'], df202401[df202401['itemengname']=="NO2"]['concentration'])
-sns.lineplot(df202401[df202401['itemengname']=="O3"]['DateTime'], df202401[df202401['itemengname']=="O3"]['concentration'])
+fig = plt.figure()
+plt.scatter(air_wide["concentration","NO2"],air_wide["concentration","SO2"], alpha=0.2,
+            s = 80*air_wide["concentration","WIND_SPEED"],marker='o')
 plt.show()
 ```
 
-```{python}
-g = sns.FacetGrid(df202401[df202401['itemengname'].isin("PM2.5","PM10","CO","NO2","O3")], row="itemengname",height=2, aspect=6, sharey=False)
-g.map(sns.lineplot, "DateTime", "concentration")
+# Visualizing Errors
+
+## Why Show Error Bars?
+
+-   Error bars 表示資料中的不確定性或變異性
+-   有助於傳達測量結果的可靠性與精確度。
+-   例如，將一個測量值報告為 $$74 \pm 5$$ 比單純寫成 74 帶有更多資訊
+
+
+## Basic Error Bars with `plt.errorbar`
+
+`plt.errorbar(x, y, yerr=error size, fmt = style)`在圖中加入Error bars
+
+-   `yerr` 設定垂直Error bars的大小（長度）
+-   `fmt` 設定樣式 (same as in `plt.plot`)
+
+Data:
+```{python} 
+#| echo: true
+x = np.linspace(0, 10, 50) #(start,end,num)
+dy = 0.8
+y = np.sin(x) + dy * np.random.randn(50)
 ```
+
+## Basic Error Bars with `plt.errorbar`
+Plot: `plt.errorbar(x, y, yerr=error size, fmt = style)`
+```{python} 
+#| echo: true
+plt.errorbar(x, y, yerr=dy, fmt='.k')
+plt.show()
+```
+
+
+## Customizing Error Bars
+
+可在`plt.errorbar()`中微調error bar樣式 
+
+-   `ecolor`: error bars顏色
+-   `elinewidth`: error bar 線段寬度
+-   `capsize`: error bar caps寬度
+
+## Customizing Error Bars
+
+```{python} 
+#| echo: true
+plt.errorbar(
+    x, y, yerr=dy, fmt='o', color='black',
+    ecolor='lightgray', elinewidth=3, capsize=2
+)
+plt.show()
+```
+
+
+## Horizontal and One-Sided Error Bars
+
+使用 `plt.errorbar()`中的`xerr` 增加水平error bar
+
+```{python} 
+#| echo: true
+plt.errorbar(x, y, xerr=0.5, fmt='o')
+```
+
+
+## Summary: Common Error Bar Options
+
+| Parameter    | Description                            |
+|--------------|----------------------------------------|
+| `yerr`       | Vertical error bar sizes               |
+| `xerr`       | Horizontal error bar sizes             |
+| `fmt`        | Format string for marker/line style    |
+| `ecolor`     | Color of error bars                    |
+| `elinewidth` | Line width of error bars               |
+| `capsize`    | Size of caps at the ends of error bars |
+
+
+## Key Takeaways
+
+-   使用error bars顯示資料中的不確定性
+-   plt.errorbar 具有高度彈性與可自訂性，無論是簡單還是進階需求都適用
+-   更多選項請參考[Matplotlib documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.errorbar.html) 官方文件。
+
+# Histograms, Binnings, and Density
+
+## What is a Histogram?
+
+-   數值資料分佈**distribution**的圖形化呈現方式
+-   將資料分成多個區間（bins），並顯示每個區間內資料點的出現次數（頻率）
+-   是了解資料集的第一步
+
+
+## Creating a Simple Histogram
+
+`plt.hist(data)`, `data`通常是List 或Series
+```{python} 
+#| echo: true
+data = np.random.randn(1000)
+plt.hist(data)
+plt.show()
+```
+
+## Customizing Histograms
+
+可調整的參數
+
+-   `bins`: Number of bins
+-   `alpha`: Transparency
+-   `color`, `edgecolor`: Color settings
+
+```{python} 
+#| echo: true
+plt.hist(data, bins=30, alpha=0.5,color='steelblue',
+         edgecolor='none')
+plt.show()
+```
+
+## Customizing Histograms
+
+```{python} 
+#| echo: true
+plt.hist(data, bins=30, alpha=0.5,
+         histtype='stepfilled', color='steelblue',
+         edgecolor='none')
+plt.show()
+```
+
+
+## Comparing Multiple Distributions
+
+疊加多個直方圖histograms並設定透明度方便比較
+
+Data:
+```{python} 
+#| echo: true
+x1 = np.random.normal(0, 0.8, 1000)
+x2 = np.random.normal(-2, 1, 1000)
+x3 = np.random.normal(3, 2, 1000)
+```
+
+## Comparing Multiple Distributions
+使用`dict(parameters)`搭配`**kwargs`，將參數儲存後，方便多次使用
+```{python} 
+#| echo: true
+kwargs = dict(histtype='stepfilled', alpha=0.3, bins=40)
+plt.hist(x1, **kwargs)
+plt.hist(x2, **kwargs)
+plt.hist(x3, **kwargs)
+plt.show()
+```
+
+
+## Hands-on - Histogram
+
+看看新竹與前鎮一氧化碳(CO)的資料分布是否有差異（疊在一張圖中）
+
+```{python}
+#| echo: true
+CO = df_air[df_air['itemengname']=="CO"]
+x1 = CO[CO['sitename']=="新竹"]["concentration"]
+x2 = CO[CO['sitename']=="前鎮"]["concentration"]
+```
+
+```{python}
+kwargs = dict(alpha=0.3, bins=40)
+plt.hist(x1, **kwargs, label = "新竹")
+plt.hist(x2, **kwargs, label = "前鎮")
+plt.legend()
+plt.show()
+```
+
+# Customizing Plot Legends and Colorbars
+
+
+## Creating a Simple Legend
+
+-   圖例賦予圖表元素意義，使視覺化結果更清晰且資訊更豐富
+-   加入圖例最簡單的方法是使用 `plt.legend()`
+-   任何帶有 `label` 的圖表元素都會出現在圖例中
+
+## Creating a Simple Legend
+
+```{python} 
+#| echo: true
+x = np.linspace(0, 10, 1000)
+fig = plt.figure()
+plt.plot(x, np.sin(x), '-b', label='Sine')
+plt.plot(x, np.cos(x), '--r', label='Cosine')
+plt.axis('equal')
+plt.legend()
+```
+
+-   By default, all labeled elements are included in the legend
+
+
+## Customizing Legend Placement and Appearance
+
+-   **Location:** 使用 `loc` 參數控制位置 (e.g., `'upper left'`, `'lower center'`).
+-   **Frame:** 設定是否要加框 `frameon=False`或`frameon=True`.
+-   **Columns:** 使用 `ncol` 設定排版（幾個columns）
+
+## Legend Placement and Appearance
+
+```{python} 
+#| echo: true
+plt.plot(x, np.cos(x), '--r', label='Cosine')
+plt.legend(loc='upper left', frameon=False)
+```
+
+## Legend Placement and Appearance
+
+```{python} 
+#| echo: true
+plt.plot(x, np.cos(x), '--r', label='Cosine')
+plt.plot(x, np.sin(x), '-b', label='Sine')
+plt.legend(frameon=False, loc='lower center', ncol=2)
+```
+
+
+## Choosing Elements for the Legend
+
+
+如果有線段不需要圖標，可以直接不設定label
+
+```{python} 
+#| echo: true
+plt.plot(x, np.cos(x), '--r', label='Cosine')
+plt.plot(x, np.sin(x), '-b',)
+plt.legend(framealpha=1, frameon=True, loc='lower center', ncol=2)
+```
+
+
+## Key Points
+
+-   在繪圖指令中使用 `label`，並呼叫 `plt.legend()` 建立圖例。
+-   可以自訂圖例的位置、欄數、邊框等屬性。
+-   只為想要的元素加上標籤或傳入特定物件，即可控制圖例的項目。
+
+## Why Use Colorbars?
+
+-   提供解讀圖中顏色意義的對照表
+-   legends適用於離散標籤，而colorbars則是呈現連續標籤不可或缺的工具
+
+
+## Creating a Basic Colorbar
+Data:
+```{python} 
+#| echo: true
+x = np.linspace(0, 10, 1000)
+I = np.sin(x) * np.cos(x[:, np.newaxis])
+print(I)
+```
+## Creating a Basic Colorbar
+
+使用 `plt.colorbar()` 增加顏色對照表
+
+```{python} 
+#| echo: true
+plt.imshow(I)
+plt.colorbar()
+```
+## Customizing Colormaps
+
+使用預設的color map，並用`cmap`參數設定 (check `plt.cm` namespace (e.g., `plt.cm.viridis`, `plt.cm.RdBu`))
+
+```{python} 
+#| echo: true
+plt.imshow(I, cmap='gray')
+```
+
+## Types of Colormaps
+
+-   連續型色彩映射（Sequential colormaps）：使用一組連續的顏色序列 (e.g., `binary`, `viridis`).
+-   發散型色彩映射（Divergent colormaps）：用兩種對比顏色來表示正負偏差 (e.g., `RdBu`, `PuOr`).
+-   定性型色彩映射（Qualitative colormaps）：沒有特定順序，適合類別型資料 (e.g., `rainbow`, `jet`).
+
+## Setting Color Limits and Extensions
+
+-   使用 `plt.clim()` 手動設定顏色範圍（以聚焦於特定的資料區間）
+-   在 `plt.colorbar()` 中使用 extend 參數來標示超出範圍的數值
+
+```{python} 
+#| echo: true
+plt.imshow(I, cmap='RdBu')
+plt.colorbar(extend='both')
+plt.clim(-1, 1)
+```
+
+## Setting Color Limits and Extensions
+```{python} 
+plt.imshow(I, cmap='RdBu')
+plt.colorbar(extend='both')
+plt.clim(-1, 1)
+```
+## Discrete Colorbars
+
+可以用 `plt.cm.get_cmap()` 取得不連續的色塊，參數為哪個幾個色塊with number of bins
+
+```{python} 
+#| echo: true
+plt.imshow(I, cmap=plt.cm.get_cmap('Blues', 6))
+plt.colorbar()
+plt.clim(-1, 1)
+```
+
+## Key Points
+
+-   呈現連續型資料可使用色條，並謹慎選擇color map，確保圖表清晰且易於理解。
+-   可以透過選擇color map、設定顏色範圍、延伸區域以及離散色塊自訂color bar。
+-   可考慮配色在灰階或色盲觀眾眼中的呈現效果。
+
+# Multiple Subplots 
+
+
+## Why Use Multiple Subplots?
+
+-   將資料並排比較，方便分析和展示
+-   Matplotlib 可以在同一個圖形中排列多個較小的子圖（subplots）
+
+
+## 1. **Manual Placement with** `plt.axes`
+
+透過在圖形座標（0 到 1 之間）中指定 `[left, bottom, width, height]`，可以在圖中任意位置建立座標軸（axes）。
+
+```{python} 
+#| echo: true
+ax1 = plt.axes()  # Standard axes
+ax2 = plt.axes([0.65, 0.65, 0.2, 0.2])  # Inset axes at top-right
+```
+
+## 2. **Simple Grids with** `plt.subplot` 
+
+透過指定`row`、`col`和圖表索引`plot index`（從 1 開始，順序為從左到右、從上到下），可以建立子圖的網格
+`plt.subplot(row, col, plot index)`
+```{python} 
+#| echo: true
+for i in range(1, 7):
+    plt.subplot(2, 3, i)
+    plt.text(0.5, 0.5, str((2, 3, i)), fontsize=18, ha='center')
+```
+
+
+## 3. **Flexible Layouts with** 
+
+可使用`plt.GridSpec(row,col)`設定更複雜的子圖排版
+```{python} 
+#| echo: true
+grid = plt.GridSpec(2, 3, wspace=0.4, hspace=0.3)
+plt.subplot(grid[0, 0])
+plt.subplot(grid[0, 1:])
+plt.subplot(grid[1, :2])
+plt.subplot(grid[1, 2])
+```
+
+
+## Summary Table
+
+| Method         | Use Case                               | Access Pattern    |
+|--------------------|----------------------------------|-------------------|
+| `plt.axes`     | Manual, precise placement              | Variable names    |
+| `plt.subplot`  | Simple grid, small number of subplots  | Index (1-based)   |
+| `plt.GridSpec` | Complex, flexible layouts              | Slicing, subplots |
+
+
+
+# 管制圖 Control chart
+
 
 ## 管制圖 Control chart
 
-管制圖可視為折線圖的延伸，如上圖所示，因PM2.5濃度在自然狀態下就會高低起伏，如何判斷正常的變化以及不正常的變化就變得非常重要，使用管制圖可快速判斷不正常的數值起伏。 如需了解更多管制圖的背景知識，可參考[wiki](https://zh.wikipedia.org/wiki/%E7%AE%A1%E5%88%B6%E5%9C%96)
+-   管制圖可視為折線圖的延伸
+-   如PM2.5濃度在自然狀態下就會高低起伏，如何判斷正常的變化以及不正常的變化就變得非常重要，使用管制圖可快速判斷不正常的數值起伏。
+-   如需了解更多管制圖的背景知識，可參考[wiki](https://zh.wikipedia.org/wiki/%E7%AE%A1%E5%88%B6%E5%9C%96)
 
-在此使用平均值加減兩倍標準差以及加減三倍標準差當作管制界線，並使用`matplotlib`套件的`axhline()`函數將平均值與管制界線加入原有的折線圖中。因`seaborn`是基於`matplotlib`套件為基礎開發的更高階套件，因此圖形可直接疊加。 以下範例中`axhline()`函數共有以下輸入參數
+## 管制圖 Control chart
+
+使用平均值**加減兩倍標準差**以及**加減三倍標準差**當作管制界線，並使用`matplotlib`套件的`axhline()`函數將平均值與管制界線加入原有的折線圖中。
+
+以下範例中`axhline()`函數共有以下輸入參數
 
 -   y: 計算平均值`mean()`，計算標準差`std()`，`skipna=True`為跳過空值
 -   color: 修改線條顏色 （綠色g、黃色y、紅色r），其他顏色設定可參考[文件](https://matplotlib.org/tutorials/colors/colors.html)
 -   linestyle: 修改線條樣式 （虛線），其他樣式設定可參考[文件](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html)
 
+## 管制圖 Control chart
+若以三倍標準差當作管制界線，僅有幾個點超過兩個標準差，應在誤差範圍內
 ```{python}
-sns.lineplot(dfpm25['DateTime'], dfpm25['concentration'])
-plt.axhline(y=dfpm25['concentration'].mean(skipna=True), 
+#| echo: true
+fig = plt.figure()
+pm25Linkou =  pm25Linkou.sort_values("DateTime")
+plt.plot(pm25Linkou['DateTime'], pm25Linkou['concentration'])
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True), 
             color='g', linestyle='-')
-plt.axhline(y=dfpm25['concentration'].mean(skipna=True)+
-            2*dfpm25['concentration'].std(), 
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)+
+            2*pm25Linkou['concentration'].std(), 
             color='y', linestyle=':')
-plt.axhline(y=dfpm25['concentration'].mean(skipna=True)-
-            2*dfpm25['concentration'].std(), 
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)-
+            2*pm25Linkou['concentration'].std(), 
             color='y', linestyle=':')
-plt.axhline(y=dfpm25['concentration'].mean(skipna=True)+
-            3*dfpm25['concentration'].std(), 
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)+
+            3*pm25Linkou['concentration'].std(), 
             color='r', linestyle=':')
-plt.axhline(y=dfpm25['concentration'].mean(skipna=True)-
-            3*dfpm25['concentration'].std(), 
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)-
+            3*pm25Linkou['concentration'].std(), 
+            color='r', linestyle=':')
+plt.show()
+```
+## 管制圖 Control chart
+若以三倍標準差當作管制界線，僅有幾個點超過兩個標準差，應在誤差範圍內
+```{python}
+pm25Linkou =  pm25Linkou.sort_values("DateTime")
+plt.plot(pm25Linkou['DateTime'], pm25Linkou['concentration'])
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True), 
+            color='g', linestyle='-')
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)+
+            2*pm25Linkou['concentration'].std(), 
+            color='y', linestyle=':')
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)-
+            2*pm25Linkou['concentration'].std(), 
+            color='y', linestyle=':')
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)+
+            3*pm25Linkou['concentration'].std(), 
+            color='r', linestyle=':')
+plt.axhline(y=pm25Linkou['concentration'].mean(skipna=True)-
+            3*pm25Linkou['concentration'].std(), 
             color='r', linestyle=':')
 plt.show()
 ```
 
-由上圖可知，若以三倍標準差當作管制界線，一月初與一月底的幾個高峰可能為不正常變化，應考慮調查造成此變化的原因。
-
-## 長條圖 Bar chart
-
-若我們不是想要比較資料在不同日期的變化，而是想要比較資料**所屬類別的數量**，屬於各類別的數量比較，可用長條圖。
-
-如比較各測站PM2.5超標的天數，可使用`seaborn`套件的`barplot()`函數，其中輸入兩個參數
-
--   x軸: 測站名稱
--   y軸: PM2.5超標的天數
-
-首先使用pandas的groupby().size().reset_index()計算資料中個風向的計數資料，並儲存成wddf變數。
-
-```{python}
-pm25_count=pm25[pm25['concentration']>35].groupby('sitename').size().reset_index(name='size')
-pm25_count.sort_values('size', ascending=False).head()
-```
-
-```{python}
-sns.barplot(x=pm25_count['sitename'],y=pm25_count['size'])
-plt.show()
-```
-
-```{python}
-pm25_sorted = pm25_count.sort_values('size')
-sns.barplot(x=pm25_sorted['sitename'],y=pm25_sorted['size'])
-plt.show()
-```
-
-由此圖可知此資料區間中，吹NNE風向的天數最多，再來是N，以及NE。
 
 ## 盒鬚圖 Box plot
 
-除了用直方圖得知PM2.5的濃度分佈外，如果想知道每個測站 PM2.5濃度 的分佈（中位數、四分位差、離群值等）是否有差異，可使用盒鬚圖，盒鬚圖的各點意義如下：
+除了用直方圖得知PM2.5的濃度分佈外，如果想知道每個測站 PM2.5濃度 的分佈是否有差異，可使用盒鬚圖。
 
 -   x軸：測站
 -   y軸：PM2.5濃度
 -   盒（方塊）中線：中位數
 -   盒（方塊）上緣：第三 四分位差
 -   盒（方塊）下緣：第一 四分位差
--   鬚（線條）上緣：
--   鬚（線條）下緣：
+-   鬚（線條）上緣：最大值（不超過 Q3 + 1.5 × 四分位距）
+-   鬚（線條）下緣：最小值（不低於 Q1 - 1.5 × 四分位距）
 -   點：離群值
 
-使用seaborn套件的boxplot()函數，可製作盒鬚圖，輸入參數為：
 
--   x軸：月份
+## 盒鬚圖 Box plot
+
+使用`seaborn`套件的`boxplot()`函數，可製作盒鬚圖，輸入參數為：
+
+-   data：資料框
+-   x軸：測站
 -   y軸：各月份要比較的數據分佈（此為PM2.5）
 
 ```{python}
-pm25[['sitename','concentration']]
-sns.boxplot( x=pm25["sitename"], y=pm25["concentration"] )
+#| echo: true
+import seaborn as sns
+sns.boxplot(data = pm25, x="sitename", y="concentration")
+plt.show()
+```
+## 盒鬚圖 Box plot
+
+```{python}
+#| echo: false
+import seaborn as sns
+sns.boxplot(data = pm25, x="sitename", y="concentration")
 plt.show()
 ```
 
-### Hands-on
+## 盒鬚圖 Box plot
+
+```{python}
+#| echo: true
+import seaborn as sns
+sns.boxplot(data = pm25, x="sitename", y="concentration")
+plt.xticks(rotation=90)
+plt.show()
+```
+
+## Hands-on 盒鬚圖
 
 使用盒鬚圖比較各月PM2.5濃度有無差異
 
+須先將月份取出，使用pandas功能，`Series.dt.month`，`Series`可以是指定資料框欄位
 ```{python}
-#| eval: false
-#| echo: true
-# 請按照題目要求修改
-# 如修改正確，會呈現一樣的圖形
-# 如修改錯誤，則會有錯誤訊息
-# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
-
-sns.boxplot(x=pm25["修改這裡"], y=pm25["concentration"] )
-plt.show()
+#| echo: false
+pm25["Month"]=pm25.DateTime.dt.month
+print(pm25.head())
 ```
 
-# 呈現相關性的圖形制作
-
-## 泡泡圖 Bubble plot -1
-
-泡泡圖是散佈圖的延伸，散佈圖除了可以觀察資料分佈外，也可呈現兩組資料的相關性。
-
-在散佈圖中，每個點代表一組X與Y的數值，因此可比較XY數值，也可看出X與Y的關係。如比較PM2.5與PM10是否有關，在先前的範例中，可看出PM2.5和PM10是顯著的相關，也就是PM2.5越高，PM10就越高。
-
-泡泡圖維持散佈圖的X與Y軸關係，但在點的大小上增加變化，將原本二維(XY)的圖形延伸成三維(XY與泡泡大小)。
-
-## 泡泡圖 Bubble plot -2
-
-首先如先前的教學，我們先做一般的散佈圖，X軸為PM2.5，Y軸為PM10：
-
+## Hands-on 盒鬚圖
+Ref:
 ```{python}
-sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'])
-plt.show()
-```
-
-## 泡泡圖 Bubble plot -3
-
-```{python}
-sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'],size=df[df['itemengname']=="WIND_SPEED"]['concentration'])
-plt.show()
-```
-
-由上圖可以發現各點的大小差距不大，導致分不太出來各點的大小差距
-
-## 泡泡圖 Bubble plot -4
-
-可以透過sizes參數設定最大點與最小點的大小，即可畫出點大小差異較大的圖形
-
-```{python}
-sns.scatterplot(df[df['itemengname']=="PM2.5"]['concentration'],df[df['itemengname']=="PM10"]['concentration'],size=df[df['itemengname']=="WIND_SPEED"]['concentration'],sizes=(20, 200))
-plt.show()
-```
-
-### Hands-on
-
-使用泡泡圖呈現NO2與SO2的關係，並用氣溫（TEMP）當作泡泡大小，觀察這三個資料是否有相關
-
-```{python}
-#| eval: false
-#| echo: true
-# 請按照題目要求修改
-# 如修改正確，會呈現一樣的圖形
-# 如修改錯誤，則會有錯誤訊息
-# 錯誤訊息的最下方為 KeyError: '修改這裡'，表示我們的資料表中沒有'修改這裡'這個欄位，
-sns.scatterplot(df[df['itemengname']=="修改這裡"]['concentration'],df[df['itemengname']=="修改這裡"]['concentration'],size=df[df['itemengname']=="修改這裡"]['concentration'],sizes=(20, 200))
+import seaborn as sns
+sns.boxplot(data = pm25, x="Month", y="concentration")
 plt.show()
 ```
 
@@ -363,14 +963,27 @@ plt.show()
 
 ## 熱度圖 Heatmap
 
-熱度圖使用顏色的深淺來表示數值的大小，通常會搭配XY兩軸的變量，所以使用一張圖就能表示三個維度的資訊，使用seaborn套件的heatmap()函數，即可製作熱度圖。在製作熱度圖之前，必須先將輸入資料處理成對應格式，舉例來說，若想使用熱度圖呈現每天（X軸為日期），PM2.5、PM10、SO2、NO2（Y軸為此四種污染物）的濃度（著色），我們必須將Pandas資料框的index設定為日期，PM2.5、PM10、SO2以及NO2為欄位名稱，各欄位的值是當日該物質的濃度。
+-   熱度圖使用顏色的深淺來表示數值的大小，通常會搭配XY兩軸的變量，所以使用一張圖就能表示三個維度的資訊。
+-   使用`seaborn`套件的`heatmap()`函數
+-   在製作熱度圖之前，必須先將輸入資料處理成對應格式
+-   若想使用熱度圖呈現每天（X軸為日期），PM2.5、PM10、SO2、NO2（Y軸為此四種污染物）的濃度（著色），我們必須將Pandas資料框的index設定為日期，PM2.5、PM10、SO2以及NO2為欄位名稱，各欄位的值是當日該物質的濃度。
 
-最後將資料放入seaborn套件的heatmap()函數，即可製作熱度圖。 有時使用內建色盤效果不一定好，可以透過設定cmap來調整色盤。 cmap的選擇可參考[官方文件](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
-
+## 熱度圖 Heatmap
 ```{python}
-df_long = df[df['itemengname'].isin("PM2.5","PM10","CO","NO2","O3")]
+#| echo: true
+df_long = df_air[df_air['itemengname'].isin(["PM2.5","PM10","CO","NO2","O3"])]
 df_long_linkou=df_long[df_long['sitename']=="林口"][["DateTime","itemengname","concentration"]]
 df_wide_linkou = pd.pivot(df_long_linkou, index='itemengname', columns='DateTime',values='concentration')
+print(df_wide_linkou)
+```
+## 熱度圖 Heatmap
+-   最後將資料放入seaborn套件的heatmap()函數，即可製作熱度圖。 
+-   有時使用內建色盤效果不一定好，可以透過設定cmap來調整色盤。 
+-   cmap的選擇可參考[官方文件](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html)
+
+## 熱度圖 Heatmap
+```{python}
+#| echo: true
 ax = sns.heatmap(df_wide_linkou, cmap="YlGnBu")
 plt.show()
 ```
@@ -383,39 +996,54 @@ plt.show()
 -   Y軸代表星期一至星期天
 -   顏色的深淺則代表欲觀察數值
 
-通常是為了觀察或呈現某一數值是否有季節或是隨著星期變化的趨勢。 在Python中，calmap套件提供非常快速製作月曆熱度圖的方法。與製作熱度圖相同，在製作月曆熱度圖時，也必須對資料做一定的處理。 首先將日期與感興趣的資料取出，方便後續呈現
+通常是為了觀察或呈現某一數值是否有季節或是隨著星期變化的趨勢。 
+
+`calmap`套件提供非常快速製作月曆熱度圖的方法。
+
+## 月曆熱度圖
+
+在製作月曆熱度圖時，需將日期與感興趣的資料取出，並將日期設定為index
 
 ```{python}
+#| echo: true
+pm25Linkou2023 = pm25Linkou[pm25Linkou["DateTime"]<'2024-01-01']
+pm25Linkou2023=pm25Linkou2023.set_index(['DateTime'])
+print(pm25Linkou2023)
+```
+## 月曆熱度圖
+
+`calmap.yearplot(資料框)`即可畫月曆熱度圖
+
+```{python}
+#| echo: true
 import calmap
-df2023=df[df["DateTime"]<'2024-01-01']
-df2023=df2023.set_index(['DateTime'])
-calmap.yearplot(df2023[df2023['itemengname']=='PM2.5']['concentration'], year=2023)
+calmap.yearplot(pm25Linkou2023[pm25Linkou2023['itemengname']=='PM2.5']['concentration'], year=2023)
 plt.show()
 ```
 
+# 矩形圖 Tree map
 ## 矩形圖 Tree map
-
-Treemap(矩形式樹狀結構繪圖法)是以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊，可設定得值包括面積、顏色以及階層。
+Treemap(矩形式樹狀結構繪圖法)是以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊，可設定的值包括`面積`、`顏色`以及`階層`。
 
 ```{python}
-import squarify 
+#| echo: true
 df_sq = pd.DataFrame({'nb_people':[8,3,4,2], 
                    'group':["group A", "group B", "group C", "group D"] })
 df_sq
 ```
 
 ## 矩形圖 Tree map
-
+使用`squarify`套件的功能，設定`sizes`, `labels`即可
 ```{python}
+#| echo: true
+#!pip3 install squarify
+import squarify 
 squarify.plot(sizes=df_sq['nb_people'], 
               label=df_sq['group'], alpha=.8 )
 plt.axis('off')
 plt.show()
 ```
 
-# 圖形樣式參數設定
-
-https://github.com/yijutseng/DataVisPython/blob/master/DataVisCode.ipynb \# 參考資料
 
 ## Python資料視覺化參考資料
 

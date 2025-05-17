@@ -170,7 +170,9 @@ from sklearn import metrics
 ```
 
 ## 載入資料
+從`datasets`套件中，透過`datasets.load_breast_cancer()`讀取乳癌資料。
 
+資料包含“data”物件與"target"物件，可分別讀取出來
 ```{python}
 #| echo: true
 cancer = datasets.load_breast_cancer()
@@ -181,8 +183,9 @@ print(X.head())
 
 ## 拆分成訓練集與測試集
 
--   `train_test_split(X,y,test_size=比例,random_state=隨機種子)`
 -   依照設定比例將資料隨機分為訓練組與測試組
+-   `train_test_split(X,y,test_size=比例,random_state=隨機種子)`
+
 
 ```{python}
 #| echo: true
@@ -193,7 +196,7 @@ print(X_test.size)
 
 ## 整合訓練集
 
-`pd.concat([df1,df2], axis = 1)` 左右整合`df1`和`df2`
+使用`pd.concat([X_train,y_train], axis = 1)` 左右整合`df1`和`df2`兩個資料框，這兩個資料框內容分別為分類標籤（答案）`y_train`以及分類用特徵`X_train`。
 
 ```{python}
 #| echo: true
@@ -203,8 +206,8 @@ print(train.head())
 
 ## 自動訓練
 
--   `setup(有標籤的訓練資料,targe=標籤名稱)` 設定 PyCaret AutoML環境
--   `compare_models()` 選擇最好的模型
+-   使用`setup(有標籤的訓練資料框,targe=標籤欄位名稱)` 設定 PyCaret AutoML環境
+-   `compare_models()` 選擇最好的模型，另存成模型物件`best_model`
 
 ```{python}
 #| echo: true
@@ -224,8 +227,8 @@ evaluate_model(best_model)
 
 ## 用在測試集上（模型驗證）
 
--   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型用在測試集中
--   `metrics.accuracy_score(正確答案,預測答案)`計算準確率
+-   `predict_model(訓練出來的模型物件,data = 測試資料)` 將訓練好的模型`best_model`用在測試集`X_test`中，並儲存成預測結果變數`y_pred_pycaret`
+-   `metrics.accuracy_score(正確答案,預測答案)`計算準確率，預測答案可從前一個功能的預測結果變數取出（在`prediction_label`欄位中）
 
 ```{python}
 #| echo: true
@@ -236,7 +239,7 @@ print("PyCaret Testing Data Accuracy: %.5f" % result)
 
 ## 測在其他資料上
 
-鐵達尼號資料集
+鐵達尼號資料集，因為資料集中本來就有標籤，所以不用再整合。
 
 ```{python}
 #| echo: true
@@ -248,8 +251,8 @@ print(train.head())
 
 ## 自動訓練
 
--   `setup(有標籤的訓練資料,targe=標籤名稱)` 設定 PyCaret AutoML環境
--   `compare_models()` 選擇最好的模型
+-   `setup(有標籤的訓練資料,targe=標籤名稱)` 設定 PyCaret AutoML環境。有標籤的資料為`train`，預測是否存活的標籤名稱為`Survived`
+-   `compare_models()` 選擇最好的模型，並儲存成`best_model`模型物件。
 
 ```{python}
 #| echo: true
@@ -260,7 +263,7 @@ print(best_model)
 
 ## 模型評估
 
--   `evaluate_model(模型物件)` 評估模型內容
+-   `evaluate_model(模型物件)` 評估`best_model`模型內容
 
 ```{python}
 #| echo: true
@@ -270,7 +273,7 @@ evaluate_model(best_model)
 
 ## 用在測試集上（模型驗證）
 
--   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型用在測試集中
+-   `predict_model(訓練出來的模型,data = 測試資料)` 將訓練好的模型`best_model`用在測試集`test`中
 -   `metrics.accuracy_score(正確答案,預測答案)`計算準確率
 
 ```{python}
@@ -305,7 +308,7 @@ print(stock_data.head())
 
 ## Hands-on AutoML 資料前處理
 
-計算移動平均
+為了平滑化曲線，計算移動平均
 
 ```{python}
 #| echo: true
@@ -323,7 +326,7 @@ print(stock_ana.head())
 ```
 
 ## Hands-on AutoML 切訓練集與測試集
-
+`train_test_split(X,y,test_size=比例,random_state=隨機種子)`
 ```{python}
 #| echo: true
 features = stock_ana.columns[:-1]
@@ -349,8 +352,8 @@ print(train.head())
 -   AutoML
 -   **深度學習簡介**
 -   AutoKeras
--   (補充資料)scikit-learn - ML with Python 常用套件
--   (補充資料)keras - DL with Python 常用套件
+-   (補充資料) scikit-learn - ML with Python 常用套件
+-   (補充資料) keras - DL with Python 常用套件
 
 # Deep Learning 深度學習
 
@@ -397,7 +400,9 @@ from keras import layers
 
 ## 資料前處理
 
--   Model / data parameters
+-   使用`keras`內建MNIST資料，`keras.datasets.mnist.load_data()`
+-   總共有10個分類
+-   資料維度(28, 28, 1)
 -   區分訓練集與測試集
 
 ```{python}
@@ -410,16 +415,34 @@ input_shape = (28, 28, 1)
 
 ## 資料前處理
 
--   像素標準化 Scale images to the \[0, 1\] range
--   確認資料維度(28, 28, 1)
+像素標準化 Scale images to the \[0, 1\] range，直接除255
 
 ```{python}
 #| echo: true
 #| cache: true
+print(x_train)
 x_train = x_train.astype("float32") / 255
 x_test = x_test.astype("float32") / 255
+print(x_train)
+```
+
+## 資料前處理
+
+```{python}
+#| echo: true
+#| cache: true
 x_train = np.expand_dims(x_train, -1)
 x_test = np.expand_dims(x_test, -1)
+print(x_train)
+```
+
+## 資料前處理
+
+確認資料筆數與維度
+
+```{python}
+#| echo: true
+#| cache: true
 print("x_train shape:", x_train.shape)
 print(x_train.shape[0], "train samples")
 print(x_test.shape[0], "test samples")
@@ -454,17 +477,20 @@ plt.clf()
 
 ## 資料類別轉換
 
-將0\~9轉換為二維的分類答案
+將0\~9透過`keras.utils.to_categorical(資料標籤,幾種預測結果)`轉換為二維的分類答案
 
 ```{python}
 #| echo: true
 #| cache: true
+print(y_test)
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 print(y_test)
 ```
 
 ## 模型架構設計
+
+一層卷積層`layers.Conv2D`，一層池化層`layers.MaxPooling2D`，再一層卷積層`layers.Conv2D`，再一層池化層`layers.MaxPooling2D`，最後全連接層`layers.Flatten`，以及`layers.Dropout`。存成`model`變數
 
 ```{python}
 #| echo: true
@@ -493,7 +519,7 @@ model.summary()
 ```
 
 ## 模型訓練
-
+`batch_size`設定每一批次訓練的資料筆數，`epochs`設定要訓練幾輪，最後使用剛剛設計好的模型架構`model`，執行`model.compile`以及`model.fit`
 ```{python}
 #| echo: true
 #| cache: true
@@ -506,7 +532,7 @@ model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_spl
 ```
 
 ## 模型驗證
-
+使用`model.evaluate(測試資料集,測試資料正確答案)`驗證模型準確度
 ```{python}
 #| echo: true
 #| eval: false
@@ -547,12 +573,11 @@ Pre-trained on ImageNet
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ## 載入股價資料
 
--   載入之前用過的NVDA股價
+載入NVDA股價
 
 ```{python}
 #| echo: true
@@ -578,8 +603,8 @@ plt.clf()
 
 ```{python}
 #| echo: true
-test = NVDA[NVDA["Date"]>'2022-01-01']
-train = NVDA[:len(NVDA)-len(test)]
+test = NVDA[NVDA["Date"]>'2022-01-01'] #2022年後的是測試組
+train = NVDA[:len(NVDA)-len(test)] #其他的是訓練組
 train_set = train['Close']
 test_set = test['Close']
 ```
@@ -592,8 +617,8 @@ test_set = test['Close']
 ```{python}
 #| echo: true
 from sklearn.preprocessing import MinMaxScaler 
-sc = MinMaxScaler(feature_range = (0, 1))
 train_set= train_set.values.reshape(-1,1)
+sc = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = sc.fit_transform(train_set)
 ```
 
@@ -638,7 +663,7 @@ from keras.layers import Dropout,BatchNormalization
 
 ## 訓練簡單的LSTM模型
 
-僅用一層LSTM
+使用keras內的`Sequential()`功能創建新的回歸訓練模型。並增加一層LSTM。最後`regressor.compile`決定模型樣貌。
 
 ```{python}
 #| echo: true
@@ -651,7 +676,7 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 ```
 
 ## 觀看訓練情形
-
+`regressor.fit`訓練模型
 ```{python}
 #| echo: true
 #| cache: true
@@ -673,7 +698,7 @@ plt.clf()
 
 ## 預測資料前處理
 
-同上邏輯，處理成14天`days`一段資料
+同上邏輯，處理測試集成14天一段資料
 
 ```{python}
 #| echo: true
@@ -691,7 +716,7 @@ print(X_test[0])
 
 ## 預測
 
-因為資料有標準化，因此用`sc.inverse_transform`還原
+使用`regressor.predict(測試資料)`預測股價。因為資料有標準化，因此用`sc.inverse_transform`還原
 
 ```{python}
 #| echo: true
