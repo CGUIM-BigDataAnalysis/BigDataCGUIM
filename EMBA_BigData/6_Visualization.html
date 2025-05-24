@@ -412,14 +412,14 @@ Yi-Ju Tseng
 </section>
 <section id="importing-matplotlib" class="slide level2">
 <h2>Importing Matplotlib</h2>
-<div id="bc206f73" class="cell" data-execution_count="1">
+<div id="6bdb0d6c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># !pip3 install matplotlib</span></span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
 <span id="cb1-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>plt</code> 為常用介面</p>
 <p>載入其他重要的library</p>
-<div id="c9aab92b" class="cell" data-execution_count="2">
+<div id="90d7cb73" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -428,7 +428,7 @@ Yi-Ju Tseng
 <h2>Figure</h2>
 <p><strong>figure</strong> (from <code>plt.Figure</code>) 包含軸、點、文字等內容的物件</p>
 <p><code>plt</code> 來自<code>import matplotlib.pyplot as plt</code></p>
-<div id="ce3fe6bf" class="cell" data-execution_count="3">
+<div id="603a6860" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>fig <span class="op">=</span> plt.figure()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
@@ -438,16 +438,16 @@ Yi-Ju Tseng
 <section id="saving-figures" class="slide level2">
 <h2>Saving Figures</h2>
 <p><code>fig.savefig()</code>存圖</p>
-<div id="94821fdb" class="cell" data-execution_count="4">
+<div id="bfee3064" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>fig.savefig(<span class="st">'my_figure.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>檔案格式由副檔名指定</li>
 <li>PNG, JPG, PDF, TIFF, and more.</li>
 </ul>
-<div id="30264917" class="cell" data-execution_count="5">
+<div id="15d1278a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>fig.canvas.get_supported_filetypes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="86">
 <pre><code>{'eps': 'Encapsulated Postscript',
  'jpg': 'Joint Photographic Experts Group',
  'jpeg': 'Joint Photographic Experts Group',
@@ -473,13 +473,13 @@ Yi-Ju Tseng
 <section id="plotting-a-simple-function" class="slide level2">
 <h2>Plotting a Simple Function</h2>
 <p>使用 <code>plt.plot(x,y)</code>, <code>plt</code>來自<code>import matplotlib.pyplot as plt</code></p>
-<div id="8ee6a9a8" class="cell" data-execution_count="6">
+<div id="ca77a76d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>) <span class="co">#(start, stop, num)</span></span>
 <span id="cb8-2"><a href=""></a>plt.plot(x, np.sin(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-7-output-1.png" width="813" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-7-output-1.png" width="812" height="412"></p>
 </figure>
 </div>
 </div>
@@ -488,13 +488,13 @@ Yi-Ju Tseng
 <section id="multiple-lines-in-one-plot" class="slide level2">
 <h2>Multiple Lines in One Plot</h2>
 <p>多次呼叫 <code>plt.plot</code>可直接疊圖</p>
-<div id="c73a8961" class="cell" data-execution_count="7">
+<div id="8fcb079d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>plt.plot(x, np.sin(x))</span>
 <span id="cb9-2"><a href=""></a>plt.plot(x, np.cos(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-8-output-1.png" width="813" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-8-output-1.png" width="812" height="412"></p>
 </figure>
 </div>
 </div>
@@ -503,7 +503,7 @@ Yi-Ju Tseng
 <section id="customizing-line-color" class="slide level2">
 <h2>Customizing Line Color</h2>
 <p>在<code>plt.plot()</code> 中使用 <code>color</code> 參數指定顏色</p>
-<div id="ede1d197" class="cell" data-execution_count="8">
+<div id="03933b0f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>plt.plot(x, np.sin(x <span class="op">-</span> <span class="dv">0</span>), color<span class="op">=</span><span class="st">'blue'</span>)        <span class="co"># by name</span></span>
 <span id="cb10-2"><a href=""></a>plt.plot(x, np.sin(x <span class="op">-</span> <span class="dv">1</span>), color<span class="op">=</span><span class="st">'g'</span>)           <span class="co"># short code (r, g, b, c, m, y, k)</span></span>
 <span id="cb10-3"><a href=""></a>plt.plot(x, np.sin(x <span class="op">-</span> <span class="dv">2</span>), color<span class="op">=</span><span class="st">'0.75'</span>)        <span class="co"># grayscale</span></span>
@@ -513,7 +513,7 @@ Yi-Ju Tseng
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-9-output-1.png" width="813" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-9-output-1.png" width="812" height="412"></p>
 </figure>
 </div>
 </div>
@@ -522,7 +522,7 @@ Yi-Ju Tseng
 <section id="customizing-line-style" class="slide level2">
 <h2>Customizing Line Style</h2>
 <p>在<code>plt.plot()</code>中使用<code>linestyle</code> 參數指定線段樣式</p>
-<div id="12e7f8b3" class="cell" data-execution_count="9">
+<div id="5504bbdd" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">'solid'</span>)</span>
 <span id="cb11-2"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">'dashed'</span>)</span>
 <span id="cb11-3"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'dashdot'</span>)</span>
@@ -535,7 +535,7 @@ Yi-Ju Tseng
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-10-output-1.png" width="802" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-10-output-1.png" width="798" height="412"></p>
 </figure>
 </div>
 </div>
@@ -543,7 +543,7 @@ Yi-Ju Tseng
 </section>
 <section id="customizing-line-color-and-style" class="slide level2">
 <h2>Customizing Line Color and Style</h2>
-<div id="556d8934" class="cell" data-execution_count="10">
+<div id="d41f1a57" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">0</span>, <span class="st">'-g'</span>)  <span class="co"># solid green</span></span>
 <span id="cb12-2"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">1</span>, <span class="st">'--c'</span>) <span class="co"># dashed cyan</span></span>
 <span id="cb12-3"><a href=""></a>plt.plot(x, x <span class="op">+</span> <span class="dv">2</span>, <span class="st">'-.k'</span>) <span class="co"># dashdot black</span></span>
@@ -551,7 +551,7 @@ Yi-Ju Tseng
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-11-output-1.png" width="789" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-11-output-1.png" width="787" height="412"></p>
 </figure>
 </div>
 </div>
@@ -560,12 +560,12 @@ Yi-Ju Tseng
 <section id="adjusting-axes-limits" class="slide level2">
 <h2>Adjusting Axes Limits</h2>
 <p><code>plt.axis([xmin, xmax, ymin, ymax])</code>設定圖片範圍限制，limits要用list包起來<code>[xmin, xmax, ymin, ymax]</code></p>
-<div id="b152a1cc" class="cell" data-execution_count="11">
+<div id="e4d7cf8b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>plt.axis([<span class="op">-</span><span class="dv">1</span>, <span class="dv">11</span>, <span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-12-output-1.png" width="805" height="416"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-12-output-1.png" width="804" height="417"></p>
 </figure>
 </div>
 </div>
@@ -574,18 +574,18 @@ Yi-Ju Tseng
 <section id="adding-titles-labels-and-legends" class="slide level2">
 <h2>Adding Titles, Labels, and Legends</h2>
 <p><code>plt.title()</code>, <code>plt.xlabel()</code>, <code>plt.ylabel()</code></p>
-<div id="f5832520" class="cell" data-execution_count="12">
+<div id="25fc8592" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>plt.plot(x, np.sin(x))</span>
 <span id="cb14-2"><a href=""></a>plt.title(<span class="st">"A Sine Curve"</span>)</span>
 <span id="cb14-3"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
 <span id="cb14-4"><a href=""></a>plt.ylabel(<span class="st">"sin(x)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="93">
 <pre><code>Text(0, 0.5, 'sin(x)')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-13-output-2.png" width="832" height="449"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-13-output-2.png" width="831" height="451"></p>
 </figure>
 </div>
 </div>
@@ -594,14 +594,14 @@ Yi-Ju Tseng
 <section id="adding-titles-labels-and-legends-1" class="slide level2">
 <h2>Adding Titles, Labels, and Legends</h2>
 <p>要呈現圖標，先在 <code>plt.plot()</code> 時增加 <code>label</code> 參數，最後呼叫 <code>plt.legend()</code></p>
-<div id="0138e671" class="cell" data-execution_count="13">
+<div id="b560b798" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>plt.plot(x, np.sin(x), <span class="st">'-g'</span>, label<span class="op">=</span><span class="st">'sin(x)'</span>)</span>
 <span id="cb16-2"><a href=""></a>plt.plot(x, np.cos(x), <span class="st">':b'</span>, label<span class="op">=</span><span class="st">'cos(x)'</span>)</span>
 <span id="cb16-3"><a href=""></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="6_Visualization_files/figure-revealjs/cell-14-output-1.png" width="813" height="411"></p>
+<p><img data-src="6_Visualization_files/figure-revealjs/cell-14-output-1.png" width="812" height="412"></p>
 </figure>
 </div>
 </div>
@@ -613,19 +613,19 @@ Yi-Ju Tseng
 <ol type="1">
 <li>Load library</li>
 </ol>
-<div id="4e240163" class="cell" data-execution_count="14">
+<div id="be461e23" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> matplotlib</span>
 <span id="cb17-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>中文問題….</li>
 </ol>
-<div id="bb0b4ac3" class="cell" data-execution_count="15">
+<div id="9c3953ea" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># colab顯示繁體中文 問題：matplotlib繪圖，會發生中文無法顯示的問題</span></span>
 <span id="cb18-2"><a href=""></a><span class="co"># 先下載台北黑體字型</span></span>
 <span id="cb18-3"><a href=""></a><span class="op">!</span>gdown <span class="st">'1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_'</span> <span class="op">--</span>output TaipeiSansTCBeta<span class="op">-</span>Regular.ttf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a901701d" class="cell" data-execution_count="16">
+<div id="47cd690b" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># 新增字體</span></span>
 <span id="cb19-2"><a href=""></a>matplotlib.font_manager.fontManager.addfont(<span class="st">'TaipeiSansTCBeta-Regular.ttf'</span>)</span>
 <span id="cb19-3"><a href=""></a><span class="co"># 將 font-family 設為 Taipei Sans TC Beta</span></span>
@@ -636,7 +636,7 @@ Yi-Ju Tseng
 <section id="hands-on---line-plot-1" class="slide level2">
 <h2>Hands-on - Line Plot</h2>
 <p>Data: 空氣品質監測日平均值(一般污染物)</p>
-<div id="f164131f" class="cell" data-execution_count="17">
+<div id="6ae6c6c3" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># https://data.moenv.gov.tw/dataset/detail/AQX_P_19</span></span>
 <span id="cb20-2"><a href=""></a><span class="co"># https://drive.google.com/drive/folders/1OrMlB4hP8nnW_0bYwoHRO6DRXWNk1qvy?usp=sharing</span></span>
 <span id="cb20-3"><a href=""></a><span class="op">!</span>gdown <span class="st">'1P3qrYrynZhXDC13dVo5KhDXmld5OGZz1'</span> <span class="op">--</span>output <span class="fl">202310.</span><span class="er">csv</span></span>
@@ -648,7 +648,7 @@ Yi-Ju Tseng
 <section id="hands-on---line-plot-2" class="slide level2">
 <h2>Hands-on - Line Plot</h2>
 <p>Data</p>
-<div id="7ff16c11" class="cell" data-execution_count="18">
+<div id="1e06868d" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a>df202401 <span class="op">=</span> pd.read_csv(<span class="st">'202401.csv'</span>) </span>
 <span id="cb21-2"><a href=""></a>df202312 <span class="op">=</span> pd.read_csv(<span class="st">'202312.csv'</span>) </span>
 <span id="cb21-3"><a href=""></a>df202311 <span class="op">=</span> pd.read_csv(<span class="st">'202311.csv'</span>) </span>
@@ -675,7 +675,7 @@ Yi-Ju Tseng
 <section id="hands-on---line-plot-3" class="slide level2">
 <h2>Hands-on - Line Plot</h2>
 <p>Data Clean: Remove the quotes “” of column headers</p>
-<div id="ff567a84" class="cell" data-execution_count="19">
+<div id="55d32652" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>new_headers <span class="op">=</span> []</span>
 <span id="cb23-2"><a href=""></a><span class="cf">for</span> header <span class="kw">in</span> df_air.columns: <span class="co"># data.columns is your list of headers</span></span>
 <span id="cb23-3"><a href=""></a>    header <span class="op">=</span> header.strip(<span class="st">'"'</span>) <span class="co"># Remove the quotes off each header</span></span>
@@ -702,15 +702,15 @@ Yi-Ju Tseng
 <section id="hands-on---line-plot-4" class="slide level2">
 <h2>Hands-on - Line Plot</h2>
 <p>Data Clean: Data type</p>
-<div id="12c32928" class="cell" data-execution_count="20">
+<div id="b1747db7" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a>df_air[<span class="st">'concentration'</span>].dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="99">
 <pre><code>dtype('O')</code></pre>
 </div>
 </div>
-<div id="2605a2d4" class="cell" data-execution_count="21">
+<div id="820deda0" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a>df_air[<span class="st">'concentration'</span>][<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="100">
 <pre><code>0     33
 1    3.8
 2    0.5
@@ -720,13 +720,13 @@ Name: concentration, dtype: object</code></pre>
 </div>
 </div>
 <p><code>pd.to_numeric(List or Series, errors={‘ignore’, ‘raise’, ‘coerce’})</code></p>
-<div id="036f003f" class="cell" data-execution_count="22">
+<div id="8b7890ee" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a>df_air[<span class="st">'concentration'</span>] <span class="op">=</span> pd.to_numeric(df_air[<span class="st">'concentration'</span>], </span>
 <span id="cb29-2"><a href=""></a>                                        errors<span class="op">=</span><span class="st">"coerce"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="39058785" class="cell" data-execution_count="23">
+<div id="26cfe2b6" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>df_air[<span class="st">'concentration'</span>].dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="102">
 <pre><code>dtype('float64')</code></pre>
 </div>
 </div>
@@ -734,21 +734,21 @@ Name: concentration, dtype: object</code></pre>
 <section id="hands-on---line-plot-5" class="slide level2">
 <h2>Hands-on - Line Plot</h2>
 <p>Data Clean: Data type</p>
-<div id="d15adcc2" class="cell" data-execution_count="24">
+<div id="a828abc7" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>df_air[<span class="st">'monitordate'</span>].dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="103">
 <pre><code>dtype('O')</code></pre>
 </div>
 </div>
 <p><code>pd.to_datetime(List or Series, errors={‘ignore’, ‘raise’, ‘coerce’},format=)</code></p>
-<div id="39ba5c5e" class="cell" data-execution_count="25">
+<div id="7d831b09" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a><span class="co"># Parse String To DateTime</span></span>
 <span id="cb34-2"><a href=""></a>df_air[<span class="st">'DateTime'</span>]<span class="op">=</span>pd.to_datetime(df_air[<span class="st">'monitordate'</span>],</span>
 <span id="cb34-3"><a href=""></a>                              <span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c0b7cf99" class="cell" data-execution_count="26">
+<div id="eadb5d7e" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a>df_air.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="105">
 <pre><code>siteid                    int64
 sitename                 object
 itemid                    int64
@@ -770,7 +770,7 @@ dtype: object</code></pre>
 <li>Subset, Boolean masking</li>
 <li><code>df.sort_values(by=column)</code> (<code>df</code> can be any DataFrame)</li>
 </ul>
-<div id="4829adbb" class="cell" data-execution_count="27">
+<div id="3b755f3e" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-stdout">
 <pre><code>       siteid sitename  itemid itemname itemengname itemunit monitordate  \
 978         9       林口      33    細懸浮微粒       PM2.5    μg/m3  2024-01-01   
@@ -812,7 +812,7 @@ dtype: object</code></pre>
 <h2>Hands-on - Line Plot</h2>
 <p>請試著呈現林口測站在2024/1/1~2024/1/15的PM2.5濃度，要呈現figure legend，也要呈現x y 軸的名字</p>
 <p>Ref:</p>
-<div id="69700327" class="cell" data-execution_count="28">
+<div id="77706d10" class="cell" data-execution_count="28">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -825,7 +825,7 @@ dtype: object</code></pre>
 <section id="line-plot---seaborn" class="slide level2">
 <h2>Line Plot - Seaborn</h2>
 <p><code>sns.lineplot(x,y)</code>, <code>x</code> <code>y</code> 為資料點</p>
-<div id="11150e9e" class="cell" data-execution_count="29">
+<div id="d1ebd996" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb38-2"><a href=""></a>sns.lineplot(x<span class="op">=</span>pm25Linkou2024[<span class="st">'DateTime'</span>], </span>
 <span id="cb38-3"><a href=""></a>              y<span class="op">=</span>pm25Linkou2024[<span class="st">'concentration'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -841,7 +841,7 @@ dtype: object</code></pre>
 <section id="line-plot---seaborn-1" class="slide level2">
 <h2>Line Plot - Seaborn</h2>
 <p><code>sns.lineplot(data, x, y)</code>, <code>x</code> <code>y</code> 表示 column names</p>
-<div id="9fe39575" class="cell" data-execution_count="30">
+<div id="3dd6c4c8" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a>sns.lineplot(data <span class="op">=</span> pm25Linkou2024, x<span class="op">=</span><span class="st">'DateTime'</span>, y<span class="op">=</span><span class="st">'concentration'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -867,7 +867,7 @@ dtype: object</code></pre>
 <section id="scatter-plots-with-plt.plot" class="slide level2">
 <h2>Scatter Plots with <code>plt.plot()</code></h2>
 <p><code>plt.plot(x,y,marker,color)</code>, <code>marker</code> 設定點的樣式, <code>color</code> 設定顏色</p>
-<div id="e4537216" class="cell" data-execution_count="31">
+<div id="7ed5861a" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">30</span>)</span>
 <span id="cb40-2"><a href=""></a>y <span class="op">=</span> np.sin(x)</span>
 <span id="cb40-3"><a href=""></a>plt.plot(x, y, <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -883,7 +883,7 @@ dtype: object</code></pre>
 <section id="scatter-plots---marker-shape" class="slide level2">
 <h2>Scatter Plots - marker shape</h2>
 <p><code>'o'</code>, <code>'.'</code>, <code>','</code>, <code>'x'</code>, <code>'+'</code>, <code>'v'</code>, <code>'^'</code>, <code>''</code>, <code>'s'</code>, <code>'d'</code> …</p>
-<div id="93ba88ce" class="cell" data-execution_count="32">
+<div id="01f1c641" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a>rng <span class="op">=</span> np.random.RandomState(<span class="dv">0</span>)</span>
 <span id="cb41-2"><a href=""></a><span class="cf">for</span> marker <span class="kw">in</span> [<span class="st">'o'</span>, <span class="st">'.'</span>, <span class="st">','</span>, <span class="st">'x'</span>, <span class="st">'+'</span>, <span class="st">'v'</span>, <span class="st">'^'</span>, <span class="st">''</span>, <span class="st">'s'</span>, <span class="st">'d'</span>]:</span>
 <span id="cb41-3"><a href=""></a>    plt.plot(rng.rand(<span class="dv">5</span>), rng.rand(<span class="dv">5</span>), marker, label<span class="op">=</span><span class="ss">f"marker='</span><span class="sc">{</span>marker<span class="sc">}</span><span class="ss">'"</span>)</span>
@@ -900,7 +900,7 @@ dtype: object</code></pre>
 <section id="line-styles-and-marker-shape" class="slide level2">
 <h2>Line styles and marker shape</h2>
 <p>結合標記與線條樣式，以製作更複雜的圖表</p>
-<div id="d1ceb763" class="cell" data-execution_count="33">
+<div id="fc83d12b" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a>plt.plot(x, y, <span class="st">'-ok'</span>) <span class="co"># solid, circle, black</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -914,7 +914,7 @@ dtype: object</code></pre>
 <section id="line-styles-and-marker-shape-1" class="slide level2">
 <h2>Line styles and marker shape</h2>
 <p>使用額外的參數來自訂標記和線條</p>
-<div id="9c2993f2" class="cell" data-execution_count="34">
+<div id="4ef0558f" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a>plt.plot(x, y, <span class="st">'-p'</span>, color<span class="op">=</span><span class="st">'gray'</span>, <span class="co"># solid, pentagon</span></span>
 <span id="cb43-2"><a href=""></a>         markersize<span class="op">=</span><span class="dv">15</span>, linewidth<span class="op">=</span><span class="dv">4</span>,</span>
 <span id="cb43-3"><a href=""></a>         markerfacecolor<span class="op">=</span><span class="st">'white'</span>,</span>
@@ -932,7 +932,7 @@ dtype: object</code></pre>
 <section id="scatter-plots-with-plt.scatter" class="slide level2">
 <h2>Scatter Plots with <code>plt.scatter</code></h2>
 <p><code>plt.scatter(x, y)</code> 可針對對每個點的<strong>size</strong>, <strong>color</strong>及其他屬性進行個別控制。</p>
-<div id="4ab2f7f9" class="cell" data-execution_count="35">
+<div id="dd69460b" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>plt.scatter(x, y, marker<span class="op">=</span><span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -946,7 +946,7 @@ dtype: object</code></pre>
 <section id="varying-color-and-size---bubble-chart" class="slide level2">
 <h2>Varying color and size - Bubble chart</h2>
 <p>Data:</p>
-<div id="6d400dcd" class="cell" data-execution_count="36">
+<div id="e58e3205" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a>rng <span class="op">=</span> np.random.RandomState(<span class="dv">0</span>)</span>
 <span id="cb45-2"><a href=""></a>x <span class="op">=</span> rng.randn(<span class="dv">100</span>)</span>
 <span id="cb45-3"><a href=""></a>y <span class="op">=</span> rng.randn(<span class="dv">100</span>)</span>
@@ -963,7 +963,7 @@ dtype: object</code></pre>
 </section>
 <section id="with-varying-color-and-size---bubble-chart" class="slide level2">
 <h2>with varying color and size - Bubble chart</h2>
-<div id="f1b24128" class="cell" data-execution_count="37">
+<div id="b169fde0" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a>plt.scatter(x, y, c<span class="op">=</span>colors, s<span class="op">=</span>sizes, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
 <span id="cb46-2"><a href=""></a>plt.colorbar()  <span class="co"># Show color scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -979,7 +979,7 @@ dtype: object</code></pre>
 <h2>Visualizing Multidimensional Data</h2>
 <p>Iris dataset, visualizing four features at once.</p>
 <p>Data:</p>
-<div id="2d332570" class="cell" data-execution_count="38">
+<div id="1ca2f41e" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># !pip3 install scikit-learn</span></span>
 <span id="cb47-2"><a href=""></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
 <span id="cb47-3"><a href=""></a>iris <span class="op">=</span> load_iris()</span>
@@ -1028,12 +1028,12 @@ dtype: object</code></pre>
 <section id="visualizing-multidimensional-data-1" class="slide level2">
 <h2>Visualizing Multidimensional Data</h2>
 <p>x/y 位置、大小與顏色都分別代表不同的資料維度。</p>
-<div id="7654d8d4" class="cell" data-execution_count="39">
+<div id="9d1cf0fe" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a>plt.scatter(features[<span class="dv">0</span>], features[<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span id="cb49-2"><a href=""></a>            s<span class="op">=</span><span class="dv">100</span><span class="op">*</span>features[<span class="dv">3</span>], c<span class="op">=</span>iris.target, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
 <span id="cb49-3"><a href=""></a>plt.xlabel(iris.feature_names[<span class="dv">0</span>])</span>
 <span id="cb49-4"><a href=""></a>plt.ylabel(iris.feature_names[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="118">
 <pre><code>Text(0, 0.5, 'sepal width (cm)')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -1047,8 +1047,8 @@ dtype: object</code></pre>
 </section>
 <section id="visualizing-multidimensional-data-2" class="slide level2">
 <h2>Visualizing Multidimensional Data</h2>
-<div id="f624cbd8" class="cell" data-execution_count="40">
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div id="4d73e00c" class="cell" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="119">
 <pre><code>Text(0, 0.5, 'sepal width (cm)')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -1079,7 +1079,7 @@ dtype: object</code></pre>
 </section>
 <section id="hands-on---scatter-plot-1" class="slide level2">
 <h2>Hands-on - Scatter Plot</h2>
-<div id="2dd81225" class="cell" data-execution_count="41">
+<div id="eab2901a" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a>air_mean <span class="op">=</span> df_air.groupby([<span class="st">'DateTime'</span>, <span class="st">'sitename'</span>, <span class="st">'itemengname'</span>]).concentration.mean().to_frame()</span>
 <span id="cb52-2"><a href=""></a>air_wide <span class="op">=</span> air_mean.unstack()</span>
 <span id="cb52-3"><a href=""></a><span class="bu">print</span>(air_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1121,7 +1121,7 @@ DateTime   sitename
 <section id="hands-on---scatter-plot-2" class="slide level2">
 <h2>Hands-on - Scatter Plot</h2>
 <p>試著看看空氣污染資料中，NO2濃度與SO2濃度有沒有相關？ Ref:</p>
-<div id="3cbb9957" class="cell" data-execution_count="42">
+<div id="1c740307" class="cell" data-execution_count="42">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1134,7 +1134,7 @@ DateTime   sitename
 <section id="hands-on---scatter-plot-3" class="slide level2">
 <h2>Hands-on - Scatter Plot</h2>
 <p>使用泡泡圖呈現NO2與SO2的關係，並用風速（WIND_SPEED）當作泡泡大小，觀察這些資料是否有相關</p>
-<div id="201517ab" class="cell" data-execution_count="43">
+<div id="501c0dd7" class="cell" data-execution_count="43">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1165,7 +1165,7 @@ DateTime   sitename
 <li><code>fmt</code> 設定樣式 (same as in <code>plt.plot</code>)</li>
 </ul>
 <p>Data:</p>
-<div id="32497bb9" class="cell" data-execution_count="44">
+<div id="3ef00831" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">50</span>) <span class="co">#(start,end,num)</span></span>
 <span id="cb54-2"><a href=""></a>dy <span class="op">=</span> <span class="fl">0.8</span></span>
 <span id="cb54-3"><a href=""></a>y <span class="op">=</span> np.sin(x) <span class="op">+</span> dy <span class="op">*</span> np.random.randn(<span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1174,7 +1174,7 @@ DateTime   sitename
 <section id="basic-error-bars-with-plt.errorbar-1" class="slide level2">
 <h2>Basic Error Bars with <code>plt.errorbar</code></h2>
 <p>Plot: <code>plt.errorbar(x, y, yerr=error size, fmt = style)</code></p>
-<div id="577fc314" class="cell" data-execution_count="45">
+<div id="a6270c80" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a>plt.errorbar(x, y, yerr<span class="op">=</span>dy, fmt<span class="op">=</span><span class="st">'.k'</span>)</span>
 <span id="cb55-2"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1197,7 +1197,7 @@ DateTime   sitename
 </section>
 <section id="customizing-error-bars-1" class="slide level2">
 <h2>Customizing Error Bars</h2>
-<div id="d3d070f6" class="cell" data-execution_count="46">
+<div id="63400693" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a>plt.errorbar(</span>
 <span id="cb56-2"><a href=""></a>    x, y, yerr<span class="op">=</span>dy, fmt<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'black'</span>,</span>
 <span id="cb56-3"><a href=""></a>    ecolor<span class="op">=</span><span class="st">'lightgray'</span>, elinewidth<span class="op">=</span><span class="dv">3</span>, capsize<span class="op">=</span><span class="dv">2</span></span>
@@ -1215,7 +1215,7 @@ DateTime   sitename
 <section id="horizontal-and-one-sided-error-bars" class="slide level2">
 <h2>Horizontal and One-Sided Error Bars</h2>
 <p>使用 <code>plt.errorbar()</code>中的<code>xerr</code> 增加水平error bar</p>
-<div id="2dc0a96e" class="cell" data-execution_count="47">
+<div id="1067b418" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a>plt.errorbar(x, y, xerr<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1287,7 +1287,7 @@ DateTime   sitename
 <section id="creating-a-simple-histogram" class="slide level2">
 <h2>Creating a Simple Histogram</h2>
 <p><code>plt.hist(data)</code>, <code>data</code>通常是List 或Series</p>
-<div id="b840e951" class="cell" data-execution_count="48">
+<div id="2e7eeaff" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a>data <span class="op">=</span> np.random.randn(<span class="dv">1000</span>)</span>
 <span id="cb58-2"><a href=""></a>plt.hist(data)</span>
 <span id="cb58-3"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1308,7 +1308,7 @@ DateTime   sitename
 <li><code>alpha</code>: Transparency</li>
 <li><code>color</code>, <code>edgecolor</code>: Color settings</li>
 </ul>
-<div id="7653788b" class="cell" data-execution_count="49">
+<div id="57a7075a" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a>plt.hist(data, bins<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
 <span id="cb59-2"><a href=""></a>         edgecolor<span class="op">=</span><span class="st">'none'</span>)</span>
 <span id="cb59-3"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1323,7 +1323,7 @@ DateTime   sitename
 </section>
 <section id="customizing-histograms-1" class="slide level2">
 <h2>Customizing Histograms</h2>
-<div id="c361a22e" class="cell" data-execution_count="50">
+<div id="646c799b" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href=""></a>plt.hist(data, bins<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span id="cb60-2"><a href=""></a>         histtype<span class="op">=</span><span class="st">'stepfilled'</span>, color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
 <span id="cb60-3"><a href=""></a>         edgecolor<span class="op">=</span><span class="st">'none'</span>)</span>
@@ -1341,7 +1341,7 @@ DateTime   sitename
 <h2>Comparing Multiple Distributions</h2>
 <p>疊加多個直方圖histograms並設定透明度方便比較</p>
 <p>Data:</p>
-<div id="7534c2ed" class="cell" data-execution_count="51">
+<div id="673fd973" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a>x1 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.8</span>, <span class="dv">1000</span>)</span>
 <span id="cb61-2"><a href=""></a>x2 <span class="op">=</span> np.random.normal(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
 <span id="cb61-3"><a href=""></a>x3 <span class="op">=</span> np.random.normal(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1350,7 +1350,7 @@ DateTime   sitename
 <section id="comparing-multiple-distributions-1" class="slide level2">
 <h2>Comparing Multiple Distributions</h2>
 <p>使用<code>dict(parameters)</code>搭配<code>**kwargs</code>，將參數儲存後，方便多次使用</p>
-<div id="1cebc687" class="cell" data-execution_count="52">
+<div id="f600bf0f" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a>kwargs <span class="op">=</span> <span class="bu">dict</span>(histtype<span class="op">=</span><span class="st">'stepfilled'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, bins<span class="op">=</span><span class="dv">40</span>)</span>
 <span id="cb62-2"><a href=""></a>plt.hist(x1, <span class="op">**</span>kwargs)</span>
 <span id="cb62-3"><a href=""></a>plt.hist(x2, <span class="op">**</span>kwargs)</span>
@@ -1368,12 +1368,12 @@ DateTime   sitename
 <section id="hands-on---histogram" class="slide level2">
 <h2>Hands-on - Histogram</h2>
 <p>看看新竹與前鎮一氧化碳(CO)的資料分布是否有差異（疊在一張圖中）</p>
-<div id="fb5d6f90" class="cell" data-execution_count="53">
+<div id="7a131c03" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href=""></a>CO <span class="op">=</span> df_air[df_air[<span class="st">'itemengname'</span>]<span class="op">==</span><span class="st">"CO"</span>]</span>
 <span id="cb63-2"><a href=""></a>x1 <span class="op">=</span> CO[CO[<span class="st">'sitename'</span>]<span class="op">==</span><span class="st">"新竹"</span>][<span class="st">"concentration"</span>]</span>
 <span id="cb63-3"><a href=""></a>x2 <span class="op">=</span> CO[CO[<span class="st">'sitename'</span>]<span class="op">==</span><span class="st">"前鎮"</span>][<span class="st">"concentration"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="66e6c496" class="cell" data-execution_count="54">
+<div id="d1fc54bb" class="cell" data-execution_count="54">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1398,7 +1398,7 @@ DateTime   sitename
 </section>
 <section id="creating-a-simple-legend-1" class="slide level2">
 <h2>Creating a Simple Legend</h2>
-<div id="fa0db085" class="cell" data-execution_count="55">
+<div id="1f121533" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">1000</span>)</span>
 <span id="cb64-2"><a href=""></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb64-3"><a href=""></a>plt.plot(x, np.sin(x), <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">'Sine'</span>)</span>
@@ -1427,7 +1427,7 @@ DateTime   sitename
 </section>
 <section id="legend-placement-and-appearance" class="slide level2">
 <h2>Legend Placement and Appearance</h2>
-<div id="a1bfce0a" class="cell" data-execution_count="56">
+<div id="f7d1675a" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a>plt.plot(x, np.cos(x), <span class="st">'--r'</span>, label<span class="op">=</span><span class="st">'Cosine'</span>)</span>
 <span id="cb65-2"><a href=""></a>plt.legend(loc<span class="op">=</span><span class="st">'upper left'</span>, frameon<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1441,7 +1441,7 @@ DateTime   sitename
 </section>
 <section id="legend-placement-and-appearance-1" class="slide level2">
 <h2>Legend Placement and Appearance</h2>
-<div id="f39ca09b" class="cell" data-execution_count="57">
+<div id="cf45809d" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href=""></a>plt.plot(x, np.cos(x), <span class="st">'--r'</span>, label<span class="op">=</span><span class="st">'Cosine'</span>)</span>
 <span id="cb66-2"><a href=""></a>plt.plot(x, np.sin(x), <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">'Sine'</span>)</span>
 <span id="cb66-3"><a href=""></a>plt.legend(frameon<span class="op">=</span><span class="va">False</span>, loc<span class="op">=</span><span class="st">'lower center'</span>, ncol<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1457,7 +1457,7 @@ DateTime   sitename
 <section id="choosing-elements-for-the-legend" class="slide level2">
 <h2>Choosing Elements for the Legend</h2>
 <p>如果有線段不需要圖標，可以直接不設定label</p>
-<div id="34104df1" class="cell" data-execution_count="58">
+<div id="13defdc9" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a>plt.plot(x, np.cos(x), <span class="st">'--r'</span>, label<span class="op">=</span><span class="st">'Cosine'</span>)</span>
 <span id="cb67-2"><a href=""></a>plt.plot(x, np.sin(x), <span class="st">'-b'</span>,)</span>
 <span id="cb67-3"><a href=""></a>plt.legend(framealpha<span class="op">=</span><span class="dv">1</span>, frameon<span class="op">=</span><span class="va">True</span>, loc<span class="op">=</span><span class="st">'lower center'</span>, ncol<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1488,7 +1488,7 @@ DateTime   sitename
 <section id="creating-a-basic-colorbar" class="slide level2">
 <h2>Creating a Basic Colorbar</h2>
 <p>Data:</p>
-<div id="159068b3" class="cell" data-execution_count="59">
+<div id="8ac4b093" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">1000</span>)</span>
 <span id="cb68-2"><a href=""></a>I <span class="op">=</span> np.sin(x) <span class="op">*</span> np.cos(x[:, np.newaxis])</span>
 <span id="cb68-3"><a href=""></a><span class="bu">print</span>(I)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1512,7 +1512,7 @@ DateTime   sitename
 <section id="creating-a-basic-colorbar-1" class="slide level2">
 <h2>Creating a Basic Colorbar</h2>
 <p>使用 <code>plt.colorbar()</code> 增加顏色對照表</p>
-<div id="0361c1ff" class="cell" data-execution_count="60">
+<div id="5d57fd6c" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a>plt.imshow(I)</span>
 <span id="cb70-2"><a href=""></a>plt.colorbar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1527,7 +1527,7 @@ DateTime   sitename
 <section id="customizing-colormaps" class="slide level2">
 <h2>Customizing Colormaps</h2>
 <p>使用預設的color map，並用<code>cmap</code>參數設定 (check <code>plt.cm</code> namespace (e.g., <code>plt.cm.viridis</code>, <code>plt.cm.RdBu</code>))</p>
-<div id="0da8d6e4" class="cell" data-execution_count="61">
+<div id="dbb1bdd7" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href=""></a>plt.imshow(I, cmap<span class="op">=</span><span class="st">'gray'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1552,7 +1552,7 @@ DateTime   sitename
 <li>使用 <code>plt.clim()</code> 手動設定顏色範圍（以聚焦於特定的資料區間）</li>
 <li>在 <code>plt.colorbar()</code> 中使用 extend 參數來標示超出範圍的數值</li>
 </ul>
-<div id="414fa8d8" class="cell" data-execution_count="62">
+<div id="5b6707ea" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a>plt.imshow(I, cmap<span class="op">=</span><span class="st">'RdBu'</span>)</span>
 <span id="cb72-2"><a href=""></a>plt.colorbar(extend<span class="op">=</span><span class="st">'both'</span>)</span>
 <span id="cb72-3"><a href=""></a>plt.clim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1567,7 +1567,7 @@ DateTime   sitename
 </section>
 <section id="setting-color-limits-and-extensions-1" class="slide level2">
 <h2>Setting Color Limits and Extensions</h2>
-<div id="b5d16f5e" class="cell" data-execution_count="63">
+<div id="97a06270" class="cell" data-execution_count="63">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1580,7 +1580,7 @@ DateTime   sitename
 <section id="discrete-colorbars" class="slide level2">
 <h2>Discrete Colorbars</h2>
 <p>可以用 <code>plt.cm.get_cmap()</code> 取得不連續的色塊，參數為哪個幾個色塊with number of bins</p>
-<div id="37bfc7e8" class="cell" data-execution_count="64">
+<div id="199de6f8" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href=""></a>plt.imshow(I, cmap<span class="op">=</span>plt.cm.get_cmap(<span class="st">'Blues'</span>, <span class="dv">6</span>))</span>
 <span id="cb73-2"><a href=""></a>plt.colorbar()</span>
 <span id="cb73-3"><a href=""></a>plt.clim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1616,7 +1616,7 @@ DateTime   sitename
 <section id="manual-placement-with-plt.axes" class="slide level2">
 <h2>1. <strong>Manual Placement with</strong> <code>plt.axes</code></h2>
 <p>透過在圖形座標（0 到 1 之間）中指定 <code>[left, bottom, width, height]</code>，可以在圖中任意位置建立座標軸（axes）。</p>
-<div id="9ead5b1d" class="cell" data-execution_count="65">
+<div id="637a1e3b" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href=""></a>ax1 <span class="op">=</span> plt.axes()  <span class="co"># Standard axes</span></span>
 <span id="cb74-2"><a href=""></a>ax2 <span class="op">=</span> plt.axes([<span class="fl">0.65</span>, <span class="fl">0.65</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>])  <span class="co"># Inset axes at top-right</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1631,7 +1631,7 @@ DateTime   sitename
 <section id="simple-grids-with-plt.subplot" class="slide level2">
 <h2>2. <strong>Simple Grids with</strong> <code>plt.subplot</code></h2>
 <p>透過指定<code>row</code>、<code>col</code>和圖表索引<code>plot index</code>（從 1 開始，順序為從左到右、從上到下），可以建立子圖的網格 <code>plt.subplot(row, col, plot index)</code></p>
-<div id="39d92fa9" class="cell" data-execution_count="66">
+<div id="219852ac" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>):</span>
 <span id="cb75-2"><a href=""></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">3</span>, i)</span>
 <span id="cb75-3"><a href=""></a>    plt.text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="bu">str</span>((<span class="dv">2</span>, <span class="dv">3</span>, i)), fontsize<span class="op">=</span><span class="dv">18</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1647,7 +1647,7 @@ DateTime   sitename
 <section id="flexible-layouts-with" class="slide level2">
 <h2>3. <strong>Flexible Layouts with</strong></h2>
 <p>可使用<code>plt.GridSpec(row,col)</code>設定更複雜的子圖排版</p>
-<div id="44fb88ff" class="cell" data-execution_count="67">
+<div id="cde34ab9" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a>grid <span class="op">=</span> plt.GridSpec(<span class="dv">2</span>, <span class="dv">3</span>, wspace<span class="op">=</span><span class="fl">0.4</span>, hspace<span class="op">=</span><span class="fl">0.3</span>)</span>
 <span id="cb76-2"><a href=""></a>plt.subplot(grid[<span class="dv">0</span>, <span class="dv">0</span>])</span>
 <span id="cb76-3"><a href=""></a>plt.subplot(grid[<span class="dv">0</span>, <span class="dv">1</span>:])</span>
@@ -1722,7 +1722,7 @@ DateTime   sitename
 <section id="管制圖-control-chart-3" class="slide level2">
 <h2>管制圖 Control chart</h2>
 <p>若以三倍標準差當作管制界線，僅有幾個點超過兩個標準差，應在誤差範圍內</p>
-<div id="a678aa4b" class="cell" data-execution_count="68">
+<div id="a8da4452" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href=""></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb77-2"><a href=""></a>pm25Linkou <span class="op">=</span>  pm25Linkou.sort_values(<span class="st">"DateTime"</span>)</span>
 <span id="cb77-3"><a href=""></a>plt.plot(pm25Linkou[<span class="st">'DateTime'</span>], pm25Linkou[<span class="st">'concentration'</span>])</span>
@@ -1753,7 +1753,7 @@ DateTime   sitename
 <section id="管制圖-control-chart-4" class="slide level2">
 <h2>管制圖 Control chart</h2>
 <p>若以三倍標準差當作管制界線，僅有幾個點超過兩個標準差，應在誤差範圍內</p>
-<div id="925ea4d6" class="cell" data-execution_count="69">
+<div id="1b486a58" class="cell" data-execution_count="69">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1785,7 +1785,7 @@ DateTime   sitename
 <li>x軸：測站</li>
 <li>y軸：各月份要比較的數據分佈（此為PM2.5）</li>
 </ul>
-<div id="35438855" class="cell" data-execution_count="70">
+<div id="3b181d56" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb78-2"><a href=""></a>sns.boxplot(data <span class="op">=</span> pm25, x<span class="op">=</span><span class="st">"sitename"</span>, y<span class="op">=</span><span class="st">"concentration"</span>)</span>
 <span id="cb78-3"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1800,7 +1800,7 @@ DateTime   sitename
 </section>
 <section id="盒鬚圖-box-plot-2" class="slide level2">
 <h2>盒鬚圖 Box plot</h2>
-<div id="f7c5f586" class="cell" data-execution_count="71">
+<div id="1c7c4f64" class="cell" data-execution_count="71">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1812,7 +1812,7 @@ DateTime   sitename
 </section>
 <section id="盒鬚圖-box-plot-3" class="slide level2">
 <h2>盒鬚圖 Box plot</h2>
-<div id="94bcd823" class="cell" data-execution_count="72">
+<div id="9e2680e3" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb79-2"><a href=""></a>sns.boxplot(data <span class="op">=</span> pm25, x<span class="op">=</span><span class="st">"sitename"</span>, y<span class="op">=</span><span class="st">"concentration"</span>)</span>
 <span id="cb79-3"><a href=""></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
@@ -1830,7 +1830,7 @@ DateTime   sitename
 <h2>Hands-on 盒鬚圖</h2>
 <p>使用盒鬚圖比較各月PM2.5濃度有無差異</p>
 <p>須先將月份取出，使用pandas功能，<code>Series.dt.month</code>，<code>Series</code>可以是指定資料框欄位</p>
-<div id="dbc7054a" class="cell" data-execution_count="73">
+<div id="15280509" class="cell" data-execution_count="73">
 <div class="cell-output cell-output-stdout">
 <pre><code>    siteid sitename  itemid itemname itemengname itemunit monitordate  \
 6       80       關山      33    細懸浮微粒       PM2.5    μg/m3  2024-01-01   
@@ -1851,7 +1851,7 @@ DateTime   sitename
 <section id="hands-on-盒鬚圖-1" class="slide level2">
 <h2>Hands-on 盒鬚圖</h2>
 <p>Ref:</p>
-<div id="2b74d73b" class="cell" data-execution_count="74">
+<div id="fc0d0714" class="cell" data-execution_count="74">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1877,7 +1877,7 @@ DateTime   sitename
 </section>
 <section id="熱度圖-heatmap-1" class="slide level2">
 <h2>熱度圖 Heatmap</h2>
-<div id="254b893d" class="cell" data-execution_count="75">
+<div id="ff7fafb2" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href=""></a>df_long <span class="op">=</span> df_air[df_air[<span class="st">'itemengname'</span>].isin([<span class="st">"PM2.5"</span>,<span class="st">"PM10"</span>,<span class="st">"CO"</span>,<span class="st">"NO2"</span>,<span class="st">"O3"</span>])]</span>
 <span id="cb81-2"><a href=""></a>df_long_linkou<span class="op">=</span>df_long[df_long[<span class="st">'sitename'</span>]<span class="op">==</span><span class="st">"林口"</span>][[<span class="st">"DateTime"</span>,<span class="st">"itemengname"</span>,<span class="st">"concentration"</span>]]</span>
 <span id="cb81-3"><a href=""></a>df_wide_linkou <span class="op">=</span> pd.pivot(df_long_linkou, index<span class="op">=</span><span class="st">'itemengname'</span>, columns<span class="op">=</span><span class="st">'DateTime'</span>,values<span class="op">=</span><span class="st">'concentration'</span>)</span>
@@ -1929,7 +1929,7 @@ PM2.5             19.70       10.10        4.50        6.30       19.20
 </section>
 <section id="熱度圖-heatmap-3" class="slide level2">
 <h2>熱度圖 Heatmap</h2>
-<div id="f1a41357" class="cell" data-execution_count="76">
+<div id="48f9bf0d" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href=""></a>ax <span class="op">=</span> sns.heatmap(df_wide_linkou, cmap<span class="op">=</span><span class="st">"YlGnBu"</span>)</span>
 <span id="cb83-2"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1955,7 +1955,7 @@ PM2.5             19.70       10.10        4.50        6.30       19.20
 <section id="月曆熱度圖-1" class="slide level2">
 <h2>月曆熱度圖</h2>
 <p>在製作月曆熱度圖時，需將日期與感興趣的資料取出，並將日期設定為index</p>
-<div id="d2b5d2af" class="cell" data-execution_count="77">
+<div id="e7e9e0a9" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href=""></a>pm25Linkou2023 <span class="op">=</span> pm25Linkou[pm25Linkou[<span class="st">"DateTime"</span>]<span class="op">&lt;</span><span class="st">'2024-01-01'</span>]</span>
 <span id="cb84-2"><a href=""></a>pm25Linkou2023<span class="op">=</span>pm25Linkou2023.set_index([<span class="st">'DateTime'</span>])</span>
 <span id="cb84-3"><a href=""></a><span class="bu">print</span>(pm25Linkou2023)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1995,7 +1995,7 @@ DateTime
 <section id="月曆熱度圖-2" class="slide level2">
 <h2>月曆熱度圖</h2>
 <p><code>calmap.yearplot(資料框)</code>即可畫月曆熱度圖</p>
-<div id="2fe86a9a" class="cell" data-execution_count="78">
+<div id="475eb240" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href=""></a><span class="im">import</span> calmap</span>
 <span id="cb86-2"><a href=""></a>calmap.yearplot(pm25Linkou2023[pm25Linkou2023[<span class="st">'itemengname'</span>]<span class="op">==</span><span class="st">'PM2.5'</span>][<span class="st">'concentration'</span>], year<span class="op">=</span><span class="dv">2023</span>)</span>
 <span id="cb86-3"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2011,16 +2011,19 @@ DateTime
 <section id="hands-on-月曆熱度圖" class="slide level2">
 <h2>Hands-on 月曆熱度圖</h2>
 <p>使用月曆熱度圖視覺化2023年NVDA股價變化，波動是否跟星期幾有關？</p>
-<p>首先先載入股價資料，並將日期設定為index，且做好日期轉換</p>
-<div id="0ee211de" class="cell" data-execution_count="79">
+<div id="0b3810a1" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href=""></a><span class="im">import</span> ssl</span>
 <span id="cb87-2"><a href=""></a>ssl._create_default_https_context <span class="op">=</span> ssl._create_unverified_context <span class="co">#取消驗證</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="86636315" class="cell" data-execution_count="80">
+</section>
+<section id="hands-on-月曆熱度圖-1" class="slide level2">
+<h2>Hands-on 月曆熱度圖</h2>
+<p>首先先載入股價資料，並將日期設定為index，且做好日期轉換</p>
+<div id="6d07c422" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href=""></a>stock_data <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv"</span>,index_col<span class="op">=</span><span class="st">"Date"</span>)</span>
 <span id="cb88-2"><a href=""></a>stock_data.index <span class="op">=</span> pd.to_datetime(stock_data.index)</span>
 <span id="cb88-3"><a href=""></a>stock_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="78">
+<div class="cell-output cell-output-display" data-execution_count="159">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2110,14 +2113,14 @@ DateTime
 </div>
 </div>
 </section>
-<section id="hands-on-月曆熱度圖-1" class="slide level2">
+<section id="hands-on-月曆熱度圖-2" class="slide level2">
 <h2>Hands-on 月曆熱度圖</h2>
 <p>下一步則是安裝套件</p>
-<div id="12d70807" class="cell" data-execution_count="81">
+<div id="3eae83ab" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href=""></a><span class="op">!</span>pip3 install calmap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>參考：</p>
-<div id="f5ec9186" class="cell" data-execution_count="82">
+<div id="d431c5e0" class="cell" data-execution_count="82">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -2135,11 +2138,11 @@ DateTime
 <section id="矩形圖-tree-map-1" class="slide level2">
 <h2>矩形圖 Tree map</h2>
 <p>Treemap(矩形式樹狀結構繪圖法)是以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊，可設定的值包括<code>面積</code>、<code>顏色</code>以及<code>階層</code>。</p>
-<div id="5f7165b0" class="cell" data-execution_count="83">
+<div id="5cec9547" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href=""></a>df_sq <span class="op">=</span> pd.DataFrame({<span class="st">'nb_people'</span>:[<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>], </span>
 <span id="cb90-2"><a href=""></a>                   <span class="st">'group'</span>:[<span class="st">"group A"</span>, <span class="st">"group B"</span>, <span class="st">"group C"</span>, <span class="st">"group D"</span>] })</span>
 <span id="cb90-3"><a href=""></a>df_sq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="161">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -2194,7 +2197,7 @@ DateTime
 <section id="矩形圖-tree-map-2" class="slide level2">
 <h2>矩形圖 Tree map</h2>
 <p>使用<code>squarify</code>套件的功能，設定<code>sizes</code>, <code>labels</code>即可</p>
-<div id="2d7cb84d" class="cell" data-execution_count="84">
+<div id="43ecace6" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href=""></a><span class="op">!</span>pip3 install squarify</span>
 <span id="cb91-2"><a href=""></a><span class="im">import</span> squarify </span>
 <span id="cb91-3"><a href=""></a>squarify.plot(sizes<span class="op">=</span>df_sq[<span class="st">'nb_people'</span>], </span>
@@ -2202,11 +2205,7 @@ DateTime
 <span id="cb91-5"><a href=""></a>plt.axis(<span class="st">'off'</span>)</span>
 <span id="cb91-6"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Collecting squarify
-  Using cached squarify-0.4.4-py3-none-any.whl.metadata (600 bytes)
-Using cached squarify-0.4.4-py3-none-any.whl (4.1 kB)
-Installing collected packages: squarify
-Successfully installed squarify-0.4.4
+<pre><code>Requirement already satisfied: squarify in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (0.4.4)
 
 [notice] A new release of pip is available: 24.0 -&gt; 25.1.1
 [notice] To update, run: pip install --upgrade pip</code></pre>
