@@ -1021,6 +1021,38 @@ calmap.yearplot(pm25Linkou2023[pm25Linkou2023['itemengname']=='PM2.5']['concentr
 plt.show()
 ```
 
+## Hands-on 月曆熱度圖
+
+使用月曆熱度圖視覺化2023年NVDA股價變化，波動是否跟星期幾有關？
+
+首先先載入股價資料，並將日期設定為index，且做好日期轉換
+```{python}
+#| echo: true
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context #取消驗證
+```
+```{python}
+#| echo: true
+stock_data = pd.read_csv("https://raw.githubusercontent.com/CGUIM-BigDataAnalysis/BigDataCGUIM/master/EMBA_BigData/Data/NVDA.csv",index_col="Date")
+stock_data.index = pd.to_datetime(stock_data.index)
+stock_data.head()
+```
+
+## Hands-on 月曆熱度圖
+
+下一步則是安裝套件
+```{python}
+#| echo: true
+#| eval: false
+!pip3 install calmap
+```
+參考：
+```{python}
+import calmap
+calmap.yearplot(stock_data['Close'],year=2023)
+plt.show()
+```
+
 # 矩形圖 Tree map
 ## 矩形圖 Tree map
 Treemap(矩形式樹狀結構繪圖法)是以二維平面的方式展示包含階層結構（hierarchical）形式的統計資訊，可設定的值包括`面積`、`顏色`以及`階層`。
@@ -1036,7 +1068,7 @@ df_sq
 使用`squarify`套件的功能，設定`sizes`, `labels`即可
 ```{python}
 #| echo: true
-#!pip3 install squarify
+!pip3 install squarify
 import squarify 
 squarify.plot(sizes=df_sq['nb_people'], 
               label=df_sq['group'], alpha=.8 )
